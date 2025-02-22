@@ -31,3 +31,18 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+
+# Java
+*.class
+*.war
+*.ear
+
+# Gradle
+.gradle/
+gradle-app.setting
+!gradle-wrapper.jar  # No ignores el wrapper
+
+# Maven
+.mvn/
