@@ -4,5 +4,6 @@ import web.app.caravanamedieval.model.Ciudad;
 
 public interface CiudadService {
     public Ciudad crearCiudad(Ciudad ciudad);
+    public Ciudad getCiudad(Long id);
 
 }

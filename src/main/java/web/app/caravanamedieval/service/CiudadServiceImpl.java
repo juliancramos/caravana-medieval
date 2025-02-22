@@ -1,5 +1,6 @@
 package web.app.caravanamedieval.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import web.app.caravanamedieval.model.Ciudad;
@@ -15,4 +16,10 @@ public class CiudadServiceImpl implements CiudadService {
     public Ciudad crearCiudad(Ciudad ciudad) {
         return ciudadRepository.save(ciudad);
     }
+
+    public Ciudad getCiudad(Long id) {
+        return ciudadRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Ciudad no encontrada"));
+    }
+
 }

@@ -1,5 +1,6 @@
 package web.app.caravanamedieval.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import web.app.caravanamedieval.model.Mapa;
@@ -14,4 +15,10 @@ public class MapaServiceImpl implements MapaService {
     public Mapa crearMapa(Mapa mapa) {
         return mapaRepository.save(mapa);
     }
+
+    public Mapa getMapa(Long id) {
+        return mapaRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Mapa no encontrado"));
+    }
+
 }
