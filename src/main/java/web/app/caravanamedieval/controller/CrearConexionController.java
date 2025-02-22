@@ -27,5 +27,13 @@ public class CrearConexionController {
         }
     }
 
+    @GetMapping("/desde/{ciudadId}")
+    public ResponseEntity<List<ConexionCiudad>> obtenerConexionesDesde(@PathVariable Long ciudadId) {
+        return ResponseEntity.ok(conexionCiudadService.obtenerConexionesDesdeCiudad(ciudadId));
+    }
 
+    @GetMapping("/hacia/{ciudadId}")
+    public ResponseEntity<List<ConexionCiudad>> obtenerConexionesHacia(@PathVariable Long ciudadId) {
+        return ResponseEntity.ok(conexionCiudadService.obtenerConexionesHaciaCiudad(ciudadId));
+    }
 }

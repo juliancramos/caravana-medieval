@@ -33,4 +33,37 @@ public class ConexionCiudad {
         this.ciudadDestino = ciudadDestino;
         this.tiempoTrayecto = tiempoTrayecto;
     }
+    public ConexionCiudad(){}
+
+    public Long getIdConexion() {
+        return idConexion;
+    }
+
+    public void setIdConexion(Long idConexion) {
+        this.idConexion = idConexion;
+    }
+
+    public Double getTiempoTrayecto() {
+        return tiempoTrayecto;
+    }
+
+    public void setTiempoTrayecto(Double tiempoTrayecto) {
+        this.tiempoTrayecto = tiempoTrayecto;
+    }
+
+    public Ciudad getCiudadOrigen() {
+        return ciudadOrigen;
+    }
+
+    public void setCiudadOrigen(Ciudad ciudadOrigen) {
+        this.ciudadOrigen = ciudadOrigen;
+    }
+
+    public Ciudad getCiudadDestino() {
+        return ciudadDestino;
+    }
+
+    public void setCiudadDestino(Ciudad ciudadDestino) {
+        this.ciudadDestino = ciudadDestino;
+    }
 }

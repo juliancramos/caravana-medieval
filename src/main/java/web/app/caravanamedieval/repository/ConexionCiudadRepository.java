@@ -9,6 +9,7 @@ import java.util.List;
 
 @Repository
 public interface ConexionCiudadRepository extends JpaRepository<ConexionCiudad, Long> {
-
+    List<ConexionCiudad> findByCiudadOrigen(Ciudad ciudadOrigen);
+    List<ConexionCiudad> findByCiudadDestino(Ciudad ciudadDestino);
 }
 

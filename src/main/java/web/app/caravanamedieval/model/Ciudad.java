@@ -1,5 +1,6 @@
 package web.app.caravanamedieval.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,13 +28,16 @@ public class Ciudad {
     private int impuestoEntrada;
 
     @ManyToMany(mappedBy = "ciudades")
+    @JsonIgnore //Evita recursiones infinitas al escribir una ciudad
     private List<Mapa> mapas;
 
     //Representa las conexiones de entrada y salida
     @OneToMany(mappedBy = "ciudadOrigen", cascade = CascadeType.ALL)
+    @JsonIgnore //Evita recursiones infinitas al escribir una ciudad
     private List<ConexionCiudad> conexionesSalida = new ArrayList<>();
 
     @OneToMany(mappedBy = "ciudadDestino", cascade = CascadeType.ALL)
+    @JsonIgnore //Evita recursiones infinitas al escribir una ciudad
     private List<ConexionCiudad> conexionesEntrada = new ArrayList<>();
 
     public Ciudad(){
