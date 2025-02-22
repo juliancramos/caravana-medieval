@@ -24,7 +24,7 @@ public class CaravanaController {
         try{
             Caravana nuevaCaravana = caravanaService.crearCaravana(caravana);
 
-            // Crear la URI para retornar la ubicación del nuevo album
+            // Crear la URI para retornar la ubicación de la caravana
             URI location = ServletUriComponentsBuilder
                     .fromCurrentRequest()
                     .path("/{nombre}")
