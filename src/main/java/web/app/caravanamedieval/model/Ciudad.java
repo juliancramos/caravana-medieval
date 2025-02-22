@@ -29,6 +29,13 @@ public class Ciudad {
     @ManyToMany(mappedBy = "ciudades")
     private List<Mapa> mapas;
 
+    //Representa las conexiones de entrada y salida
+    @OneToMany(mappedBy = "ciudadOrigen", cascade = CascadeType.ALL)
+    private List<ConexionCiudad> conexionesSalida = new ArrayList<>();
+
+    @OneToMany(mappedBy = "ciudadDestino", cascade = CascadeType.ALL)
+    private List<ConexionCiudad> conexionesEntrada = new ArrayList<>();
+
     public Ciudad(){
         this.mapas = new ArrayList<>();
     }
@@ -65,5 +72,21 @@ public class Ciudad {
 
     public List<Mapa> getMapas() {
         return mapas;
+    }
+
+    public List<ConexionCiudad> getConexionesSalida() {
+        return conexionesSalida;
+    }
+
+    public void setConexionesSalida(List<ConexionCiudad> conexionesSalida) {
+        this.conexionesSalida = conexionesSalida;
+    }
+
+    public List<ConexionCiudad> getConexionesEntrada() {
+        return conexionesEntrada;
+    }
+
+    public void setConexionesEntrada(List<ConexionCiudad> conexionesEntrada) {
+        this.conexionesEntrada = conexionesEntrada;
     }
 }
