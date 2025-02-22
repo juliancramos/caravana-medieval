@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,6 +24,19 @@ public class Mapa {
 
     @Column(name = "descripcion", nullable = false, length = 200)
     private String descripcion;
+
+    @ManyToMany
+    @JoinTable(
+            name = "ciudadesxmapa",
+            joinColumns = @JoinColumn(name = "mapa_id"),
+            inverseJoinColumns = @JoinColumn(name = "ciudad_id")
+    )
+    private List<Ciudad> ciudades;
+
+    public Mapa() {
+        this.ciudades = new ArrayList<>();
+    }
+
 
     public Mapa(String nombre, String descripcion) {
         this.nombre = nombre;
@@ -49,5 +65,9 @@ public class Mapa {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public List<Ciudad> getCiudades() {
+        return ciudades;
     }
 }

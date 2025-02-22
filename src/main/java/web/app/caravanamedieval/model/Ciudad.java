@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,6 +25,13 @@ public class Ciudad {
 
     @Column(name = "impuesto_entrada", nullable = false)
     private int impuestoEntrada;
+
+    @ManyToMany(mappedBy = "ciudades")
+    private List<Mapa> mapas;
+
+    public Ciudad(){
+        this.mapas = new ArrayList<>();
+    }
 
 
     public Ciudad(String nombre, int impuestoEntrada) {
@@ -53,5 +63,7 @@ public class Ciudad {
         this.impuestoEntrada = impuestoEntrada;
     }
 
-
+    public List<Mapa> getMapas() {
+        return mapas;
+    }
 }
