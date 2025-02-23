@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/conexion")
-public class CrearConexionController {
+public class ConexionCiudadController {
 
     @Autowired
     ConexionCiudadService conexionCiudadService;
