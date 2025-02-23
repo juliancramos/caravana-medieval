@@ -31,7 +31,7 @@ public class Ciudad {
     @JsonIgnore //Evita recursiones infinitas al escribir una ciudad
     private List<Mapa> mapas;
 
-    //Representa las conexiones de entrada y salida
+    //Representa las conexiones de entrada y salida EN LAS CONEXIONES
     @OneToMany(mappedBy = "ciudadOrigen", cascade = CascadeType.ALL)
     @JsonIgnore //Evita recursiones infinitas al escribir una ciudad
     private List<ConexionCiudad> conexionesSalida = new ArrayList<>();
@@ -39,6 +39,15 @@ public class Ciudad {
     @OneToMany(mappedBy = "ciudadDestino", cascade = CascadeType.ALL)
     @JsonIgnore //Evita recursiones infinitas al escribir una ciudad
     private List<ConexionCiudad> conexionesEntrada = new ArrayList<>();
+
+    //Representa la ciudad de origen y de destino EN LAS RUTAS
+    @OneToMany(mappedBy = "ciudadOrigen", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Ruta> rutasOrigen = new ArrayList<>();
+
+    @OneToMany(mappedBy = "ciudadDestino", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Ruta> rutasSalida = new ArrayList<>();
 
     public Ciudad(){
         this.mapas = new ArrayList<>();
@@ -92,5 +101,21 @@ public class Ciudad {
 
     public void setConexionesEntrada(List<ConexionCiudad> conexionesEntrada) {
         this.conexionesEntrada = conexionesEntrada;
+    }
+
+    public List<Ruta> getRutasOrigen() {
+        return rutasOrigen;
+    }
+
+    public void setRutasOrigen(List<Ruta> rutasOrigen) {
+        this.rutasOrigen = rutasOrigen;
+    }
+
+    public List<Ruta> getRutasSalida() {
+        return rutasSalida;
+    }
+
+    public void setRutasSalida(List<Ruta> rutasSalida) {
+        this.rutasSalida = rutasSalida;
     }
 }
