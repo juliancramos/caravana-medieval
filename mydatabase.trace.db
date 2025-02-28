@@ -1,0 +1,6 @@
+2025-02-28 02:43:22.490299Z jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "JUGADOR" not found (this database is empty); SQL statement:
+INSERT INTO jugador (username, password, rol_jugador, id_partida) VALUES ('admin', 'admin123', 'ADMIN', NULL), ('player1', 'player123', 'USER', NULL), ('player2', 'player456', 'USER', NULL) [42104-232]
+2025-02-28 02:47:55.204749Z jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "JUGADOR" not found (this database is empty); SQL statement:
+INSERT INTO jugador (username, password, rol_jugador, id_partida) VALUES ('admin', 'admin123', 'ADMIN', NULL), ('player1', 'player123', 'USER', NULL), ('player2', 'player456', 'USER', NULL) [42104-232]

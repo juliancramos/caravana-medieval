@@ -14,11 +14,16 @@ public class Jugador {
     @Column(name = "id_jugador")
     private Integer idJugador;
 
+    @Column(name = "username", nullable = false, unique = true)
+    private String username;
+
+    @Column(name = "password", nullable = false)
+    private String password;
+    
     @Column(name = "rol_jugador", nullable = false)
     private String rol;
 
     @OneToOne
-    @JoinColumn(name = "id_partida", unique = true, nullable = false)
+    @JoinColumn(name = "id_partida", unique = true, nullable = true)
     private Partida partida;
-    
 }
