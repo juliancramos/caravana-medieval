@@ -33,7 +33,7 @@ public class Ruta {
     @Column(name = "causa_dano", length = 50)
     private String causaDano;
 
-    public Ruta(){}
+
 
     public Ruta(String tipo, Ciudad ciudadOrigen, Ciudad ciudadDestino, Integer dano, String causaDano) {
         this.tipo = tipo;

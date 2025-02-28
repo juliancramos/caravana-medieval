@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap');    
+
+body {
+    background-image: url(https://static.vecteezy.com/system/resources/previews/007/106/640/non_2x/empty-silhouette-medieval-background-free-vector.jpg);
+    background-size: 100% auto; /* Ajusta la imagen sin recortarla */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Mantiene la imagen fija al hacer scroll */
+    background-color: #f0f0f0; /* Color de fondo en caso de espacios vacíos */
+}
+/* Contenedor para centrar todo */
+.formMedieval {
+    text-align: center;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra los elementos */
+}
+
+
+.imgLogin {
+    display: block;
+    margin: 30px auto; /* Centra horizontalmente */
+    max-width: 1000px; 
+    object-fit: cover; 
+}
+
+.labelMedieval {
+    font-family: 'Uncial Antiqua', serif;
+    color: #ffffff; /* Café oscuro */
+    background-color: #8B5A2B;
+    padding: 6px 7px;
+    font-size: 1.5rem;
+    display: block;
+    margin-top: 15px;
+}
+
+/* Estilo de los campos de texto */
+.inputMedieval {
+    font-family: 'Uncial Antiqua', serif;
+    font-size: 1.2rem;
+    padding: 8px;
+    border: 2px solid #4B2E15;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 300px;
+    display: block;
+    margin-top: 5px;
+    text-align: center; /* Para centrar el texto dentro del input */
+}
+
+/* Botón estilo medieval */
+.btnMedieval {
+    font-family: 'Uncial Antiqua', serif;
+    background-color: #8B5A2B; /* Café oscuro */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-top: 15px;
+    display: block;
+}
+
+.btnMedieval:hover {
+    background-color: #6B4226; /* Un tono más oscuro */
+}
+

@@ -49,9 +49,6 @@ public class Ciudad {
     @JsonIgnore
     private List<Ruta> rutasSalida = new ArrayList<>();
 
-    public Ciudad(){
-        this.mapas = new ArrayList<>();
-    }
 
 
     public Ciudad(String nombre, int impuestoEntrada) {

@@ -33,10 +33,7 @@ public class Mapa {
     )
     private List<Ciudad> ciudades;
 
-    public Mapa() {
-        this.ciudades = new ArrayList<>();
-    }
-
+  
 
     public Mapa(String nombre, String descripcion) {
         this.nombre = nombre;

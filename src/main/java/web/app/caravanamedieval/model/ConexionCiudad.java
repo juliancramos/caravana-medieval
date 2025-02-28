@@ -33,7 +33,7 @@ public class ConexionCiudad {
         this.ciudadDestino = ciudadDestino;
         this.tiempoTrayecto = tiempoTrayecto;
     }
-    public ConexionCiudad(){}
+
 
     public Long getIdConexion() {
         return idConexion;

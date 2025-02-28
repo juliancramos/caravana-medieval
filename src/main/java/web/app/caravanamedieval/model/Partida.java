@@ -2,6 +2,7 @@ package web.app.caravanamedieval.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.util.List;
 
 @Entity
 @Table(name = "partida")
@@ -32,8 +33,11 @@ public class Partida {
     @JoinColumn(name = "mapa_id", nullable = false)
     private Mapa mapa;
 
-    public Partida() {
-    }
+    @OneToOne(mappedBy = "partida")
+    private Jugador jugador;
+  
+
+  
 
     public Partida(Double tiempoTranscurrido, Double tiempoLimite, Double gananciaMinima, Caravana caravana, Mapa mapa) {
         this.tiempoTranscurrido = tiempoTranscurrido;

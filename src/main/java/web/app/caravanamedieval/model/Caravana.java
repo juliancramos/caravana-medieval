@@ -40,7 +40,7 @@ public class Caravana {
         this.puntosVida = puntosVida;
     }
 
-    public Caravana(){}
+ 
 
     // Getters y Setters
     public Long getIdCaravana() {
