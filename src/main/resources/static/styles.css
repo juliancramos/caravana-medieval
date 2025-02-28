@@ -28,7 +28,7 @@ body {
 .labelMedieval {
     font-family: 'Uncial Antiqua', serif;
     color: #ffffff; /* Café oscuro */
-    background-color: #8B5A2B;
+    background-color:#8B4513;
     padding: 6px 7px;
     font-size: 1.5rem;
     display: block;
@@ -65,5 +65,36 @@ body {
 
 .btnMedieval:hover {
     background-color: #6B4226; /* Un tono más oscuro */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+
+
+.botonesRol {
+    display: flex;
+    gap: 20px;
+}
+
+.btnRol {
+    background-color: #8B4513;
+    color: white;
+    font-size: 22px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Uncial Antiqua', cursive;
+    transition: background-color 0.3s;
+}
+
+.btnRol:hover {
+    background-color: #A0522D;
 }
 
