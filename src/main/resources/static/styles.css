@@ -17,11 +17,18 @@ body {
     align-items: center; /* Centra los elementos */
 }
 
-
+.logo {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    
+    max-width: 200px;
+    height: auto;
+}
 .imgLogin {
     display: block;
-    margin: 30px auto; /* Centra horizontalmente */
-    max-width: 1000px; 
+    margin: 10px auto; /* Centra horizontalmente */
+    max-width: 500px; 
     object-fit: cover; 
 }
 
@@ -62,7 +69,26 @@ body {
     margin-top: 15px;
     display: block;
 }
+.CRUDButton{
+    position: absolute;
+    font-family: 'Uncial Antiqua', serif;
+    background-color: #8B5A2B; /* Café oscuro */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-top: 15px;
+    display: block;
+    top: 500px;
+    right: 10px;
+    text-decoration: none;
+    font-weight: bold;
+      
 
+
+}
 .btnMedieval:hover {
     background-color: #6B4226; /* Un tono más oscuro */
 }
@@ -98,3 +124,47 @@ body {
     background-color: #A0522D;
 }
 
+/*CRUD*/
+.menu {
+    background-color: #8B5A2B;
+    padding: 10px;
+    text-align: center;
+    list-style: none;
+
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+.menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.menu ul li {
+    display: inline;
+    margin: 0 15px;
+}
+.menu ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 10px;
+    
+}
+.menu ul li a:hover {
+    background:  #b39477;
+}
+.crud-title {
+    font-family: 'Uncial Antiqua', serif;
+    text-align: center;
+    margin-top: 50px;
+    font-size: 3.5rem;
+    color: #5a432d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
