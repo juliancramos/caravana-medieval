@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav class="menu">
+            <ul>
+                <li><a href="productosCRUD.html">Productos</a></li>
+                <li><a href="serviciosCRUD.html">Servicios</a></li>
+                <li><a href="ciudadesCRUD.html">Ciudades</a></li>
+                <li><a href="rutasCRUD.html">Rutas</a></li>
+                <li><a href="jugadoresCRUD.html">Jugadores</a></li>
+            </ul>
+        </nav>
+    </header>
+    <h1 class="crud-title">CRUD Productos </h1>
+    <section class="crud-container">
+        <h2 class="labelCRUD">Crear Producto</h2>
+        <form id="productoForm">
+            <label for="nombre" class="labelCRUD">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+            
+            <label for="descripcion" class="labelCRUD">Descripción:</label>
+            <input type="text" id="descripcion" name="descripcion" required>
+            
+            <label for="peso" class="labelCRUD">Peso:</label>
+            <input type="number" step="0.01" id="peso" name="peso" required>
+            
+            <button type="submit">Crear Producto</button>
+          </form>
+          
+          <script>
+          document.getElementById("productoForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            
+            const data = {
+              nombre: formData.get("nombre"),
+              descripcion: formData.get("descripcion"),
+              peso: parseFloat(formData.get("peso"))
+            };
+          
+            fetch("/producto/crearProducto", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+              console.log("Producto creado:", result);
+              // Aquí puedes actualizar la interfaz o notificar al usuario
+            })
+            .catch(error => console.error("Error:", error));
+          });
+          </script>
+          
+</body>
+</html>

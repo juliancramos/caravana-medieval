@@ -1,4 +1,4 @@
-package web.app.caravanamedieval.service;
+package web.app.init;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

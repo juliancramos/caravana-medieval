@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba POST</title>
+</head>
+<body>
+    <button id="enviar">Enviar solicitud</button>
+    <script>
+        document.getElementById("enviar").addEventListener("click", async () => {
+            const data = { nombre: "Producto 1", descripcion: "Descripción del producto", peso: 20.5 };
+            try {
+                const response = await fetch("http://localhost:8080/producto/crearProducto", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data)
+                });
+                if (response.ok) {
+                    alert("Producto creado exitosamente");
+                } else {
+                    const errorText = await response.text();
+                    alert("Error: " + errorText);
+                }
+            } catch (error) {
+                console.error("Error en la solicitud:", error);
+                alert("Hubo un problema con el servidor.");
+            }
+        });
+    </script>
+</body>
+</html>

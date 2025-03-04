@@ -130,7 +130,6 @@ body {
     padding: 10px;
     text-align: center;
     list-style: none;
-
     width: 100%;
     position: fixed;
     top: 0;
@@ -167,4 +166,13 @@ body {
     justify-content: center;
     align-items: center;
     height: 100px;
+}
+
+.labelCRUD {
+    font-family: 'Uncial Antiqua', serif;
+    color: #000000; 
+    font-weight: bold;
+    background-color: #bd8959;
+    padding: 6px 7px;
+    display: inline-block; /* 🔹 Ajusta el ancho al contenido */
 }

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -22,14 +22,16 @@ public class ProductoController {
 
     @PostMapping("/crearProducto")
     public ResponseEntity<?> crearProducto(@RequestBody Producto producto){
+        System.out.println("Solicitud recibida: " + producto);
         try{
+            
             Producto nuevoProducto = productoService.crearProducto(producto);
 
             // Crear la URI para retornar la ubicación del producto
             URI location = ServletUriComponentsBuilder
                     .fromCurrentRequest()
-                    .path("/{nombre}")
-                    .buildAndExpand(nuevoProducto.getNombre())
+                    .path("/{id}")
+                    .buildAndExpand(nuevoProducto.getIdProducto())
                     .toUri();
             return ResponseEntity.created(location).body(nuevoProducto);
         }catch (Exception e){
@@ -37,6 +39,12 @@ public class ProductoController {
                     .body("Error al crear el producto: " + e.getMessage());
         }
     }
+
+        @GetMapping("/listar")
+    public ResponseEntity<?> listarProductos() {
+        return ResponseEntity.ok(productoService.listarTodos());
+    }
+
 
     @PostMapping("/agregarRegistros")
     public ResponseEntity<String> agregarRegistros() {
