@@ -46,3 +46,8 @@ gradle-app.setting
 
 # Maven
 .mvn/
+
+# Ignorar archivos de base de datos de H2
+*.mv.db
+*.trace.db
+*.h2.db
