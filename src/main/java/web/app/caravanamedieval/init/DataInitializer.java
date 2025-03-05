@@ -33,18 +33,18 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-      
-        createJugadores();
-        createCiudades();
-        createProductos();
-        createServicios(); 
+
+//        createJugadores();
+//        createCiudades();
+//        createProductos();
+//        createServicios();
     }
 
     private void createJugadores() {
         String[] roles = {"Comerciante", "Caravanero", "Administrador"};
         for (int i = 0; i < 10; i++) {
             String username = "Jugador" + (i + 1);
-            String password = "password" + (i + 1); 
+            String password = "password" + (i + 1);
             String rol = roles[new Random().nextInt(roles.length)];
             Jugador jugador = new Jugador(null, username, password, rol, null);
             jugadorRepository.save(jugador);
@@ -56,7 +56,7 @@ public class DataInitializer implements CommandLineRunner {
         List<Ciudad> ciudades = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
             String nombreCiudad = "Ciudad" + (i + 1);
-            int impuestoEntrada = new Random().nextInt(100) + 1; 
+            int impuestoEntrada = new Random().nextInt(100) + 1;
             Ciudad ciudad = new Ciudad(nombreCiudad, impuestoEntrada);
             ciudadRepository.save(ciudad);
             ciudades.add(ciudad);
@@ -68,38 +68,38 @@ public class DataInitializer implements CommandLineRunner {
     }
 
     private void createRutasAleatorias(List<Ciudad> ciudades) {
-        Random random = new Random();
-
-        for (int i = 0; i < 100; i++) {
-          
-            Ciudad ciudadOrigen = ciudades.get(random.nextInt(ciudades.size()));
-            Ciudad ciudadDestino = ciudades.get(random.nextInt(ciudades.size()));
-
-            while (ciudadOrigen.equals(ciudadDestino)) {
-                ciudadDestino = ciudades.get(random.nextInt(ciudades.size()));
-            }
-
-            // Generar un tipo de ruta aleatorio
-            String[] tiposDeRuta = {"segura", "insegura"};
-            String tipo = tiposDeRuta[random.nextInt(tiposDeRuta.length)];
-
-            // Declarar la variable `dano` fuera del bloque if-else
-            Integer dano = 0;
-
-            // Asignar un valor de daño si la ruta es "insegura"
-            if ("insegura".equals(tipo)) {
-                dano = random.nextInt(100);  // Daño entre 0 y 99
-            }
-
-            String causaDano = (dano > 0) ? "Desastre natural" : null;
-
-            // Crear la ruta con la información generada
-            Ruta ruta = new Ruta(tipo, ciudadOrigen, ciudadDestino, dano, causaDano);
-
-            // Guardar la ruta en la base de datos
-            rutaRepository.save(ruta);
-            System.out.println("Ruta creada entre " + ciudadOrigen.getNombre() + " y " + ciudadDestino.getNombre());
-        }
+//        Random random = new Random();
+//
+//        for (int i = 0; i < 100; i++) {
+//
+//            Ciudad ciudadOrigen = ciudades.get(random.nextInt(ciudades.size()));
+//            Ciudad ciudadDestino = ciudades.get(random.nextInt(ciudades.size()));
+//
+//            while (ciudadOrigen.equals(ciudadDestino)) {
+//                ciudadDestino = ciudades.get(random.nextInt(ciudades.size()));
+//            }
+//
+//            // Generar un tipo de ruta aleatorio
+//            String[] tiposDeRuta = {"segura", "insegura"};
+//            String tipo = tiposDeRuta[random.nextInt(tiposDeRuta.length)];
+//
+//            // Declarar la variable `dano` fuera del bloque if-else
+//            Integer dano = 0;
+//
+//            // Asignar un valor de daño si la ruta es "insegura"
+//            if ("insegura".equals(tipo)) {
+//                dano = random.nextInt(100);  // Daño entre 0 y 99
+//            }
+//
+//            String causaDano = (dano > 0) ? "Desastre natural" : null;
+//
+//            // Crear la ruta con la información generada
+//            Ruta ruta = new Ruta(tipo, ciudadOrigen, ciudadDestino, dano, causaDano);
+//
+//            // Guardar la ruta en la base de datos
+//            rutaRepository.save(ruta);
+//            System.out.println("Ruta creada entre " + ciudadOrigen.getNombre() + " y " + ciudadDestino.getNombre());
+//        }
     }
 
     private void createProductos() {
@@ -119,7 +119,7 @@ public class DataInitializer implements CommandLineRunner {
     }
 
     private void createServicios() {
-       
+
     Servicio servicio1 = new Servicio(null, "Reparar", "Por una suma de dinero, la caravana puede recuperar todos o parte de sus puntos de vida", 0.10f, 0.50f);
     Servicio servicio2 = new Servicio(null, "Mejorar capacidad", "Por una suma de dinero, la caravana puede ampliar su capacidad maxima de carga. A través de este servicio se puede aumentar hasta un tope de 400% por sobre la capacidad maxima original de la caravana", 0.10f, 4f);
     Servicio servicio3 = new Servicio(null, "Mejorar velocidad", "Por una suma de dinero, la velocidad maxima de la caravana puede ser aumentada, hasta un tope maximo de 50%, por sobre la velocidad original de la caravana", 0.10f, 0.5f);
@@ -128,17 +128,17 @@ public class DataInitializer implements CommandLineRunner {
     servicioRepository.save(servicio1);
     System.out.println("Servicio guardado: " + servicio1.getNombre());
 
-    
-    
+
+
     servicioRepository.save(servicio2);
     System.out.println("Servicio guardado: " + servicio2.getNombre());
-    
+
     servicioRepository.save(servicio3);
     System.out.println("Servicio guardado: " + servicio3.getNombre());
-    
+
     servicioRepository.save(servicio4);
     System.out.println("Servicio guardado: " + servicio4.getNombre());
-    
+
         System.out.println("Servicios creados.");
     }
 }

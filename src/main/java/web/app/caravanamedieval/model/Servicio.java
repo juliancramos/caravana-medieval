@@ -29,10 +29,18 @@ public class Servicio {
     @Column(name = "mejora_max", nullable = false)
     private Float mejoraMax;
 
-   
-   
 
- 
+    public Servicio() {
+    }
+
+    public Servicio(Integer idServicio, String nombre, String descripcion, Float mejoraxCompra, Float mejoraMax) {
+        this.idServicio = idServicio;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.mejoraxCompra = mejoraxCompra;
+        this.mejoraMax = mejoraMax;
+    }
+
     public Integer getIdServicio() {
         return idServicio;
     }
