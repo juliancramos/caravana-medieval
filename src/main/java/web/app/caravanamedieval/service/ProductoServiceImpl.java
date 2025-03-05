@@ -19,23 +19,72 @@ public class ProductoServiceImpl implements ProductoService{
         return productoRepository.save(producto);
     }
 
-            @Override
-        public List<Producto> listarTodos() {
+    @Override
+    public List<Producto> listarTodos() {
             return productoRepository.findAll();
         }
+
+    @Override
+    public Producto getProductoByNombre(String nombre) {
+        return productoRepository.findByNombre(nombre)
+                .orElseThrow(()->new EntityNotFoundException("Producto no encontrado"));
+    }
+
+    @Override
+    public Producto actualizarProducto(Integer id, Producto actualizado) {
+        Producto producto = productoRepository.findById(id)
+                .orElseThrow(()->new EntityNotFoundException("Producto no encontrado"));
+
+        //Para verificar si se modificó un campo
+        boolean modificacion = false;
+
+        if(actualizado.getNombre() != null){
+            producto.setNombre(actualizado.getNombre());
+            modificacion = true;
+        }
+        if(actualizado.getDescripcion() != null){
+            producto.setDescripcion(actualizado.getDescripcion());
+            modificacion = true;
+        }
+        if(actualizado.getPeso() != null){
+            producto.setPeso(actualizado.getPeso());
+            modificacion = true;
+        }
+        if (!modificacion) {
+            throw new IllegalArgumentException("No se proporcionó ningún campo válido para actualizar");
+        }
+
+        return productoRepository.save(producto);
+    }
+
+//    @Override
+//    public Producto actualizarProductoEntero(Integer id, Producto actualizado) {
+//        Producto producto = productoRepository.findById(id)
+//                .orElseThrow(()->new EntityNotFoundException("Producto no encontrado"));
+//
+//        //Evitar datos nulos
+//        if (actualizado.getNombre() != null) {
+//            producto.setNombre(actualizado.getNombre());
+//        }
+//        if (actualizado.getDescripcion() != null) {
+//            producto.setDescripcion(actualizado.getDescripcion());
+//        }
+//        if (actualizado.getPeso() != null) {
+//            producto.setPeso(actualizado.getPeso());
+//        }
+//        return productoRepository.save(producto);
+//    }
+
+    @Override
+    public void eliminarProducto(Integer id) {
+        if (!productoRepository.existsById(id)) {
+            throw new EntityNotFoundException("Producto con ID " + id + " no encontrado.");
+        }
+        productoRepository.deleteById(id);
+    }
 
     public Producto getProducto(Integer id) {
         return productoRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Producto no encontrado"));
     }
-} /* 
- @Transactional
-    public Usuario updateProducto(Integer id, String nombre, String descripcion, Float peso) {
-        return productoRepository.findById(id).map(usuario -> {
-            producto.setNombre(nombre);
-            usuario.setDescripcion(descripcion);
-            usuario.setPeso(peso);
-            return usuarioRepository.save(usuario);
-        }).orElseThrow(() -> new RuntimeException("Producto not found"));
-    }
-*/
+}

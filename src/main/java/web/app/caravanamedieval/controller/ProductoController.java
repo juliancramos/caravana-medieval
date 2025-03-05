@@ -1,5 +1,6 @@
 package web.app.caravanamedieval.controller;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,7 +46,6 @@ public class ProductoController {
         return ResponseEntity.ok(productoService.listarTodos());
     }
 
-
     @PostMapping("/agregarRegistros")
     public ResponseEntity<String> agregarRegistros() {
         try {
@@ -58,6 +58,70 @@ public class ProductoController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Error al agregar registros: " + e.getMessage());
+        }
+    }
+
+    @GetMapping({"/{id}"})
+    public ResponseEntity<?> getProducto(@PathVariable Integer id){
+        try{
+            Producto producto = productoService.getProducto(id);
+            if(producto == null){
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Producto no encontrado");
+            }
+            return ResponseEntity.ok(producto);
+        }catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error en el servidor");
+        }
+    }
+    @GetMapping("/nombre/{nombre}")
+    public ResponseEntity<?>getProductByName(@PathVariable String nombre){
+        try{
+            Producto producto = productoService.getProductoByNombre(nombre);
+            if(producto == null){
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Producto no encontrado");
+            }
+            return ResponseEntity.ok(producto);
+        }catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error en el servidor");
+        }
+    }
+
+    @PutMapping("/actualizarCompleto/{id}")
+    public ResponseEntity<?> actualizarProductoCompleto(@PathVariable Integer id, @RequestBody Producto nuevoProducto){
+
+        try{
+            Producto actualizado = productoService.actualizarProducto(id, nuevoProducto);
+
+            return ResponseEntity.ok(actualizado);
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error al actualizar el producto: " + e.getMessage());
+        }
+    }
+
+    @PatchMapping("/actualizar/{id}")
+    public ResponseEntity<?> actualizarProducto(@PathVariable Integer id, @RequestBody Producto nuevoProducto){
+        try{
+            Producto actualizado = productoService.actualizarProducto(id, nuevoProducto);
+            return ResponseEntity.ok(actualizado);
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error al actualizar el producto: " + e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<?> eliminarProducto(@PathVariable Integer id){
+        try{
+            productoService.eliminarProducto(id);
+            return ResponseEntity.ok().build();
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error al eliminar el producto: " + e.getMessage());
         }
     }
 }
