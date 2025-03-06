@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import web.app.caravanamedieval.dto.CaravanaDTO;
 import web.app.caravanamedieval.model.Caravana;
 import web.app.caravanamedieval.service.CaravanaService;
 
@@ -20,9 +21,9 @@ public class CaravanaController {
     private CaravanaService caravanaService;
 
     @PostMapping("/crearCaravana")
-    public ResponseEntity<?> crearCaravana(@RequestBody Caravana caravana){
+    public ResponseEntity<?> crearCaravana(@RequestBody CaravanaDTO caravanaDTO){
         try{
-            Caravana nuevaCaravana = caravanaService.crearCaravana(caravana);
+            Caravana nuevaCaravana = caravanaService.crearCaravana(caravanaDTO);
 
             // Crear la URI para retornar la ubicación de la caravana
             URI location = ServletUriComponentsBuilder
@@ -42,7 +43,7 @@ public class CaravanaController {
         try {
             for (int i = 0; i < 100; i++) {
                 String nombre = "nombre" + i;
-                caravanaService.crearCaravana(new Caravana(nombre, 30 + i, 50+i, 1000, 100));
+                caravanaService.crearCaravana(new CaravanaDTO(nombre, 30 + i, 50+i, 1000, 100));
             }
             return ResponseEntity.ok("Se agregaron 100 registros correctamente.");
         } catch (Exception e) {
