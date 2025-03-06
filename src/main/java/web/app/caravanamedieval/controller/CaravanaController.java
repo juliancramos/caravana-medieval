@@ -1,12 +1,10 @@
 package web.app.caravanamedieval.controller;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import web.app.caravanamedieval.dto.CaravanaDTO;
 import web.app.caravanamedieval.model.Caravana;
@@ -49,6 +47,30 @@ public class CaravanaController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Error al agregar registros: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?>getCaravana(@PathVariable Long id){
+        try{
+            Caravana caravana = caravanaService.getCaravana(id);
+            if(caravana == null){
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Caravana no encontrada");
+            }
+            return ResponseEntity.ok(caravana);
+        }catch (EntityNotFoundException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/listar")
+    public ResponseEntity<?> getCaravanas(){
+        try{
+            return ResponseEntity.ok(caravanaService.getCaravanas());
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
 

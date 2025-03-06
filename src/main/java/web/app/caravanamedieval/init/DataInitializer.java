@@ -3,6 +3,8 @@ package web.app.caravanamedieval.init;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import web.app.caravanamedieval.dto.ProductoDTO;
+import web.app.caravanamedieval.mapper.ProductoMapper;
 import web.app.caravanamedieval.model.*;
 import web.app.caravanamedieval.repository.*;
 
@@ -112,33 +114,34 @@ public class DataInitializer implements CommandLineRunner {
             String nombre = nombresProducto[new Random().nextInt(nombresProducto.length)] + " " + (i + 1);
             String descripcion = descripcionesProducto[new Random().nextInt(descripcionesProducto.length)];
             Float peso = (float) (new Random().nextInt(100) + 1); // Peso entre 1 y 100
-            Producto producto = new Producto(nombre, descripcion, peso);
+            ProductoDTO productoDTO = new ProductoDTO(nombre, descripcion, peso);
+            Producto producto = ProductoMapper.INSTANCE.toEntity(productoDTO);
             productoRepository.save(producto);
             System.out.println("Producto creado: " + nombre);
         }
     }
 
-    private void createServicios() {
-
-    Servicio servicio1 = new Servicio(null, "Reparar", "Por una suma de dinero, la caravana puede recuperar todos o parte de sus puntos de vida", 0.10f, 0.50f);
-    Servicio servicio2 = new Servicio(null, "Mejorar capacidad", "Por una suma de dinero, la caravana puede ampliar su capacidad maxima de carga. A través de este servicio se puede aumentar hasta un tope de 400% por sobre la capacidad maxima original de la caravana", 0.10f, 4f);
-    Servicio servicio3 = new Servicio(null, "Mejorar velocidad", "Por una suma de dinero, la velocidad maxima de la caravana puede ser aumentada, hasta un tope maximo de 50%, por sobre la velocidad original de la caravana", 0.10f, 0.5f);
-    Servicio servicio4 = new Servicio(null, "Guardias", "Por una suma de dinero, la caravana adquiere, permanentemente, mejor protección para viajar por rutas inseguras. La cantidad de daño que recibe durante un viaje inseguro se reduce un 25%. Este servicio no es acumulable (solo se puede comprar una vez)", 0.10f, 0.5f);
-
-    servicioRepository.save(servicio1);
-    System.out.println("Servicio guardado: " + servicio1.getNombre());
-
-
-
-    servicioRepository.save(servicio2);
-    System.out.println("Servicio guardado: " + servicio2.getNombre());
-
-    servicioRepository.save(servicio3);
-    System.out.println("Servicio guardado: " + servicio3.getNombre());
-
-    servicioRepository.save(servicio4);
-    System.out.println("Servicio guardado: " + servicio4.getNombre());
-
-        System.out.println("Servicios creados.");
-    }
+//    private void createServicios() {
+//
+//    Servicio servicio1 = new Servicio(null, "Reparar", "Por una suma de dinero, la caravana puede recuperar todos o parte de sus puntos de vida", 0.10f, 0.50f);
+//    Servicio servicio2 = new Servicio(null, "Mejorar capacidad", "Por una suma de dinero, la caravana puede ampliar su capacidad maxima de carga. A través de este servicio se puede aumentar hasta un tope de 400% por sobre la capacidad maxima original de la caravana", 0.10f, 4f);
+//    Servicio servicio3 = new Servicio(null, "Mejorar velocidad", "Por una suma de dinero, la velocidad maxima de la caravana puede ser aumentada, hasta un tope maximo de 50%, por sobre la velocidad original de la caravana", 0.10f, 0.5f);
+//    Servicio servicio4 = new Servicio(null, "Guardias", "Por una suma de dinero, la caravana adquiere, permanentemente, mejor protección para viajar por rutas inseguras. La cantidad de daño que recibe durante un viaje inseguro se reduce un 25%. Este servicio no es acumulable (solo se puede comprar una vez)", 0.10f, 0.5f);
+//
+//    servicioRepository.save(servicio1);
+//    System.out.println("Servicio guardado: " + servicio1.getNombre());
+//
+//
+//
+//    servicioRepository.save(servicio2);
+//    System.out.println("Servicio guardado: " + servicio2.getNombre());
+//
+//    servicioRepository.save(servicio3);
+//    System.out.println("Servicio guardado: " + servicio3.getNombre());
+//
+//    servicioRepository.save(servicio4);
+//    System.out.println("Servicio guardado: " + servicio4.getNombre());
+//
+//        System.out.println("Servicios creados.");
+//    }
 }

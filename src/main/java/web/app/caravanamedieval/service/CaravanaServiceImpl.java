@@ -2,11 +2,15 @@ package web.app.caravanamedieval.service;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import web.app.caravanamedieval.dto.CaravanaDTO;
 import web.app.caravanamedieval.mapper.CaravanaMapper;
 import web.app.caravanamedieval.model.Caravana;
 import web.app.caravanamedieval.repository.CaravanaRepository;
+
+import java.util.List;
 
 @Service
 public class CaravanaServiceImpl implements CaravanaService {
@@ -22,6 +26,15 @@ public class CaravanaServiceImpl implements CaravanaService {
     public Caravana getCaravana(Long id) {
         return caravanaRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Ciudad no encontrada"));
+    }
+
+    @Override
+    public List<Caravana> getCaravanas() {
+        List<Caravana> caravanas = caravanaRepository.findAll();
+        if (caravanas.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No hay caravanas registradas");
+        }
+        return caravanas;
     }
 
 }
