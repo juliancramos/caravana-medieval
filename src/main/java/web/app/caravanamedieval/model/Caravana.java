@@ -4,8 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -31,63 +30,4 @@ public class Caravana {
     @Column(name = "puntos_vida", nullable = false)
     private int puntosVida;
 
-    //Constructor sin id para evitar problemas con generación automática
-    public Caravana(String nombre, float velocidad, float capacidadMaxima, long dineroDisponible, int puntosVida) {
-        this.nombre = nombre;
-        this.velocidad = velocidad;
-        this.capacidadMaxima = capacidadMaxima;
-        this.dineroDisponible = dineroDisponible;
-        this.puntosVida = puntosVida;
-    }
-
- 
-
-    // Getters y Setters
-    public Long getIdCaravana() {
-        return idCaravana;
-    }
-
-    public void setIdCaravana(Long idCaravana) {
-        this.idCaravana = idCaravana;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public double getVelocidad() {
-        return velocidad;
-    }
-
-    public void setVelocidad(double velocidad) {
-        this.velocidad = velocidad;
-    }
-
-    public double getCapacidadMaxima() {
-        return capacidadMaxima;
-    }
-
-    public void setCapacidadMaxima(double capacidadMaxima) {
-        this.capacidadMaxima = capacidadMaxima;
-    }
-
-    public long getDineroDisponible() {
-        return dineroDisponible;
-    }
-
-    public void setDineroDisponible(long dineroDisponible) {
-        this.dineroDisponible = dineroDisponible;
-    }
-
-    public int getPuntosVida() {
-        return puntosVida;
-    }
-
-    public void setPuntosVida(int puntosVida) {
-        this.puntosVida = puntosVida;
-    }
 }

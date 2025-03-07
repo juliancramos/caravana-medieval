@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import web.app.caravanamedieval.dto.ProductoDTO;
 import web.app.caravanamedieval.model.Producto;
 import web.app.caravanamedieval.service.ProductoService;
 
@@ -22,7 +23,7 @@ public class ProductoController {
     private ProductoService productoService;
 
     @PostMapping("/crearProducto")
-    public ResponseEntity<?> crearProducto(@RequestBody Producto producto){
+    public ResponseEntity<?> crearProducto(@RequestBody ProductoDTO producto){
         System.out.println("Solicitud recibida: " + producto);
         try{
             
@@ -52,7 +53,7 @@ public class ProductoController {
             for (int i = 0; i < 50; i++) {
                 String nombre = "producto" + i;
                 String descripcion = "Este es el producto " + i;
-                productoService.crearProducto(new Producto(nombre, descripcion, (float) (20.5+i)));
+                productoService.crearProducto(new ProductoDTO(nombre, descripcion, (float) (20.5+i)));
             }
             return ResponseEntity.ok("Se agregaron 50 registros correctamente.");
         } catch (Exception e) {
@@ -91,7 +92,7 @@ public class ProductoController {
     }
 
     @PutMapping("/actualizarCompleto/{id}")
-    public ResponseEntity<?> actualizarProductoCompleto(@PathVariable Integer id, @RequestBody Producto nuevoProducto){
+    public ResponseEntity<?> actualizarProductoCompleto(@PathVariable Integer id, @RequestBody ProductoDTO nuevoProducto){
 
         try{
             Producto actualizado = productoService.actualizarProducto(id, nuevoProducto);
@@ -104,7 +105,7 @@ public class ProductoController {
     }
 
     @PatchMapping("/actualizar/{id}")
-    public ResponseEntity<?> actualizarProducto(@PathVariable Integer id, @RequestBody Producto nuevoProducto){
+    public ResponseEntity<?> actualizarProducto(@PathVariable Integer id, @RequestBody ProductoDTO nuevoProducto){
         try{
             Producto actualizado = productoService.actualizarProducto(id, nuevoProducto);
             return ResponseEntity.ok(actualizado);

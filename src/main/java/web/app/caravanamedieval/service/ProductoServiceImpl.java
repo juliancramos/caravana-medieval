@@ -3,6 +3,8 @@ package web.app.caravanamedieval.service;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import web.app.caravanamedieval.dto.ProductoDTO;
+import web.app.caravanamedieval.mapper.ProductoMapper;
 import web.app.caravanamedieval.model.Producto;
 import web.app.caravanamedieval.repository.ProductoRepository;
 import jakarta.transaction.Transactional;
@@ -15,7 +17,8 @@ public class ProductoServiceImpl implements ProductoService{
 
     @Override
     @Transactional
-    public Producto crearProducto(Producto producto) {
+    public Producto crearProducto(ProductoDTO productoDTO) {
+        Producto producto = ProductoMapper.INSTANCE.toEntity(productoDTO);
         return productoRepository.save(producto);
     }
 
@@ -31,7 +34,7 @@ public class ProductoServiceImpl implements ProductoService{
     }
 
     @Override
-    public Producto actualizarProducto(Integer id, Producto actualizado) {
+    public Producto actualizarProducto(Integer id, ProductoDTO actualizado) {
         Producto producto = productoRepository.findById(id)
                 .orElseThrow(()->new EntityNotFoundException("Producto no encontrado"));
 
