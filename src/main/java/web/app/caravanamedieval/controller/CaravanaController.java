@@ -95,4 +95,15 @@ public class CaravanaController {
                     .body("Error al actualizar la caravana: " + e.getMessage());
         }
     }
+
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<?> eliminarCaravana(@PathVariable Long id){
+        try{
+            caravanaService.eliminarCaravana(id);
+            return ResponseEntity.ok().build();
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).
+                    body("Error al eliminar la caravana: " + e.getMessage());
+        }
+    }
 }

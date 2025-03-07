@@ -10,4 +10,5 @@ public interface CaravanaService {
     public Caravana getCaravana(Long id);
     public List<Caravana> getCaravanas();
     public Caravana actualizarCaravana(Long id, CaravanaDTO caravanaDTO);
+    public void eliminarCaravana(Long id);
 }

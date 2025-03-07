@@ -70,5 +70,13 @@ public class CaravanaServiceImpl implements CaravanaService {
         return caravanaRepository.save(caravana);
     }
 
+    @Override
+    public void eliminarCaravana(Long id) {
+        if(!caravanaRepository.existsById(id)){
+            throw new EntityNotFoundException("Caravana con ID" + id + " no encontrada");
+        }
+        caravanaRepository.deleteById(id);
+    }
+
 
 }
