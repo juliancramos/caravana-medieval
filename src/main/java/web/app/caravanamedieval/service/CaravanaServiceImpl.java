@@ -37,4 +37,38 @@ public class CaravanaServiceImpl implements CaravanaService {
         return caravanas;
     }
 
+    @Override
+    public Caravana actualizarCaravana(Long id, CaravanaDTO caravanaDTO) {
+        Caravana caravana = caravanaRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Caravana no encontrada"));
+
+        boolean modificacion = false;
+        if (caravanaDTO.getNombre() != null) {
+            caravana.setNombre(caravanaDTO.getNombre());
+            modificacion = true;
+        }
+        if (caravanaDTO.getVelocidad() != null) {
+            caravana.setVelocidad(caravanaDTO.getVelocidad());
+            modificacion = true;
+        }
+        if (caravanaDTO.getCapacidadMaxima() != null) {
+            caravana.setCapacidadMaxima(caravanaDTO.getCapacidadMaxima());
+            modificacion = true;
+        }
+        if (caravanaDTO.getDineroDisponible() != null) {
+            caravana.setDineroDisponible(caravanaDTO.getDineroDisponible());
+            modificacion = true;
+        }
+        if (caravanaDTO.getPuntosVida() != null) {
+            caravana.setPuntosVida(caravanaDTO.getPuntosVida());
+            modificacion = true;
+        }
+
+        if(!modificacion) {
+            throw new IllegalArgumentException("No se proporcionó ningún cambio para actualizar la caravana");
+        }
+        return caravanaRepository.save(caravana);
+    }
+
+
 }

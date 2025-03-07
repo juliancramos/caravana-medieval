@@ -41,7 +41,7 @@ public class CaravanaController {
         try {
             for (int i = 0; i < 100; i++) {
                 String nombre = "nombre" + i;
-                caravanaService.crearCaravana(new CaravanaDTO(nombre, 30 + i, 50+i, 1000, 100));
+                caravanaService.crearCaravana(new CaravanaDTO(nombre, 30.0 + i, 50.0+i, 1000L, 100));
             }
             return ResponseEntity.ok("Se agregaron 100 registros correctamente.");
         } catch (Exception e) {
@@ -74,4 +74,25 @@ public class CaravanaController {
         }
     }
 
+    @PatchMapping("/actualizar/{id}")
+    public ResponseEntity<?> actualizarCaravana(@PathVariable Long id, @RequestBody CaravanaDTO nuevaCaravana){
+        try{
+            Caravana actualizada = caravanaService.actualizarCaravana(id, nuevaCaravana);
+            return ResponseEntity.ok(actualizada);
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error al actualizar la caravana: " + e.getMessage());
+        }
+    }
+
+    @PutMapping("/actualizar/{id}")
+    public ResponseEntity<?> actualizarCaravanaCompleta(@PathVariable Long id, @RequestBody CaravanaDTO nuevaCaravana){
+        try{
+            Caravana actualizada = caravanaService.actualizarCaravana(id, nuevaCaravana);
+            return ResponseEntity.ok(actualizada);
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error al actualizar la caravana: " + e.getMessage());
+        }
+    }
 }

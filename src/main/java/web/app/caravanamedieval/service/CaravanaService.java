@@ -9,4 +9,5 @@ public interface CaravanaService {
     public Caravana crearCaravana(CaravanaDTO caravanaDTO);
     public Caravana getCaravana(Long id);
     public List<Caravana> getCaravanas();
+    public Caravana actualizarCaravana(Long id, CaravanaDTO caravanaDTO);
 }
