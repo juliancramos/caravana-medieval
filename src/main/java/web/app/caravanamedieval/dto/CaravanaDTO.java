@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CaravanaDTO {
+    private Long idCaravana;
     private String nombre;
     private Double velocidad;
     private Double capacidadMaxima;

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Caravana</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h2>Crear Nueva Caravana</h2>
+
+    <form th:action="@{/caravana/save}" method="post" th:object="${caravana}">
+        <input type="hidden" th:field="*{idCaravana}">
+
+        <label for="nombre" class="labelCRUD">Nombre:</label>
+        <input type="text" id="nombre" th:field="*{nombre}" required>
+
+        <label for="velocidad" class="labelCRUD">Velocidad:</label>
+        <input type="number" step="0.01" id="velocidad" th:field="*{velocidad}" required>
+
+        <label for="capacidadMaxima" class="labelCRUD">Capacidad máxima:</label>
+      <input type="number" step="0.01" id="capacidadMaxima" th:field="*{capacidadMaxima}" required>
+      
+      <label for="dineroDisponible" class="labelCRUD">Dinero disponible:</label>
+      <input type="number" step="0.01" id="dineroDisponible" th:field="*{dineroDisponible}" required>
+      
+      <label for="puntosVida" class="labelCRUD">Puntos de vida:</label>
+      <input type="number" step="0.01" id="puntosVida" th:field="*{puntosVida}" required>
+
+        <button type="submit">Guardar Caravana</button>
+    </form>
+
+    <br>
+    <a th:href="@{/caravana/listar}" class = "labelCRUD">Volver a la lista</a>
+</body>
+</html>

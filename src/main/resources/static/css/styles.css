@@ -176,3 +176,48 @@ body {
     padding: 6px 7px;
     display: inline-block; /* 🔹 Ajusta el ancho al contenido */
 }
+
+/* Asegurar que la tabla ocupe todo el ancho disponible */
+table {
+    width: 100%;
+    border-collapse: collapse; /* Elimina los espacios entre bordes */
+    background-color: #fdf6e3; /* Fondo claro para mejor contraste */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    overflow: hidden;
+}
+
+/* Asegurar que los th y td tengan un tamaño proporcional */
+th, td {
+    padding: 10px; /* Espaciado interno */
+    text-align: center; /* Centra el texto */
+    border-bottom: 2px solid #e4d5b7; /* Línea separadora */
+}
+
+/* Asegurar que los encabezados se alineen correctamente */
+th {
+    background-color: #bd8959;
+    font-weight: bold;
+    color: #000;
+    text-align: center;
+}
+
+/* Específico para el encabezado de "Acciones" */
+th.acciones-header {
+    min-width: 150px; /* Ajusta el ancho mínimo */
+}
+
+/* Espaciado entre las acciones */
+td a {
+    margin-right: 10px; /* Espacio entre enlaces */
+}
+
+/* Alternar colores para mejor legibilidad */
+tr:nth-child(even) {
+    background-color: #faebd7;
+}
+
+/* Efecto hover */
+tr:hover {
+    background-color: #f3d9b0;
+}

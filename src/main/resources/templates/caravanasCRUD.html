@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Caravana</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header>
+        <nav class="menu">
+            <ul>
+                <li><a th:href="@{/caravana/listar}">Caravanas</a>
+                <li><a href="productosCRUD.html">Productos</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <h1 class="crud-title">CRUD Caravanas</h1>
+    <p class = "labelCRUD"><a th:href="@{/caravana/crear}">Crear Caravana</a></p>
+    <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th> 
+            <th class="acciones-header">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="caravana : ${listaCaravanas}">
+            <td th:text="${caravana.idCaravana}"></td>
+            <td th:text="${caravana.nombre}"></td>
+            <td>
+                <a th:href="@{/caravana/view/{id}(id=${caravana.idCaravana})}">Ver</a>
+                <a th:href="@{/caravana/editar/{id}(id=${caravana.idCaravana})}">Editar</a>
+                <a th:href="@{/caravana/eliminar/{id}(id=${caravana.idCaravana})}">Eliminar</a>
+            </td>
+        </tr>
+        
+        </tbody>
+      </table>
+</body>
+</html>

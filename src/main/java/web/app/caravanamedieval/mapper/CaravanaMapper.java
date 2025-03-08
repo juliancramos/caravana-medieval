@@ -1,18 +1,37 @@
 package web.app.caravanamedieval.mapper;
 
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 import web.app.caravanamedieval.dto.CaravanaDTO;
 import web.app.caravanamedieval.model.Caravana;
 
-@Mapper
-public interface CaravanaMapper {
-    CaravanaMapper INSTANCE = Mappers.getMapper(CaravanaMapper.class);
+public class CaravanaMapper {
 
-    CaravanaDTO toDTO(Caravana caravana);
+    public static CaravanaDTO toDTO(Caravana caravana){
+        if(caravana == null) return null;
 
-    //Ignora el id
-    @Mapping(target = "idCaravana", ignore = true)
-    Caravana toEntity(CaravanaDTO dto);
+        CaravanaDTO caravanaDTO = new CaravanaDTO();
+
+        caravanaDTO.setIdCaravana(caravana.getIdCaravana());
+        caravanaDTO.setNombre(caravana.getNombre());
+        caravanaDTO.setVelocidad(caravana.getVelocidad());
+        caravanaDTO.setCapacidadMaxima(caravana.getCapacidadMaxima());
+        caravanaDTO.setDineroDisponible(caravana.getDineroDisponible());
+        caravanaDTO.setPuntosVida(caravana.getPuntosVida());
+
+        return caravanaDTO;
+    }
+
+    public static Caravana toEntity(CaravanaDTO dto){
+        if(dto == null) return null;
+
+        Caravana caravana = new Caravana();
+
+        caravana.setIdCaravana(dto.getIdCaravana());
+        caravana.setNombre(dto.getNombre());
+        caravana.setVelocidad(dto.getVelocidad());
+        caravana.setCapacidadMaxima(dto.getCapacidadMaxima());
+        caravana.setDineroDisponible(dto.getDineroDisponible());
+        caravana.setPuntosVida(dto.getPuntosVida());
+
+        return caravana;
+    }
 }

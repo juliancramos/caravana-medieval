@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 import web.app.caravanamedieval.dto.ProductoDTO;
 import web.app.caravanamedieval.mapper.ProductoMapper;
 import web.app.caravanamedieval.model.*;
+import web.app.caravanamedieval.dto.*;
+import web.app.caravanamedieval.service.*;
 import web.app.caravanamedieval.repository.*;
 
 import java.util.ArrayList;
@@ -14,6 +16,9 @@ import java.util.Random;
 
 @Component
 public class DataInitializer implements CommandLineRunner {
+
+    @Autowired
+    private CaravanaService caravanaService;
 
     @Autowired
     private JugadorRepository jugadorRepository;
@@ -35,7 +40,8 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
+        caravanaService.guardarCaravana(new CaravanaDTO(null,"Caravana A", 30.0, 50.0, 1000L, 100));
+        caravanaService.guardarCaravana(new CaravanaDTO(null,"Caravana B", 35.0, 60.0, 1500L, 120));
 //        createJugadores();
 //        createCiudades();
 //        createProductos();
