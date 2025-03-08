@@ -109,7 +109,7 @@ public class DataInitializer implements CommandLineRunner {
 //            System.out.println("Ruta creada entre " + ciudadOrigen.getNombre() + " y " + ciudadDestino.getNombre());
 //        }
     }
-
+    /*
     private void createProductos() {
         String[] nombresProducto = {"Espada", "Escudo", "Poción", "Armadura", "Anillo", "Arco", "Daga", "Báculo", "Casco", "Botas"};
         String[] descripcionesProducto = {
@@ -126,6 +126,7 @@ public class DataInitializer implements CommandLineRunner {
             System.out.println("Producto creado: " + nombre);
         }
     }
+        */
 
 //    private void createServicios() {
 //

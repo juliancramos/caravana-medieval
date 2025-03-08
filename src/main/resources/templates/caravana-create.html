@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <h2>Crear Nueva Caravana</h2>
+    <h1>Crear Nueva Caravana</h1>
 
     <form th:action="@{/caravana/save}" method="post" th:object="${caravana}">
         <input type="hidden" th:field="*{idCaravana}">
@@ -32,5 +32,6 @@
 
     <br>
     <a th:href="@{/caravana/listar}" class = "labelCRUD">Volver a la lista</a>
+    <a th:href="@{/caravana/productos/editar/{id}(id=${caravana.idCaravana})}" class = "labelCRUD">Editar productos</a>
 </body>
 </html>

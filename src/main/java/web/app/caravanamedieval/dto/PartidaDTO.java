@@ -1,4 +1,4 @@
-package web.app.caravanamedieval.dto;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

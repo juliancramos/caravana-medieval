@@ -3,7 +3,8 @@ package web.app.caravanamedieval.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-
+import java.util.List;
+import java.util.ArrayList;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,5 +30,8 @@ public class Caravana {
 
     @Column(name = "puntos_vida", nullable = false)
     private int puntosVida;
+
+    @ManyToMany
+    private List<Producto> productos = new ArrayList<>();
 
 }

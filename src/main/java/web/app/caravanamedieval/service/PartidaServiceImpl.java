@@ -20,6 +20,8 @@ public class PartidaServiceImpl implements PartidaService {
     @Autowired
     private CaravanaService caravanaService;
 
+    
+
     @Override
     public Partida crearPartida(PartidaDTO partidaDTO) {
 

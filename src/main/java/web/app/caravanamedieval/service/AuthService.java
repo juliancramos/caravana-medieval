@@ -13,8 +13,8 @@ import java.util.Map;
 public class AuthService {
     @Autowired
     private JugadorRepository jugadorRepository;
-
-    public ResponseEntity<Map<String, Object>> authenticate(String username, String password) {
+   
+    public ResponseEntity<Map<String, Object>> authenticate(String username, String password) { /*
         Optional<Jugador> optionalJugador = jugadorRepository.findByUsername(username);
         Map<String, Object> response = new HashMap<>();
         
@@ -29,6 +29,6 @@ public class AuthService {
         
         response.put("success", false);
         response.put("message", "Credenciales incorrectas");
-        return ResponseEntity.badRequest().body(response);
+        return ResponseEntity.badRequest().body(response);*/
     }
 }

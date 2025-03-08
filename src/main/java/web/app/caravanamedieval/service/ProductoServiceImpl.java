@@ -15,11 +15,16 @@ public class ProductoServiceImpl implements ProductoService{
     @Autowired
     private ProductoRepository productoRepository;
 
-    @Override
+    /*@Override
     @Transactional
     public Producto crearProducto(ProductoDTO productoDTO) {
         Producto producto = ProductoMapper.INSTANCE.toEntity(productoDTO);
         return productoRepository.save(producto);
+    }*/
+
+    @Override
+    public List<ProductoDTO> recuperarProductos(){
+        return productoRepository.findAll().stream().map(ProductoMapper::toDTO).toList();
     }
 
     @Override
@@ -31,7 +36,9 @@ public class ProductoServiceImpl implements ProductoService{
     public Producto getProductoByNombre(String nombre) {
         return productoRepository.findByNombre(nombre)
                 .orElseThrow(()->new EntityNotFoundException("Producto no encontrado"));
-    }
+    }   
+
+    /*/
 
     @Override
     public Producto actualizarProducto(Integer id, ProductoDTO actualizado) {
@@ -85,7 +92,7 @@ public class ProductoServiceImpl implements ProductoService{
         }
         productoRepository.deleteById(id);
     }
-
+        */
     public Producto getProducto(Integer id) {
         return productoRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Producto no encontrado"));

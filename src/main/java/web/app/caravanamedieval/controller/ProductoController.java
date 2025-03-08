@@ -22,6 +22,7 @@ public class ProductoController {
     @Autowired
     private ProductoService productoService;
 
+    
     @PostMapping("/crearProducto")
     public ResponseEntity<?> crearProducto(@RequestBody ProductoDTO producto){
         System.out.println("Solicitud recibida: " + producto);
@@ -47,6 +48,7 @@ public class ProductoController {
         return ResponseEntity.ok(productoService.listarTodos());
     }
 
+    /*
     @PostMapping("/agregarRegistros")
     public ResponseEntity<String> agregarRegistros() {
         try {
@@ -61,7 +63,7 @@ public class ProductoController {
                     .body("Error al agregar registros: " + e.getMessage());
         }
     }
-
+        */
     @GetMapping({"/{id}"})
     public ResponseEntity<?> getProducto(@PathVariable Integer id){
         try{
@@ -91,18 +93,7 @@ public class ProductoController {
         }
     }
 
-    @PutMapping("/actualizarCompleto/{id}")
-    public ResponseEntity<?> actualizarProductoCompleto(@PathVariable Integer id, @RequestBody ProductoDTO nuevoProducto){
-
-        try{
-            Producto actualizado = productoService.actualizarProducto(id, nuevoProducto);
-
-            return ResponseEntity.ok(actualizado);
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Error al actualizar el producto: " + e.getMessage());
-        }
-    }
+   
 
     @PatchMapping("/actualizar/{id}")
     public ResponseEntity<?> actualizarProducto(@PathVariable Integer id, @RequestBody ProductoDTO nuevoProducto){
@@ -115,14 +106,5 @@ public class ProductoController {
         }
     }
 
-    @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<?> eliminarProducto(@PathVariable Integer id){
-        try{
-            productoService.eliminarProducto(id);
-            return ResponseEntity.ok().build();
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Error al eliminar el producto: " + e.getMessage());
-        }
-    }
+  
 }

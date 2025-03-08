@@ -1,7 +1,7 @@
 package web.app.caravanamedieval.mapper;
 
-import web.app.caravanamedieval.dto.CaravanaDTO;
-import web.app.caravanamedieval.model.Caravana;
+import web.app.caravanamedieval.dto.*;
+import web.app.caravanamedieval.model.*;
 
 public class CaravanaMapper {
 
