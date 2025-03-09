@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap');    
+@import url('https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap');
 
 body {
     background-image: url(https://static.vecteezy.com/system/resources/previews/007/106/640/non_2x/empty-silhouette-medieval-background-free-vector.jpg);
@@ -21,15 +21,15 @@ body {
     position: absolute;
     top: 10px;
     left: 10px;
-    
+
     max-width: 200px;
     height: auto;
 }
 .imgLogin {
     display: block;
     margin: 10px auto; /* Centra horizontalmente */
-    max-width: 500px; 
-    object-fit: cover; 
+    max-width: 500px;
+    object-fit: cover;
 }
 
 .labelMedieval {
@@ -85,7 +85,7 @@ body {
     right: 10px;
     text-decoration: none;
     font-weight: bold;
-      
+
 
 
 }
@@ -151,7 +151,7 @@ body {
     font-size: 1.2rem;
     font-weight: bold;
     padding: 10px;
-    
+
 }
 .menu ul li a:hover {
     background:  #b39477;
@@ -170,9 +170,90 @@ body {
 
 .labelCRUD {
     font-family: 'Uncial Antiqua', serif;
-    color: #000000; 
+    color: #000000;
     font-weight: bold;
     background-color: #bd8959;
     padding: 6px 7px;
     display: inline-block; /* 🔹 Ajusta el ancho al contenido */
+}
+
+
+/*ESTILOS PARA PAGINAS DE CRUD*/
+.center-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+}
+h2, h3 {
+    color: #f0f0f0;
+    font-size: 2rem;
+}
+
+.form-crud {
+    background-color: rgba(139, 69, 19, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    display: inline-block;
+    text-align: left;
+    margin-top: 20px;
+}
+
+.label-crud {
+    font-size: 1.2rem;
+    color: white;
+    display: block;
+    margin-top: 10px;
+}
+
+.input-crud {
+    width: 100%;
+    max-width: 300px;
+    padding: 8px;
+    border: 2px solid #4B2E15;
+    border-radius: 5px;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.button-crud {
+    font-family: 'Uncial Antiqua', serif;
+    background-color: #8B5A2B;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.button-crud:hover {
+    background-color: #6B4226;
+}
+
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: rgba(139, 69, 19, 0.9);
+    color: white;
+    border: 2px solid #4B2E15;
+}
+
+th, td {
+    border: 1px solid white;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #5a3d1c;
+    font-size: 1.3rem;
+}
+
+tr:nth-child(even) {
+    background-color: rgba(165, 42, 42, 0.7);
 }
