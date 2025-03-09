@@ -1,0 +1,271 @@
+@import url('https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap');
+
+body {
+    background-image: url(https://static.vecteezy.com/system/resources/previews/007/106/640/non_2x/empty-silhouette-medieval-background-free-vector.jpg);
+    background-size: 100% auto; /* Ajusta la imagen sin recortarla */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Mantiene la imagen fija al hacer scroll */
+    background-color: #f0f0f0; /* Color de fondo en caso de espacios vacíos */
+}
+/* Contenedor para centrar todo */
+.formMedieval {
+    text-align: center;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra los elementos */
+}
+
+.logo {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+
+    max-width: 200px;
+    height: auto;
+}
+.imgLogin {
+    display: block;
+    margin: 10px auto; /* Centra horizontalmente */
+    max-width: 500px;
+    object-fit: cover;
+}
+
+.labelMedieval {
+    font-family: 'Uncial Antiqua', serif;
+    color: #ffffff; /* Café oscuro */
+    background-color:#8B4513;
+    padding: 6px 7px;
+    font-size: 1.5rem;
+    display: block;
+    margin-top: 15px;
+}
+
+/* Estilo de los campos de texto */
+.inputMedieval {
+    font-family: 'Uncial Antiqua', serif;
+    font-size: 1.2rem;
+    padding: 8px;
+    border: 2px solid #4B2E15;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 300px;
+    display: block;
+    margin-top: 5px;
+    text-align: center; /* Para centrar el texto dentro del input */
+}
+
+/* Botón estilo medieval */
+.btnMedieval {
+    font-family: 'Uncial Antiqua', serif;
+    background-color: #8B5A2B; /* Café oscuro */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-top: 15px;
+    display: block;
+}
+.CRUDButton{
+    position: absolute;
+    font-family: 'Uncial Antiqua', serif;
+    background-color: #8B5A2B; /* Café oscuro */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-top: 15px;
+    display: block;
+    top: 500px;
+    right: 10px;
+    text-decoration: none;
+    font-weight: bold;
+
+
+
+}
+.btnMedieval:hover {
+    background-color: #6B4226; /* Un tono más oscuro */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+
+
+.botonesRol {
+    display: flex;
+    gap: 20px;
+}
+
+.btnRol {
+    background-color: #8B4513;
+    color: white;
+    font-size: 22px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Uncial Antiqua', cursive;
+    transition: background-color 0.3s;
+}
+
+.btnRol:hover {
+    background-color: #A0522D;
+}
+
+/*CRUD*/
+.menu {
+    background-color: #8B5A2B;
+    padding: 10px;
+    text-align: center;
+    list-style: none;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+.menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.menu ul li {
+    display: inline;
+    margin: 0 15px;
+}
+.menu ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 10px;
+
+}
+.menu ul li a:hover {
+    background:  #b39477;
+}
+.crud-title {
+    font-family: 'Uncial Antiqua', serif;
+    text-align: center;
+    margin-top: 50px;
+    font-size: 3.5rem;
+    color: #5a432d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+.labelCRUD {
+    font-family: 'Uncial Antiqua', serif;
+    color: #000000;
+    font-weight: bold;
+    background-color: #bd8959;
+    padding: 6px 7px;
+    display: inline-block; /* 🔹 Ajusta el ancho al contenido */
+}
+
+
+/*ESTILOS PARA PAGINAS DE CRUD*/
+.center-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+}
+h2, h3 {
+    color: #f0f0f0;
+    font-size: 2rem;
+}
+
+.form-crud {
+    background-color: rgba(139, 69, 19, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    display: inline-block;
+    text-align: left;
+    margin-top: 20px;
+}
+
+.label-crud {
+    font-size: 1.2rem;
+    color: white;
+    display: block;
+    margin-top: 10px;
+}
+
+.input-crud {
+    width: 100%;
+    max-width: 300px;
+    padding: 8px;
+    border: 2px solid #4B2E15;
+    border-radius: 5px;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.button-crud {
+    font-family: 'Uncial Antiqua', serif;
+    background-color: #8B5A2B;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.button-crud:hover {
+    background-color: #6B4226;
+}
+
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: rgba(139, 69, 19, 0.9);
+    color: white;
+    border: 2px solid #4B2E15;
+}
+
+th, td {
+    border: 1px solid white;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #5a3d1c;
+    font-size: 1.3rem;
+}
+
+tr:nth-child(even) {
+    background-color: rgba(165, 42, 42, 0.7);
+}
+
+.crud-title {
+    font-family: 'Uncial Antiqua', serif;
+    text-align: center;
+    margin-top: 50px;
+    font-size: 3.5rem;
+    color: #5a432d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}

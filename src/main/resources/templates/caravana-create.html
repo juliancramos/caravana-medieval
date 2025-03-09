@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Caravana</title>
+    <link rel="stylesheet" href="/css/styles2.css">
+</head>
+<body>
+    <div class="center-container">
+    <h3 class="crud-title">Crear Nueva Caravana</h3>
+
+    <form class="form-crud" th:action="@{/caravana/save}" method="post" th:object="${caravana}">
+           <input type="hidden" name="idCaravana" th:value="${idCaravana}" />
+
+        <label for="nombre" class="label-crud">Nombre:</label>
+        <input class="input-crud"  type="text" id="nombre" th:field="*{nombre}" required>
+
+        <label for="velocidad" class="label-crud">Velocidad:</label>
+        <input  class="input-crud"  type="number" step="0.01" id="velocidad" th:field="*{velocidad}" required>
+
+        <label for="capacidadMaxima" class="label-crud">Capacidad máxima:</label>
+      <input class="input-crud" type="number" step="0.01" id="capacidadMaxima" th:field="*{capacidadMaxima}" required>
+      
+      <label for="dineroDisponible" class="label-crud">Dinero disponible:</label>
+      <input class="input-crud" type="number" step="0.01" id="dineroDisponible" th:field="*{dineroDisponible}" required>
+      
+      <label for="puntosVida" class="label-crud">Puntos de vida:</label>
+      <input class="input-crud" type="number" step="0.01" id="puntosVida" th:field="*{puntosVida}" required>
+
+        <button class = "button-crud" type="submit">Guardar Caravana</button>
+    </form>
+    
+
+    <br>    
+    <a th:href="@{/caravana/productos/editar/{id}(id=${caravana.idCaravana})}" class = "labelCRUD">Editar productos</a>
+</div>
+<a th:href="@{/caravana/listar}" class = "labelCRUD">Volver a la lista</a>
+</body>
+</html>

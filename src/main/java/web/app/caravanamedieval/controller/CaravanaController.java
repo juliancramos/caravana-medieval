@@ -13,11 +13,11 @@ import web.app.caravanamedieval.service.CaravanaService;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/caravana")
+@RequestMapping("/caravana2")
 public class CaravanaController {
     @Autowired
     private CaravanaService caravanaService;
-
+/*
     @PostMapping("/crearCaravana")
     public ResponseEntity<?> crearCaravana(@RequestBody CaravanaDTO caravanaDTO){
         try{
@@ -105,5 +105,5 @@ public class CaravanaController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).
                     body("Error al eliminar la caravana: " + e.getMessage());
         }
-    }
+    }*/
 }

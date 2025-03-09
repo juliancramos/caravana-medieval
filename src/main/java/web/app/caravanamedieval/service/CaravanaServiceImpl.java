@@ -14,14 +14,14 @@ import java.util.List;
 
 @Service
 public class CaravanaServiceImpl implements CaravanaService {
-    @Autowired
+    @Autowired  
     private CaravanaRepository caravanaRepository;
-
+/*
     @Override
     public Caravana crearCaravana(CaravanaDTO caravanaDTO) {
         Caravana caravana = CaravanaMapper.INSTANCE.toEntity(caravanaDTO);
         return caravanaRepository.save(caravana);
-    }
+    }*/
 
     public Caravana getCaravana(Long id) {
         return caravanaRepository.findById(id)
@@ -37,6 +37,7 @@ public class CaravanaServiceImpl implements CaravanaService {
         return caravanas;
     }
 
+    /*
     @Override
     public Caravana actualizarCaravana(Long id, CaravanaDTO caravanaDTO) {
         Caravana caravana = caravanaRepository.findById(id)
@@ -69,7 +70,7 @@ public class CaravanaServiceImpl implements CaravanaService {
         }
         return caravanaRepository.save(caravana);
     }
-
+*/
     @Override
     public void eliminarCaravana(Long id) {
         if(!caravanaRepository.existsById(id)){
@@ -77,6 +78,6 @@ public class CaravanaServiceImpl implements CaravanaService {
         }
         caravanaRepository.deleteById(id);
     }
-
+   
 
 }
