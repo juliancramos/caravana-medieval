@@ -3,8 +3,8 @@ package web.app.caravanamedieval.service;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import web.app.caravanamedieval.dto.ProductoDTO;
-import web.app.caravanamedieval.mapper.ProductoMapper;
+import web.app.caravanamedieval.dto.*;
+import web.app.caravanamedieval.mapper.*;
 import web.app.caravanamedieval.model.Producto;
 import web.app.caravanamedieval.repository.ProductoRepository;
 import jakarta.transaction.Transactional;
@@ -26,6 +26,15 @@ public class ProductoServiceImpl implements ProductoService{
     public List<Producto> listarTodos() {
             return productoRepository.findAll();
         }
+    
+        //BORRAR
+        @Override
+        public List<ProductoDTOJ> recuperarProductos(){
+            return productoRepository.findAll().stream()
+                    .map(producto -> ProductoMapperJ.INSTANCE.toDTOJ(producto)) // 🔹 Llamada correcta
+                    .toList();
+        }
+        
 
     @Override
     public Producto getProductoByNombre(String nombre) {

@@ -2,7 +2,9 @@ package web.app.caravanamedieval.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-
+import web.app.caravanamedieval.model.*;
+import java.util.List;
+import java.util.ArrayList;
 
 @Data
 @AllArgsConstructor
@@ -29,5 +31,9 @@ public class Caravana {
 
     @Column(name = "puntos_vida", nullable = false)
     private int puntosVida;
+
+    @ManyToMany
+    private List<Producto> productos; // 🔹 Relación de muchos a muchos
+
 
 }

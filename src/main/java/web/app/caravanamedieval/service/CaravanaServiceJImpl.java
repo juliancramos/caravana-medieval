@@ -54,7 +54,7 @@ public class CaravanaServiceJImpl implements CaravanaServiceJ {
             return caravanaRepository.save(caravana);
         }
 
-    /*
+    
     @Override
         public Optional <CaravanaProductosDTO> getCaravanaProductos(Long caravanaId){
             Optional<Caravana> caravanaOpt = caravanaRepository.findById(caravanaId);
@@ -63,7 +63,7 @@ public class CaravanaServiceJImpl implements CaravanaServiceJ {
             }
 
             Caravana caravana = caravanaOpt.get();
-           List <Long> productoIds = caravana.getProductos().stream().map(Producto::getIdProducto).toList();
+           List <Integer> productoIds = caravana.getProductos().stream().map(Producto::getIdProducto).toList();
 
            CaravanaProductosDTO caravanaProductosDTO = new CaravanaProductosDTO(caravanaId, productoIds);
            return Optional.of(caravanaProductosDTO);
@@ -77,7 +77,7 @@ public class CaravanaServiceJImpl implements CaravanaServiceJ {
         caravana.getProductos().addAll(selectedProductos);
         caravanaRepository.save(caravana);
         
-    }*/
+    }
 
 
 

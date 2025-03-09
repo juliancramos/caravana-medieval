@@ -44,7 +44,7 @@ public class DataInitializer implements CommandLineRunner {
  
 //        createJugadores();
 //        createCiudades();
-//        createProductos();
+          createProductos();
 //        createServicios();
     }
 

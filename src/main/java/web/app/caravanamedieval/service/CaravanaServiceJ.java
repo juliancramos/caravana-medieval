@@ -12,8 +12,8 @@ public interface CaravanaServiceJ {
     public List<CaravanaDTO> listarCaravanas();
     public Optional<CaravanaDTO> buscarCaravana(Long id);
     Caravana guardarCaravana(CaravanaDTO caravanaDTO);
-   /* public void updateCaravanaProductos(CaravanaProductosDTO cpd);
-    public Optional <CaravanaProductosDTO> getCaravanaProductos(Long caravanaId);*/
+   public void updateCaravanaProductos(CaravanaProductosDTO cpd);
+    public Optional <CaravanaProductosDTO> getCaravanaProductos(Long caravanaId);
 
   
 }

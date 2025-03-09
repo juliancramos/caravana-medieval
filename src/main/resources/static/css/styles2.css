@@ -249,7 +249,7 @@ tr:hover {
 
 .button-crud {
     font-family: 'Uncial Antiqua', serif;
-    background-color: #8B5A2B;
+    background-color: #b8793e;
     color: white;
     padding: 10px 15px;
     border: none;
@@ -267,4 +267,59 @@ tr:hover {
     text-align: center;
     width: 100%;
 }
+
+.container {
+    max-width: 600px;
+    max-height: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: rgba(170, 98, 47, 0.9);
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.product-list {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+    max-height: 250px;
+    overflow-y: auto;
+}
+.product-item {
+    display: flex;
+    align-items: center; /* 🔹 Centra verticalmente el checkbox con el texto */
+    justify-content: flex-start; /* 🔹 Alinea el texto a la izquierda */
+    gap: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 8px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    width: 100%; /* 🔹 Asegura que cada item ocupe todo el ancho */
+}
+
+/* Estiliza el checkbox para centrarlo */
+.product-checkbox {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    flex-shrink: 0; /* 🔹 Evita que se reduzca en tamaño */
+}
+
+
+.label-crudd {
+    font-size: 1.2rem;
+    color: white;
+    text-align: left; /* 🔹 Alinea el texto del label a la izquierda */
+    flex-grow: 1; /* 🔹 Permite que el texto ocupe el espacio restante */
+}
+
+
 
