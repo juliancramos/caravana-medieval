@@ -1,6 +1,5 @@
 package web.app.caravanamedieval.service;
 
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -10,8 +9,8 @@ import web.app.caravanamedieval.mapper.*;
 import web.app.caravanamedieval.model.*;
 import web.app.caravanamedieval.repository.*;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class CaravanaServiceJImpl implements CaravanaServiceJ {
@@ -20,6 +19,9 @@ public class CaravanaServiceJImpl implements CaravanaServiceJ {
 
     @Autowired
     private ProductoRepository productoRepository;
+
+    @Autowired
+    private ProductosXCaravanaRepository productosXCaravanaRepository;
 
 
 
@@ -54,34 +56,70 @@ public class CaravanaServiceJImpl implements CaravanaServiceJ {
             return caravanaRepository.save(caravana);
         }
 
-    
-    @Override
-        public Optional <CaravanaProductosDTO> getCaravanaProductos(Long caravanaId){
-            Optional<Caravana> caravanaOpt = caravanaRepository.findById(caravanaId);
-            if(caravanaOpt.isEmpty()){
-                return Optional.empty();
+
+
+    public Optional<CaravanaProductosDTO> getCaravanaProductos(Long idCaravana) {
+        Caravana caravana = caravanaRepository.findById(idCaravana)
+                .orElseThrow(() -> new NoSuchElementException("Caravana no encontrada"));
+
+
+        List<ProductosXCaravana> productosXCaravana = productosXCaravanaRepository.findByCaravana_IdCaravana(idCaravana);
+
+        List<ProductosXCaravanaDTO> productos = productosXCaravana.stream()
+                .map(productoXCaravana -> new ProductosXCaravanaDTO(
+                        productoXCaravana.getCaravana().getIdCaravana(),
+                        productoXCaravana.getProducto().getIdProducto(),
+                        productoXCaravana.getCantidad()
+                ))
+                .collect(Collectors.toList());
+
+        CaravanaProductosDTO dto = new CaravanaProductosDTO(caravana.getIdCaravana(), productos);
+
+        return Optional.of(dto);
+    }
+
+    public void updateCaravanaProductos(CaravanaProductosDTO cpd) {
+
+        // Obtener la caravana
+        Caravana caravana = caravanaRepository.findById(cpd.getIdCaravana()).orElseThrow();
+
+        // Obtener relaciones existentes
+        List<ProductosXCaravana> relacionesExistentes =
+                productosXCaravanaRepository.findByCaravana_IdCaravana(cpd.getIdCaravana());
+
+        // Convertir a un mapa para facilitar la búsqueda por ID de producto
+        Map<Long, ProductosXCaravana> relacionesMap = relacionesExistentes.stream()
+                .collect(Collectors.toMap(rel -> rel.getProducto().getIdProducto(), rel -> rel));
+
+        // Recorrer los productos del DTO
+        for (ProductosXCaravanaDTO productoDTO : cpd.getProductos()) {
+            Producto producto = productoRepository.findById(productoDTO.getIdProducto()).orElseThrow();
+
+            // Crear clave compuesta
+            ProductosXCaravanaKey key = new ProductosXCaravanaKey(caravana.getIdCaravana(), producto.getIdProducto());
+
+            // Verificar si la relación ya existe
+            if (relacionesMap.containsKey(productoDTO.getIdProducto())) {
+                // Actualizar la cantidad si es necesario
+                ProductosXCaravana relacionExistente = relacionesMap.get(productoDTO.getIdProducto());
+                relacionExistente.setCantidad(productoDTO.getCantidad());
+                productosXCaravanaRepository.save(relacionExistente);
+            } else {
+                // Crear nueva relación si no existe
+                ProductosXCaravana productosXCaravana = new ProductosXCaravana();
+                productosXCaravana.setId(key);
+                productosXCaravana.setCaravana(caravana);
+                productosXCaravana.setProducto(producto);
+                productosXCaravana.setCantidad(productoDTO.getCantidad());
+
+                // Guardar la nueva relación
+                productosXCaravanaRepository.save(productosXCaravana);
             }
-
-            Caravana caravana = caravanaOpt.get();
-           List <Integer> productoIds = caravana.getProductos().stream().map(Producto::getIdProducto).toList();
-
-           CaravanaProductosDTO caravanaProductosDTO = new CaravanaProductosDTO(caravanaId, productoIds);
-           return Optional.of(caravanaProductosDTO);
         }
 
-
-    public void updateCaravanaProductos(CaravanaProductosDTO cpd){
-        Caravana caravana = caravanaRepository.findById(cpd.getIdCaravana()).orElseThrow();
-        List<Producto> selectedProductos = productoRepository.findAllById(cpd.getIdsProductos());
-        caravana.getProductos().clear();
-        caravana.getProductos().addAll(selectedProductos);
-        caravanaRepository.save(caravana);
-        
     }
 
 
-
-   
 
 
 }

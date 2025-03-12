@@ -7,22 +7,28 @@
     <link rel="stylesheet" href="/css/styles2.css">
 </head>
 <body>
-    <div class="container">
-        <h1 class="crud-title">Editar Relación con Productos</h1>
-        
-        <form action="/caravana/productos/save" method="post" class="form-container">
-            <input type="hidden" name="idCaravana" th:value="${caravanaProductos.idCaravana}">
-            
-            <ul class="product-list">
-                <li th:each="producto: ${allProductos}" class="product-item">
-                    <input type="checkbox" name="idsProductos" th:value="${producto.idProducto}"
-                    th:checked="${caravanaProductos.idsProductos.contains(producto.idProducto)}" class="product-checkbox">
-                    <label class="label-crudd" th:text="${producto.nombre}"></label>
-                </li>
-            </ul>
+<div class="container">
+    <h1 class="crud-title">Editar Relación con Productos</h1>
 
-            <button class="button-crud">Guardar</button>
-        </form>
-    </div>
+    <form action="/caravana/productos/save" method="post" class="form-container">
+        <!-- Campo oculto para el ID de la caravana -->
+        <input type="hidden" name="idCaravana" th:value="${caravanaProductos.idCaravana}">
+
+        <!-- Lista de productos con checkboxes -->
+        <ul class="product-list">
+            <li th:each="producto : ${allProductos}" class="product-item">
+                <input type="checkbox" name="idsProductos" th:value="${producto.idProducto}"
+                       th:checked="${idsProductosRelacionados.contains(producto.idProducto)}"
+                       class="product-checkbox">
+                <label class="label-crudd" th:text="${producto.nombre}"></label>
+            </li>
+        </ul>
+
+        <!-- Botón para guardar -->
+        <button class="button-crud">Guardar</button>
+    </form>
+
+
+</div>
 </body>
 </html>
