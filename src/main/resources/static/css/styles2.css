@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap');    
 
 body {
     background-image: url(https://static.vecteezy.com/system/resources/previews/007/106/640/non_2x/empty-silhouette-medieval-background-free-vector.jpg);
@@ -21,15 +21,15 @@ body {
     position: absolute;
     top: 10px;
     left: 10px;
-
+    
     max-width: 200px;
     height: auto;
 }
 .imgLogin {
     display: block;
     margin: 10px auto; /* Centra horizontalmente */
-    max-width: 500px;
-    object-fit: cover;
+    max-width: 500px; 
+    object-fit: cover; 
 }
 
 .labelMedieval {
@@ -85,7 +85,7 @@ body {
     right: 10px;
     text-decoration: none;
     font-weight: bold;
-
+      
 
 
 }
@@ -151,7 +151,7 @@ body {
     font-size: 1.2rem;
     font-weight: bold;
     padding: 10px;
-
+    
 }
 .menu ul li a:hover {
     background:  #b39477;
@@ -170,34 +170,63 @@ body {
 
 .labelCRUD {
     font-family: 'Uncial Antiqua', serif;
-    color: #000000;
+    color: #000000; 
     font-weight: bold;
     background-color: #bd8959;
     padding: 6px 7px;
     display: inline-block; /* 🔹 Ajusta el ancho al contenido */
 }
 
-
-/*ESTILOS PARA PAGINAS DE CRUD*/
-.center-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+/* Asegurar que la tabla ocupe todo el ancho disponible */
+table {
     width: 100%;
-}
-h2, h3 {
-    color: #f0f0f0;
-    font-size: 2rem;
+    border-collapse: collapse; /* Elimina los espacios entre bordes */
+    background-color: #fdf6e3; /* Fondo claro para mejor contraste */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    overflow: hidden;
 }
 
+/* Asegurar que los th y td tengan un tamaño proporcional */
+th, td {
+    padding: 10px; /* Espaciado interno */
+    text-align: center; /* Centra el texto */
+    border-bottom: 2px solid #e4d5b7; /* Línea separadora */
+}
+
+/* Asegurar que los encabezados se alineen correctamente */
+th {
+    background-color: #bd8959;
+    font-weight: bold;
+    color: #000;
+    text-align: center;
+}
+
+/* Específico para el encabezado de "Acciones" */
+th.acciones-header {
+    min-width: 150px; /* Ajusta el ancho mínimo */
+}
+
+/* Espaciado entre las acciones */
+td a {
+    margin-right: 10px; /* Espacio entre enlaces */
+}
+
+/* Alternar colores para mejor legibilidad */
+tr:nth-child(even) {
+    background-color: #faebd7;
+}
+
+/* Efecto hover */
+tr:hover {
+    background-color: #f3d9b0;
+}
 .form-crud {
     background-color: rgba(139, 69, 19, 0.9);
     padding: 20px;
     border-radius: 10px;
     display: inline-block;
-    text-align: left;
+    text-align: center;
     margin-top: 20px;
 }
 
@@ -220,7 +249,7 @@ h2, h3 {
 
 .button-crud {
     font-family: 'Uncial Antiqua', serif;
-    background-color: #8B5A2B;
+    background-color: #b8793e;
     color: white;
     padding: 10px 15px;
     border: none;
@@ -230,30 +259,67 @@ h2, h3 {
     margin-top: 10px;
 }
 
-.button-crud:hover {
-    background-color: #6B4226;
-}
-
-table {
-    width: 80%;
-    margin: 20px auto;
-    border-collapse: collapse;
-    background-color: rgba(139, 69, 19, 0.9);
-    color: white;
-    border: 2px solid #4B2E15;
-}
-
-th, td {
-    border: 1px solid white;
-    padding: 10px;
+.center-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
+    width: 100%;
 }
 
-th {
-    background-color: #5a3d1c;
-    font-size: 1.3rem;
+.container {
+    max-width: 600px;
+    max-height: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: rgba(170, 98, 47, 0.9);
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-tr:nth-child(even) {
-    background-color: rgba(165, 42, 42, 0.7);
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
 }
+
+.product-list {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+    max-height: 250px;
+    overflow-y: auto;
+}
+.product-item {
+    display: flex;
+    align-items: center; /* 🔹 Centra verticalmente el checkbox con el texto */
+    justify-content: flex-start; /* 🔹 Alinea el texto a la izquierda */
+    gap: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 8px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    width: 100%; /* 🔹 Asegura que cada item ocupe todo el ancho */
+}
+
+/* Estiliza el checkbox para centrarlo */
+.product-checkbox {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    flex-shrink: 0; /* 🔹 Evita que se reduzca en tamaño */
+}
+
+
+.label-crudd {
+    font-size: 1.2rem;
+    color: white;
+    text-align: left; /* 🔹 Alinea el texto del label a la izquierda */
+    flex-grow: 1; /* 🔹 Permite que el texto ocupe el espacio restante */
+}
+
+
+

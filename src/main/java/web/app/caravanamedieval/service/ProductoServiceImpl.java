@@ -3,8 +3,8 @@ package web.app.caravanamedieval.service;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import web.app.caravanamedieval.dto.ProductoDTO;
-import web.app.caravanamedieval.mapper.ProductoMapper;
+import web.app.caravanamedieval.dto.*;
+import web.app.caravanamedieval.mapper.*;
 import web.app.caravanamedieval.model.Producto;
 import web.app.caravanamedieval.repository.ProductoRepository;
 import jakarta.transaction.Transactional;
@@ -26,6 +26,15 @@ public class ProductoServiceImpl implements ProductoService{
     public List<Producto> listarTodos() {
             return productoRepository.findAll();
         }
+    
+        //BORRAR
+        @Override
+        public List<ProductoDTOJ> recuperarProductos(){
+            return productoRepository.findAll().stream()
+                    .map(producto -> ProductoMapperJ.INSTANCE.toDTOJ(producto)) // 🔹 Llamada correcta
+                    .toList();
+        }
+        
 
     @Override
     public Producto getProductoByNombre(String nombre) {
@@ -34,7 +43,7 @@ public class ProductoServiceImpl implements ProductoService{
     }
 
     @Override
-    public Producto actualizarProducto(Integer id, ProductoDTO actualizado) {
+    public Producto actualizarProducto(Long id, ProductoDTO actualizado) {
         Producto producto = productoRepository.findById(id)
                 .orElseThrow(()->new EntityNotFoundException("Producto no encontrado"));
 
@@ -61,7 +70,7 @@ public class ProductoServiceImpl implements ProductoService{
     }
 
 //    @Override
-//    public Producto actualizarProductoEntero(Integer id, Producto actualizado) {
+//    public Producto actualizarProductoEntero(Long id, Producto actualizado) {
 //        Producto producto = productoRepository.findById(id)
 //                .orElseThrow(()->new EntityNotFoundException("Producto no encontrado"));
 //
@@ -79,14 +88,14 @@ public class ProductoServiceImpl implements ProductoService{
 //    }
 
     @Override
-    public void eliminarProducto(Integer id) {
+    public void eliminarProducto(Long id) {
         if (!productoRepository.existsById(id)) {
             throw new EntityNotFoundException("Producto con ID " + id + " no encontrado.");
         }
         productoRepository.deleteById(id);
     }
 
-    public Producto getProducto(Integer id) {
+    public Producto getProducto(Long id) {
         return productoRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Producto no encontrado"));
     }

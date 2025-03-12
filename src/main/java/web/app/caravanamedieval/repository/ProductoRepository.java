@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 import web.app.caravanamedieval.model.Producto;
 import java.util.Optional;
 @Repository
-public interface ProductoRepository extends JpaRepository<Producto, Integer > {
-    Optional<Producto> findById (Integer id);
+public interface ProductoRepository extends JpaRepository<Producto, Long > {
     Optional<Producto> findByNombre (String nombre);
 }

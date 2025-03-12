@@ -41,6 +41,13 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <!-- ThymeLeaf -->
+             <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-thymeleaf</artifactId>
+             </dependency>
+
+
         <!-- PostgreSQL -->
         <dependency>
             <groupId>org.postgresql</groupId>

@@ -1,17 +1,19 @@
 package web.app.caravanamedieval.service;
-
-import web.app.caravanamedieval.dto.ProductoDTO;
+import web.app.caravanamedieval.model.*;
+import web.app.caravanamedieval.dto.*;
 import web.app.caravanamedieval.model.Producto;
 import java.util.List;
 
 public interface ProductoService {
     public Producto crearProducto(ProductoDTO producto);
-    public Producto getProducto(Integer id);
+    public Producto getProducto(Long id);
     List<Producto> listarTodos();
     public Producto getProductoByNombre(String nombre);
-    public Producto actualizarProducto(Integer id, ProductoDTO actualizado);
-//    public Producto actualizarProductoEntero(Integer id , Producto actualizado);
-    public void eliminarProducto(Integer id);
+    public Producto actualizarProducto(Long id, ProductoDTO actualizado);
+//    public Producto actualizarProductoEntero(Long id , Producto actualizado);
+    public void eliminarProducto(Long id);
+    //BORRAR EL DE ABAJO
+    public List<ProductoDTOJ> recuperarProductos();
 
 
 }

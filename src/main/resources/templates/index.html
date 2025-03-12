@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
     <img src="logoCaravana.png" alt="Logo" class="logo">
@@ -19,8 +19,9 @@
         <button type="submit" class="btnMedieval">Iniciar Sesión</button>
         <a href="register.html" class="btnMedieval">Registrarse</a>
     </form>
-    <a href="CRUD.html" class="CRUDButton">CRUD</a>
+    <a th:href="@{/caravana/listar}" class="CRUDButton">CRUD</a>
 
-    <script src="scripts.js"></script>
+
+    <script th:src="@{/scripts.js}"></script>
 </body>
 </html>

@@ -8,9 +8,19 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CaravanaDTO {
+    private Long idCaravana;  
     private String nombre;
     private Double velocidad;
     private Double capacidadMaxima;
     private Long dineroDisponible;
     private Integer puntosVida;
+
+    // 🔹 Constructor sin `idCaravana`
+    public CaravanaDTO(String nombre, Double velocidad, Double capacidadMaxima, Long dineroDisponible, Integer puntosVida) {
+        this.nombre = nombre;
+        this.velocidad = velocidad;
+        this.capacidadMaxima = capacidadMaxima;
+        this.dineroDisponible = dineroDisponible;
+        this.puntosVida = puntosVida;
+    }
 }

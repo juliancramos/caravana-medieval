@@ -63,7 +63,7 @@ public class ProductoController {
     }
 
     @GetMapping({"/{id}"})
-    public ResponseEntity<?> getProducto(@PathVariable Integer id){
+    public ResponseEntity<?> getProducto(@PathVariable Long id){
         try{
             Producto producto = productoService.getProducto(id);
             if(producto == null){
@@ -92,7 +92,7 @@ public class ProductoController {
     }
 
     @PutMapping("/actualizarCompleto/{id}")
-    public ResponseEntity<?> actualizarProductoCompleto(@PathVariable Integer id, @RequestBody ProductoDTO nuevoProducto){
+    public ResponseEntity<?> actualizarProductoCompleto(@PathVariable Long id, @RequestBody ProductoDTO nuevoProducto){
 
         try{
             Producto actualizado = productoService.actualizarProducto(id, nuevoProducto);
@@ -105,7 +105,7 @@ public class ProductoController {
     }
 
     @PatchMapping("/actualizar/{id}")
-    public ResponseEntity<?> actualizarProducto(@PathVariable Integer id, @RequestBody ProductoDTO nuevoProducto){
+    public ResponseEntity<?> actualizarProducto(@PathVariable Long id, @RequestBody ProductoDTO nuevoProducto){
         try{
             Producto actualizado = productoService.actualizarProducto(id, nuevoProducto);
             return ResponseEntity.ok(actualizado);
@@ -116,7 +116,7 @@ public class ProductoController {
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<?> eliminarProducto(@PathVariable Integer id){
+    public ResponseEntity<?> eliminarProducto(@PathVariable Long id){
         try{
             productoService.eliminarProducto(id);
             return ResponseEntity.ok().build();
