@@ -6,12 +6,12 @@ import java.util.List;
 
 public interface ProductoService {
     public Producto crearProducto(ProductoDTO producto);
-    public Producto getProducto(Integer id);
+    public Producto getProducto(Long id);
     List<Producto> listarTodos();
     public Producto getProductoByNombre(String nombre);
-    public Producto actualizarProducto(Integer id, ProductoDTO actualizado);
-//    public Producto actualizarProductoEntero(Integer id , Producto actualizado);
-    public void eliminarProducto(Integer id);
+    public Producto actualizarProducto(Long id, ProductoDTO actualizado);
+//    public Producto actualizarProductoEntero(Long id , Producto actualizado);
+    public void eliminarProducto(Long id);
     //BORRAR EL DE ABAJO
     public List<ProductoDTOJ> recuperarProductos();
 

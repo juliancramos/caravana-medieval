@@ -43,7 +43,7 @@ public class ProductoServiceImpl implements ProductoService{
     }
 
     @Override
-    public Producto actualizarProducto(Integer id, ProductoDTO actualizado) {
+    public Producto actualizarProducto(Long id, ProductoDTO actualizado) {
         Producto producto = productoRepository.findById(id)
                 .orElseThrow(()->new EntityNotFoundException("Producto no encontrado"));
 
@@ -70,7 +70,7 @@ public class ProductoServiceImpl implements ProductoService{
     }
 
 //    @Override
-//    public Producto actualizarProductoEntero(Integer id, Producto actualizado) {
+//    public Producto actualizarProductoEntero(Long id, Producto actualizado) {
 //        Producto producto = productoRepository.findById(id)
 //                .orElseThrow(()->new EntityNotFoundException("Producto no encontrado"));
 //
@@ -88,14 +88,14 @@ public class ProductoServiceImpl implements ProductoService{
 //    }
 
     @Override
-    public void eliminarProducto(Integer id) {
+    public void eliminarProducto(Long id) {
         if (!productoRepository.existsById(id)) {
             throw new EntityNotFoundException("Producto con ID " + id + " no encontrado.");
         }
         productoRepository.deleteById(id);
     }
 
-    public Producto getProducto(Integer id) {
+    public Producto getProducto(Long id) {
         return productoRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Producto no encontrado"));
     }
