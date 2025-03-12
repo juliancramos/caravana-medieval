@@ -33,7 +33,12 @@ public class Caravana {
     private int puntosVida;
 
     @ManyToMany
-    private List<Producto> productos; // 🔹 Relación de muchos a muchos
+    @JoinTable(
+            name = "productosxcaravana",  // Tabla intemedia
+            joinColumns = @JoinColumn(name = "caravana_id"),
+            inverseJoinColumns = @JoinColumn(name = "producto_id")
+    )
+    private List<Producto> productos; // 🔹
 
 
 }

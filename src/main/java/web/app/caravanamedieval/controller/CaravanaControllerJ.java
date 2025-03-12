@@ -7,19 +7,26 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import web.app.caravanamedieval.dto.CaravanaDTO;
+import web.app.caravanamedieval.dto.ProductoDTO;
 import web.app.caravanamedieval.model.Caravana;
+import web.app.caravanamedieval.model.Producto;
 import web.app.caravanamedieval.service.CaravanaServiceJ;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import web.app.caravanamedieval.service.ProductoService;
+
 @Controller
 @RequestMapping("/caravana")
 public class CaravanaControllerJ {
 
     @Autowired
     private CaravanaServiceJ caravanaService;
+
+    @Autowired
+    private ProductoService productoService;
     private static final Logger log = LoggerFactory.getLogger(CaravanaController.class);
 
     @GetMapping("/listar")
@@ -57,12 +64,16 @@ public class CaravanaControllerJ {
          return mav;
      }
 
-     @GetMapping("/producto")
-     public ModelAndView formularioProductos() {
-        return new ModelAndView("productos");
-     }
- 
-     @PostMapping("/save")
+    @GetMapping("/producto")
+    public ModelAndView formularioProductos() {
+        List<Producto> productos = productoService.listarTodos();
+        ModelAndView modelAndView = new ModelAndView("productos");
+        modelAndView.addObject("productos", productos);
+        return modelAndView;
+    }
+
+
+    @PostMapping("/save")
      public RedirectView guardarCaravana(@ModelAttribute CaravanaDTO caravanaDTO) {
          caravanaService.guardarCaravana(caravanaDTO);
          return new RedirectView("/caravana/listar");
