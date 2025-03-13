@@ -10,23 +10,28 @@
 <div class="container">
     <h1 class="crud-title">Editar Relación con Productos</h1>
 
-    <form action="/caravana/productos/save" method="post" class="form-container">
-        <!-- Campo oculto para el ID de la caravana -->
+    <form action="/caravana/productos/save" method="post">
         <input type="hidden" name="idCaravana" th:value="${caravanaProductos.idCaravana}">
 
-        <!-- Lista de productos con checkboxes -->
         <ul class="product-list">
-            <li th:each="producto : ${allProductos}" class="product-item">
+            <li th:each="producto, stat : ${allProductos}" class="product-item">
                 <input type="checkbox" name="idsProductos" th:value="${producto.idProducto}"
                        th:checked="${idsProductosRelacionados.contains(producto.idProducto)}"
                        class="product-checkbox">
                 <label class="label-crudd" th:text="${producto.nombre}"></label>
+
+                <!-- Campo para la cantidad -->
+                <input type="number" name="cantidades" min="1"
+                       th:value="${#lists.contains(idsProductosRelacionados, producto.idProducto) ? caravanaProductos.productos[stat.index].cantidad : 1}"
+                       class="product-quantity">
             </li>
         </ul>
 
-        <!-- Botón para guardar -->
         <button class="button-crud">Guardar</button>
     </form>
+
+
+
 
 
 </div>

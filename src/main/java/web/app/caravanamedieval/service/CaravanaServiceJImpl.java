@@ -62,7 +62,6 @@ public class CaravanaServiceJImpl implements CaravanaServiceJ {
         Caravana caravana = caravanaRepository.findById(idCaravana)
                 .orElseThrow(() -> new NoSuchElementException("Caravana no encontrada"));
 
-
         List<ProductosXCaravana> productosXCaravana = productosXCaravanaRepository.findByCaravana_IdCaravana(idCaravana);
 
         List<ProductosXCaravanaDTO> productos = productosXCaravana.stream()
@@ -78,46 +77,65 @@ public class CaravanaServiceJImpl implements CaravanaServiceJ {
         return Optional.of(dto);
     }
 
-    public void updateCaravanaProductos(CaravanaProductosDTO cpd) {
 
-        // Obtener la caravana
-        Caravana caravana = caravanaRepository.findById(cpd.getIdCaravana()).orElseThrow();
+    public void updateCaravanaProductos(CaravanaProductosDTO cpd) {
+        System.out.println("🔹 Iniciando actualización de productos para la caravana ID: " + cpd.getIdCaravana());
+
+        Caravana caravana = caravanaRepository.findById(cpd.getIdCaravana())
+                .orElseThrow(() -> new NoSuchElementException("❌ Caravana no encontrada"));
 
         // Obtener relaciones existentes
         List<ProductosXCaravana> relacionesExistentes =
                 productosXCaravanaRepository.findByCaravana_IdCaravana(cpd.getIdCaravana());
+        System.out.println("🔹 Relaciones existentes: " + relacionesExistentes.size());
 
-        // Convertir a un mapa para facilitar la búsqueda por ID de producto
         Map<Long, ProductosXCaravana> relacionesMap = relacionesExistentes.stream()
                 .collect(Collectors.toMap(rel -> rel.getProducto().getIdProducto(), rel -> rel));
 
-        // Recorrer los productos del DTO
+        Set<Long> productosEnviados = new HashSet<>();
+
+        // Recorrer los productos enviados desde el formulario
         for (ProductosXCaravanaDTO productoDTO : cpd.getProductos()) {
-            Producto producto = productoRepository.findById(productoDTO.getIdProducto()).orElseThrow();
+            Producto producto = productoRepository.findById(productoDTO.getIdProducto())
+                    .orElseThrow(() -> new NoSuchElementException("❌ Producto no encontrado"));
 
-            // Crear clave compuesta
             ProductosXCaravanaKey key = new ProductosXCaravanaKey(caravana.getIdCaravana(), producto.getIdProducto());
+            productosEnviados.add(productoDTO.getIdProducto());
 
-            // Verificar si la relación ya existe
             if (relacionesMap.containsKey(productoDTO.getIdProducto())) {
-                // Actualizar la cantidad si es necesario
+                // Si ya existe, actualizar cantidad si es diferente
                 ProductosXCaravana relacionExistente = relacionesMap.get(productoDTO.getIdProducto());
-                relacionExistente.setCantidad(productoDTO.getCantidad());
-                productosXCaravanaRepository.save(relacionExistente);
+                if (relacionExistente.getCantidad() != productoDTO.getCantidad()) {
+                    System.out.println("🔹 Actualizando cantidad del producto ID: " + productoDTO.getIdProducto());
+                    relacionExistente.setCantidad(productoDTO.getCantidad());
+                    productosXCaravanaRepository.save(relacionExistente);
+                }
             } else {
-                // Crear nueva relación si no existe
+                // Si no existe, crear nueva relación
+                System.out.println("🟢 Creando nueva relación para Producto ID: " + productoDTO.getIdProducto());
                 ProductosXCaravana productosXCaravana = new ProductosXCaravana();
                 productosXCaravana.setId(key);
                 productosXCaravana.setCaravana(caravana);
                 productosXCaravana.setProducto(producto);
                 productosXCaravana.setCantidad(productoDTO.getCantidad());
-
-                // Guardar la nueva relación
                 productosXCaravanaRepository.save(productosXCaravana);
             }
         }
 
+        // Eliminar productos deseleccionados
+        for (ProductosXCaravana relacion : relacionesExistentes) {
+            if (!productosEnviados.contains(relacion.getProducto().getIdProducto())) {
+                System.out.println("🛑 Eliminando relación para Producto ID: " + relacion.getProducto().getIdProducto());
+                productosXCaravanaRepository.delete(relacion);
+            }
+        }
+
+        System.out.println("✅ Actualización finalizada para Caravana ID: " + cpd.getIdCaravana());
     }
+
+
+
+
 
 
 

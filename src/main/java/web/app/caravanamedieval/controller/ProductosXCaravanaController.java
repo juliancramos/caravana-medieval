@@ -47,18 +47,27 @@ public class ProductosXCaravanaController {
 
     @PostMapping("/save")
     public RedirectView saveCaravanaProductos(@RequestParam Long idCaravana,
-                                              @RequestParam(required = false) List<Long> idsProductos){
-        // Crear el DTO completo a partir de los parámetros simples
+                                              @RequestParam(required = false) List<Long> idsProductos,
+                                              @RequestParam(required = false) List<Integer> cantidades) {
+        System.out.println("🔹 Recibiendo solicitud para actualizar Caravana ID: " + idCaravana);
+
+        if (idsProductos == null || idsProductos.isEmpty()) {
+            System.out.println("🛑 No se enviaron productos, eliminando todas las relaciones");
+        }
+
+        // Crear DTO con los datos recibidos
         CaravanaProductosDTO cpd = new CaravanaProductosDTO();
         cpd.setIdCaravana(idCaravana);
 
         List<ProductosXCaravanaDTO> productosDTO = new ArrayList<>();
         if (idsProductos != null) {
-            for (Long idProducto : idsProductos) {
+            for (int i = 0; i < idsProductos.size(); i++) {
                 ProductosXCaravanaDTO productoDTO = new ProductosXCaravanaDTO();
                 productoDTO.setIdCaravana(idCaravana);
-                productoDTO.setIdProducto(idProducto);
-                productoDTO.setCantidad(1); // Valor predeterminado o puedes incluir un campo para esto en el formulario
+                productoDTO.setIdProducto(idsProductos.get(i));
+                productoDTO.setCantidad(cantidades != null && cantidades.size() > i ? cantidades.get(i) : 1);
+
+                System.out.println("🟢 Agregando producto ID: " + productoDTO.getIdProducto() + " con cantidad: " + productoDTO.getCantidad());
                 productosDTO.add(productoDTO);
             }
         }
@@ -67,6 +76,10 @@ public class ProductosXCaravanaController {
         caravanaService.updateCaravanaProductos(cpd);
         return new RedirectView("/caravana/listar");
     }
+
+
+
+
 
 
 }
