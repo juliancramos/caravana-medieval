@@ -3,6 +3,8 @@ package web.app.caravanamedieval.service;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import web.app.caravanamedieval.dto.MapaDTO;
+import web.app.caravanamedieval.mapper.MapaMapper;
 import web.app.caravanamedieval.model.Ciudad;
 import web.app.caravanamedieval.model.Mapa;
 import web.app.caravanamedieval.repository.MapaRepository;
@@ -12,11 +14,11 @@ public class MapaServiceImpl implements MapaService {
     @Autowired
     private MapaRepository mapaRepository;
 
-    @Autowired
-    private CiudadService ciudadService;
+
 
     @Override
-    public Mapa crearMapa(Mapa mapa) {
+    public Mapa crearMapa(MapaDTO mapaDTO) {
+        Mapa mapa = MapaMapper.INSTANCE.toEntity(mapaDTO);
         return mapaRepository.save(mapa);
     }
 
@@ -25,12 +27,14 @@ public class MapaServiceImpl implements MapaService {
                 .orElseThrow(() -> new EntityNotFoundException("Mapa no encontrado"));
     }
 
-    public void asignarCiudadAMapa(Long mapaId, Long ciudadId) {
-        Mapa mapa = getMapa(mapaId);
-        Ciudad ciudad = ciudadService.getCiudad(ciudadId);
-        mapa.getCiudades().add(ciudad);
-        mapaRepository.save(mapa);
+    public void asignarCiudadAMapa(Mapa mapa, Ciudad ciudad) {
+        // Verificar que la ciudad no esté en el mapa
+        if (!mapa.getCiudades().contains(ciudad)) {
+            mapa.getCiudades().add(ciudad);
+            mapaRepository.save(mapa);
+        }
     }
+
 
 
 }
