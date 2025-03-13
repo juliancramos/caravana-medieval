@@ -79,7 +79,7 @@ public class CaravanaServiceJImpl implements CaravanaServiceJ {
 
 
     public void updateCaravanaProductos(CaravanaProductosDTO cpd) {
-        System.out.println("🔹 Iniciando actualización de productos para la caravana ID: " + cpd.getIdCaravana());
+        //System.out.println("🔹 Iniciando actualización de productos para la caravana ID: " + cpd.getIdCaravana());
 
         Caravana caravana = caravanaRepository.findById(cpd.getIdCaravana())
                 .orElseThrow(() -> new NoSuchElementException("❌ Caravana no encontrada"));
@@ -87,7 +87,7 @@ public class CaravanaServiceJImpl implements CaravanaServiceJ {
         // Obtener relaciones existentes
         List<ProductosXCaravana> relacionesExistentes =
                 productosXCaravanaRepository.findByCaravana_IdCaravana(cpd.getIdCaravana());
-        System.out.println("🔹 Relaciones existentes: " + relacionesExistentes.size());
+        //System.out.println("🔹 Relaciones existentes: " + relacionesExistentes.size());
 
         Map<Long, ProductosXCaravana> relacionesMap = relacionesExistentes.stream()
                 .collect(Collectors.toMap(rel -> rel.getProducto().getIdProducto(), rel -> rel));
@@ -106,13 +106,13 @@ public class CaravanaServiceJImpl implements CaravanaServiceJ {
                 // Si ya existe, actualizar cantidad si es diferente
                 ProductosXCaravana relacionExistente = relacionesMap.get(productoDTO.getIdProducto());
                 if (relacionExistente.getCantidad() != productoDTO.getCantidad()) {
-                    System.out.println("🔹 Actualizando cantidad del producto ID: " + productoDTO.getIdProducto());
+                    //System.out.println("🔹 Actualizando cantidad del producto ID: " + productoDTO.getIdProducto());
                     relacionExistente.setCantidad(productoDTO.getCantidad());
                     productosXCaravanaRepository.save(relacionExistente);
                 }
             } else {
                 // Si no existe, crear nueva relación
-                System.out.println("🟢 Creando nueva relación para Producto ID: " + productoDTO.getIdProducto());
+                //System.out.println("🟢 Creando nueva relación para Producto ID: " + productoDTO.getIdProducto());
                 ProductosXCaravana productosXCaravana = new ProductosXCaravana();
                 productosXCaravana.setId(key);
                 productosXCaravana.setCaravana(caravana);
@@ -125,12 +125,12 @@ public class CaravanaServiceJImpl implements CaravanaServiceJ {
         // Eliminar productos deseleccionados
         for (ProductosXCaravana relacion : relacionesExistentes) {
             if (!productosEnviados.contains(relacion.getProducto().getIdProducto())) {
-                System.out.println("🛑 Eliminando relación para Producto ID: " + relacion.getProducto().getIdProducto());
+                //System.out.println("🛑 Eliminando relación para Producto ID: " + relacion.getProducto().getIdProducto());
                 productosXCaravanaRepository.delete(relacion);
             }
         }
 
-        System.out.println("✅ Actualización finalizada para Caravana ID: " + cpd.getIdCaravana());
+        //System.out.println("✅ Actualización finalizada para Caravana ID: " + cpd.getIdCaravana());
     }
 
 

@@ -14,7 +14,7 @@
         <input type="hidden" name="idCaravana" th:value="${caravanaProductos.idCaravana}">
 
         <ul class="product-list">
-            <li th:each="producto, stat : ${allProductos}" class="product-item">
+            <li th:each="producto : ${allProductos}" class="product-item">
                 <input type="checkbox" name="idsProductos" th:value="${producto.idProducto}"
                        th:checked="${idsProductosRelacionados.contains(producto.idProducto)}"
                        class="product-checkbox">
@@ -22,18 +22,13 @@
 
                 <!-- Campo para la cantidad -->
                 <input type="number" name="cantidades" min="1"
-                       th:value="${#lists.contains(idsProductosRelacionados, producto.idProducto) ? caravanaProductos.productos[stat.index].cantidad : 1}"
+                       th:value="${cantidadesPorProducto.containsKey(producto.idProducto) ? cantidadesPorProducto[producto.idProducto] : 1}"
                        class="product-quantity">
+
             </li>
         </ul>
-
         <button class="button-crud">Guardar</button>
     </form>
-
-
-
-
-
 </div>
 </body>
 </html>
