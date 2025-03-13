@@ -10,5 +10,6 @@ import java.util.List;
 @Repository
 public interface ProductosXCaravanaRepository extends JpaRepository<ProductosXCaravana, ProductosXCaravanaKey> {
     List<ProductosXCaravana> findByCaravana_IdCaravana(Long idCaravana);
+    void deleteByProducto_IdProducto(Long idProducto);
 }
 

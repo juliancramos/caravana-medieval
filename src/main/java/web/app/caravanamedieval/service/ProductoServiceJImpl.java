@@ -1,11 +1,13 @@
 package web.app.caravanamedieval.service;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import web.app.caravanamedieval.dto.ProductoDTOJ;
 import web.app.caravanamedieval.mapper.ProductoMapperJ;
 import web.app.caravanamedieval.model.Producto;
 import web.app.caravanamedieval.repository.ProductoRepository;
+import web.app.caravanamedieval.repository.ProductosXCaravanaRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +18,9 @@ public class ProductoServiceJImpl implements ProductoServiceJ {
 
     @Autowired
     private ProductoRepository productoRepository;
+
+    @Autowired
+    private ProductosXCaravanaRepository productosXCaravanaRepository;
 
     @Override
     public List<ProductoDTOJ> listarTodos() {
@@ -36,8 +41,12 @@ public class ProductoServiceJImpl implements ProductoServiceJ {
       return productoRepository.save(producto);
     }
 
+    @Transactional
     @Override
     public void borrarProducto(Long id) {
+        // Primero elimina relaciones en tabla intermedia
+        productosXCaravanaRepository.deleteByProducto_IdProducto(id);
+        //Luego elimina el producto
         productoRepository.deleteById(id);
     }
 }
