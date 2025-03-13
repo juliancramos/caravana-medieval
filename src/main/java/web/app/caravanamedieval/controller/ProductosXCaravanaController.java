@@ -10,6 +10,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
@@ -35,10 +36,15 @@ public class ProductosXCaravanaController {
                 .map(ProductosXCaravanaDTO::getIdProducto)
                 .collect(Collectors.toList());
 
+        //mapa de cantidades
+        Map<Long, Integer> cantidadesPorProducto = caravanaProductosDTO.getProductos().stream()
+                .collect(Collectors.toMap(ProductosXCaravanaDTO::getIdProducto, ProductosXCaravanaDTO::getCantidad));
+
         ModelAndView mav = new ModelAndView("caravana-productos-edit");
         mav.addObject("caravanaProductos", caravanaProductosDTO);
         mav.addObject("allProductos", allProductos);
         mav.addObject("idsProductosRelacionados", idsProductosRelacionados);
+        mav.addObject("cantidadesPorProducto", cantidadesPorProducto);
         return mav;
     }
 
@@ -47,26 +53,35 @@ public class ProductosXCaravanaController {
 
     @PostMapping("/save")
     public RedirectView saveCaravanaProductos(@RequestParam Long idCaravana,
-                                              @RequestParam(required = false) List<Long> idsProductos){
-        // Crear el DTO completo a partir de los parámetros simples
+                                              @RequestParam(required = false) List<Long> idsProductos,
+                                              @RequestParam(required = false) List<Integer> cantidades) {
+
+
+        // Crea DTO con los datos recibidos
         CaravanaProductosDTO cpd = new CaravanaProductosDTO();
         cpd.setIdCaravana(idCaravana);
-
         List<ProductosXCaravanaDTO> productosDTO = new ArrayList<>();
         if (idsProductos != null) {
-            for (Long idProducto : idsProductos) {
+            for (int i = 0; i < idsProductos.size(); i++) {
                 ProductosXCaravanaDTO productoDTO = new ProductosXCaravanaDTO();
                 productoDTO.setIdCaravana(idCaravana);
-                productoDTO.setIdProducto(idProducto);
-                productoDTO.setCantidad(1); // Valor predeterminado o puedes incluir un campo para esto en el formulario
+                productoDTO.setIdProducto(idsProductos.get(i));
+                productoDTO.setCantidad(cantidades != null && cantidades.size() > i ? cantidades.get(i) : 1);
+
                 productosDTO.add(productoDTO);
             }
         }
         cpd.setProductos(productosDTO);
-
         caravanaService.updateCaravanaProductos(cpd);
         return new RedirectView("/caravana/listar");
     }
+
+
+
+
+
+
+
 
 
 }

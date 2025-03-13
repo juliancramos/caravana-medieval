@@ -26,15 +26,16 @@ public class ProductoServiceImpl implements ProductoService{
     public List<Producto> listarTodos() {
             return productoRepository.findAll();
         }
-    
-        //BORRAR
-        @Override
-        public List<ProductoDTOJ> recuperarProductos(){
-            return productoRepository.findAll().stream()
-                    .map(producto -> ProductoMapperJ.INSTANCE.toDTOJ(producto)) // 🔹 Llamada correcta
-                    .toList();
-        }
-        
+
+
+    @Override
+    public List<ProductoDTOJ> recuperarProductos() {
+        return productoRepository.findAll().stream()
+                .map(ProductoMapperJ::toDTOJ) // 🔹 Llamada correcta sin INSTANCE
+                .toList();
+    }
+
+
 
     @Override
     public Producto getProductoByNombre(String nombre) {

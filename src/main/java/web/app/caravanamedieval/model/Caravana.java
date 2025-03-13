@@ -21,13 +21,13 @@ public class Caravana {
     private String nombre;
 
     @Column(name = "velocidad", nullable = false)
-    private double velocidad;
+    private Double velocidad;
 
     @Column(name = "capacidad_maxima", nullable = false)
-    private double capacidadMaxima;
+    private Double capacidadMaxima;
 
     @Column(name = "dinero_disponible", nullable = false)
-    private long dineroDisponible;
+    private Long dineroDisponible;
 
     @Column(name = "puntos_vida", nullable = false)
     private int puntosVida;
@@ -39,6 +39,10 @@ public class Caravana {
             inverseJoinColumns = @JoinColumn(name = "producto_id")
     )
     private List<Producto> productos; // 🔹
+
+    @OneToMany(mappedBy = "caravana")
+    private List<Partida> partidas;
+
 
 
 }

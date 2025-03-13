@@ -20,11 +20,9 @@ public class Jugador {
     @Column(name = "password", nullable = false)
     private String password;
     
-    @Column(name = "rol_jugador", nullable = false)
+    @Column(name = "rol", nullable = false)
     private String rol;
 
-    @OneToOne
-    @JoinColumn(name = "id_partida", unique = true, nullable = true)
-    private Partida partida;
+
 
 }

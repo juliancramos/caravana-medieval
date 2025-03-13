@@ -23,7 +23,7 @@ public class Servicio {
     @Column(name = "descripcion", nullable = false, length = 1000)
     private String descripcion;
 
-    @Column(name = "mejoraxCompra", nullable = false)
+    @Column(name = "mejora_por_compra", nullable = false)
     private Float mejoraxCompra;
 
     @Column(name = "mejora_max", nullable = false)

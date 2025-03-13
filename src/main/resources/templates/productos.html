@@ -6,11 +6,22 @@
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
+
+<!-- 🔹 Menú de navegación agregado -->
+<header>
+    <nav class="menu">
+        <ul>
+            <li><a th:href="@{/caravana/listar}">Caravanas</a></li>
+            <li><a th:href="@{/producto/listar}">Productos</a></li>
+        </ul>
+    </nav>
+</header>
+
 <div class="center-container">
     <h2 class="crud-title">Gestión de Productos</h2>
 
     <!-- Formulario para crear/editar producto -->
-    <form class="form-crud" id="productoForm" th:action="@{/caravana/producto/save}" method="post">
+    <form class="form-crud" id="productoForm" th:action="@{/producto/save}" method="post">
         <input class="input-crud" type="hidden" id="idProducto" name="idProducto">
 
         <label class="label-crud">Nombre:</label>
@@ -45,13 +56,13 @@
         <td th:text="${producto.descripcion}"></td>
         <td th:text="${producto.peso}"></td>
         <td>
-            <button class="button-crud" onclick="editarProducto([[${producto.idProducto}]])">Editar</button>
-            <button class="button-crud" onclick="eliminarProducto([[${producto.idProducto}]])">Eliminar</button>
+            <a class="button-crud" th:href="@{/producto/editar/{idProducto}(idProducto=${producto.idProducto})}">Editar</a>
+            <a class="button-crud" th:href="@{/producto/eliminar/{idProducto}(idProducto=${producto.idProducto})}">Eliminar</a>
         </td>
+
     </tr>
     </tbody>
 </table>
-
 
 </body>
 </html>

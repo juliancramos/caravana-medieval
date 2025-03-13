@@ -16,7 +16,7 @@ import web.app.caravanamedieval.service.ProductoService;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/producto")
+@RequestMapping("/productoj")
 public class ProductoController {
 
     @Autowired

@@ -13,7 +13,7 @@ public class CaravanaDTO {
     private Double velocidad;
     private Double capacidadMaxima;
     private Long dineroDisponible;
-    private Integer puntosVida;
+    private int puntosVida;
 
     // 🔹 Constructor sin `idCaravana`
     public CaravanaDTO(String nombre, Double velocidad, Double capacidadMaxima, Long dineroDisponible, Integer puntosVida) {

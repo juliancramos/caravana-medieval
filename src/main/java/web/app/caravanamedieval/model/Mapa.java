@@ -1,5 +1,6 @@
 package web.app.caravanamedieval.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,13 +8,13 @@ import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name= "mapa")
+@Table(name = "mapa")
 public class Mapa {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_mapa")
@@ -25,46 +26,12 @@ public class Mapa {
     @Column(name = "descripcion", nullable = false, length = 200)
     private String descripcion;
 
-    @ManyToMany
-    @JoinTable(
-            name = "ciudadesxmapa",
-            joinColumns = @JoinColumn(name = "mapa_id"),
-            inverseJoinColumns = @JoinColumn(name = "ciudad_id")
-    )
-    private List<Ciudad> ciudades;
+    @OneToMany(mappedBy = "mapa", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Ciudad> ciudades = new ArrayList<>();
 
-  
-
-    public Mapa(String nombre, String descripcion) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-    }
-
-    public Long getIdMapa() {
-        return idMapa;
-    }
-
-    public void setIdMapa(Long idMapa) {
-        this.idMapa = idMapa;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public List<Ciudad> getCiudades() {
-        return ciudades;
-    }
+    // Relación con Partida
+    @OneToMany(mappedBy = "mapa", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Partida> partidas = new ArrayList<>();
 }
