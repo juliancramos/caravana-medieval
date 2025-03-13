@@ -1,18 +1,31 @@
 package web.app.caravanamedieval.mapper;
 
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 import web.app.caravanamedieval.dto.ProductoDTOJ;
 import web.app.caravanamedieval.model.Producto;
 
-@Mapper
-public interface ProductoMapperJ {
-    ProductoMapperJ INSTANCE = Mappers.getMapper(ProductoMapperJ.class);
+public class ProductoMapperJ {
 
-    ProductoDTOJ toDTOJ(Producto producto);
+    public static ProductoDTOJ toDTOJ(Producto producto) {
+        if (producto == null) return null;
 
-    //Ignora el id
-    @Mapping(target = "idProducto", ignore = true)
-    Producto toEntity(ProductoDTOJ dto);
+        ProductoDTOJ productoDTO = new ProductoDTOJ();
+        productoDTO.setIdProducto(producto.getIdProducto());
+        productoDTO.setNombre(producto.getNombre());
+        productoDTO.setDescripcion(producto.getDescripcion());
+        productoDTO.setPeso(producto.getPeso());
+
+        return productoDTO;
+    }
+
+    public static Producto toEntity(ProductoDTOJ dto) {
+        if (dto == null) return null;
+
+        Producto producto = new Producto();
+        producto.setIdProducto(dto.getIdProducto());
+        producto.setNombre(dto.getNombre());
+        producto.setDescripcion(dto.getDescripcion());
+        producto.setPeso(dto.getPeso());
+
+        return producto;
+    }
 }

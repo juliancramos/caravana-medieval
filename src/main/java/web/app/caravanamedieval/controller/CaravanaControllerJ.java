@@ -64,13 +64,6 @@ public class CaravanaControllerJ {
          return mav;
      }
 
-    @GetMapping("/producto")
-    public ModelAndView formularioProductos() {
-        List<Producto> productos = productoService.listarTodos();
-        ModelAndView modelAndView = new ModelAndView("productos");
-        modelAndView.addObject("productos", productos);
-        return modelAndView;
-    }
 
 
     @PostMapping("/save")
