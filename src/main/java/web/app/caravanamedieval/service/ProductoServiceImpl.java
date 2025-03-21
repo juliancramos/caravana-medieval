@@ -12,8 +12,11 @@ import java.util.List;
 @Service
 public class ProductoServiceImpl implements ProductoService{
 
+    private final ProductoRepository productoRepository;
     @Autowired
-    private ProductoRepository productoRepository;
+    public ProductoServiceImpl(ProductoRepository productoRepository) {
+        this.productoRepository = productoRepository;
+    }
 
     @Override
     @Transactional
@@ -24,71 +27,42 @@ public class ProductoServiceImpl implements ProductoService{
 
     @Override
     public List<Producto> listarTodos() {
-            return productoRepository.findAll();
-        }
-
-
-    @Override
-    public List<ProductoDTOJ> recuperarProductos() {
-        return productoRepository.findAll().stream()
-                .map(ProductoMapperJ::toDTOJ) // 🔹 Llamada correcta sin INSTANCE
-                .toList();
+        return productoRepository.findAll();
     }
 
-
+    @Override
+    public Producto getProducto(Long id) {
+        return productoRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Producto con ID " + id + " no encontrado"));
+    }
 
     @Override
     public Producto getProductoByNombre(String nombre) {
         return productoRepository.findByNombre(nombre)
-                .orElseThrow(()->new EntityNotFoundException("Producto no encontrado"));
+                .orElseThrow(() -> new EntityNotFoundException("Producto no encontrado"));
     }
 
     @Override
+    @Transactional
     public Producto actualizarProducto(Long id, ProductoDTO actualizado) {
         Producto producto = productoRepository.findById(id)
-                .orElseThrow(()->new EntityNotFoundException("Producto no encontrado"));
+                .orElseThrow(() -> new EntityNotFoundException("Producto con ID " + id + " no encontrado"));
 
-        //Para verificar si se modificó un campo
-        boolean modificacion = false;
-
-        if(actualizado.getNombre() != null){
+        if (actualizado.getNombre() != null) {
             producto.setNombre(actualizado.getNombre());
-            modificacion = true;
         }
-        if(actualizado.getDescripcion() != null){
+        if (actualizado.getDescripcion() != null) {
             producto.setDescripcion(actualizado.getDescripcion());
-            modificacion = true;
         }
-        if(actualizado.getPeso() != null){
+        if (actualizado.getPeso() != null) {
             producto.setPeso(actualizado.getPeso());
-            modificacion = true;
-        }
-        if (!modificacion) {
-            throw new IllegalArgumentException("No se proporcionó ningún campo válido para actualizar");
         }
 
         return productoRepository.save(producto);
     }
 
-//    @Override
-//    public Producto actualizarProductoEntero(Long id, Producto actualizado) {
-//        Producto producto = productoRepository.findById(id)
-//                .orElseThrow(()->new EntityNotFoundException("Producto no encontrado"));
-//
-//        //Evitar datos nulos
-//        if (actualizado.getNombre() != null) {
-//            producto.setNombre(actualizado.getNombre());
-//        }
-//        if (actualizado.getDescripcion() != null) {
-//            producto.setDescripcion(actualizado.getDescripcion());
-//        }
-//        if (actualizado.getPeso() != null) {
-//            producto.setPeso(actualizado.getPeso());
-//        }
-//        return productoRepository.save(producto);
-//    }
-
     @Override
+    @Transactional
     public void eliminarProducto(Long id) {
         if (!productoRepository.existsById(id)) {
             throw new EntityNotFoundException("Producto con ID " + id + " no encontrado.");
@@ -96,8 +70,13 @@ public class ProductoServiceImpl implements ProductoService{
         productoRepository.deleteById(id);
     }
 
-    public Producto getProducto(Long id) {
-        return productoRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Producto no encontrado"));
+    //Este se borra después
+    @Override
+    public List<ProductoDTOJ> recuperarProductos() {
+        return productoRepository.findAll().stream()
+                .map(ProductoMapperJ::toDTOJ)
+                .toList();
     }
+
+
 }

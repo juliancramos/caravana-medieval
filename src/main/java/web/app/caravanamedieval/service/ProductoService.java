@@ -10,9 +10,8 @@ public interface ProductoService {
     List<Producto> listarTodos();
     public Producto getProductoByNombre(String nombre);
     public Producto actualizarProducto(Long id, ProductoDTO actualizado);
-//    public Producto actualizarProductoEntero(Long id , Producto actualizado);
     public void eliminarProducto(Long id);
-    //BORRAR EL DE ABAJO
+    //Model and view
     public List<ProductoDTOJ> recuperarProductos();
 
 
