@@ -1,37 +1,25 @@
 package web.app.caravanamedieval.mapper;
 
-import web.app.caravanamedieval.dto.*;
-import web.app.caravanamedieval.model.*;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.factory.Mappers;
+import web.app.caravanamedieval.dto.CaravanaDTO;
+import web.app.caravanamedieval.model.Caravana;
 
-public class CaravanaMapper {
+@Mapper(componentModel = "spring")
+public interface CaravanaMapper {
+    CaravanaMapper INSTANCE = Mappers.getMapper(CaravanaMapper.class);
 
-    public static CaravanaDTO toDTO(Caravana caravana){
-        if(caravana == null) return null;
+    // DTO a entidad
+    Caravana toEntity(CaravanaDTO caravanaDTO);
 
-        CaravanaDTO caravanaDTO = new CaravanaDTO();
+    // Entidad a DTO
+    CaravanaDTO toDTO(Caravana caravana);
 
-        caravanaDTO.setIdCaravana(caravana.getIdCaravana());
-        caravanaDTO.setNombre(caravana.getNombre());
-        caravanaDTO.setVelocidad(caravana.getVelocidad());
-        caravanaDTO.setCapacidadMaxima(caravana.getCapacidadMaxima());
-        caravanaDTO.setDineroDisponible(caravana.getDineroDisponible());
-        caravanaDTO.setPuntosVida(caravana.getPuntosVida());
-
-        return caravanaDTO;
-    }
-
-    public static Caravana toEntity(CaravanaDTO dto){
-        if(dto == null) return null;
-
-        Caravana caravana = new Caravana();
-
-        caravana.setIdCaravana(dto.getIdCaravana());
-        caravana.setNombre(dto.getNombre());
-        caravana.setVelocidad(dto.getVelocidad());
-        caravana.setCapacidadMaxima(dto.getCapacidadMaxima());
-        caravana.setDineroDisponible(dto.getDineroDisponible());
-        caravana.setPuntosVida(dto.getPuntosVida());
-
-        return caravana;
-    }
+    // Actualizar entidad desde DTO
+    @Mapping(target = "idCaravana", ignore = true)
+    @Mapping(target = "productos", ignore = true)
+    @Mapping(target = "partidas", ignore = true)
+    void updateEntity(@MappingTarget Caravana entity, CaravanaDTO dto);
 }

@@ -28,13 +28,13 @@ public class CaravanaServiceJImpl implements CaravanaServiceJ {
 
     @Override
     public List<CaravanaDTO> listarCaravanas(){
-        return caravanaRepository.findAll().stream().map(CaravanaMapper::toDTO).toList();
+        return caravanaRepository.findAll().stream().map(CaravanaMapperAnterior::toDTO).toList();
         }
 
 
     @Override
     public Optional<CaravanaDTO> buscarCaravana(Long id){
-        return caravanaRepository.findById(id).map(CaravanaMapper::toDTO);
+        return caravanaRepository.findById(id).map(CaravanaMapperAnterior::toDTO);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class CaravanaServiceJImpl implements CaravanaServiceJ {
 
     @Override
         public Caravana guardarCaravana(CaravanaDTO caravanaDTO){
-            Caravana caravana = CaravanaMapper.toEntity(caravanaDTO);
+            Caravana caravana = CaravanaMapperAnterior.toEntity(caravanaDTO);
             return caravanaRepository.save(caravana);
         }
 
