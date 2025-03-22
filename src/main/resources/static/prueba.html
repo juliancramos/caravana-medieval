@@ -9,9 +9,9 @@
     <button id="enviar">Enviar solicitud</button>
     <script>
         document.getElementById("enviar").addEventListener("click", async () => {
-            const data = { nombre: "Producto 1", descripcion: "Descripción del producto", peso: 20.5 };
+            const data = { nombre: "Producto 1", descripcion: "Descripción del product", peso: 20.5 };
             try {
-                const response = await fetch("http://localhost:8080/producto/crearProducto", {
+                const response = await fetch("http://localhost:8080/product/crearProducto", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(data)

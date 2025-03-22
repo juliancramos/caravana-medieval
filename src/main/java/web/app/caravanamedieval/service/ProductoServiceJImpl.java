@@ -5,9 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import web.app.caravanamedieval.dto.ProductoDTOJ;
 import web.app.caravanamedieval.mapper.ProductoMapperJ;
-import web.app.caravanamedieval.model.Producto;
-import web.app.caravanamedieval.repository.ProductoRepository;
-import web.app.caravanamedieval.repository.ProductosXCaravanaRepository;
+import web.app.caravanamedieval.model.Product;
+import web.app.caravanamedieval.repository.ProductRepository;
+import web.app.caravanamedieval.repository.ProductsByCaravanRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,36 +17,36 @@ import java.util.stream.Collectors;
 public class ProductoServiceJImpl implements ProductoServiceJ {
 
     @Autowired
-    private ProductoRepository productoRepository;
+    private ProductRepository productRepository;
 
     @Autowired
-    private ProductosXCaravanaRepository productosXCaravanaRepository;
+    private ProductsByCaravanRepository productsByCaravanRepository;
 
     @Override
     public List<ProductoDTOJ> listarTodos() {
-        return productoRepository.findAll().stream()
+        return productRepository.findAll().stream()
                 .map(ProductoMapperJ::toDTOJ)
                 .collect(Collectors.toList());
     }
 
     @Override
     public Optional<ProductoDTOJ> buscarProducto(Long id) {
-        return productoRepository.findById(id)
+        return productRepository.findById(id)
                 .map(ProductoMapperJ::toDTOJ);
     }
 
     @Override
-    public Producto guardarProducto(ProductoDTOJ productoDTO) {
-        Producto producto = ProductoMapperJ.toEntity(productoDTO);
-      return productoRepository.save(producto);
+    public Product guardarProducto(ProductoDTOJ productoDTO) {
+        Product product = ProductoMapperJ.toEntity(productoDTO);
+      return productRepository.save(product);
     }
 
     @Transactional
     @Override
     public void borrarProducto(Long id) {
         // Primero elimina relaciones en tabla intermedia
-        productosXCaravanaRepository.deleteByProducto_IdProducto(id);
+        productsByCaravanRepository.deleteByProduct_IdProduct(id);
         //Luego elimina el producto
-        productoRepository.deleteById(id);
+        productRepository.deleteById(id);
     }
 }

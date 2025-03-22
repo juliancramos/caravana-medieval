@@ -5,33 +5,33 @@ import web.app.caravanamedieval.model.*;
 
 public class CaravanaMapperAnterior {
 
-    public static CaravanaDTO toDTO(Caravana caravana){
-        if(caravana == null) return null;
+    public static CaravanDTO toDTO(Caravan caravan){
+        if(caravan == null) return null;
 
-        CaravanaDTO caravanaDTO = new CaravanaDTO();
+        CaravanDTO caravanDTO = new CaravanDTO();
 
-        caravanaDTO.setIdCaravana(caravana.getIdCaravana());
-        caravanaDTO.setNombre(caravana.getNombre());
-        caravanaDTO.setVelocidad(caravana.getVelocidad());
-        caravanaDTO.setCapacidadMaxima(caravana.getCapacidadMaxima());
-        caravanaDTO.setDineroDisponible(caravana.getDineroDisponible());
-        caravanaDTO.setPuntosVida(caravana.getPuntosVida());
+        caravanDTO.setIdCaravan(caravan.getIdCaravan());
+        caravanDTO.setName(caravan.getName());
+        caravanDTO.setSpeed(caravan.getSpeed());
+        caravanDTO.setMaxCapacity(caravan.getMaxCapacity());
+        caravanDTO.setAvailableMoney(caravan.getAvailableMoney());
+        caravanDTO.setLifePoints(caravan.getLifePoints());
 
-        return caravanaDTO;
+        return caravanDTO;
     }
 
-    public static Caravana toEntity(CaravanaDTO dto){
+    public static Caravan toEntity(CaravanDTO dto){
         if(dto == null) return null;
 
-        Caravana caravana = new Caravana();
+        Caravan caravan = new Caravan();
 
-        caravana.setIdCaravana(dto.getIdCaravana());
-        caravana.setNombre(dto.getNombre());
-        caravana.setVelocidad(dto.getVelocidad());
-        caravana.setCapacidadMaxima(dto.getCapacidadMaxima());
-        caravana.setDineroDisponible(dto.getDineroDisponible());
-        caravana.setPuntosVida(dto.getPuntosVida());
+        caravan.setIdCaravan(dto.getIdCaravan());
+        caravan.setName(dto.getName());
+        caravan.setSpeed(dto.getSpeed());
+        caravan.setMaxCapacity(dto.getMaxCapacity());
+        caravan.setAvailableMoney(dto.getAvailableMoney());
+        caravan.setLifePoints(dto.getLifePoints());
 
-        return caravana;
+        return caravan;
     }
 }

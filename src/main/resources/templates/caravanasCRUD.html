@@ -10,8 +10,8 @@
     <header>
         <nav class="menu">
             <ul>
-                <li><a th:href="@{/caravana/listar}">Caravanas</a>
-                 <li><a th:href="@{/producto/listar}">Productos</a></li>
+                <li><a th:href="@{/caravan/listar}">Caravanas</a>
+                 <li><a th:href="@{/product/listar}">Productos</a></li>
 
 
             </ul>
@@ -19,7 +19,7 @@
     </header>
     
     <h1 class="crud-title">CRUD Caravanas</h1>
-    <p class = "labelCRUD"><a th:href="@{/caravana/crear}">Crear Caravana</a></p>
+    <p class = "labelCRUD"><a th:href="@{/caravan/crear}">Crear Caravana</a></p>
     <table>
         <thead>
           <tr>
@@ -29,13 +29,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr th:each="caravana : ${listaCaravanas}">
-            <td th:text="${caravana.idCaravana}"></td>
-            <td th:text="${caravana.nombre}"></td>
+          <tr th:each="caravan : ${listaCaravanas}">
+            <td th:text="${caravan.getIdCaravan}"></td>
+            <td th:text="${caravan.getName}"></td>
             <td>
-                <a th:href="@{/caravana/view/{id}(id=${caravana.idCaravana})}">Ver</a>
-                <a th:href="@{/caravana/editar/{id}(id=${caravana.idCaravana})}">Editar</a>
-                <a th:href="@{/caravana/eliminar/{id}(id=${caravana.idCaravana})}">Eliminar</a>
+                <a th:href="@{/caravan/view/{id}(id=${caravan.getIdCaravan})}">Ver</a>
+                <a th:href="@{/caravan/editar/{id}(id=${caravan.getIdCaravan})}">Editar</a>
+                <a th:href="@{/caravan/eliminar/{id}(id=${caravan.getIdCaravan})}">Eliminar</a>
             </td>
         </tr>
         
