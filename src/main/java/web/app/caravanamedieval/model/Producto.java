@@ -1,5 +1,6 @@
 package web.app.caravanamedieval.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import web.app.caravanamedieval.model.*;
@@ -25,7 +26,8 @@ public class Producto {
     @Column(name = "peso", nullable = false)
     private Float peso;
 
-    @ManyToMany(mappedBy = "productos") 
+    @ManyToMany(mappedBy = "productos")
+    @JsonIgnore
     private List<Caravana> caravanas; 
 
 }
