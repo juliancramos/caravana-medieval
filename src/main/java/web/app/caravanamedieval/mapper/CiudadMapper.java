@@ -2,18 +2,22 @@ package web.app.caravanamedieval.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 import web.app.caravanamedieval.dto.CiudadDTO;
 import web.app.caravanamedieval.model.Ciudad;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {RutaMapper.class})
 public interface CiudadMapper {
 
-    CiudadMapper INSTANCE = Mappers.getMapper(CiudadMapper.class);
+    Ciudad toEntity(CiudadDTO dto);
 
-    @Mapping(target = "mapaId", source = "mapa.idMapa")
-    CiudadDTO toDTO(Ciudad ciudad);
+    CiudadDTO toDTO(Ciudad entity);
 
     @Mapping(target = "idCiudad", ignore = true)
-    Ciudad toEntity(CiudadDTO ciudadDTO);
+    @Mapping(target = "rutasOrigen", ignore = true)
+    @Mapping(target = "rutasDestino", ignore = true)
+    @Mapping(target = "mapa", ignore = true)
+    void updateEntity(@MappingTarget Ciudad entity, CiudadDTO dto);
 }
+

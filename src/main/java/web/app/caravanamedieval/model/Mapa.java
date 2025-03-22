@@ -34,4 +34,14 @@ public class Mapa {
     @OneToMany(mappedBy = "mapa", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<Partida> partidas = new ArrayList<>();
+
+    public void addCiudad(Ciudad ciudad) {
+        ciudades.add(ciudad);
+        ciudad.setMapa(this);
+    }
+
+    public void removeCiudad(Ciudad ciudad) {
+        ciudades.remove(ciudad);
+        ciudad.setMapa(null);
+    }
 }

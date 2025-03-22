@@ -14,26 +14,26 @@ import java.util.List;
 @RequestMapping("/conexion")
 public class ConexionCiudadController {
 
-    @Autowired
-    ConexionCiudadService conexionCiudadService;
-
-    @PostMapping("/crear")
-    public ResponseEntity<?> crearConexion(@RequestBody ConexionCiudadDTO conexionCiudadDTO) {
-        try {
-            ConexionCiudad conexion = conexionCiudadService.crearConexion(conexionCiudadDTO);
-            return ResponseEntity.ok(conexion);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al crear la conexión: " + e.getMessage());
-        }
-    }
-
-    @GetMapping("/desde/{ciudadId}")
-    public ResponseEntity<List<ConexionCiudad>> obtenerConexionesDesde(@PathVariable Long ciudadId) {
-        return ResponseEntity.ok(conexionCiudadService.obtenerConexionesDesdeCiudad(ciudadId));
-    }
-
-    @GetMapping("/hacia/{ciudadId}")
-    public ResponseEntity<List<ConexionCiudad>> obtenerConexionesHacia(@PathVariable Long ciudadId) {
-        return ResponseEntity.ok(conexionCiudadService.obtenerConexionesHaciaCiudad(ciudadId));
-    }
+//    @Autowired
+//    ConexionCiudadService conexionCiudadService;
+//
+//    @PostMapping("/crear")
+//    public ResponseEntity<?> crearConexion(@RequestBody ConexionCiudadDTO conexionCiudadDTO) {
+//        try {
+//            ConexionCiudad conexion = conexionCiudadService.crearConexion(conexionCiudadDTO);
+//            return ResponseEntity.ok(conexion);
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al crear la conexión: " + e.getMessage());
+//        }
+//    }
+//
+//    @GetMapping("/desde/{ciudadId}")
+//    public ResponseEntity<List<ConexionCiudad>> obtenerConexionesDesde(@PathVariable Long ciudadId) {
+//        return ResponseEntity.ok(conexionCiudadService.obtenerConexionesDesdeCiudad(ciudadId));
+//    }
+//
+//    @GetMapping("/hacia/{ciudadId}")
+//    public ResponseEntity<List<ConexionCiudad>> obtenerConexionesHacia(@PathVariable Long ciudadId) {
+//        return ResponseEntity.ok(conexionCiudadService.obtenerConexionesHaciaCiudad(ciudadId));
+//    }
 }

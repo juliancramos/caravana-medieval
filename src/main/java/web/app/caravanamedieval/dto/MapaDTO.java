@@ -10,8 +10,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MapaDTO {
+    private Long id;
     private String nombre;
     private String descripcion;
-    private List<Long> ciudadesIds;  // IDs de las ciudades que pertenecen al mapa
-    private List<Long> partidasIds;  // IDs de las partidas asociadas al mapa
+    private List<CiudadDTO> ciudades;
 }

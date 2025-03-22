@@ -1,5 +1,6 @@
 package web.app.caravanamedieval.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import web.app.caravanamedieval.model.*;
@@ -38,7 +39,8 @@ public class Caravana {
             joinColumns = @JoinColumn(name = "caravana_id"),
             inverseJoinColumns = @JoinColumn(name = "producto_id")
     )
-    private List<Producto> productos; // 🔹
+    @JsonManagedReference
+    private List<Producto> productos;
 
     @OneToMany(mappedBy = "caravana")
     private List<Partida> partidas;
