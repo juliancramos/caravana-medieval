@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 import web.app.caravanamedieval.service.ProductoService;
 
 @Controller
-@RequestMapping("/caravana")
+@RequestMapping("/caravanaj")
 public class CaravanaControllerJ {
 
     @Autowired

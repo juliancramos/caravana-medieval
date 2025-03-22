@@ -1,5 +1,6 @@
 package web.app.caravanamedieval.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -43,6 +44,7 @@ public class Caravana {
     private List<Producto> productos;
 
     @OneToMany(mappedBy = "caravana")
+    @JsonIgnore
     private List<Partida> partidas;
 
 

@@ -1,5 +1,6 @@
 package web.app.caravanamedieval.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.List;
@@ -26,9 +27,11 @@ public class Partida {
 
     @ManyToOne
     @JoinColumn(name = "caravana_id", nullable = false)
+    @JsonManagedReference
     private Caravana caravana;
 
     @ManyToOne
     @JoinColumn(name = "mapa_id", nullable = false)
+    @JsonManagedReference
     private Mapa mapa;
 }
