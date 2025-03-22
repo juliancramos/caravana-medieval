@@ -41,20 +41,20 @@ public class CiudadController {
     }
 
     @GetMapping("/listar")
-    public ResponseEntity<List<CiudadDTO>> listar() {
-        List<CiudadDTO> ciudades = ciudadService.listarTodas();
+    public ResponseEntity<List<Ciudad>> listar() {
+        List<Ciudad> ciudades = ciudadService.listarTodas();
         return ResponseEntity.ok(ciudades);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CiudadDTO> obtenerCiudad(@PathVariable Long id) {
-        CiudadDTO ciudad = ciudadService.obtenerCiudad(id);
+    public ResponseEntity<Ciudad> obtenerCiudad(@PathVariable Long id) {
+        Ciudad ciudad = ciudadService.getCiudad(id);
         return ResponseEntity.ok(ciudad);
     }
 
     @PutMapping("/actualizar/{id}")
-    public ResponseEntity<CiudadDTO> actualizarCiudad(@PathVariable Long id, @RequestBody CiudadDTO ciudadDTO) {
-        CiudadDTO ciudadActualizada = ciudadService.actualizarCiudad(id, ciudadDTO);
+    public ResponseEntity<Ciudad> actualizarCiudad(@PathVariable Long id, @RequestBody CiudadDTO ciudadDTO) {
+        Ciudad ciudadActualizada = ciudadService.actualizarCiudad(id, ciudadDTO);
         return ResponseEntity.ok(ciudadActualizada);
     }
 

@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface CiudadService {
     Ciudad crearCiudad(CiudadDTO ciudadDTO);
-    List<CiudadDTO> listarTodas();
-    CiudadDTO obtenerCiudad(Long id);
-    CiudadDTO actualizarCiudad(Long id, CiudadDTO actualizado);
+    List<Ciudad> listarTodas();
+    Ciudad getCiudad(Long id);
+    Ciudad actualizarCiudad(Long id, CiudadDTO actualizado);
     void eliminarCiudad(Long id);
 }

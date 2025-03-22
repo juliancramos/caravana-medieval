@@ -45,23 +45,19 @@ public class CiudadServiceImpl implements CiudadService {
 
 
     @Override
-    public List<CiudadDTO> listarTodas() {
-        List<Ciudad> ciudades = ciudadRepository.findAll();
-        return ciudades.stream()
-                .map(ciudadMapper::toDTO)
-                .collect(Collectors.toList());
+    public List<Ciudad> listarTodas() {
+        return ciudadRepository.findAll();
     }
 
     @Override
-    public CiudadDTO obtenerCiudad(Long id) {
-        Ciudad ciudad = ciudadRepository.findById(id)
+    public Ciudad getCiudad(Long id) {
+        return ciudadRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Ciudad con ID " + id + " no encontrada"));
-        return ciudadMapper.toDTO(ciudad);
     }
 
     @Override
     @Transactional
-    public CiudadDTO actualizarCiudad(Long id, CiudadDTO actualizado) {
+    public Ciudad actualizarCiudad(Long id, CiudadDTO actualizado) {
         Ciudad ciudad = ciudadRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Ciudad con ID " + id + " no encontrada"));
 
@@ -77,8 +73,7 @@ public class CiudadServiceImpl implements CiudadService {
             ciudad.setMapa(mapa);
         }
 
-        Ciudad ciudadActualizada = ciudadRepository.save(ciudad);
-        return ciudadMapper.toDTO(ciudadActualizada);
+        return ciudadRepository.save(ciudad);
     }
 
     @Override
