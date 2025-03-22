@@ -14,90 +14,67 @@ import web.app.caravanamedieval.service.CiudadService;
 import web.app.caravanamedieval.service.MapaService;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("mapa")
 public class MapaController {
-    @Autowired
-    private MapaService mapaService;
 
+    private final MapaService mapaService;
     @Autowired
-    private CiudadService ciudadService;
-    @PostMapping("/crearMapa")
-    public ResponseEntity<?> crearMapa(@RequestBody MapaDTO mapaDTO) {
-        try {
-            Mapa nuevoMapa = mapaService.crearMapa(mapaDTO);
-            MapaDTO respuestaDTO = MapaMapper.INSTANCE.toDTO(nuevoMapa);
-            URI location = ServletUriComponentsBuilder
-                    .fromCurrentRequest()
-                    .path("/{nombre}")
-                    .buildAndExpand(respuestaDTO.getNombre())
-                    .toUri();
-            return ResponseEntity.created(location).body(respuestaDTO);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Error al crear el mapa: " + e.getMessage());
-        }
+    public MapaController(MapaService mapaService) {
+        this.mapaService = mapaService;
+    }
+
+    @PostMapping("/crear")
+    public ResponseEntity<Mapa> crearMapa(@RequestBody MapaDTO mapaDTO) {
+        Mapa nuevoMapa = mapaService.crearMapa(mapaDTO);
+
+        // Crear la URI para retornar la ubicación del recurso creado
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(nuevoMapa.getIdMapa())
+                .toUri();
+
+        return ResponseEntity.created(location).body(nuevoMapa);
+    }
+
+    @GetMapping("/listar")
+    public ResponseEntity<List<Mapa>> listar() {
+        List<Mapa> mapas = mapaService.listarTodos();
+        return ResponseEntity.ok(mapas);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Mapa> obtenerMapa(@PathVariable Long id) {
+        Mapa mapa = mapaService.getMapa(id);
+        return ResponseEntity.ok(mapa);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Mapa> actualizarMapa(@PathVariable Long id, @RequestBody MapaDTO mapaDTO) {
+        Mapa mapaActualizado = mapaService.actualizarMapa(id, mapaDTO);
+        return ResponseEntity.ok(mapaActualizado);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminarMapa(@PathVariable Long id) {
+        mapaService.eliminarMapa(id);
+        return ResponseEntity.noContent().build();
     }
 
 
-//    @PostMapping("agregarRegistros")
-//    public ResponseEntity<?> agregarRegistros() {
-//        try{
-//            for (int i = 1; i <= 3; i++){
-//                String nombre = "mapa" + i;
-//                String descripcion = "Este es el mapa " + i;
-//                mapaService.crearMapa(new Mapa(nombre, descripcion));
-//            }
-//            return ResponseEntity.ok("Se agregaron 3 registros correctamente");
-//        }catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-//                    .body("Error al agregar registros: " + e.getMessage());
-//        }
-//    }
 
-    @PostMapping("/asignar/{mapaId}/ciudad/{ciudadId}")
+
+    @PostMapping("/{mapaId}/ciudades/{ciudadId}")
     public ResponseEntity<String> asignarCiudad(@PathVariable Long mapaId, @PathVariable Long ciudadId) {
-        try {
-            // Obtener el mapa y la ciudad directamente en el controlador
-            Mapa mapa = mapaService.getMapa(mapaId);
-            Ciudad ciudad = ciudadService.getCiudad(ciudadId);
-
-            // Asignar la ciudad al mapa a través del servicio
-            mapaService.asignarCiudadAMapa(mapa, ciudad);
-
-            return ResponseEntity.ok("Ciudad asignada al mapa correctamente");
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Error al asignar ciudad: " + e.getMessage());
-        }
+        mapaService.asignarCiudadAMapa(mapaId, ciudadId);
+        return ResponseEntity.ok("Ciudad asignada al mapa correctamente");
     }
 
 
-//    @PostMapping("agregarRegistrosCiudadAMapa")
-//    public ResponseEntity<?> agregarRegistrosCiudadAMapa() {
-//        try{
-//            //Agrega las 7 primeras ciudades al primer mapa
-//            for (int i = 1; i <= 7; i++){
-//                mapaService.asignarCiudadAMapa((long) 1, (long) i);
-//            }
-//            //Agrega las 5 siguientes ciudades al segundo mapa
-//            for (int i = 8; i <= 12; i++){
-//                mapaService.asignarCiudadAMapa((long) 2, (long) i);
-//            }
-//            //Agrega las 3 siguientes ciudades al tercer mapa
-//            for (int i = 13; i <= 15; i++){
-//                mapaService.asignarCiudadAMapa((long) 3, (long) i);
-//            }
-//
-//            return ResponseEntity.ok("Se agregaron los registros correctamente");
-//        }catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-//                    .body("Error al agregar registros: " + e.getMessage());
-//        }
-//    }
+
 
 
 }
