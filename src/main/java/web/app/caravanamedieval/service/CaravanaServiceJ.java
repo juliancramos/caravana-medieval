@@ -1,19 +1,19 @@
 package web.app.caravanamedieval.service;
 
 import web.app.caravanamedieval.dto.*;
-import web.app.caravanamedieval.model.Caravana;
+import web.app.caravanamedieval.model.Caravan;
 import java.util.Optional;
 
 import java.util.List;
 
 public interface CaravanaServiceJ {
     void borrarCaravana (Long id);
-    Caravana getCaravana (Long id);
-    public List<CaravanaDTO> listarCaravanas();
-    public Optional<CaravanaDTO> buscarCaravana(Long id);
-    Caravana guardarCaravana(CaravanaDTO caravanaDTO);
-    public void updateCaravanaProductos(CaravanaProductosDTO cpd);
-    Optional<CaravanaProductosDTO> getCaravanaProductos(Long caravanaId);
+    Caravan getCaravana (Long id);
+    public List<CaravanDTO> listarCaravanas();
+    public Optional<CaravanDTO> buscarCaravana(Long id);
+    Caravan guardarCaravana(CaravanDTO caravanDTO);
+    public void updateCaravanaProductos(CaravanProductsDTO cpd);
+    Optional<CaravanProductsDTO> getCaravanaProductos(Long caravanaId);
 
 
 

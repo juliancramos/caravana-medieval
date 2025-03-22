@@ -11,8 +11,8 @@
 <header>
     <nav class="menu">
         <ul>
-            <li><a th:href="@{/caravana/listar}">Caravanas</a></li>
-            <li><a th:href="@{/producto/listar}">Productos</a></li>
+            <li><a th:href="@{/caravan/listar}">Caravanas</a></li>
+            <li><a th:href="@{/product/listar}">Productos</a></li>
         </ul>
     </nav>
 </header>
@@ -20,8 +20,8 @@
 <div class="center-container">
     <h2 class="crud-title">Gestión de Productos</h2>
 
-    <!-- Formulario para crear/editar producto -->
-    <form class="form-crud" id="productoForm" th:action="@{/producto/save}" method="post">
+    <!-- Formulario para crear/editar product -->
+    <form class="form-crud" id="productoForm" th:action="@{/product/save}" method="post">
         <input class="input-crud" type="hidden" id="idProducto" name="idProducto">
 
         <label class="label-crud">Nombre:</label>
@@ -50,14 +50,14 @@
     </tr>
     </thead>
     <tbody id="productosTable">
-    <tr th:each="producto : ${productos}">
-        <td th:text="${producto.idProducto}"></td>
-        <td th:text="${producto.nombre}"></td>
-        <td th:text="${producto.descripcion}"></td>
-        <td th:text="${producto.peso}"></td>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.idProducto}"></td>
+        <td th:text="${product.nombre}"></td>
+        <td th:text="${product.descripcion}"></td>
+        <td th:text="${product.peso}"></td>
         <td>
-            <a class="button-crud" th:href="@{/producto/editar/{idProducto}(idProducto=${producto.idProducto})}">Editar</a>
-            <a class="button-crud" th:href="@{/producto/eliminar/{idProducto}(idProducto=${producto.idProducto})}">Eliminar</a>
+            <a class="button-crud" th:href="@{/product/editar/{idProducto}(idProducto=${product.idProducto})}">Editar</a>
+            <a class="button-crud" th:href="@{/product/eliminar/{idProducto}(idProducto=${product.idProducto})}">Eliminar</a>
         </td>
 
     </tr>

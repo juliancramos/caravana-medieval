@@ -25,7 +25,7 @@
         <h2 class="labelCRUD">Crear Ciudad</h2>
         
         <form id="ciudadForm">
-            <label for="nombre" class="labelCRUD">Nombre de la ciudad:</label>
+            <label for="nombre" class="labelCRUD">Nombre de la city:</label>
             <input type="text" id="nombre" name="nombre" required>
             
             <label for="impuestoEntrada" class="labelCRUD">Impuesto de entrada:</label>
@@ -44,12 +44,12 @@
         const formData = new FormData(this);
 
         const data = {
-            nombre: formData.get("nombre"),  // Nombre de la ciudad
+            nombre: formData.get("nombre"),  // Nombre de la city
             impuestoEntrada: parseFloat(formData.get("impuestoEntrada")) // Impuesto de entrada
         };
 
         // Enviar los datos al servidor usando fetch
-        fetch("/ciudad/crearCiudad", {
+        fetch("/city/crearCiudad", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -64,7 +64,7 @@
         })
         .catch(error => {
             console.error("Error:", error);
-            alert("Hubo un error al crear la ciudad.");
+            alert("Hubo un error al crear la city.");
         });
     });
     </script>

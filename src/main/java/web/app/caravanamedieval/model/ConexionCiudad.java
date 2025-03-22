@@ -21,16 +21,16 @@ public class ConexionCiudad {
 
     @ManyToOne
     @JoinColumn(name = "ciudad_origen_id", nullable = false)
-    private Ciudad ciudadOrigen;
+    private City cityOrigen;
 
     @ManyToOne
     @JoinColumn(name = "ciudad_destino_id", nullable = false)
-    private Ciudad ciudadDestino;
+    private City cityDestino;
 
 
-    public ConexionCiudad(Ciudad ciudadOrigen, Ciudad ciudadDestino, Double tiempoTrayecto) {
-        this.ciudadOrigen = ciudadOrigen;
-        this.ciudadDestino = ciudadDestino;
+    public ConexionCiudad(City cityOrigen, City cityDestino, Double tiempoTrayecto) {
+        this.cityOrigen = cityOrigen;
+        this.cityDestino = cityDestino;
         this.tiempoTrayecto = tiempoTrayecto;
     }
 
@@ -51,19 +51,19 @@ public class ConexionCiudad {
         this.tiempoTrayecto = tiempoTrayecto;
     }
 
-    public Ciudad getCiudadOrigen() {
-        return ciudadOrigen;
+    public City getCityOrigen() {
+        return cityOrigen;
     }
 
-    public void setCiudadOrigen(Ciudad ciudadOrigen) {
-        this.ciudadOrigen = ciudadOrigen;
+    public void setCityOrigen(City cityOrigen) {
+        this.cityOrigen = cityOrigen;
     }
 
-    public Ciudad getCiudadDestino() {
-        return ciudadDestino;
+    public City getCityDestino() {
+        return cityDestino;
     }
 
-    public void setCiudadDestino(Ciudad ciudadDestino) {
-        this.ciudadDestino = ciudadDestino;
+    public void setCityDestino(City cityDestino) {
+        this.cityDestino = cityDestino;
     }
 }

@@ -3,18 +3,11 @@ package web.app.caravanamedieval.init;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import web.app.caravanamedieval.dto.*;
 import web.app.caravanamedieval.mapper.*;
-import web.app.caravanamedieval.model.*;
 import web.app.caravanamedieval.service.*;
 
 
 import web.app.caravanamedieval.repository.*;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.stream.Collectors;
 
 @Component
 public class DataInitializer implements CommandLineRunner {
@@ -23,40 +16,40 @@ public class DataInitializer implements CommandLineRunner {
     @Autowired
     private CaravanaServiceJ caravanaService;
     @Autowired
-    private JugadorRepository jugadorRepository;
+    private PlayerRepository playerRepository;
 
     @Autowired
-    private CiudadRepository ciudadRepository;
+    private CityRepository cityRepository;
 
     @Autowired
-    private CiudadService ciudadService;
+    private CityService cityService;
 
     @Autowired
-    private ProductoRepository productoRepository;
+    private ProductRepository productRepository;
 
     @Autowired
-    private MapaService mapaService;
+    private MapService mapService;
 
     @Autowired
-    private CiudadMapper ciudadMapper;
+    private CityMapper cityMapper;
 
     @Autowired
-    private RutaRepository rutaRepository;
+    private RouteRepository routeRepository;
 
     @Autowired
-    private ServicioRepository servicioRepository;
+    private ServiceRepository serviceRepository;
 
     @Autowired
-    private MapaRepository mapaRepository;
+    private MapRepository mapRepository;
 
     @Autowired
-    private MapaServiceImpl mapaServiceImpl;
+    private MapServiceImpl mapaServiceImpl;
 
     @Autowired
-    private CaravanaRepository caravanaRepository;
+    private CaravanRepository caravanRepository;
 
     @Autowired
-    private PartidaRepository partidaRepository;
+    private GameRepository gameRepository;
 
     @Override
     public void run(String... args) throws Exception {

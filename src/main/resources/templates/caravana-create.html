@@ -10,7 +10,7 @@
     <div class="center-container">
     <h3 class="crud-title">Crear Nueva Caravana</h3>
 
-    <form class="form-crud" th:action="@{/caravana/save}" method="post" th:object="${caravana}">
+    <form class="form-crud" th:action="@{/caravan/save}" method="post" th:object="${caravan}">
            <input type="hidden" name="idCaravana" th:value="${idCaravana}" />
 
         <label for="nombre" class="label-crud">Nombre:</label>
@@ -33,8 +33,8 @@
     
 
     <br>    
-    <a th:href="@{/caravana/productos/editar/{id}(id=${caravana.idCaravana})}" class = "labelCRUD">Editar productos</a>
+    <a th:href="@{/caravan/products/editar/{id}(id=${caravan.idCaravana})}" class = "labelCRUD">Editar products</a>
 </div>
-<a th:href="@{/caravana/listar}" class = "labelCRUD">Volver a la lista</a>
+<a th:href="@{/caravan/listar}" class = "labelCRUD">Volver a la lista</a>
 </body>
 </html>

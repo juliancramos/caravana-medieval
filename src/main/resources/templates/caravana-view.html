@@ -22,17 +22,17 @@
         </thead>
         <tbody>
             <tr>
-                <td th:text="${caravana.idCaravana}"></td>
-                <td th:text="${caravana.nombre}"></td>
-                <td th:text="${caravana.velocidad}"></td>
-                <td th:text="${caravana.capacidadMaxima}"></td>
-                <td th:text="${caravana.dineroDisponible}"></td>
-                <td th:text="${caravana.puntosVida}"></td>
+                <td th:text="${caravan.idCaravana}"></td>
+                <td th:text="${caravan.nombre}"></td>
+                <td th:text="${caravan.velocidad}"></td>
+                <td th:text="${caravan.capacidadMaxima}"></td>
+                <td th:text="${caravan.dineroDisponible}"></td>
+                <td th:text="${caravan.puntosVida}"></td>
             </tr>
         </tbody>
     </table>
 
     <br>
-    <a th:href="@{/caravana/listar}" class="labelCRUD">Volver a la lista</a>
+    <a th:href="@{/caravan/listar}" class="labelCRUD">Volver a la lista</a>
 </body>
 </html>

@@ -9,7 +9,7 @@
 <div class="center-container">
     <h2 class="crud-title">Gestión de Producto</h2>
 
-    <form class="form-crud" th:action="@{/producto/save}" method="post" th:object="${producto}">
+    <form class="form-crud" th:action="@{/product/save}" method="post" th:object="${product}">
         <!-- 🔹 Aseguramos que el ID se envía -->
         <input class="input-crud" type="hidden" th:field="*{idProducto}">
 
@@ -26,7 +26,7 @@
     </form>
 
 
-    <a href="/producto/listar" class="button-crud">Volver</a>
+    <a href="/product/listar" class="button-crud">Volver</a>
 </div>
 </body>
 </html>

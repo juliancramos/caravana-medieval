@@ -1,11 +1,11 @@
 2025-02-28 02:43:22.490299Z jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "JUGADOR" not found (this database is empty); SQL statement:
-INSERT INTO jugador (username, password, rol_jugador, id_partida) VALUES ('admin', 'admin123', 'ADMIN', NULL), ('player1', 'player123', 'USER', NULL), ('player2', 'player456', 'USER', NULL) [42104-232]
+INSERT INTO player (username, password, rol_jugador, id_partida) VALUES ('admin', 'admin123', 'ADMIN', NULL), ('player1', 'player123', 'USER', NULL), ('player2', 'player456', 'USER', NULL) [42104-232]
 2025-02-28 02:47:55.204749Z jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "JUGADOR" not found (this database is empty); SQL statement:
-INSERT INTO jugador (username, password, rol_jugador, id_partida) VALUES ('admin', 'admin123', 'ADMIN', NULL), ('player1', 'player123', 'USER', NULL), ('player2', 'player456', 'USER', NULL) [42104-232]
+INSERT INTO player (username, password, rol_jugador, id_partida) VALUES ('admin', 'admin123', 'ADMIN', NULL), ('player1', 'player123', 'USER', NULL), ('player2', 'player456', 'USER', NULL) [42104-232]
 2025-03-04 02:38:59.951732Z database: flush
-org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
+org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
 	at org.h2.message.DbException.get(DbException.java:212)
 	at org.h2.message.DbException.convert(DbException.java:407)
 	at org.h2.mvstore.db.Store.lambda$new$0(Store.java:122)
@@ -69,11 +69,11 @@ org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
-Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
 	... 63 more
-Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]
+Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]
 	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
 	at org.h2.mvstore.SingleFileStore.lockFileChannel(SingleFileStore.java:143)
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:117)
@@ -81,7 +81,7 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/carav
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 57 more
 2025-03-04 02:39:01.750588Z database: flush
-org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
+org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
 	at org.h2.message.DbException.get(DbException.java:212)
 	at org.h2.message.DbException.convert(DbException.java:407)
 	at org.h2.mvstore.db.Store.lambda$new$0(Store.java:122)
@@ -152,11 +152,11 @@ org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
-Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
 	... 70 more
-Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]
+Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]
 	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
 	at org.h2.mvstore.SingleFileStore.lockFileChannel(SingleFileStore.java:143)
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:117)
@@ -164,7 +164,7 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/carav
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 64 more
 2025-03-04 02:41:16.720457Z database: flush
-org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
+org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
 	at org.h2.message.DbException.get(DbException.java:212)
 	at org.h2.message.DbException.convert(DbException.java:407)
 	at org.h2.mvstore.db.Store.lambda$new$0(Store.java:122)
@@ -228,11 +228,11 @@ org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
-Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
 	... 63 more
-Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]
+Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]
 	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
 	at org.h2.mvstore.SingleFileStore.lockFileChannel(SingleFileStore.java:143)
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:117)
@@ -240,7 +240,7 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/carav
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 57 more
 2025-03-04 02:41:18.534562Z database: flush
-org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
+org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
 	at org.h2.message.DbException.get(DbException.java:212)
 	at org.h2.message.DbException.convert(DbException.java:407)
 	at org.h2.mvstore.db.Store.lambda$new$0(Store.java:122)
@@ -311,11 +311,11 @@ org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
-Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
 	... 70 more
-Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]
+Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]
 	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
 	at org.h2.mvstore.SingleFileStore.lockFileChannel(SingleFileStore.java:143)
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:117)
@@ -323,7 +323,7 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/carav
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 64 more
 2025-03-04 19:56:12.035280Z database: flush
-org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
+org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
 	at org.h2.message.DbException.get(DbException.java:212)
 	at org.h2.message.DbException.convert(DbException.java:407)
 	at org.h2.mvstore.db.Store.lambda$new$0(Store.java:122)
@@ -387,11 +387,11 @@ org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
-Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
 	... 63 more
-Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]
+Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]
 	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
 	at org.h2.mvstore.SingleFileStore.lockFileChannel(SingleFileStore.java:143)
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:117)
@@ -399,7 +399,7 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/carav
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 57 more
 2025-03-04 19:56:13.880259Z database: flush
-org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
+org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
 	at org.h2.message.DbException.get(DbException.java:212)
 	at org.h2.message.DbException.convert(DbException.java:407)
 	at org.h2.mvstore.db.Store.lambda$new$0(Store.java:122)
@@ -470,11 +470,11 @@ org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
-Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
 	... 70 more
-Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]
+Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]
 	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
 	at org.h2.mvstore.SingleFileStore.lockFileChannel(SingleFileStore.java:143)
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:117)
@@ -482,7 +482,7 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/carav
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 64 more
 2025-03-04 19:56:55.790548Z database: flush
-org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
+org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
 	at org.h2.message.DbException.get(DbException.java:212)
 	at org.h2.message.DbException.convert(DbException.java:407)
 	at org.h2.mvstore.db.Store.lambda$new$0(Store.java:122)
@@ -546,11 +546,11 @@ org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
-Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
 	... 63 more
-Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]
+Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]
 	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
 	at org.h2.mvstore.SingleFileStore.lockFileChannel(SingleFileStore.java:143)
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:117)
@@ -558,7 +558,7 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/carav
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 57 more
 2025-03-04 19:56:57.652583Z database: flush
-org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
+org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
 	at org.h2.message.DbException.get(DbException.java:212)
 	at org.h2.message.DbException.convert(DbException.java:407)
 	at org.h2.mvstore.db.Store.lambda$new$0(Store.java:122)
@@ -629,11 +629,11 @@ org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
-Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
 	... 70 more
-Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]
+Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]
 	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
 	at org.h2.mvstore.SingleFileStore.lockFileChannel(SingleFileStore.java:143)
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:117)
@@ -641,7 +641,7 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/carav
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 64 more
 2025-03-04 19:58:36.801312Z database: flush
-org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
+org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
 	at org.h2.message.DbException.get(DbException.java:212)
 	at org.h2.message.DbException.convert(DbException.java:407)
 	at org.h2.mvstore.db.Store.lambda$new$0(Store.java:122)
@@ -705,11 +705,11 @@ org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
-Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
 	... 63 more
-Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]
+Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]
 	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
 	at org.h2.mvstore.SingleFileStore.lockFileChannel(SingleFileStore.java:143)
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:117)
@@ -717,7 +717,7 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/carav
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 57 more
 2025-03-04 19:58:38.799481Z database: flush
-org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
+org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
 	at org.h2.message.DbException.get(DbException.java:212)
 	at org.h2.message.DbException.convert(DbException.java:407)
 	at org.h2.mvstore.db.Store.lambda$new$0(Store.java:122)
@@ -788,11 +788,11 @@ org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
-Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
 	... 70 more
-Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]
+Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]
 	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
 	at org.h2.mvstore.SingleFileStore.lockFileChannel(SingleFileStore.java:143)
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:117)
@@ -800,7 +800,7 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/carav
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 64 more
 2025-03-04 20:01:18.487415Z database: flush
-org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
+org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
 	at org.h2.message.DbException.get(DbException.java:212)
 	at org.h2.message.DbException.convert(DbException.java:407)
 	at org.h2.mvstore.db.Store.lambda$new$0(Store.java:122)
@@ -864,11 +864,11 @@ org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
-Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
 	... 63 more
-Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]
+Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]
 	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
 	at org.h2.mvstore.SingleFileStore.lockFileChannel(SingleFileStore.java:143)
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:117)
@@ -876,7 +876,7 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/carav
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 57 more
 2025-03-04 20:01:20.804120Z database: flush
-org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
+org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
 	at org.h2.message.DbException.get(DbException.java:212)
 	at org.h2.message.DbException.convert(DbException.java:407)
 	at org.h2.mvstore.db.Store.lambda$new$0(Store.java:122)
@@ -947,11 +947,11 @@ org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
-Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
 	... 70 more
-Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]
+Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]
 	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
 	at org.h2.mvstore.SingleFileStore.lockFileChannel(SingleFileStore.java:143)
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:117)
@@ -959,7 +959,7 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/carav
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 64 more
 2025-03-04 20:03:01.869885Z database: flush
-org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
+org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
 	at org.h2.message.DbException.get(DbException.java:212)
 	at org.h2.message.DbException.convert(DbException.java:407)
 	at org.h2.mvstore.db.Store.lambda$new$0(Store.java:122)
@@ -1023,11 +1023,11 @@ org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
-Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
 	... 63 more
-Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]
+Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]
 	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
 	at org.h2.mvstore.SingleFileStore.lockFileChannel(SingleFileStore.java:143)
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:117)
@@ -1035,7 +1035,7 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/carav
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 57 more
 2025-03-04 20:03:03.667853Z database: flush
-org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
+org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
 	at org.h2.message.DbException.get(DbException.java:212)
 	at org.h2.message.DbException.convert(DbException.java:407)
 	at org.h2.mvstore.db.Store.lambda$new$0(Store.java:122)
@@ -1106,11 +1106,11 @@ org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
-Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
 	... 70 more
-Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]
+Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]
 	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
 	at org.h2.mvstore.SingleFileStore.lockFileChannel(SingleFileStore.java:143)
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:117)
@@ -1118,7 +1118,7 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/carav
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 64 more
 2025-03-04 20:04:29.990587Z database: flush
-org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
+org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
 	at org.h2.message.DbException.get(DbException.java:212)
 	at org.h2.message.DbException.convert(DbException.java:407)
 	at org.h2.mvstore.db.Store.lambda$new$0(Store.java:122)
@@ -1182,11 +1182,11 @@ org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
-Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
 	... 63 more
-Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]
+Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]
 	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
 	at org.h2.mvstore.SingleFileStore.lockFileChannel(SingleFileStore.java:143)
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:117)
@@ -1194,7 +1194,7 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/carav
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 57 more
 2025-03-04 20:04:32.014966Z database: flush
-org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
+org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
 	at org.h2.message.DbException.get(DbException.java:212)
 	at org.h2.message.DbException.convert(DbException.java:407)
 	at org.h2.mvstore.db.Store.lambda$new$0(Store.java:122)
@@ -1265,11 +1265,11 @@ org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
-Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]" [50000-232]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
 	... 70 more
-Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravana-medieval/mydatabase.mv.db [2.3.232/7]
+Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/caravan-medieval/mydatabase.mv.db [2.3.232/7]
 	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
 	at org.h2.mvstore.SingleFileStore.lockFileChannel(SingleFileStore.java:143)
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:117)
@@ -1277,8 +1277,8 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: /workspace/carav
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 64 more
 2025-03-04 20:32:04.889430Z jdbc[3]: exception
-org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPCION CHARACTER VARYING(50)": "'Por una suma de dinero, la caravana puede recuperar todos o parte de sus puntos... (87)"; SQL statement:
-insert into servicio (descripcion,mejora_max,mejorax_compra,nombre,id_servicio) values (?,?,?,?,default) [22001-232]
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPCION CHARACTER VARYING(50)": "'Por una suma de dinero, la caravan puede recuperar todos o parte de sus puntos... (87)"; SQL statement:
+insert into service (descripcion,mejora_max,mejorax_compra,nombre,id_servicio) values (?,?,?,?,default) [22001-232]
 2025-03-09 03:09:45.974528Z database: close
 org.h2.message.DbException: IO Exception: "Closing" [90028-232]
 	at org.h2.message.DbException.get(DbException.java:212)
