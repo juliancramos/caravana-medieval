@@ -12,7 +12,7 @@ import web.app.caravanamedieval.service.ProductoServiceJ;
 import java.util.List;
 
 @Controller
-@RequestMapping("/producto")
+@RequestMapping("/productoj")
 public class ProductoControllerJ {
 
     @Autowired
