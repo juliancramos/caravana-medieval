@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Caravana Productos</title>
+    <link rel="stylesheet" href="/css/styles2.css">
+</head>
+<body>
+<div class="container">
+    <h1 class="crud-title">Editar Relación con Productos</h1>
+
+    <form action="/caravan/products/save" method="post">
+        <input type="hidden" name="idCaravana" th:value="${caravanaProductos.getIdCaravan}">
+
+        <ul class="product-list">
+            <li th:each="product : ${allProductos}" class="product-item">
+                <input type="checkbox" name="idsProductos" th:value="${product.idProducto}"
+                       th:checked="${idsProductosRelacionados.contains(product.idProducto)}"
+                       class="product-checkbox">
+                <label class="label-crudd" th:text="${product.nombre}"></label>
+
+                <!-- Campo para la cantidad -->
+                <input type="number" name="cantidades" min="1"
+                       th:value="${cantidadesPorProducto.containsKey(product.idProducto) ? cantidadesPorProducto[product.idProducto] : 1}"
+                       class="product-quantity">
+
+            </li>
+        </ul>
+        <button class="button-crud">Guardar</button>
+    </form>
+</div>
+</body>
+</html>

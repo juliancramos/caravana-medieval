@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <img src="logoCaravana.png" alt="Logo" class="logo">
+    <img src= "loginIMG.png" alt="img1" class="imgLogin">
+    <form class="formMedieval" id="loginForm">
+        <label for="usuario" class="labelMedieval">Usuario:</label>
+        <input type="text" id="username" class="inputMedieval" placeholder="Ingrese su usuario" required>
+        
+        <label for="contrasena" class="labelMedieval">Contraseña:</label>
+        <input type="password" id="password" class="inputMedieval" placeholder="Ingrese su contraseña" required>
+        
+        <button type="submit" class="btnMedieval">Iniciar Sesión</button>
+        <a href="register.html" class="btnMedieval">Registrarse</a>
+    </form>
+    <a th:href="@{/caravan/listar}" class="CRUDButton">CRUD</a>
+
+
+    <script th:src="@{/scripts.js}"></script>
+</body>
+</html>

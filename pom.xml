@@ -12,10 +12,10 @@
     </parent>
 
     <groupId>web.app</groupId>
-    <artifactId>caravana-medieval</artifactId>
+    <artifactId>caravan-medieval</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>caravana-medieval</name>
-    <description>caravana-medieval</description>
+    <name>caravan-medieval</name>
+    <description>caravan-medieval</description>
 
     <properties>
         <java.version>21</java.version>

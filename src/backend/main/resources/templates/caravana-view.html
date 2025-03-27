@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de Caravana</title>
+    <link rel="stylesheet" href="/css/styles2.css"> <!-- Asegura que el CSS se carga correctamente -->
+</head>
+<body>
+    <h3>Detalle de Caravana</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Velocidad</th>
+                <th>Capacidad Máxima</th>
+                <th>Dinero Disponible</th>
+                <th>Puntos de Vida</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td th:text="${caravan.idCaravana}"></td>
+                <td th:text="${caravan.nombre}"></td>
+                <td th:text="${caravan.velocidad}"></td>
+                <td th:text="${caravan.capacidadMaxima}"></td>
+                <td th:text="${caravan.dineroDisponible}"></td>
+                <td th:text="${caravan.puntosVida}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br>
+    <a th:href="@{/caravan/listar}" class="labelCRUD">Volver a la lista</a>
+</body>
+</html>
