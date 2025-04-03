@@ -42,4 +42,14 @@ public class GamesByPlayerController {
         return ResponseEntity.ok(gamesByPlayerService.listAssignments());
     }
 
+    @GetMapping("/game/{idGame}/player/{idPlayer}")
+    public ResponseEntity<GamesByPlayer> getGame(@PathVariable Long idGame, @PathVariable Long idPlayer){
+        return ResponseEntity.ok(gamesByPlayerService.getGame(idGame, idPlayer));
+    }
+
+    @GetMapping("/games/player/{id}")
+    public ResponseEntity<List<GamesByPlayer>> getGamesByPlayerId(@PathVariable Long id){
+        return ResponseEntity.ok(gamesByPlayerService.getGamesByPlayer(id));
+    }
+
 }

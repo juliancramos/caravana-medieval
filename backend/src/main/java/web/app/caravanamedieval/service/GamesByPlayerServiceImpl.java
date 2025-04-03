@@ -48,6 +48,16 @@ public class GamesByPlayerServiceImpl {
         return gamesByPlayerRepository.save(assignment);
     }
 
+    public GamesByPlayer getGame(Long gameId, Long playerId) {
+        GamesByPlayerKey key = new GamesByPlayerKey(gameId, playerId);
+        return gamesByPlayerRepository.findById(key)
+                .orElseThrow(() -> new RuntimeException("Assignment not found"));
+    }
+
+    public List<GamesByPlayer> getGamesByPlayer(Long playerId) {
+        return gamesByPlayerRepository.findByPlayer_IdPlayer(playerId);
+    }
+
     public void removeAssignment(Long gameId, Long playerId) {
         GamesByPlayerKey key = new GamesByPlayerKey();
         key.setGameId(gameId);
