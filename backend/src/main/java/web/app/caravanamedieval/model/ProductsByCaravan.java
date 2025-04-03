@@ -25,6 +25,6 @@ public class ProductsByCaravan {
     @JoinColumn(name = "producto_id")
     private Product product;
 
-    @Column(nullable = false)
+    @Column(name = "cantidad", nullable = false)
     private int quantity;
 }
