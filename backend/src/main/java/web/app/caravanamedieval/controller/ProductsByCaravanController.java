@@ -39,9 +39,26 @@ public class ProductsByCaravanController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/list")
-    public ResponseEntity<List<ProductsByCaravan>> listProductsByCaravan(){
-        return ResponseEntity.ok(productsByCaravanService.getProductsByCaravan());
+
+    @GetMapping("/product/{idProduct}/caravan/{idCaravan}")
+    public ResponseEntity<ProductsByCaravan> getProduct(@PathVariable Long idProduct, @PathVariable Long idCaravan){
+        return ResponseEntity.ok(productsByCaravanService.getProduct(idProduct, idCaravan));
     }
 
+    @GetMapping("/products/caravan/{id}")
+    public ResponseEntity<List<ProductsByCaravan>> getProductsByCaravanId(@PathVariable Long id){
+        return ResponseEntity.ok(productsByCaravanService.getProductsByCaravanId(id));
+    }
+
+
+    @GetMapping("/list")
+    public ResponseEntity<List<ProductsByCaravan>> listProductsByCaravan(){
+        return ResponseEntity.ok(productsByCaravanService.listProductsByCaravan());
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<ProductsByCaravan> updateAssignment(@RequestBody ProductsByCaravanDTO dto) {
+        ProductsByCaravan updatedAssignment = productsByCaravanService.updateAssignment(dto);
+        return ResponseEntity.ok(updatedAssignment);
+    }
 }

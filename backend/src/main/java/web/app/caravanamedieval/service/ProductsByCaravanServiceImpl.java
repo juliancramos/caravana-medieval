@@ -1,9 +1,11 @@
 package web.app.caravanamedieval.service;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import web.app.caravanamedieval.dto.ProductsByCaravanDTO;
+import web.app.caravanamedieval.mapper.ProductsByCaravanMapper;
 import web.app.caravanamedieval.model.Caravan;
 import web.app.caravanamedieval.model.Product;
 import web.app.caravanamedieval.model.ProductsByCaravan;
@@ -41,11 +43,9 @@ public class ProductsByCaravanServiceImpl {
             throw new IllegalArgumentException("Assignment already exists");
         }
 
-        ProductsByCaravan assignment = new ProductsByCaravan();
-        assignment.setId(productsByCaravanKey);
+        ProductsByCaravan assignment = ProductsByCaravanMapper.INSTANCE.toEntity(productsByCaravanDTO);
         assignment.setProduct(product);
         assignment.setCaravan(caravan);
-        assignment.setQuantity(productsByCaravanDTO.getQuantity());
 
         return productsByCaravanRepository.save(assignment);
     }
@@ -58,8 +58,33 @@ public class ProductsByCaravanServiceImpl {
         productsByCaravanRepository.deleteById(key);
     }
 
+    public ProductsByCaravan getProduct (Long productId, Long caravanId) {
+        ProductsByCaravanKey key= new ProductsByCaravanKey(caravanId, productId);
 
-    public List<ProductsByCaravan> getProductsByCaravan() {
+        return productsByCaravanRepository.findById(key)
+                .orElseThrow( ()-> new RuntimeException("Assignment not found"));
+    }
+
+    public List<ProductsByCaravan>getProductsByCaravanId (Long caravanId) {
+        return productsByCaravanRepository.findByCaravan_IdCaravan(caravanId);
+    }
+
+
+    public List<ProductsByCaravan> listProductsByCaravan() {
         return  productsByCaravanRepository.findAll();
     }
+
+    @Transactional
+    public ProductsByCaravan updateAssignment(ProductsByCaravanDTO productsByCaravanDTO) {
+        ProductsByCaravanKey key = new ProductsByCaravanKey
+                (productsByCaravanDTO.getIdCaravan(), productsByCaravanDTO.getIdProduct());
+
+        ProductsByCaravan assignment = productsByCaravanRepository.findById(key)
+                .orElseThrow(() -> new EntityNotFoundException("Assignment not found"));
+
+        ProductsByCaravanMapper.INSTANCE.updateEntity(assignment, productsByCaravanDTO);
+
+        return productsByCaravanRepository.save(assignment);
+    }
+
 }
