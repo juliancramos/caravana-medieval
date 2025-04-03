@@ -1,4 +1,4 @@
-package web.app.caravanamedieval.model;
+package web.app.caravanamedieval.model.keys;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

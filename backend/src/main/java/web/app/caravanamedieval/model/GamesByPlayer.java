@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import web.app.caravanamedieval.model.keys.GamesByPlayerKey;
 
 @Getter
 @Setter

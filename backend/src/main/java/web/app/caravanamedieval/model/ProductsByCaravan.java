@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import web.app.caravanamedieval.model.keys.ProductsByCaravanKey;
 
 @Data
 @AllArgsConstructor

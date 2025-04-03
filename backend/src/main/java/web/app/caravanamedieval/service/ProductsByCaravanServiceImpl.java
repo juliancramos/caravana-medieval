@@ -9,7 +9,7 @@ import web.app.caravanamedieval.mapper.ProductsByCaravanMapper;
 import web.app.caravanamedieval.model.Caravan;
 import web.app.caravanamedieval.model.Product;
 import web.app.caravanamedieval.model.ProductsByCaravan;
-import web.app.caravanamedieval.model.ProductsByCaravanKey;
+import web.app.caravanamedieval.model.keys.ProductsByCaravanKey;
 import web.app.caravanamedieval.repository.CaravanRepository;
 import web.app.caravanamedieval.repository.ProductRepository;
 import web.app.caravanamedieval.repository.ProductsByCaravanRepository;

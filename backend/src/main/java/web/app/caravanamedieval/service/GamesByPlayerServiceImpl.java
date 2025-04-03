@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import web.app.caravanamedieval.model.Game;
 import web.app.caravanamedieval.model.GamesByPlayer;
-import web.app.caravanamedieval.model.GamesByPlayerKey;
+import web.app.caravanamedieval.model.keys.GamesByPlayerKey;
 import web.app.caravanamedieval.model.Player;
 import web.app.caravanamedieval.repository.GameRepository;
 import web.app.caravanamedieval.repository.GamesByPlayerRepository;

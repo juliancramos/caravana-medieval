@@ -3,7 +3,7 @@ package web.app.caravanamedieval.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import web.app.caravanamedieval.model.ProductsByCaravan;
-import web.app.caravanamedieval.model.ProductsByCaravanKey;
+import web.app.caravanamedieval.model.keys.ProductsByCaravanKey;
 
 import java.util.List;
 

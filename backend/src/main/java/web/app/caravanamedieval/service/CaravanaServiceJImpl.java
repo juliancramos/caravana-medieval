@@ -7,6 +7,7 @@ import org.springframework.web.server.ResponseStatusException;
 import web.app.caravanamedieval.dto.*;
 import web.app.caravanamedieval.mapper.*;
 import web.app.caravanamedieval.model.*;
+import web.app.caravanamedieval.model.keys.ProductsByCaravanKey;
 import web.app.caravanamedieval.repository.*;
 
 import java.util.*;
