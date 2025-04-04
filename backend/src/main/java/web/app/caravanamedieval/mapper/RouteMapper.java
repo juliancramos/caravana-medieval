@@ -1,23 +1,26 @@
 package web.app.caravanamedieval.mapper;
 
-import org.mapstruct.Context;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import org.mapstruct.*;
+import org.mapstruct.factory.Mappers;
 import web.app.caravanamedieval.dto.RouteDTO;
 import web.app.caravanamedieval.model.Route;
-@Mapper(componentModel = "spring")
+
+@Mapper(componentModel = "spring", uses = {CityMapper.class})
 public interface RouteMapper {
 
+    RouteMapper INSTANCE = Mappers.getMapper(RouteMapper.class);
+
     @Mapping(target = "idRoute", ignore = true)
-    @Mapping(target = "originCity", expression = "java(context.getOriginCity())")
-    @Mapping(target = "destinationCity", expression = "java(context.getDestinationCity())")
-    Route toEntity(RouteDTO dto, @Context RouteContext context);
+    @Mapping(target = "originCity", ignore = true)
+    @Mapping(target = "destinationCity", ignore = true)
+    Route toEntity(RouteDTO dto);
 
-    @Mapping(target = "originCityId", source = "originCity.idCity")
-    @Mapping(target = "destinationCityId", source = "destinationCity.idCity")
+    @Mapping(source = "originCity.idCity", target = "originCityId")
+    @Mapping(source = "destinationCity.idCity", target = "destinationCityId")
     RouteDTO toDTO(Route route);
+
+    @Mapping(target = "idRoute", ignore = true)
+    @Mapping(target = "originCity", ignore = true)
+    @Mapping(target = "destinationCity", ignore = true)
+    void updateEntity(@MappingTarget Route entity, RouteDTO dto);
 }
-
-
-
-
