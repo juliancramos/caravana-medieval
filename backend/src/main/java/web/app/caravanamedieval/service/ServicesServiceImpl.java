@@ -1,49 +1,59 @@
 package web.app.caravanamedieval.service;
 
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import web.app.caravanamedieval.model.Service;
-import web.app.caravanamedieval.repository.ServiceRepository;
+import org.springframework.stereotype.Service;
+import web.app.caravanamedieval.dto.ServicesDTO;
+import web.app.caravanamedieval.mapper.ServicesMapper;
+import web.app.caravanamedieval.model.Services;
+import web.app.caravanamedieval.repository.ServicesRepository;
 
 import java.util.List;
-import java.util.Optional;
 
-@org.springframework.stereotype.Service
+@Service
 public class ServicesServiceImpl implements ServicesService {
 
+    private final ServicesRepository servicesRepository;
+
     @Autowired
-    private ServiceRepository serviceRepository;
+    public ServicesServiceImpl(ServicesRepository servicesRepository) {this.servicesRepository = servicesRepository;}
 
     @Override
-    public List<Service> getServices() {
-        return serviceRepository.findAll();
-    }
-    
-
-    @Override
-    public Service findServiceById(Integer id) {
-        Optional<Service> servicio = serviceRepository.findById(id);
-        return servicio.orElse(null);
+    @Transactional
+    public Services createService(ServicesDTO serviceDTO) {
+        Services service = ServicesMapper.INSTANCE.toEntity(serviceDTO);
+        return servicesRepository.save(service);
     }
 
     @Override
-    public Service createService(Service service) {
-        return serviceRepository.save(service);
+    public List<Services> getServices() {
+        return servicesRepository.findAll();
     }
 
     @Override
-    public Service updateService(Service service) {
-        if (serviceRepository.existsById(service.getIdService())) {
-            return serviceRepository.save(service);
+    public Services getService(Long id) {
+        return servicesRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Servicio con ID " + id + " no encontrado"));
+    }
+
+    @Override
+    @Transactional
+    public Services updateService(Long id, ServicesDTO updatedServiceDTO) {
+        Services service = servicesRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Servicio con ID " + id + " no encontrado"));
+
+        ServicesMapper.INSTANCE.updateEntity(service, updatedServiceDTO);
+
+        return servicesRepository.save(service);
+    }
+
+    @Override
+    @Transactional
+    public void deleteService(Long id) {
+        if (!servicesRepository.existsById(id)) {
+            throw new EntityNotFoundException("Servicio con ID " + id + " no encontrado.");
         }
-        return null;
-    }
-
-    @Override
-    public boolean deleteService(Integer id) {
-        if (serviceRepository.existsById(id)) {
-            serviceRepository.deleteById(id);
-            return true;
-        }
-        return false;
+        servicesRepository.deleteById(id);
     }
 }
