@@ -40,8 +40,4 @@ public class Map {
         city.setMap(this);
     }
 
-    public void removeCity(City city) {
-        cities.remove(city);
-        city.setMap(null);
-    }
 }
