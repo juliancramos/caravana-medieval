@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav class="menu">
+            <ul>
+                <li><a href="productosCRUD.html">Productos</a></li>
+                <li><a href="serviciosCRUD.html">Servicios</a></li>
+                <li><a href="ciudadesCRUD.html">Ciudades</a></li>
+                <li><a href="rutasCRUD.html">Rutas</a></li>
+                <li><a href="jugadoresCRUD.html">Jugadores</a></li>
+            </ul>
+        </nav>
+    </header>
+    <h1 class="crud-title">CRUD Servicios</h1>
+    <section class="crud-container">
+        <h2 class="labelCRUD">Crear Servicio</h2>
+        <form id="servicioForm">
+            <label for="nombre" class="labelCRUD">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+            
+            <label for="descripcion" class="labelCRUD">Descripción:</label>
+            <input type="text" id="descripcion" name="descripcion" required>
+            
+            <label for="mejoraxCompra" class="labelCRUD">Mejora por compra:</label>
+            <input type="number" step="0.01" id="mejoraxCompra" name="mejoraxCompra" required>
+
+
+            <label for="mejoraMax" class="labelCRUD">Mejora maxima:</label>
+            <input type="number" step="0.01" id="mejoraMax" name="mejoraMax" required>
+            
+            <button type="submit">Crear Servicio</button>
+          </form>
+          
+          <script>
+          document.getElementById("servicioForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            
+            const data = {
+              nombre: formData.get("nombre"),
+              descripcion: formData.get("descripcion"),
+              mejoraxCompra: parseFloat(formData.get("mejoraxCompra")),
+              mejoraMax: parseFloat(formData.get("mejoraMax"))
+            };
+          
+            fetch("/services/crearServicio", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+              console.log("Servicio creado:", result);
+              // Aquí puedes actualizar la interfaz o notificar al usuario
+            })
+            .catch(error => console.error("Error:", error));
+          });
+          </script>
+          
+</body>
+</html>
