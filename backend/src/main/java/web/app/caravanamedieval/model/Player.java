@@ -24,4 +24,7 @@ public class Player {
     
     @Column(name = "rol", nullable = false)
     private String role;
+
+    @Column(name = "img_url")
+    private String imgUrl;
 }

@@ -28,5 +28,8 @@ public class Services {
 
     @Column(name = "mejora_max", nullable = false)
     private Float maxUpgrade;
+
+    @Column(name = "img_url")
+    private String imgUrl;
   
 }

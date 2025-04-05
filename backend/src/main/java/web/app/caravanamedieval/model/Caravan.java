@@ -33,6 +33,9 @@ public class Caravan {
     @Column(name = "puntos_vida", nullable = false)
     private int lifePoints;
 
+    @Column(name = "img_url")
+    private String imgUrl;
+
     @ManyToMany
     @JoinTable(
             name = "productosxcaravana",  // Tabla intemedia

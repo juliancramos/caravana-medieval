@@ -26,6 +26,9 @@ public class Map {
     @Column(name = "descripcion", nullable = false, length = 200)
     private String description;
 
+    @Column(name = "img_url")
+    private String imgUrl;
+
     @OneToMany(mappedBy = "map", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<City> cities = new ArrayList<>();
