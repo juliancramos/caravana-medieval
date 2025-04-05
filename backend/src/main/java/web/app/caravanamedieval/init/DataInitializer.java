@@ -1,5 +1,6 @@
 package web.app.caravanamedieval.init;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -58,9 +59,9 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 //        createPlayers();
-//        createCaravans();
 //        createMaps();
 //        createCities();
+//        createCaravans();
 //        createGames();
 //        createServices();
 //        createProducts();
@@ -109,6 +110,13 @@ public class DataInitializer implements CommandLineRunner {
             caravan.setAvailableMoney(availableMoney);
             caravan.setLifePoints(lifePoints);
             caravan.setProducts(randomProducts);
+
+            // Ciudad aleatoria entre IDs 0 y 98
+            Long cityId = (long) random.nextInt(99);
+            City currentCity = cityRepository.findById(cityId)
+                    .orElseThrow(() -> new EntityNotFoundException("Ciudad con ID " + cityId + " no encontrada"));
+
+            caravan.setCurrentCity(currentCity);
 
             caravanRepository.save(caravan);
             System.out.println("Caravana creada: " + name);
@@ -187,8 +195,6 @@ public class DataInitializer implements CommandLineRunner {
                 cityDTO.setName(cityName);
                 cityDTO.setEntryTax(entryTax);
                 cityDTO.setMapId(mapId);
-
-
 
                 // Save the city using the service
                 City city = cityService.createCity(cityDTO);

@@ -49,6 +49,7 @@ public class Caravan {
     @JsonIgnore
     private List<Game> games;
 
-
-
+    @ManyToOne
+    @JoinColumn(name = "ciudad_actual_id", nullable = false)
+    private City currentCity;
 }
