@@ -1,0 +1,34 @@
+<div class="select-game-background">
+  <div class="overlay">
+    <h1 class="title">Seleccionar Partida</h1>
+
+    <div class="map-cards">
+      <div class="map-card" (click)="openPopup()">
+        <img src="/assets/img/map1-thumb.png" alt="Mapa 1" />
+        <div class="map-title">Mapa 1</div>
+      </div>
+
+      <div class="map-card" (click)="openPopup()">
+        <img src="/assets/img/map2-thumb.png" alt="Mapa 2" />
+        <div class="map-title">Mapa 2</div>
+      </div>
+
+      <div class="map-card" (click)="openPopup()">
+        <img src="/assets/img/map3-thumb.png" alt="Mapa 3" />
+        <div class="map-title">Mapa 3</div>
+      </div>
+    </div>
+    <!-- POPUP para crear o cargar partida -->
+    <div class="popup-overlay" *ngIf="showPopup">
+      <div class="popup">
+        <h2>¿Qué deseas hacer?</h2>
+        <div class="popup-buttons">
+          <button class="btn" (click)="createGame()">Crear partida</button>
+          <button class="btn" (click)="loadGame()">Cargar partida</button>
+        </div>
+        <button class="close-btn" (click)="closePopup()">✖</button>
+      </div>
+    </div>
+
+  </div>
+</div>
