@@ -1,0 +1,119 @@
+.login-background {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  background: url('/assets/img/bg-login.png') no-repeat center center fixed;
+
+
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.login-container {
+  width: 600px;
+  margin: 8vh 300px 14vw auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3rem;
+}
+
+
+.login-title {
+  font-family: 'Forum', serif;
+  font-size: 5rem;
+  color: #f8e4c3;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+  line-height: 1.2;
+  text-align: center;
+  width: 100%;
+
+  span {
+    display: block;
+  }
+}
+
+.login-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    color: #f8e4c3;
+    margin-bottom: 0.5rem;
+  }
+
+  input {
+    height: 3rem;
+    padding: 0 1rem;
+    font-size: 1.1rem;
+    font-family: 'Cinzel', serif;
+    border: 1px solid #f8e4c3;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.4);
+    color: #ffffff;
+    outline: none;
+    transition: border 0.2s ease;
+
+    &::placeholder {
+      color: #f8e4c3aa;
+      font-style: italic;
+    }
+
+    &:focus {
+      border-color: #f1c965;
+    }
+  }
+}
+
+.form-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+
+  .btn {
+    height: 3.5rem;
+    width: 60%;
+    font-size: 1.1rem;
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    border: 1px solid #ffffffcc;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #ffffff;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: #ffffffcc;
+      color: #111;
+      box-shadow: 0 0 8px #ffffff55;
+    }
+
+    &.btn-secondary {
+      border: 1px solid #888888cc;
+
+      &:hover {
+        background-color: #ddddddcc;
+        color: #111;
+      }
+    }
+  }
+}
+
+
+
+
