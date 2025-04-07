@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common'; // 👈 IMPORTANTE
+import { CommonModule } from '@angular/common';
+import {Router} from '@angular/router'; // 👈 IMPORTANTE
 
 @Component({
   selector: 'app-select-game',
@@ -9,6 +10,7 @@ import { CommonModule } from '@angular/common'; // 👈 IMPORTANTE
   styleUrls: ['./select-game.component.scss']
 })
 export class SelectGameComponent {
+  constructor(private router: Router) {}
   showPopup = false;
 
   openPopup(): void {
@@ -20,7 +22,7 @@ export class SelectGameComponent {
   }
 
   createGame(): void {
-    alert('Crear partida');
+    this.router.navigate(['/resume']);
   }
 
   loadGame(): void {
