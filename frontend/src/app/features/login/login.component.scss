@@ -114,6 +114,26 @@
   }
 }
 
+.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.black-screen {
+  position: fixed;
+  inset: 0;
+  background-color: #000;
+  opacity: 0;
+  z-index: 2000;
+  animation: fadeIn 0.8s forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
 
 
 
