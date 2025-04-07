@@ -19,16 +19,18 @@
       </div>
     </div>
     <!-- POPUP para crear o cargar partida -->
-    <div class="popup-overlay" *ngIf="showPopup">
+    <div class="popup-overlay" [ngClass]="{ 'fade-out': fadingOut }" *ngIf="showPopup">
       <div class="popup">
         <h2>¿Qué deseas hacer?</h2>
         <div class="popup-buttons">
-          <button class="btn" (click)="createGame()">Crear partida</button>
+          <button class="btn" (click)="startGame()">Crear partida</button>
           <button class="btn" (click)="loadGame()">Cargar partida</button>
         </div>
         <button class="close-btn" (click)="closePopup()">✖</button>
       </div>
     </div>
+    <div class="black-screen" *ngIf="showBlackScreen"></div>
+
 
   </div>
 </div>

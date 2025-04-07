@@ -1,17 +1,20 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import {Router} from '@angular/router'; // 👈 IMPORTANTE
 
 @Component({
   selector: 'app-select-game',
   standalone: true,
-  imports: [CommonModule], // 👈 AÑADIR CommonModule
+  imports: [CommonModule],
   templateUrl: './select-game.component.html',
   styleUrls: ['./select-game.component.scss']
 })
 export class SelectGameComponent {
-  constructor(private router: Router) {}
   showPopup = false;
+  fadingOut = false;
+  showBlackScreen = false;
+
+  constructor(private router: Router) {}
 
   openPopup(): void {
     this.showPopup = true;
@@ -21,8 +24,12 @@ export class SelectGameComponent {
     this.showPopup = false;
   }
 
-  createGame(): void {
-    this.router.navigate(['/resume']);
+  startGame(): void {
+    this.showBlackScreen = true;
+
+    setTimeout(() => {
+      this.router.navigate(['/resume']);
+    }, 900); // un poco más que la duración del fadeIn
   }
 
   loadGame(): void {

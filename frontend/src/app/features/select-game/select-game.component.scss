@@ -93,8 +93,10 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
-}
+  opacity: 1;
+  transition: opacity 0.7s ease;
 
+}
 .popup {
   background: #f8e4c3;
   border: 2px solid #4a2f1b;
@@ -147,6 +149,26 @@
   background: transparent;
   border: none;
   cursor: pointer;
+}
+
+.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.black-screen {
+  position: fixed;
+  inset: 0;
+  background-color: #000;
+  opacity: 0;
+  z-index: 2000;
+  animation: fadeIn 0.8s forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
 }
 
 

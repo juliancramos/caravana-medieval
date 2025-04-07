@@ -1,13 +1,34 @@
 .resume-background {
   background: url('/assets/img/bg-resume.png') no-repeat center center;
-  background-size: cover; // ⬅️ antes tenías "cover"
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   background-color: #000;
   width: 100%;
   height: 100vh;
   position: relative;
+  overflow: hidden;
 }
+
+/* Nueva capa negra animada */
+.screen-fade {
+  position: absolute;
+  inset: 0;
+  background-color: #000;
+  z-index: 100;
+  animation: fadeFromBlack 1.2s ease forwards;
+  pointer-events: none;
+}
+
+@keyframes fadeFromBlack {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 
 
 /* Zonas clickeables transparentes */
@@ -42,4 +63,11 @@
   width: 40%;
   height: 90%;
 }
+
+
+
+
+
+
+
 
