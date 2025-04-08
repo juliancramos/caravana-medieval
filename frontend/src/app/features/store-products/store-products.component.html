@@ -25,7 +25,8 @@
   <div class="gold-display">
     <span class="label">Monedas:</span>
     <img src="/assets/icons/coin.png" alt="Moneda de oro" class="gold-icon" />
-    <span class="amount">{{ playerGold }}</span>
+    <span class="amount" [ngClass]="{ 'flash': goldChanged }">{{ playerGold }}</span>
+
   </div>
 
   <!-- Popup del producto -->

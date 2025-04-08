@@ -69,7 +69,7 @@ export class StoreProductsComponent {
   itemsPerPage = 9;
   currentPage = 0;
   playerGold = 250;
-
+  goldChanged = false;
 
   selectedProduct: any = null;
   selectedQuantity = 1;
@@ -108,6 +108,33 @@ export class StoreProductsComponent {
   exitStore(): void {
     this.router.navigate(['/resume']); // o la ruta a la pantalla anterior
   }
+
+  updateGold(amount: number): void {
+    this.playerGold += amount;
+
+    this.goldChanged = false; // Reinicia para asegurar
+    setTimeout(() => {
+      this.goldChanged = true;
+
+      setTimeout(() => {
+        this.goldChanged = false;
+      }, 800); // duración de la animación
+    });
+  }
+
+
+  comprarProducto(product: any): void {
+    const total = product.price * this.selectedQuantity;
+    if (this.playerGold >= total) {
+      this.updateGold(-total);
+      this.closeProductPopup();
+      // lógica adicional: enviar al backend, feedback, etc.
+    } else {
+      alert('No tienes suficientes monedas de oro.');
+    }
+  }
+
+
 
 
 }

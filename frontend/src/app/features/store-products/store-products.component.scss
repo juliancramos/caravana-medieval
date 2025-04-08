@@ -254,6 +254,24 @@
   font-size: 1.3rem;
 }
 
+@keyframes goldFlash {
+  0% {
+    color: #f8e4c3;
+    text-shadow: none;
+  }
+  30% {
+    color: #ffe96b;
+    text-shadow: 0 0 6px #ffe96b;
+  }
+  100% {
+    color: #f8e4c3;
+    text-shadow: none;
+  }
+}
+
+.amount.flash {
+  animation: goldFlash 0.8s ease;
+}
 
 
 
