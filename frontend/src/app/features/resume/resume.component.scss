@@ -114,6 +114,20 @@
 }
 
 
+.status-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: fit-content;
+  color: #f8e4c3;
+  font-family: 'Forum', serif;
+  font-size: 1.5rem;
+  text-shadow: 1px 1px 2px #000;
+  pointer-events: none;
+}
+
+
+
 
 .status-item {
   display: flex;
@@ -128,9 +142,9 @@
 }
 
 .status-icon {
-  width: 65px;
-  height: 65px;
-  margin-right: 0.5rem;
+  width: 55px;
+  height: 55px;
+  margin-right: 0.1rem;
 }
 
 .service-icon-btn {

@@ -13,6 +13,12 @@
     </div>
   </div>
 
+  <div class="status-center">
+
+      <span>Ciudad: {{ currentCity }}</span>
+
+  </div>
+
   <div class="status-right">
     <ng-container *ngFor="let service of activeServices">
       <button class="service-icon-btn" (click)="showServiceInfo(service)">

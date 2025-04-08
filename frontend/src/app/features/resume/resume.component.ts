@@ -13,6 +13,8 @@ export class ResumeComponent {
   constructor(private router: Router) {}
   playerHealth = 100;
   playerGold = 250;
+  currentCity: string = 'Ciudad de ejemplo'; // temporal
+
 
   activeServices = [
     {
