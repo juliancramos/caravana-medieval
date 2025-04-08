@@ -1,7 +1,7 @@
 .store-services-background {
   width: 100%;
   height: 100vh;
-  background: url('/assets/img/bg-store-products.png') no-repeat center center;
+  background: url('/assets/img/bg-store-services.png') no-repeat center center;
   background-size: cover;
   position: relative;
   font-family: 'Forum', serif;
@@ -10,8 +10,8 @@
 .services-shelf {
   position: absolute;
   right: 250px;
-  top: 100px;
-  width: 380px;
+  top: 50px;
+  width: 400px;
   background: rgba(59, 45, 38, 0.71);
   border-radius: 14px;
   padding: 1.5rem;
@@ -27,20 +27,25 @@
 
 .services-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.2rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  justify-items: center;
 }
 
 .service-tile {
+  width: 150px;
+  height: 150px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.4);
-  border: 1px solid #f8e4c3;
-  border-radius: 10px;
-  padding: 1rem;
+  border: 2px solid #f8e4c3;
+  border-radius: 12px;
   cursor: pointer;
   transition: transform 0.2s ease;
+  text-align: center;
+  padding: 1rem;
 
   img {
     width: 64px;
@@ -50,15 +55,17 @@
   }
 
   .service-name {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: bold;
-    text-align: center;
+    color: #f8e4c3;
   }
 
   &:hover {
-    transform: scale(1.05);
+    transform: scale(1.08);
+    box-shadow: 0 0 10px #f8e4c355;
   }
 }
+
 
 @keyframes goldFlash {
   0% {
@@ -108,6 +115,7 @@
   color: #f8e4c3;
   font-size: 1.1rem;
   padding: 0.6rem 1.2rem;
+  font-family: 'Forum', serif;
   border: 2px solid #f8e4c3;
   border-radius: 10px;
   cursor: pointer;
@@ -118,5 +126,76 @@
     background: #f8e4c3;
     color: #111;
     border-color: #111;
+  }
+}
+.product-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.product-popup {
+  background: #f8e4c3;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 320px;
+  font-family: 'Forum', serif;
+  color: #2d1c0e;
+  text-align: center;
+  position: relative;
+
+  .popup-image {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 1rem;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #2d1c0e;
+  }
+
+  .buy-button {
+    margin-top: 1rem;
+    padding: 0.6rem 1.2rem;
+    background: #2d1c0e;
+    color: #f8e4c3;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+
+    &:hover {
+      background: #f8e4c3;
+      color: #2d1c0e;
+      border: 1px solid #2d1c0e;
+    }
+  }
+}
+/* animated black screen */
+.screen-fade {
+  position: absolute;
+  inset: 0;
+  background-color: #000;
+  z-index: 100;
+  animation: fadeFromBlack 1.2s ease forwards;
+  pointer-events: none;
+}
+@keyframes fadeFromBlack {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }

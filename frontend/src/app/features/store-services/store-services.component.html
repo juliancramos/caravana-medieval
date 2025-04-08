@@ -26,7 +26,7 @@
 
   <!-- Popup de servicio -->
   <div class="service-popup-overlay" *ngIf="selectedService">
-    <div class="service-popup">
+    <div class="product-popup"> <!-- Cambiado de service-popup a product-popup -->
       <button class="close-btn" (click)="closeServicePopup()">✖</button>
 
       <img [src]="selectedService.icon" class="popup-image" />
@@ -38,6 +38,7 @@
       <button class="buy-button" (click)="buyService()">Comprar</button>
     </div>
   </div>
+
 
   <!-- Botón salir -->
   <button class="exit-button" (click)="exitStore()">⬅ Salir de la tienda</button>
