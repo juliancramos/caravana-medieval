@@ -55,4 +55,9 @@ export class ResumeComponent {
   closeServiceInfo(): void {
     this.selectedService = null;
   }
+
+  goToMap(): void {
+    this.router.navigate(['/map']);
+  }
+
 }
