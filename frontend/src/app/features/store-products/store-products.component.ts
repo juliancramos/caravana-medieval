@@ -68,6 +68,8 @@ export class StoreProductsComponent {
   ];
   itemsPerPage = 9;
   currentPage = 0;
+  playerGold = 250;
+
 
   selectedProduct: any = null;
   selectedQuantity = 1;
