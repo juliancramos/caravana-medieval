@@ -43,7 +43,7 @@ export class ResumeComponent {
   }
 
   goToServices(): void {
-    //this.router.navigate(['/servicios']);
+    this.router.navigate(['/servicios']);
   }
 
   showServiceInfo(service: any): void {
