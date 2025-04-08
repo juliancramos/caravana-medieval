@@ -39,7 +39,7 @@ export class ResumeComponent {
   selectedService: any = null;
 
   goToProducts(): void {
-    //this.router.navigate(['/productos']);
+    this.router.navigate(['/productos']);
   }
 
   goToServices(): void {
