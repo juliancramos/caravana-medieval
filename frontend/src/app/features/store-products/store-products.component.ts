@@ -1,11 +1,111 @@
 import { Component } from '@angular/core';
+import {CommonModule} from '@angular/common';
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-store-products',
-  imports: [],
+  standalone: true,
   templateUrl: './store-products.component.html',
-  styleUrl: './store-products.component.scss'
+  styleUrls: ['./store-products.component.scss'],
+  imports: [CommonModule]
 })
+
 export class StoreProductsComponent {
+  constructor(private router: Router) {}
+  products = [
+    {
+      name: 'Especias',
+      price: 50,
+      image: '/assets/icons/bag.png'
+    },
+    {
+      name: 'Telas',
+      price: 70,
+      image: '/assets/icons/bag.png'
+    },
+    {
+      name: 'Armas',
+      price: 120,
+      image: '/assets/icons/bag.png'
+    },
+    {
+      name: 'Armas',
+      price: 120,
+      image: '/assets/icons/bag.png'
+    },
+    {
+      name: 'Armas',
+      price: 120,
+      image: '/assets/icons/bag.png'
+    },
+    {
+      name: 'Armas',
+      price: 120,
+      image: '/assets/icons/bag.png'
+    },
+    {
+      name: 'Armas',
+      price: 120,
+      image: '/assets/icons/bag.png'
+    },
+    {
+      name: 'Armas',
+      price: 120,
+      image: '/assets/icons/bag.png'
+    },
+    {
+      name: 'Armas',
+      price: 120,
+      image: '/assets/icons/bag.png'
+    },
+    {
+      name: 'Ganado',
+      price: 90,
+      image: '/assets/icons/bag.png'
+    }
+  ];
+  itemsPerPage = 9;
+  currentPage = 0;
+
+  selectedProduct: any = null;
+  selectedQuantity = 1;
+
+  get paginatedProducts() {
+    const start = this.currentPage * this.itemsPerPage;
+    return this.products.slice(start, start + this.itemsPerPage);
+  }
+
+  prevPage(): void {
+    if (this.currentPage > 0) this.currentPage--;
+  }
+
+  nextPage(): void {
+    const totalPages = Math.ceil(this.products.length / this.itemsPerPage);
+    if (this.currentPage < totalPages - 1) this.currentPage++;
+  }
+
+  openProductPopup(product: any): void {
+    this.selectedProduct = product;
+    this.selectedQuantity = 1;
+  }
+
+  closeProductPopup(): void {
+    this.selectedProduct = null;
+  }
+
+  increaseQuantity(): void {
+    this.selectedQuantity++;
+  }
+
+  decreaseQuantity(): void {
+    if (this.selectedQuantity > 1) this.selectedQuantity--;
+  }
+
+  exitStore(): void {
+    this.router.navigate(['/resume']); // o la ruta a la pantalla anterior
+  }
+
 
 }

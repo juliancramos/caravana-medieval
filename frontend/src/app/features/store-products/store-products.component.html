@@ -1,6 +1,45 @@
 <div class="store-products-background">
-  <h1 class="title">Tienda de Productos</h1>
-  <p class="description">Aquí podrás comprar productos para tu caravana.</p>
 
-  <!-- A futuro: lista de productos con botón para comprar -->
+  <!-- Estante de productos -->
+  <div class="products-shelf">
+    <h2 class="shelf-title">Estante de productos</h2>
+
+    <div class="products-grid">
+      <div class="product-tile" *ngFor="let product of paginatedProducts" (click)="openProductPopup(product)">
+        <img [src]="product.image" [alt]="product.name" />
+      </div>
+    </div>
+
+    <!-- Flechas de paginación -->
+    <div class="pagination-controls">
+      <button (click)="prevPage()" [disabled]="currentPage === 0">&larr;</button>
+      <span>Página {{ currentPage + 1 }}</span>
+      <button (click)="nextPage()" [disabled]="(currentPage + 1) * itemsPerPage >= products.length">&rarr;</button>
+    </div>
+  </div>
+
+  <!-- Popup del producto -->
+  <div class="product-popup-overlay" *ngIf="selectedProduct">
+    <div class="product-popup">
+      <button class="close-btn" (click)="closeProductPopup()">✖</button>
+
+      <img [src]="selectedProduct.image" class="popup-image" />
+      <h3>{{ selectedProduct.name }}</h3>
+      <p><strong>Precio:</strong> {{ selectedProduct.price }} MO</p>
+
+      <div class="quantity-selector">
+        <button (click)="decreaseQuantity()">−</button>
+        <input type="number" [value]="selectedQuantity" readonly />
+        <button (click)="increaseQuantity()">+</button>
+      </div>
+
+      <button class="buy-button">Comprar</button>
+    </div>
+  </div>
+  <!-- Botón salir de la tienda -->
+  <button class="exit-button" (click)="exitStore()" aria-label="Salir de la tienda">
+    ⬅ Salir de la tienda
+  </button>
+
+
 </div>
