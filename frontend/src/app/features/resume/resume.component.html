@@ -33,8 +33,15 @@
   <div class="screen-fade"></div>
 
   <!-- Clickeable houses -->
-  <button class="click-zone zone-products" (click)="goToProducts()" aria-label="Tienda de productos"></button>
-  <button class="click-zone zone-services" (click)="goToServices()" aria-label="Tienda de servicios"></button>
+  <!-- Casa de productos -->
+  <button class="click-zone zone-products"(click)="goToProducts()">
+    <span class="zone-label">Entrar a tienda de productos</span>
+  </button>
+
+  <!-- Casa de servicios -->
+  <button class="click-zone zone-services"(click)="goToServices()">
+    <span class="zone-label">Entrar a tienda de servicios</span>
+  </button>
 
   <!-- Map button -->
   <button class="map-button" (click)="goToMap()" aria-label="Abrir mapa">
