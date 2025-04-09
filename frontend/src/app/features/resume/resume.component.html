@@ -1,0 +1,68 @@
+<!-- Barra superior con estado del jugador -->
+<div class="status-bar">
+  <div class="status-left">
+    <div class="status-item">
+      <img src="/assets/icons/heart.png" alt="Vida" class="status-icon" />
+      <span>Vida:</span>
+      <span>{{ playerHealth }}</span>
+    </div>
+    <div class="status-item">
+      <img src="/assets/icons/coin.png" alt="Dinero" class="status-icon" />
+      <span>Dinero:</span>
+      <span>{{ playerGold }}</span>
+    </div>
+  </div>
+
+  <div class="status-center">
+
+      <span>Ciudad: {{ currentCity }}</span>
+
+  </div>
+
+  <div class="status-right">
+    <ng-container *ngFor="let service of activeServices">
+      <button class="service-icon-btn" (click)="showServiceInfo(service)">
+        <img [src]="service.icon" [alt]="service.name" class="service-icon" />
+      </button>
+    </ng-container>
+  </div>
+</div>
+
+<!-- background game -->
+<div class="resume-background">
+  <div class="screen-fade"></div>
+
+  <!-- Clickeable houses -->
+  <!-- Casa de productos -->
+  <button class="click-zone zone-products"(click)="goToProducts()">
+    <span class="zone-label">Entrar a tienda de productos</span>
+  </button>
+
+  <!-- Casa de servicios -->
+  <button class="click-zone zone-services"(click)="goToServices()">
+    <span class="zone-label">Entrar a tienda de servicios</span>
+  </button>
+
+  <!-- Map button -->
+  <button class="map-button" (click)="goToMap()" aria-label="Abrir mapa">
+    <img src="/assets/icons/map.png" alt="Mapa" />
+    <span class="map-label">Mapa</span>
+  </button>
+
+
+</div>
+
+<!-- Service popup -->
+<div class="service-popup-overlay" *ngIf="selectedService">
+  <div class="service-popup">
+    <img [src]="selectedService.icon" [alt]="selectedService.name" class="popup-service-icon" />
+    <h2>{{ selectedService.name }}</h2>
+    <p>{{ selectedService.description }}</p>
+    <p><strong>Duración:</strong> {{ selectedService.duration }}</p>
+    <button (click)="closeServiceInfo()" class="btn-close">Cerrar</button>
+  </div>
+
+
+</div>
+
+

@@ -1,0 +1,323 @@
+:host {
+  display: block;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.resume-background {
+  background: url('/assets/img/bg-resume.png') no-repeat center center;
+  background-size: cover;
+  background-position: center;
+  background-color: #000;
+  width: 100%;
+  height: 100%;
+  padding-top: 70px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+
+
+
+/* animated black screen */
+.screen-fade {
+  position: absolute;
+  inset: 0;
+  background-color: #000;
+  z-index: 100;
+  animation: fadeFromBlack 1.2s ease forwards;
+  pointer-events: none;
+}
+
+@keyframes fadeFromBlack {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes glowPulse {
+  0% {
+    outline: 4px solid rgba(255, 255, 200, 0.0);
+    box-shadow: 0 0 0 rgba(255, 255, 200, 0);
+  }
+  50% {
+    outline: 4px solid rgba(255, 255, 200, 0.4);
+    box-shadow: 0 0 12px 6px rgba(255, 255, 200, 0.3);
+  }
+  100% {
+    outline: 4px solid rgba(255, 255, 200, 0.0);
+    box-shadow: 0 0 0 rgba(255, 255, 200, 0);
+  }
+}
+
+
+/* Zonas clickeables transparentes */
+.click-zone {
+  position: absolute;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 0;
+  animation: glowPulse 2s ease-in-out infinite;
+  transition: background-color 0.3s ease, outline 0.3s ease, box-shadow 0.3s ease;
+
+  .zone-label {
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 220, 140, 0.7); // mismo tono que el parpadeo
+    padding: 0.6rem 1.2rem;
+    border-radius: 12px;
+    color: #2d1c0e;
+    font-family: 'Forum', serif;
+    font-size: 1.2rem;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    text-align: center;
+    white-space: nowrap;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  }
+
+  &:hover {
+    animation: none;
+    background-color: rgba(255, 220, 140, 0.3);
+    outline: none;
+    box-shadow: none;
+  }
+
+  &:hover .zone-label {
+    opacity: 1;
+  }
+}
+
+
+
+
+/* cords */
+.zone-products {
+  position: absolute;
+  top: 2%;
+  left: 5%;
+  width: 31%;
+  height: 85%;
+}
+
+
+.zone-services {
+  position: absolute;
+  top: 2%;
+  right: 0.1%;
+  width: 40%;
+  height: 90%;
+}
+
+.status-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem; // Ajuste de espacio lateral general
+  box-sizing: border-box;
+}
+
+.status-left {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+}
+
+.status-right {
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255, 255, 255, 0.15); // más transparente
+  backdrop-filter: blur(10px); // efecto vidrio
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 35px;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: calc(3 * 70px + 2rem);
+  min-width: calc(3 * 70px + 2rem);
+  height: 55px;
+  box-sizing: border-box;
+}
+
+
+.status-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: fit-content;
+  color: #f8e4c3;
+  font-family: 'Forum', serif;
+  font-size: 1.5rem;
+  text-shadow: 1px 1px 2px #000;
+  pointer-events: none;
+}
+
+
+
+
+.status-item {
+  display: flex;
+  align-items: center;
+  font-family: 'Forum', serif;
+  font-size: 1.5rem;
+  color: #f8e4c3;
+
+  span {
+    margin-left: 0.4rem;
+  }
+}
+
+.status-icon {
+  width: 55px;
+  height: 55px;
+  margin-right: 0.1rem;
+}
+
+.service-icon-btn {
+  background: rgba(0, 0, 0, 0.05);
+  border: none;
+  border-radius: 50%;
+  padding: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.1);
+    transform: scale(1.1);
+  }
+}
+
+.service-icon {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+
+
+.service-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.service-popup {
+  background: #f8e4c3;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 320px;
+  text-align: center;
+  font-family: 'Forum', serif;
+  color: #2d1c0e;
+
+  h2 {
+    margin-bottom: 1rem;
+  }
+
+  .btn-close {
+    margin-top: 1.5rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    background: #2d1c0e;
+    color: #f8e4c3;
+    border-radius: 6px;
+    cursor: pointer;
+
+    &:hover {
+      background: #f8e4c3;
+      color: #2d1c0e;
+      border: 1px solid #2d1c0e;
+    }
+  }
+}
+.popup-service-icon {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 1rem;
+  object-fit: contain;
+  border: none;
+  background: transparent;
+  padding: 6px;
+}
+
+@keyframes mapBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.map-button {
+  position: fixed;
+  bottom: 10px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: mapBounce 2.4s ease-in-out infinite;
+
+  img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+  }
+
+  .map-label {
+    margin-top: 4px;
+    font-size: 2rem;
+    color: #f8e4c3;
+    font-family: 'Forum', serif;
+    text-shadow: 1px 1px 2px #000;
+  }
+
+  &:hover img {
+    transform: scale(1.08);
+  }
+}
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,45 @@
+<div class="store-services-background">
+  <div class="screen-fade"></div>
+
+  <!-- Estante de servicios -->
+  <div class="services-shelf">
+    <h2 class="shelf-title">Tienda de Servicios</h2>
+
+    <div class="services-grid">
+      <div
+        class="service-tile"
+        *ngFor="let service of services"
+        (click)="openServicePopup(service)"
+      >
+        <img [src]="service.icon" [alt]="service.name" />
+        <span class="service-name">{{ service.name }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Monedas del jugador -->
+  <div class="gold-display">
+    <span class="label">Monedas:</span>
+    <img src="/assets/icons/coin.png" alt="Moneda de oro" class="gold-icon" />
+    <span class="amount" [ngClass]="{ flash: goldChanged }">{{ playerGold }}</span>
+  </div>
+
+  <!-- Popup de servicio -->
+  <div class="product-popup-overlay" *ngIf="selectedService">
+    <div class="product-popup"> <!-- Cambiado de service-popup a product-popup -->
+      <button class="close-btn" (click)="closeServicePopup()">✖</button>
+
+      <img [src]="selectedService.icon" class="popup-image" />
+      <h3>{{ selectedService.name }}</h3>
+      <p>{{ selectedService.description }}</p>
+      <p><strong>Duración:</strong> {{ selectedService.duration }}</p>
+      <p><strong>Precio:</strong> {{ selectedService.price }} MO</p>
+
+      <button class="buy-button" (click)="buyService()">Comprar</button>
+    </div>
+  </div>
+
+
+  <!-- Botón salir -->
+  <button class="exit-button" (click)="exitStore()">⬅ Salir de la tienda</button>
+</div>
