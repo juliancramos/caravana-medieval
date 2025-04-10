@@ -34,11 +34,14 @@
       <p>{{ selectedService.description }}</p>
       <p><strong>Duración:</strong> {{ selectedService.duration }}</p>
       <p><strong>Precio:</strong> {{ selectedService.price }} MO</p>
-      <div class="popup-notification" *ngIf="showNotification">
-        {{ notificationMessage }}
-      </div>
+
       <button class="buy-button" (click)="buyService()">Comprar</button>
     </div>
+  </div>
+
+
+  <div class="global-notification" [ngClass]="notificationType" *ngIf="showGlobalNotification">
+    {{ globalNotification }}
   </div>
 
 

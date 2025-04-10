@@ -14,8 +14,14 @@ export class StoreServicesComponent {
   constructor(private gameState: GameStateService, private router: Router) {}
   selectedService: any = null;
   goldChanged = false;
-  notificationMessage = '';
-  showNotification = false;
+
+
+  //Global notification
+  globalNotification = '';
+  showGlobalNotification = false;
+  notificationType: 'success' | 'error' = 'success';
+
+
 
   services = [
     {
@@ -73,20 +79,26 @@ export class StoreServicesComponent {
       this.goldChanged = true;
       setTimeout(() => this.goldChanged = false, 800);
       this.closeServicePopup();
+      this.showGlobalMessage('¡Servicio comprado!', 'success');
     } else {
-      this.showTempNotification('No tienes suficiente oro.');
+      this.closeServicePopup();
+      this.showGlobalMessage('No tienes suficiente oro.', 'error');
     }
   }
 
-  //Show service notification
-  showTempNotification(message: string): void {
-    this.notificationMessage = message;
-    this.showNotification = true;
 
+
+
+
+  showGlobalMessage(message: string, type: 'success' | 'error' = 'success'): void {
+    this.globalNotification = message;
+    this.notificationType = type;
+    this.showGlobalNotification = true;
     setTimeout(() => {
-      this.showNotification = false;
+      this.showGlobalNotification = false;
     }, 2000);
   }
+
 
 
 
