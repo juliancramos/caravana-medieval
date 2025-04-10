@@ -1,14 +1,18 @@
 <div class="map-screen-container">
   <img src="/assets/img/bg-map.png" class="map-background" />
   <div class="screen-fade"></div>
+
+  <!-- Banner con ciudad actual -->
   <div class="map-banner">
     <span class="map-banner-text">Ciudad actual: {{ currentCity }}</span>
   </div>
 
+  <!-- Renderizado de ciudades -->
   <ng-container *ngFor="let city of cities">
     <button
       class="map-city"
       [class.available]="city.available"
+      [class.current-city]="city.name === currentCity"
       [ngStyle]="{ top: city.y + '%', left: city.x + '%' }"
       (click)="city.available && openPopup(city)"
     >
@@ -17,11 +21,11 @@
     </button>
   </ng-container>
 
+  <!-- Botón volver -->
   <button class="back-button" (click)="goBack()">⬅ Volver</button>
-
 </div>
 
-<!-- Routes popup -->
+<!-- Popup de rutas -->
 <div class="city-popup-overlay" *ngIf="selectedCity">
   <div class="city-popup">
     <h2>{{ selectedCity.name }}</h2>
@@ -36,8 +40,6 @@
       </div>
     </div>
 
-
     <button class="btn-close" (click)="closePopup()">✖</button>
   </div>
 </div>
-
