@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 export class MapComponent {
   // Ciudad actual (esto se conectará luego con el backend)
   currentCity = 'Eldenport';
-
+  selectedCity: any = null;
   // Ciudades visibles en el mapa (solo para pruebas)
   cities = [
     { name: 'Eldenport', x: 20, y: 40, available: false },
@@ -31,5 +31,66 @@ export class MapComponent {
       console.log('Viajar a:', city.name);
       // Aquí luego se abrirá el popup con rutas disponibles
     }
+  }
+
+  openPopup(city: any): void {
+    // Simular rutas (esto se conectará al backend más adelante)
+    this.selectedCity = {
+      ...city,
+      routes: [
+        {
+          type: 'Ruta segura',
+          time: '4h',
+          damage: 0,
+          cause: null
+        },
+        {
+          type: 'Ruta segura',
+          time: '4h',
+          damage: 0,
+          cause: null
+        },
+        {
+          type: 'Ruta segura',
+          time: '4h',
+          damage: 0,
+          cause: null
+        },
+        {
+          type: 'Ruta segura',
+          time: '4h',
+          damage: 0,
+          cause: null
+        },
+        {
+          type: 'Ruta segura',
+          time: '4h',
+          damage: 0,
+          cause: null
+        },
+        {
+          type: 'Ruta segura',
+          time: '4h',
+          damage: 0,
+          cause: null
+        },
+
+        {
+          type: 'Ruta insegura',
+          time: '2h',
+          damage: 20,
+          cause: 'Bandidos'
+        }
+      ]
+    };
+  }
+
+  closePopup(): void {
+    this.selectedCity = null;
+  }
+
+  travelTo(city: any): void {
+    alert(`Viajando a ${city.name}`);
+    this.closePopup();
   }
 }
