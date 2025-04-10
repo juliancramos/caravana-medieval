@@ -1,1 +1,14 @@
-<p>map works!</p>
+<div class="map-screen-container">
+  <img src="/assets/img/bg-map.png" class="map-background" />
+
+  <ng-container *ngFor="let city of cities">
+    <button
+      class="map-city"
+      [class.available]="city.available"
+      [ngStyle]="{ top: city.y + '%', left: city.x + '%' }"
+      (click)="selectCity(city)"
+    >
+      <img src="/assets/icons/city-icon.png" alt="Ciudad" />
+    </button>
+  </ng-container>
+</div>
