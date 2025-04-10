@@ -57,7 +57,7 @@ export class ResumeComponent {
   }
 
   goToMap(): void {
-    this.router.navigate(['/map']);
+    this.router.navigate(['/mapa']);
   }
 
 }
