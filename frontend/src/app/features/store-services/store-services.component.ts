@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import {GameStateService} from '@core/services/game-state.service';
 
 @Component({
   selector: 'app-store-services',
@@ -10,7 +11,8 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./store-services.component.scss']
 })
 export class StoreServicesComponent {
-  playerGold = 250;
+  constructor(private gameState: GameStateService, private router: Router) {}
+  selectedService: any = null;
   goldChanged = false;
 
   services = [
@@ -44,9 +46,13 @@ export class StoreServicesComponent {
     }
   ];
 
-  selectedService: any = null;
+  get playerGold(){
+    return this.gameState.playerGold();
+  }
 
-  constructor(private router: Router) {}
+
+
+
 
   openServicePopup(service: any): void {
     this.selectedService = service;
@@ -56,30 +62,23 @@ export class StoreServicesComponent {
     this.selectedService = null;
   }
 
-  buyService(): void {
-    const total = this.selectedService.price;
+//Buy service with signals
 
+  buyService() {
+    const total = this.selectedService.price;
     if (this.playerGold >= total) {
-      this.updateGold(-total);
-      alert(`Has comprado el servicio: ${this.selectedService.name}`);
+      this.gameState.updateGold(-total);
+      this.goldChanged = true;
+      setTimeout(() => this.goldChanged = false, 800);
       this.closeServicePopup();
     } else {
-      alert('No tienes suficientes monedas de oro.');
+      alert('No tienes suficiente oro.');
     }
   }
 
-  updateGold(amount: number): void {
-    this.playerGold += amount;
-    this.goldChanged = false;
 
-    setTimeout(() => {
-      this.goldChanged = true;
 
-      setTimeout(() => {
-        this.goldChanged = false;
-      }, 800);
-    });
-  }
+
 
   exitStore(): void {
     this.router.navigate(['/resume']);
