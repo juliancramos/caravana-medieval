@@ -14,6 +14,8 @@ export class StoreServicesComponent {
   constructor(private gameState: GameStateService, private router: Router) {}
   selectedService: any = null;
   goldChanged = false;
+  notificationMessage = '';
+  showNotification = false;
 
   services = [
     {
@@ -72,9 +74,20 @@ export class StoreServicesComponent {
       setTimeout(() => this.goldChanged = false, 800);
       this.closeServicePopup();
     } else {
-      alert('No tienes suficiente oro.');
+      this.showTempNotification('No tienes suficiente oro.');
     }
   }
+
+  //Show service notification
+  showTempNotification(message: string): void {
+    this.notificationMessage = message;
+    this.showNotification = true;
+
+    setTimeout(() => {
+      this.showNotification = false;
+    }, 2000);
+  }
+
 
 
 

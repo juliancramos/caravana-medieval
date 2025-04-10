@@ -26,7 +26,7 @@
 
   <!-- Popup de servicio -->
   <div class="product-popup-overlay" *ngIf="selectedService">
-    <div class="product-popup"> <!-- Cambiado de service-popup a product-popup -->
+    <div class="product-popup">
       <button class="close-btn" (click)="closeServicePopup()">✖</button>
 
       <img [src]="selectedService.icon" class="popup-image" />
@@ -34,7 +34,9 @@
       <p>{{ selectedService.description }}</p>
       <p><strong>Duración:</strong> {{ selectedService.duration }}</p>
       <p><strong>Precio:</strong> {{ selectedService.price }} MO</p>
-
+      <div class="popup-notification" *ngIf="showNotification">
+        {{ notificationMessage }}
+      </div>
       <button class="buy-button" (click)="buyService()">Comprar</button>
     </div>
   </div>
