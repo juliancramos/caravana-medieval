@@ -45,7 +45,7 @@
     .city-name {
       margin-top: 0.4rem;
       font-size: 1rem;
-      color: #f8e4c3;
+      color: #ffffff;
       font-family: 'Forum', serif;
       text-shadow: 1px 1px 2px #000;
       pointer-events: none;
@@ -210,4 +210,25 @@
   to {
     opacity: 0;
   }
+}
+
+.map-banner {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid #f8e4c3;
+  padding: 0.5rem 2rem;
+  border-radius: 12px;
+  z-index: 1000;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.map-banner-text {
+  font-family: 'Forum', serif;
+  font-size: 1.7rem;
+  color: #f8e4c3;
+  text-shadow: 1px 1px 2px #000;
 }
