@@ -14,6 +14,7 @@
       [ngClass]="{
         available: city.available,
         'current-city': city.name === currentCity
+
       }"
       [ngStyle]="{ top: city.y + '%', left: city.x + '%' }"
       (click)="city.name !== currentCity && city.available && openPopup(city)"

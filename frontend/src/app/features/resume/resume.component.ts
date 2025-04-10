@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { GameStateService } from '@core/services/game-state.service';
 
 @Component({
   selector: 'app-resume',
@@ -10,11 +11,16 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./resume.component.scss']
 })
 export class ResumeComponent {
-  constructor(private router: Router) {}
+
+  constructor(private gameState: GameStateService, private router: Router) {}
+
   playerHealth = 100;
   playerGold = 250;
-  currentCity: string = 'Ciudad de ejemplo'; // temporal
 
+  // Reactive getter
+  get currentCity() {
+    return this.gameState.currentCity();
+  }
 
   activeServices = [
     {
@@ -37,7 +43,6 @@ export class ResumeComponent {
     }
   ];
 
-
   selectedService: any = null;
 
   goToProducts(): void {
@@ -48,6 +53,10 @@ export class ResumeComponent {
     this.router.navigate(['/servicios']);
   }
 
+  goToMap(): void {
+    this.router.navigate(['/mapa']);
+  }
+
   showServiceInfo(service: any): void {
     this.selectedService = service;
   }
@@ -55,9 +64,4 @@ export class ResumeComponent {
   closeServiceInfo(): void {
     this.selectedService = null;
   }
-
-  goToMap(): void {
-    this.router.navigate(['/mapa']);
-  }
-
 }

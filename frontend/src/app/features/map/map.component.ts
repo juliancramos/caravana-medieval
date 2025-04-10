@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, computed} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { GameStateService } from '@core/services/game-state.service';
 @Component({
   selector: 'app-map',
   standalone: true,
@@ -9,11 +10,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent {
-  constructor(private router: Router) {}
-  // Ciudad actual (esto se conectará luego con el backend)
-  currentCity = 'Eldenport';
+  constructor(private gameState: GameStateService, private router: Router) {}
+
+  // Reactive current city getter
+  get currentCity() {
+    return this.gameState.currentCity();
+  }
   selectedCity: any = null;
-  // Ciudades visibles en el mapa (solo para pruebas)
+
+  // test cities
   cities = [
     { name: 'Eldenport', x: 20, y: 40, available: true },
     { name: 'Drakenshire', x: 30, y: 40, available: true },
@@ -108,8 +113,8 @@ export class MapComponent {
   }
 
   travelTo(city: any): void {
-    alert(`Viajando a ${city.name}`);
-    this.currentCity = city.name;
+    this.gameState.setCurrentCity(city.name);
+    this.closePopup();
   }
 
   goBack(): void {
