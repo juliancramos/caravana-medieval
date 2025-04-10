@@ -14,10 +14,20 @@ export class ResumeComponent {
 
   constructor(private gameState: GameStateService, private router: Router) {}
 
-  playerHealth = 100;
-  playerGold = 250;
 
-  // Reactive getter
+  //Reactive playerHealth getter
+  get playerHealth(){
+    return this.gameState.playerHealth();
+  }
+
+  //Reactive playerGold getter
+  get playerGold(){
+    return this.gameState.playerGold();
+  }
+
+
+
+  // Reactive current city getter
   get currentCity() {
     return this.gameState.currentCity();
   }
@@ -63,5 +73,21 @@ export class ResumeComponent {
 
   closeServiceInfo(): void {
     this.selectedService = null;
+  }
+
+  //Example: Buy a product which costs 50 gold coins
+  buyExampleProduct() {
+    const price = 50;
+    if (this.playerGold >= price) {
+      this.gameState.updateGold(-price);
+      alert('¡Producto comprado!');
+    } else {
+      alert('No tienes suficiente oro.');
+    }
+  }
+
+  // Example: When you receive damage
+  takeDamage() {
+    this.gameState.updateHealth(-20);
   }
 }
