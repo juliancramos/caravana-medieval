@@ -115,6 +115,7 @@ export class MapComponent {
   travelTo(city: any): void {
     this.gameState.setCurrentCity(city.name);
     this.closePopup();
+    this.goBack();
   }
 
   goBack(): void {
