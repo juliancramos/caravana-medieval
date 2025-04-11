@@ -42,7 +42,7 @@ export class MapComponent {
     { name: 'Blackwater', x: 85, y: 25, available: true },
     { name: 'Ashenfield', x: 70, y: 35, available: true },
     { name: 'Briarholm', x: 60, y: 60, available: true },
-    { name: 'Wyrmrest', x: 50, y: 70, available: true },
+   /* { name: 'Wyrmrest', x: 50, y: 70, available: true },
     { name: 'Highreach', x: 35, y: 85, available: true },
     { name: 'Mooncliff', x: 20, y: 90, available: true },
     { name: 'Emberfall', x: 10, y: 85, available: true },
@@ -51,7 +51,7 @@ export class MapComponent {
     { name: 'Silverrest', x: 25, y: 50, available: true },
     { name: 'Stormhold', x: 40, y: 45, available: true },
     { name: 'Gladefort', x: 65, y: 80, available: true },
-    { name: 'Whiteridge', x: 85, y: 60, available: true }
+    { name: 'Whiteridge', x: 85, y: 60, available: true }*/
   ];
 
 

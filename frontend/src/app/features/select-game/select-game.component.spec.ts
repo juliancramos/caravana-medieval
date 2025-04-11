@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SelectGameComponent } from './select-game.component';
 
-describe('SelectGameComponent', () => {
+describe('SelectGame2Component', () => {
   let component: SelectGameComponent;
   let fixture: ComponentFixture<SelectGameComponent>;
 

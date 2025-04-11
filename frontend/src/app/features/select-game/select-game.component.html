@@ -1,0 +1,22 @@
+<div class="select-game-screen">
+
+  <div class="game-cards">
+    <!-- Ejemplo de partida existente -->
+    <div class="game-card" (click)="loadGame(1)">
+      <img src="/assets/img/map1-thumb.png" alt="Partida guardada 1" />
+      <span class="card-label">Partida 1</span>
+    </div>
+
+    <!-- Carta para crear nueva partida -->
+    <div class="game-card new-game" (click)="createNewGame()">
+      <span class="plus-icon">+</span>
+      <span class="card-label">Nueva partida</span>
+    </div>
+
+    <div class="game-card new-game" (click)="createNewGame()">
+      <span class="plus-icon">+</span>
+      <span class="card-label">Nueva partida</span>
+    </div>
+
+  </div>
+</div>
