@@ -7,6 +7,7 @@ import { StoreServicesComponent } from './features/store-services/store-services
 import { ProductListComponent } from './features/prueba/product-list.component';
 import { MapComponent } from './features/map/map.component';
 import {SelectGameComponent} from '@features/select-game/select-game.component';
+import {SelectCaravanComponent} from '@features/select-caravan/select-caravan.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -17,5 +18,6 @@ export const routes: Routes = [
   { path: 'resume', component: ResumeComponent },
   { path: 'prueba', component: ProductListComponent },
   { path: 'select-game', component: SelectGameComponent },
+  { path: 'select-caravan', component: SelectCaravanComponent },
   { path: 'mapa', component: MapComponent }
 ];

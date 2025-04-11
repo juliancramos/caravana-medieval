@@ -17,7 +17,7 @@ export class SelectGameComponent {
   }
 
   createNewGame(): void {
-    this.router.navigate(['/crear-partida']);
+    this.router.navigate(['/select-caravan']);
   }
 
 }
