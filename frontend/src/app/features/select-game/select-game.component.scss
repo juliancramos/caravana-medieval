@@ -79,3 +79,21 @@
   }
 }
 
+/* animated black screen */
+.screen-fade {
+  position: absolute;
+  inset: 0;
+  background-color: #000;
+  z-index: 100;
+  animation: fadeFromBlack 1.2s ease forwards;
+  pointer-events: none;
+}
+
+@keyframes fadeFromBlack {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
