@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import {CommonModule} from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-
-
 
 @Component({
   selector: 'app-store-products',
@@ -11,61 +9,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./store-products.component.scss'],
   imports: [CommonModule]
 })
-
 export class StoreProductsComponent {
   constructor(private router: Router) {}
-  products = [
-    {
-      name: 'Especias',
-      price: 50,
-      image: '/assets/icons/bag.png'
-    },
-    {
-      name: 'Telas',
-      price: 70,
-      image: '/assets/icons/bag.png'
-    },
-    {
-      name: 'Armas',
-      price: 120,
-      image: '/assets/icons/bag.png'
-    },
-    {
-      name: 'Armas',
-      price: 120,
-      image: '/assets/icons/bag.png'
-    },
-    {
-      name: 'Armas',
-      price: 120,
-      image: '/assets/icons/bag.png'
-    },
-    {
-      name: 'Armas',
-      price: 120,
-      image: '/assets/icons/bag.png'
-    },
-    {
-      name: 'Armas',
-      price: 120,
-      image: '/assets/icons/bag.png'
-    },
-    {
-      name: 'Armas',
-      price: 120,
-      image: '/assets/icons/bag.png'
-    },
-    {
-      name: 'Armas',
-      price: 120,
-      image: '/assets/icons/bag.png'
-    },
-    {
-      name: 'Ganado',
-      price: 90,
-      image: '/assets/icons/bag.png'
-    }
-  ];
+
   itemsPerPage = 9;
   currentPage = 0;
   playerGold = 250;
@@ -73,6 +19,24 @@ export class StoreProductsComponent {
 
   selectedProduct: any = null;
   selectedQuantity = 1;
+
+  // Global notification
+  globalNotification = '';
+  showGlobalNotification = false;
+  notificationType: 'success' | 'error' = 'success';
+
+  products = [
+    { name: 'Especias', price: 50, image: '/assets/icons/bag.png' },
+    { name: 'Telas', price: 70, image: '/assets/icons/bag.png' },
+    { name: 'Armas', price: 120, image: '/assets/icons/bag.png' },
+    { name: 'Armas', price: 120, image: '/assets/icons/bag.png' },
+    { name: 'Armas', price: 120, image: '/assets/icons/bag.png' },
+    { name: 'Armas', price: 120, image: '/assets/icons/bag.png' },
+    { name: 'Armas', price: 120, image: '/assets/icons/bag.png' },
+    { name: 'Armas', price: 120, image: '/assets/icons/bag.png' },
+    { name: 'Armas', price: 120, image: '/assets/icons/bag.png' },
+    { name: 'Ganado', price: 90, image: '/assets/icons/bag.png' }
+  ];
 
   get paginatedProducts() {
     const start = this.currentPage * this.itemsPerPage;
@@ -106,35 +70,38 @@ export class StoreProductsComponent {
   }
 
   exitStore(): void {
-    this.router.navigate(['/resume']); // o la ruta a la pantalla anterior
+    this.router.navigate(['/resume']);
   }
 
   updateGold(amount: number): void {
     this.playerGold += amount;
-
-    this.goldChanged = false; // Reinicia para asegurar
+    this.goldChanged = true;
     setTimeout(() => {
-      this.goldChanged = true;
-
-      setTimeout(() => {
-        this.goldChanged = false;
-      }, 800); // duración de la animación
-    });
+      this.goldChanged = false;
+    }, 800);
   }
 
-
-  comprarProducto(product: any): void {
+  // Buy Product
+  buyProduct(): void {
+    const product = this.selectedProduct;
     const total = product.price * this.selectedQuantity;
+
     if (this.playerGold >= total) {
       this.updateGold(-total);
       this.closeProductPopup();
-      // lógica adicional: enviar al backend, feedback, etc.
+      this.showGlobalMessage('¡Producto comprado!', 'success');
     } else {
-      alert('No tienes suficientes monedas de oro.');
+      this.closeProductPopup();
+      this.showGlobalMessage('No tienes suficiente oro.', 'error');
     }
   }
 
-
-
-
+  showGlobalMessage(message: string, type: 'success' | 'error' = 'success'): void {
+    this.globalNotification = message;
+    this.notificationType = type;
+    this.showGlobalNotification = true;
+    setTimeout(() => {
+      this.showGlobalNotification = false;
+    }, 2000);
+  }
 }

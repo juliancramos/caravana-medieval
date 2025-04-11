@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { GameStateService } from '@core/services/game-state.service';
 
 @Component({
   selector: 'app-resume',
@@ -10,11 +11,26 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./resume.component.scss']
 })
 export class ResumeComponent {
-  constructor(private router: Router) {}
-  playerHealth = 100;
-  playerGold = 250;
-  currentCity: string = 'Ciudad de ejemplo'; // temporal
 
+  constructor(private gameState: GameStateService, private router: Router) {}
+
+
+  //Reactive playerHealth getter
+  get playerHealth(){
+    return this.gameState.playerHealth();
+  }
+
+  //Reactive playerGold getter
+  get playerGold(){
+    return this.gameState.playerGold();
+  }
+
+
+
+  // Reactive current city getter
+  get currentCity() {
+    return this.gameState.currentCity();
+  }
 
   activeServices = [
     {
@@ -37,7 +53,6 @@ export class ResumeComponent {
     }
   ];
 
-
   selectedService: any = null;
 
   goToProducts(): void {
@@ -48,6 +63,10 @@ export class ResumeComponent {
     this.router.navigate(['/servicios']);
   }
 
+  goToMap(): void {
+    this.router.navigate(['/mapa']);
+  }
+
   showServiceInfo(service: any): void {
     this.selectedService = service;
   }
@@ -56,8 +75,19 @@ export class ResumeComponent {
     this.selectedService = null;
   }
 
-  goToMap(): void {
-    this.router.navigate(['/map']);
+  //Example: Buy a product which costs 50 gold coins
+  buyExampleProduct() {
+    const price = 50;
+    if (this.playerGold >= price) {
+      this.gameState.updateGold(-price);
+      alert('¡Producto comprado!');
+    } else {
+      alert('No tienes suficiente oro.');
+    }
   }
 
+  // Example: When you receive damage
+  takeDamage() {
+    this.gameState.updateHealth(-20);
+  }
 }

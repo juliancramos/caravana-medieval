@@ -199,3 +199,39 @@
     opacity: 0;
   }
 }
+
+
+
+
+
+.global-notification {
+  position: fixed;
+  top: 20px;
+  right: 30px;
+  padding: 0.8rem 1.5rem;
+  border-radius: 10px;
+  font-family: 'Forum', serif;
+  font-size: 1.1rem;
+  color: #f8e4c3;
+  box-shadow: 0 0 10px #00000055;
+  animation: fadeInOut 2s ease-in-out;
+  z-index: 3000;
+  text-shadow: 1px 1px #000;
+}
+
+.global-notification.success {
+  background-color: rgba(46, 125, 50, 0.95); // Verde
+}
+
+.global-notification.error {
+  background-color: rgba(175, 40, 40, 0.95); // Rojo
+}
+
+@keyframes fadeInOut {
+  0%   { opacity: 0; transform: translateY(-10px); }
+  10%  { opacity: 1; transform: translateY(0); }
+  90%  { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-10px); }
+}
+
+

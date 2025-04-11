@@ -44,8 +44,12 @@
         <button (click)="increaseQuantity()">+</button>
       </div>
 
-      <button class="buy-button">Comprar</button>
+      <button class="buy-button" (click)="buyProduct()">Comprar</button>
     </div>
+  </div>
+
+  <div class="global-notification" [ngClass]="notificationType" *ngIf="showGlobalNotification">
+    {{ globalNotification }}
   </div>
   <!-- Botón salir de la tienda -->
   <button class="exit-button" (click)="exitStore()" aria-label="Salir de la tienda">
