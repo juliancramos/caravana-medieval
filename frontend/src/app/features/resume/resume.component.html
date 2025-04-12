@@ -33,16 +33,7 @@
 </div>
 
 <!-- Service popup -->
-<div class="service-popup-overlay" *ngIf="selectedService">
-  <div class="service-popup">
-    <img [src]="selectedService.icon" [alt]="selectedService.name" class="popup-service-icon" />
-    <h2>{{ selectedService.name }}</h2>
-    <p>{{ selectedService.description }}</p>
-    <p><strong>Duración:</strong> {{ selectedService.duration }}</p>
-    <button (click)="closeServiceInfo()" class="btn-close">Cerrar</button>
-  </div>
+<app-service-popup *ngIf="selectedService" [service]="selectedService" (close)="closeServiceInfo()"></app-service-popup>
 
-
-</div>
 
 

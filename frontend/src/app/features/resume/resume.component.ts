@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { GameStateService } from '@core/services/game-state.service';
 import {GameStatusBarComponent} from '@shared/game-status-bar/game-status-bar.component';
+import {ServicePopupComponent} from '@shared/service-popup/service-popup.component';
 
 @Component({
   selector: 'app-resume',
   standalone: true,
-  imports: [CommonModule, GameStatusBarComponent],
+  imports: [CommonModule, GameStatusBarComponent, ServicePopupComponent],
   templateUrl: './resume.component.html',
   styleUrls: ['./resume.component.scss']
 })
@@ -18,26 +19,7 @@ export class ResumeComponent {
   selectedService: any = null;
 
 
-  activeServices = [
-    {
-      name: 'Guardias',
-      icon: '/assets/icons/shield.png',
-      description: 'Reduce el daño recibido en rutas inseguras en un 25%.',
-      duration: 'Permanente'
-    },
-    {
-      name: 'Mejorar velocidad',
-      icon: '/assets/icons/speed.png',
-      description: 'Aumenta la velocidad de la caravana hasta un 50%.',
-      duration: 'Permanente'
-    },
-    {
-      name: 'Mejorar capacidad',
-      icon: '/assets/icons/bag.png',
-      description: 'Aumenta la capacidad de carga hasta un 400%.',
-      duration: 'Permanente'
-    }
-  ];
+
 
 
 

@@ -220,54 +220,7 @@
 
 
 
-.service-popup-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.75);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 2000;
-}
 
-.service-popup {
-  background: #f8e4c3;
-  padding: 2rem;
-  border-radius: 12px;
-  width: 320px;
-  text-align: center;
-  font-family: 'Forum', serif;
-  color: #2d1c0e;
-
-  h2 {
-    margin-bottom: 1rem;
-  }
-
-  .btn-close {
-    margin-top: 1.5rem;
-    padding: 0.5rem 1rem;
-    border: none;
-    background: #2d1c0e;
-    color: #f8e4c3;
-    border-radius: 6px;
-    cursor: pointer;
-
-    &:hover {
-      background: #f8e4c3;
-      color: #2d1c0e;
-      border: 1px solid #2d1c0e;
-    }
-  }
-}
-.popup-service-icon {
-  width: 100px;
-  height: 100px;
-  margin-bottom: 1rem;
-  object-fit: contain;
-  border: none;
-  background: transparent;
-  padding: 6px;
-}
 
 @keyframes mapBounce {
   0%, 100% {
