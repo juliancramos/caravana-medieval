@@ -278,10 +278,9 @@
   }
 }
 
-.map-button {
+.bottom-icon-button {
   position: fixed;
   bottom: 10px;
-  right: 20px;
   background: transparent;
   border: none;
   padding: 0;
@@ -299,12 +298,16 @@
     transition: transform 0.3s ease;
   }
 
-  .map-label {
+  span {
     margin-top: 4px;
     font-size: 2rem;
     color: #f8e4c3;
     font-family: 'Forum', serif;
     text-shadow: 1px 1px 2px #000;
+    padding: 0.2rem 0.6rem;
+    background: linear-gradient(rgba(45, 28, 14, 0.85), rgba(45, 28, 14, 0.85));
+    border-radius: 6px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
   }
 
   &:hover img {
@@ -312,6 +315,14 @@
   }
 }
 
+// Posiciones específicas
+.map-button {
+  right: 20px;
+}
+
+.inventory-button {
+  left: 20px;
+}
 
 
 
