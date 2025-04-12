@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {Router} from '@angular/router';
 import {GameStatusBarComponent} from '@shared/game-status-bar/game-status-bar.component';
+import {ServicePopupComponent} from '@shared/service-popup/service-popup.component';
 
 @Component({
   selector: 'app-inventory',
   standalone: true,
-  imports: [CommonModule, GameStatusBarComponent],
+  imports: [CommonModule, GameStatusBarComponent, ServicePopupComponent],
   templateUrl: './inventory.component.html',
   styleUrls: ['./inventory.component.scss']
 })

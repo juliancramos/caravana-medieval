@@ -37,4 +37,7 @@
   </div>
 
   <button class="back-button" (click)="exitInventory()">⬅ Volver</button>
+
+  <app-service-popup *ngIf="selectedService" [service]="selectedService" (close)="closeServiceInfo()"></app-service-popup>
+
 </div>
