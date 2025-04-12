@@ -67,6 +67,10 @@ export class ResumeComponent {
     this.router.navigate(['/mapa']);
   }
 
+  goToInventory(): void {
+    this.router.navigate(['/inventory']);
+  }
+
   showServiceInfo(service: any): void {
     this.selectedService = service;
   }
