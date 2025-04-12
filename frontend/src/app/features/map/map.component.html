@@ -48,4 +48,9 @@
 
     <button class="btn-close" (click)="closePopup()">✖</button>
   </div>
+
+
 </div>
+
+<!-- Service popup -->
+<app-service-popup *ngIf="selectedService" [service]="selectedService" (close)="closeServiceInfo()"></app-service-popup>

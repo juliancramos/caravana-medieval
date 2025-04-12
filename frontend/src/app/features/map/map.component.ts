@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { GameStateService } from '@core/services/game-state.service';
 import {GameStatusBarComponent} from '@shared/game-status-bar/game-status-bar.component';
+import {ServicePopupComponent} from '@shared/service-popup/service-popup.component';
 @Component({
   selector: 'app-map',
   standalone: true,
-  imports: [CommonModule, GameStatusBarComponent],
+  imports: [CommonModule, GameStatusBarComponent, ServicePopupComponent],
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
