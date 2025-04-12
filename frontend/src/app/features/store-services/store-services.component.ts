@@ -3,17 +3,20 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {GameStateService} from '@core/services/game-state.service';
 import {GameStatusBarComponent} from '@shared/game-status-bar/game-status-bar.component';
+import {ServicePopupComponent} from '@shared/service-popup/service-popup.component';
 
 @Component({
   selector: 'app-store-services',
   standalone: true,
-  imports: [CommonModule, GameStatusBarComponent],
+  imports: [CommonModule, GameStatusBarComponent, ServicePopupComponent],
   templateUrl: './store-services.component.html',
   styleUrls: ['./store-services.component.scss']
 })
 export class StoreServicesComponent {
   constructor(private gameState: GameStateService, private router: Router) {}
-  selectedService: any = null;
+  selectedServiceToBuy: any = null;  // para el popup de compra
+  selectedServiceInfo: any = null;   // para el popup de la barra superior
+
   goldChanged = false;
 playerGold: any = 200;
 
@@ -62,12 +65,21 @@ playerGold: any = 200;
 
 
   openServicePopup(service: any): void {
-    this.selectedService = service;
+    this.selectedServiceToBuy = service;
   }
 
   closeServicePopup(): void {
-    this.selectedService = null;
+    this.selectedServiceToBuy = null;
   }
+
+  showServiceInfo(service: any): void {
+    this.selectedServiceInfo = service;
+  }
+
+  closeServiceInfo(): void {
+    this.selectedServiceInfo = null;
+  }
+
 
 //Buy service with signals
 
@@ -103,11 +115,4 @@ playerGold: any = 200;
     this.router.navigate(['/resume']);
   }
 
-  showServiceInfo(service: any): void {
-    this.selectedService = service;
-  }
-
-  closeServiceInfo(): void {
-    this.selectedService = null;
-  }
 }
