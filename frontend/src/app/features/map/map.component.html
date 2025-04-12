@@ -2,10 +2,13 @@
   <img src="/assets/img/bg-map.png" class="map-background" />
   <div class="screen-fade"></div>
 
-  <!-- Banner con ciudad actual -->
+  <!-- Stats header-->
+  <app-game-status-bar (serviceSelected)="showServiceInfo($event)"></app-game-status-bar>
+
+  <!-- Banner con ciudad actual
   <div class="map-banner">
     <span class="map-banner-text">Ciudad actual: {{ currentCity }}</span>
-  </div>
+  </div>-->
 
   <!-- Ciudades -->
   <ng-container *ngFor="let city of cities">

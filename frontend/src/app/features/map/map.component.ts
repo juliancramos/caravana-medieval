@@ -6,7 +6,7 @@ import {GameStatusBarComponent} from '@shared/game-status-bar/game-status-bar.co
 @Component({
   selector: 'app-map',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, GameStatusBarComponent],
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
@@ -15,6 +15,7 @@ export class MapComponent {
 
  currentCity : string = "Eldenport"
   selectedCity: any = null;
+  selectedService: any = null;
 
   // test cities
   cities = [
@@ -115,5 +116,11 @@ export class MapComponent {
     this.router.navigate(['/resume']);
   }
 
+  showServiceInfo(service: any): void {
+    this.selectedService = service;
+  }
 
+  closeServiceInfo(): void {
+    this.selectedService = null;
+  }
 }
