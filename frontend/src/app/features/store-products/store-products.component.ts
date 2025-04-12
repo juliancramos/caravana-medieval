@@ -1,21 +1,21 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import {GameStatusBarComponent} from "@shared/game-status-bar/game-status-bar.component";
 
 @Component({
   selector: 'app-store-products',
   standalone: true,
   templateUrl: './store-products.component.html',
   styleUrls: ['./store-products.component.scss'],
-  imports: [CommonModule]
+    imports: [CommonModule, GameStatusBarComponent]
 })
 export class StoreProductsComponent {
   constructor(private router: Router) {}
-
+  selectedService: any = null;
   itemsPerPage = 9;
   currentPage = 0;
-  playerGold = 250;
-  goldChanged = false;
+
 
   selectedProduct: any = null;
   selectedQuantity = 1;
@@ -73,28 +73,6 @@ export class StoreProductsComponent {
     this.router.navigate(['/resume']);
   }
 
-  updateGold(amount: number): void {
-    this.playerGold += amount;
-    this.goldChanged = true;
-    setTimeout(() => {
-      this.goldChanged = false;
-    }, 800);
-  }
-
-  // Buy Product
-  buyProduct(): void {
-    const product = this.selectedProduct;
-    const total = product.price * this.selectedQuantity;
-
-    if (this.playerGold >= total) {
-      this.updateGold(-total);
-      this.closeProductPopup();
-      this.showGlobalMessage('¡Producto comprado!', 'success');
-    } else {
-      this.closeProductPopup();
-      this.showGlobalMessage('No tienes suficiente oro.', 'error');
-    }
-  }
 
   showGlobalMessage(message: string, type: 'success' | 'error' = 'success'): void {
     this.globalNotification = message;
@@ -103,5 +81,13 @@ export class StoreProductsComponent {
     setTimeout(() => {
       this.showGlobalNotification = false;
     }, 2000);
+  }
+
+  showServiceInfo(service: any): void {
+    this.selectedService = service;
+  }
+
+  closeServiceInfo(): void {
+    this.selectedService = null;
   }
 }

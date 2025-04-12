@@ -12,7 +12,7 @@ import { GameStateService } from '@core/services/game-state.service';
 export class MapComponent {
   constructor(private gameState: GameStateService, private router: Router) {}
 
-
+ currentCity : string = "Eldenport"
   selectedCity: any = null;
 
   // test cities

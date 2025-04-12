@@ -1,5 +1,9 @@
 <div class="store-products-background">
   <div class="screen-fade"></div>
+
+  <!-- Stats header-->
+  <app-game-status-bar (serviceSelected)="showServiceInfo($event)"></app-game-status-bar>
+
   <!-- Estante de productos -->
   <div class="products-shelf">
     <h2 class="shelf-title">Estante de productos</h2>
@@ -21,13 +25,7 @@
 
   </div>
 
-  <!-- Monedas del jugador (debajo del estante) -->
-  <div class="gold-display">
-    <span class="label">Monedas:</span>
-    <img src="/assets/icons/coin.png" alt="Moneda de oro" class="gold-icon" />
-    <span class="amount" [ngClass]="{ 'flash': goldChanged }">{{ playerGold }}</span>
 
-  </div>
 
   <!-- Popup del producto -->
   <div class="product-popup-overlay" *ngIf="selectedProduct">
@@ -44,7 +42,7 @@
         <button (click)="increaseQuantity()">+</button>
       </div>
 
-      <button class="buy-button" (click)="buyProduct()">Comprar</button>
+      <button class="buy-button">Comprar</button>
     </div>
   </div>
 

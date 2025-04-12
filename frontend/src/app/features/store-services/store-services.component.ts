@@ -14,7 +14,7 @@ export class StoreServicesComponent {
   constructor(private gameState: GameStateService, private router: Router) {}
   selectedService: any = null;
   goldChanged = false;
-
+playerGold: any = 200;
 
   //Global notification
   globalNotification = '';
@@ -54,9 +54,7 @@ export class StoreServicesComponent {
     }
   ];
 
-  get playerGold(){
-    return this.gameState.playerGold();
-  }
+
 
 
 
@@ -73,7 +71,7 @@ export class StoreServicesComponent {
 //Buy service with signals
 
   buyService() {
-    const total = this.selectedService.price;
+    /*const total = this.selectedService.price;
     if (this.playerGold >= total) {
       this.gameState.updateGold(-total);
       this.goldChanged = true;
@@ -83,7 +81,7 @@ export class StoreServicesComponent {
     } else {
       this.closeServicePopup();
       this.showGlobalMessage('No tienes suficiente oro.', 'error');
-    }
+    }*/
   }
 
 
