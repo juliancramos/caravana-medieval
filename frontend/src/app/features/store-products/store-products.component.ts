@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import {GameStatusBarComponent} from "@shared/game-status-bar/game-status-bar.component";
+import {ServicePopupComponent} from '@shared/service-popup/service-popup.component';
 
 @Component({
   selector: 'app-store-products',
   standalone: true,
   templateUrl: './store-products.component.html',
   styleUrls: ['./store-products.component.scss'],
-    imports: [CommonModule, GameStatusBarComponent]
+  imports: [CommonModule, GameStatusBarComponent, ServicePopupComponent]
 })
 export class StoreProductsComponent {
   constructor(private router: Router) {}

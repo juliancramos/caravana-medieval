@@ -54,5 +54,8 @@
     ⬅ Salir de la tienda
   </button>
 
+  <!-- Service popup -->
+  <app-service-popup *ngIf="selectedService" [service]="selectedService" (close)="closeServiceInfo()"></app-service-popup>
+
 
 </div>
