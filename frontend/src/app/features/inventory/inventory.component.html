@@ -2,6 +2,9 @@
   <div class="screen-fade"></div>
   <img src="/assets/img/bg-inventory.png" class="inventory-background" />
 
+  <!-- Stats header-->
+  <app-game-status-bar (serviceSelected)="showServiceInfo($event)"></app-game-status-bar>
+
 
   <div class="inventory-title">
     Inventario

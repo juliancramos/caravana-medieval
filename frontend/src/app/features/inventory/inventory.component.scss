@@ -11,13 +11,12 @@
 
 .inventory-container {
   position: absolute;
-  top: 50%;
+  top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 60%;
   max-height: 75vh;
   background: rgba(45, 28, 14, 0.8);
-  border-radius: 16px;
   padding: 2rem;
   box-shadow: 0 0 12px #000;
   display: flex;
@@ -140,7 +139,7 @@
 
 .inventory-title {
   position: absolute;
-  top: 10px;
+  top: 100px;
   left: 50%;
   transform: translateX(-50%);
   padding: 0.6rem 2.5rem;

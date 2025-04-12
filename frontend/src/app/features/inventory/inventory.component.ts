@@ -1,16 +1,18 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {Router} from '@angular/router';
+import {GameStatusBarComponent} from '@shared/game-status-bar/game-status-bar.component';
 
 @Component({
   selector: 'app-inventory',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, GameStatusBarComponent],
   templateUrl: './inventory.component.html',
   styleUrls: ['./inventory.component.scss']
 })
 export class InventoryComponent {
   selectedCategory = 'all';
+  selectedService: any = null;
 
   constructor(private router: Router) {}
   itemsPerPage = 8;
@@ -60,5 +62,14 @@ export class InventoryComponent {
       ? this.inventoryItems
       : this.inventoryItems.filter(item => item.category === this.selectedCategory);
   }
+
+  showServiceInfo(service: any): void {
+    this.selectedService = service;
+  }
+
+  closeServiceInfo(): void {
+    this.selectedService = null;
+  }
+
 
 }
