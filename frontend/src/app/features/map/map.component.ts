@@ -2,6 +2,7 @@ import {Component, computed} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { GameStateService } from '@core/services/game-state.service';
+import {GameStatusBarComponent} from '@shared/game-status-bar/game-status-bar.component';
 @Component({
   selector: 'app-map',
   standalone: true,
@@ -113,4 +114,6 @@ export class MapComponent {
   goBack(): void {
     this.router.navigate(['/resume']);
   }
+
+
 }

@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {GameStateService} from '@core/services/game-state.service';
+import {GameStatusBarComponent} from '@shared/game-status-bar/game-status-bar.component';
 
 @Component({
   selector: 'app-store-services',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, GameStatusBarComponent],
   templateUrl: './store-services.component.html',
   styleUrls: ['./store-services.component.scss']
 })
@@ -98,12 +99,15 @@ playerGold: any = 200;
   }
 
 
-
-
-
-
-
   exitStore(): void {
     this.router.navigate(['/resume']);
+  }
+
+  showServiceInfo(service: any): void {
+    this.selectedService = service;
+  }
+
+  closeServiceInfo(): void {
+    this.selectedService = null;
   }
 }

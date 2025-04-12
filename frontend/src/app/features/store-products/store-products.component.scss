@@ -222,37 +222,7 @@
   }
 }
 
-.gold-display {
-  position: absolute;
-  right: 353px; // igual que el estante
-  top: 600px;
-  background: rgba(0, 0, 0, 0.75);
-  padding: 0.6rem 1.2rem;
-  border-radius: 12px;
-  border: 1px solid #f8e4c333;
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-family: 'Forum', serif;
-  font-size: 1.2rem;
-  color: #f8e4c3;
-  box-shadow: 0 0 6px #00000088;
-  backdrop-filter: blur(3px);
-}
 
-.gold-icon {
-  width: 28px;
-  height: 28px;
-}
-
-.label {
-  font-weight: bold;
-  margin-right: 0.2rem;
-}
-
-.amount {
-  font-size: 1.3rem;
-}
 
 @keyframes goldFlash {
   0% {
