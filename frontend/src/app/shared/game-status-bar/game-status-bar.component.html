@@ -1,1 +1,26 @@
-<p>game-status-bar works!</p>
+<div class="status-bar">
+  <div class="status-left">
+    <div class="status-item">
+      <img src="/assets/icons/heart.png" alt="Vida" class="status-icon" />
+      <span>Vida:</span>
+      <span>{{ gameState.playerHealth }}</span>
+    </div>
+    <div class="status-item">
+      <img src="/assets/icons/coin.png" alt="Dinero" class="status-icon" />
+      <span>Dinero:</span>
+      <span>{{ gameState.playerGold }}</span>
+    </div>
+  </div>
+
+  <div class="status-center">
+    <span>Ciudad: {{ gameState.currentCity }}</span>
+  </div>
+
+  <div class="status-right">
+    <ng-container *ngFor="let service of gameState.activeServices">
+      <button class="service-icon-btn" (click)="showServiceInfo(service)">
+        <img [src]="service.icon" [alt]="service.name" class="service-icon" />
+      </button>
+    </ng-container>
+  </div>
+</div>

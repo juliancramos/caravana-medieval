@@ -12,10 +12,7 @@ import { GameStateService } from '@core/services/game-state.service';
 export class MapComponent {
   constructor(private gameState: GameStateService, private router: Router) {}
 
-  // Reactive current city getter
-  get currentCity() {
-    return this.gameState.currentCity();
-  }
+
   selectedCity: any = null;
 
   // test cities
@@ -112,11 +109,6 @@ export class MapComponent {
     this.selectedCity = null;
   }
 
-  travelTo(city: any): void {
-    this.gameState.setCurrentCity(city.name);
-    this.closePopup();
-    this.goBack();
-  }
 
   goBack(): void {
     this.router.navigate(['/resume']);
