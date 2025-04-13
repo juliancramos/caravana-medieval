@@ -11,21 +11,21 @@
   </div>-->
 
   <!-- Ciudades -->
-  <ng-container *ngFor="let city of cities">
+  <ng-container *ngFor="let city of availableCities">
     <button
       class="map-city"
       [ngClass]="{
-        available: city.available,
-        'current-city': city.name === currentCity
-
-      }"
+      available: city.available,
+      'current-city': city.name === currentCity
+    }"
       [ngStyle]="{ top: city.y + '%', left: city.x + '%' }"
-      (click)="city.name !== currentCity && city.available && openPopup(city)"
+      (click)="city.name !== currentCity && openPopup(city)"
     >
       <img src="/assets/icons/city-icon.png" alt="Ciudad" />
       <span class="city-name">{{ city.name }}</span>
     </button>
   </ng-container>
+
 
   <!-- Botón volver -->
   <button class="back-button" (click)="goBack()">⬅ Volver</button>

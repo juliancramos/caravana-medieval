@@ -32,6 +32,12 @@ export class InventoryComponent {
     { name: 'Especias', icon: '/assets/icons/bag.png', quantity: 5, category: 'recursos' },
     { name: 'Armas', icon: '/assets/icons/bag.png', quantity: 1, category: 'armas' },
     { name: 'Pociones', icon: '/assets/icons/bag.png', quantity: 8, category: 'alquimia' },
+    { name: 'Especias', icon: '/assets/icons/bag.png', quantity: 5, category: 'recursos' },
+    { name: 'Armas', icon: '/assets/icons/bag.png', quantity: 1, category: 'armas' },
+    { name: 'Pociones', icon: '/assets/icons/bag.png', quantity: 8, category: 'alquimia' },
+    { name: 'Especias', icon: '/assets/icons/bag.png', quantity: 5, category: 'recursos' },
+    { name: 'Armas', icon: '/assets/icons/bag.png', quantity: 1, category: 'armas' },
+    { name: 'Pociones', icon: '/assets/icons/bag.png', quantity: 8, category: 'alquimia' },
   ];
 
 
