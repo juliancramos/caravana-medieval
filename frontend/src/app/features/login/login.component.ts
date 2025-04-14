@@ -20,7 +20,7 @@ export class LoginComponent {
     this.showBlackScreen = true;
 
     setTimeout(() => {
-      this.router.navigate(['/seleccionar-partida']);
+      this.router.navigate(['/select-game']);
     }, 900);
   }
 }

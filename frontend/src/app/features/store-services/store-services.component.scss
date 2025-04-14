@@ -10,7 +10,7 @@
 .services-shelf {
   position: absolute;
   right: 250px;
-  top: 50px;
+  top: 150px;
   width: 400px;
   background: rgba(59, 45, 38, 0.71);
   border-radius: 14px;
@@ -86,26 +86,7 @@
   animation: goldFlash 0.8s ease;
 }
 
-.gold-display {
-  position: absolute;
-  right: 353px;
-  top: calc(100px + 480px);
-  background: rgba(0, 0, 0, 0.75);
-  padding: 0.6rem 1.2rem;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-size: 1.3rem;
-  color: #f8e4c3;
-  box-shadow: 0 0 6px #00000088;
-  backdrop-filter: blur(3px);
-}
 
-.gold-icon {
-  width: 28px;
-  height: 28px;
-}
 
 .exit-button {
   position: fixed;

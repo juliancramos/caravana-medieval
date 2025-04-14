@@ -1,32 +1,32 @@
-// src/app/core/services/game-state.service.ts
-import {computed, Injectable, signal} from '@angular/core';
+import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class GameStateService {
-  // Signal for current city
-  private _currentCity = signal('Eldenport');
-  // Reactive getter
-  currentCity = computed(() => this._currentCity());
+  playerHealth = 100;
+  playerGold = 250;
+  currentCity = 'Eldenport';
+  activeServices = [
+    {
+      name: 'Guardias',
+      icon: '/assets/icons/shield.png',
+      description: 'Reduce el daño recibido en rutas inseguras en un 25%.',
+      duration: 'Permanente'
+    },
+    {
+      name: 'Mejorar velocidad',
+      icon: '/assets/icons/speed.png',
+      description: 'Aumenta la velocidad de la caravana hasta un 50%.',
+      duration: 'Permanente'
+    },
+    {
+      name: 'Mejorar capacidad',
+      icon: '/assets/icons/bag.png',
+      description: 'Aumenta la capacidad de carga hasta un 400%.',
+      duration: 'Permanente'
+    }
+  ];
 
-// Upload current city
-  setCurrentCity(newCity: string) {
-    this._currentCity.set(newCity);
-  }
 
-  // Health Signal
-  private _playerHealth = signal(100);
-  playerHealth = computed(() => this._playerHealth());
 
-  updateHealth(amount: number) {
-    this._playerHealth.set(this._playerHealth() + amount);
-  }
-
-  // Gold Signal
-  private _playerGold = signal(250);
-  playerGold = computed(() => this._playerGold());
-
-  updateGold(amount: number) {
-    this._playerGold.set(this._playerGold() + amount);
-  }
-
+  // Opcionalmente podrías usar getters/setters o signals si en un futuro lo deseas.
 }

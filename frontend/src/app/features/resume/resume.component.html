@@ -1,33 +1,6 @@
-<!-- Barra superior con estado del jugador -->
-<div class="status-bar">
-  <div class="status-left">
-    <div class="status-item">
-      <img src="/assets/icons/heart.png" alt="Vida" class="status-icon" />
-      <span>Vida:</span>
-      <span>{{ playerHealth }}</span>
-    </div>
-    <div class="status-item">
-      <img src="/assets/icons/coin.png" alt="Dinero" class="status-icon" />
-      <span>Dinero:</span>
-      <span>{{ playerGold }}</span>
-    </div>
-  </div>
+<!-- Stats header-->
+<app-game-status-bar (serviceSelected)="showServiceInfo($event)"></app-game-status-bar>
 
-  <div class="status-center">
-
-       <span>Ciudad: {{ currentCity }}</span>
-
-
-  </div>
-
-  <div class="status-right">
-    <ng-container *ngFor="let service of activeServices">
-      <button class="service-icon-btn" (click)="showServiceInfo(service)">
-        <img [src]="service.icon" [alt]="service.name" class="service-icon" />
-      </button>
-    </ng-container>
-  </div>
-</div>
 
 <!-- background game -->
 <div class="resume-background">
@@ -45,25 +18,22 @@
   </button>
 
   <!-- Map button -->
-  <button class="map-button" (click)="goToMap()" aria-label="Abrir mapa">
+  <button class="bottom-icon-button map-button" (click)="goToMap()">
     <img src="/assets/icons/map.png" alt="Mapa" />
-    <span class="map-label">Mapa</span>
+    <span>Mapa</span>
+  </button>
+
+  <!-- Inventory button -->
+  <button class="bottom-icon-button inventory-button" (click)="goToInventory()">
+    <img src="/assets/icons/bag.png" alt="Inventario" />
+    <span>Inventario</span>
   </button>
 
 
 </div>
 
 <!-- Service popup -->
-<div class="service-popup-overlay" *ngIf="selectedService">
-  <div class="service-popup">
-    <img [src]="selectedService.icon" [alt]="selectedService.name" class="popup-service-icon" />
-    <h2>{{ selectedService.name }}</h2>
-    <p>{{ selectedService.description }}</p>
-    <p><strong>Duración:</strong> {{ selectedService.duration }}</p>
-    <button (click)="closeServiceInfo()" class="btn-close">Cerrar</button>
-  </div>
+<app-service-popup *ngIf="selectedService" [service]="selectedService" (close)="closeServiceInfo()"></app-service-popup>
 
-
-</div>
 
 

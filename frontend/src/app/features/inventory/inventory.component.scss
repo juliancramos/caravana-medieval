@@ -1,0 +1,198 @@
+.inventory-screen {
+  width: 100%;
+  height: 100vh;
+  background: url('/assets/img/bg-inventory.png') no-repeat center center;
+  background-size: cover;
+  position: relative;
+  font-family: 'Forum', serif;
+  color: #f8e4c3;
+  overflow: hidden;
+}
+
+.inventory-container {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  max-height: 75vh;
+  background: rgba(45, 28, 14, 0.8);
+  padding: 2rem;
+  box-shadow: 0 0 12px #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+.items-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  padding-bottom: 1rem;
+  flex: 1 1 auto;
+  overflow-y: auto;
+
+  .item-tile {
+    aspect-ratio: 1 / 1;
+    max-height: 200px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid #f8e4c3;
+    border-radius: 10px;
+    text-align: center;
+    padding: 0.4rem;
+    cursor: pointer;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    .item-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease;
+    }
+
+    img {
+      width: 96px;
+      height: 96px;
+      object-fit: contain;
+      margin-bottom: 0.4rem;
+    }
+
+    .item-name {
+      font-size: 1.3rem;
+      color: #f8e4c3;
+    }
+
+    &:hover {
+      border: 1px solid gold;
+      box-shadow: 0 0 10px gold, 0 0 15px rgba(255, 215, 0, 0.4);
+
+      .item-content {
+        transform: scale(1.05);
+      }
+    }
+  }
+}
+
+
+
+
+
+.pagination-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+
+  button {
+    background: rgba(0, 0, 0, 0.5);
+    color: #f8e4c3;
+    font-size: 1.2rem;
+    border: 1px solid #f8e4c3;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+
+    &:disabled {
+      opacity: 0.3;
+      cursor: default;
+    }
+
+    &:hover:not(:disabled) {
+      background: #f8e4c3;
+      color: #2d1c0e;
+    }
+  }
+
+  .page-indicator {
+    font-size: 1.2rem;
+  }
+}
+.back-button {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.65);
+  color: #f8e4c3;
+  font-family: 'Forum', serif;
+  font-size: 1.1rem;
+  padding: 1.2rem 2.4rem;
+  border: 2px solid #f8e4c3;
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 1000;
+  transition: all 0.3s ease;
+
+
+  &:hover {
+    background: #f8e4c3;
+    color: #111;
+    border-color: #111;
+    box-shadow: 0 0 8px #f8e4c388;
+  }
+}
+
+.inventory-title {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.6rem 2.5rem;
+  background: rgba(45, 28, 14, 0.85);
+  border: 2px solid #f8e4c3;
+  border-radius: 15px;
+  text-align: center;
+  font-family: 'Forum', serif;
+  font-size: 3rem;
+  color: #f8e4c3;
+  text-shadow: 1px 1px 3px #000;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  z-index: 10;
+}
+.screen-fade {
+  position: absolute;
+  inset: 0;
+  background-color: #000;
+  z-index: 100;
+  animation: fadeFromBlack 1.2s ease forwards;
+  pointer-events: none;
+}
+
+@keyframes fadeFromBlack {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+.inventory-filters {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+
+  button {
+    background: rgba(0, 0, 0, 0.5);
+    color: #f8e4c3;
+    border: 1px solid #f8e4c3;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-family: 'Forum', serif;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+
+    &.active {
+      background: #f8e4c3;
+      color: #2d1c0e;
+      font-weight: bold;
+    }
+
+    &:hover {
+      background: #f8e4c3;
+      color: #2d1c0e;
+    }
+  }
+}

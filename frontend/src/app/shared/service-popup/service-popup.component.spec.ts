@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SelectGameComponent } from './select-game.component';
+import { ServicePopupComponent } from './service-popup.component';
 
-describe('SelectGame2Component', () => {
-  let component: SelectGameComponent;
-  let fixture: ComponentFixture<SelectGameComponent>;
+describe('ServicePopupComponent', () => {
+  let component: ServicePopupComponent;
+  let fixture: ComponentFixture<ServicePopupComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SelectGameComponent]
+      imports: [ServicePopupComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SelectGameComponent);
+    fixture = TestBed.createComponent(ServicePopupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

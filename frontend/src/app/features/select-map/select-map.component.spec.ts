@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SelectGameComponent } from './select-game.component';
+import { SelectMapComponent } from './select-map.component';
 
-describe('SelectGame2Component', () => {
-  let component: SelectGameComponent;
-  let fixture: ComponentFixture<SelectGameComponent>;
+describe('SelectGameComponent', () => {
+  let component: SelectMapComponent;
+  let fixture: ComponentFixture<SelectMapComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SelectGameComponent]
+      imports: [SelectMapComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SelectGameComponent);
+    fixture = TestBed.createComponent(SelectMapComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

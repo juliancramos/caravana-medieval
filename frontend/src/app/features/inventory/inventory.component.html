@@ -1,0 +1,43 @@
+<div class="inventory-screen">
+  <div class="screen-fade"></div>
+  <img src="/assets/img/bg-inventory.png" class="inventory-background" />
+
+  <!-- Stats header-->
+  <app-game-status-bar (serviceSelected)="showServiceInfo($event)"></app-game-status-bar>
+
+
+  <div class="inventory-title">
+    Inventario
+  </div>
+
+  <div class="inventory-container">
+
+    <div class="inventory-filters">
+      <button (click)="filterCategory('all')" [class.active]="selectedCategory === 'all'">Todos</button>
+      <button (click)="filterCategory('recursos')" [class.active]="selectedCategory === 'recursos'">🌾 Recursos</button>
+      <button (click)="filterCategory('armas')" [class.active]="selectedCategory === 'armas'">⚔️ Armas</button>
+      <button (click)="filterCategory('alquimia')" [class.active]="selectedCategory === 'alquimia'">🧪 Alquimia</button>
+    </div>
+
+
+    <div class="items-grid">
+      <div class="item-tile" *ngFor="let item of paginatedItems">
+        <div class="item-content">
+          <img [src]="item.icon" [alt]="item.name" />
+          <span class="item-name">{{ item.name }}<br>x{{ item.quantity }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pagination-controls">
+      <button (click)="prevPage()" [disabled]="currentPage === 0">&larr;</button>
+      <span class="page-indicator">Página {{ currentPage + 1 }}</span>
+      <button (click)="nextPage()" [disabled]="(currentPage + 1) * itemsPerPage >= filteredItems.length">&rarr;</button>
+    </div>
+  </div>
+
+  <button class="back-button" (click)="exitInventory()">⬅ Volver</button>
+
+  <app-service-popup *ngIf="selectedService" [service]="selectedService" (close)="closeServiceInfo()"></app-service-popup>
+
+</div>

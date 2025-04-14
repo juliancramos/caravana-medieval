@@ -6,18 +6,19 @@ import { CommonModule } from '@angular/common';
   selector: 'app-select-game',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './select-game.component.html',
-  styleUrls: ['./select-game.component.scss']
+  templateUrl: './select-map.component.html',
+  styleUrls: ['./select-map.component.scss']
 })
-export class SelectGameComponent {
+export class SelectMapComponent {
+
+
+
   constructor(private router: Router) {}
 
-  loadGame(slot: number): void {
+
+  startGame(): void {
     this.router.navigate(['/resume']);
   }
 
-  createNewGame(): void {
-    this.router.navigate(['/select-caravan']);
-  }
 
 }
