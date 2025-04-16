@@ -2,20 +2,25 @@ package web.app.caravanamedieval.controller;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
-import org.springframework.beans.factory.annotation.Autowired;
-import java.util.Map;
-import java.util.HashMap;
 
+import web.app.caravanamedieval.dto.LoginRequest;
+import web.app.caravanamedieval.dto.LoginResponse;
 import web.app.caravanamedieval.service.AuthService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("auth")
 public class AuthController {
-    @Autowired
-    private AuthService authService;
+
+    private final AuthService authService;
+
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, Object>> login(@RequestBody Map<String, String> credentials) {
-        return authService.authenticate(credentials.get("username"), credentials.get("password"));
+    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+        LoginResponse response = authService.authenticate(request);
+        return ResponseEntity.ok(response);
     }
+
 }
