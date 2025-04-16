@@ -1,22 +1,24 @@
 <div class="select-game-screen">
   <div class="screen-fade"></div>
+
   <div class="game-cards">
-    <!-- Ejemplo de partida existente -->
-    <div class="game-card" (click)="loadGame(1)">
-      <img src="/assets/img/map1-thumb.png" alt="Partida guardada 1" />
-      <span class="card-label">Partida 1</span>
-    </div>
-
-    <!-- Carta para crear nueva partida -->
-    <div class="game-card new-game" (click)="createNewGame()">
-      <span class="plus-icon">+</span>
-      <span class="card-label">Nueva partida</span>
-    </div>
-
-    <div class="game-card new-game" (click)="createNewGame()">
-      <span class="plus-icon">+</span>
-      <span class="card-label">Nueva partida</span>
-    </div>
-
+    @for (slot of gameSlots(); let i = $index; track i) {
+      <!-- Verifica si es un slot o si es nulo -->
+      <ng-container *ngIf="slot; else newGameCard">
+        <div class="game-card" (click)="loadGame(slot)">
+          <img 
+            [src]="'/assets/img/map' + (i + 1) + '-thumb.png'" 
+            [alt]="slot.game.map.name" />
+          <span class="card-label">{{ slot.game.map.name }}</span>
+        </div>
+      </ng-container>
+    }
   </div>
+
+  <ng-template #newGameCard>
+    <div class="game-card new-game" (click)="createNewGame()">
+      <span class="plus-icon">+</span>
+      <span class="card-label">Nueva partida</span>
+    </div>
+  </ng-template>
 </div>
