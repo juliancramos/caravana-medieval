@@ -1,21 +1,11 @@
+import { Player } from './player.model';
+import { Game } from './game.model';
+
 export interface GameByPlayer {
-    id: {
-      gameId: number;
-      playerId: number;
-    };
-    game: {
-      idGame: number;
-      map: {
-        idMap: number;
-        name: string;
-        description: string;
-        imgUrl: string | null;
-      };
-    };
-    player: {
-      idPlayer: number;
-      username: string;
-      imgUrl: string | null;
-    };
-  }
-  
+  id: {
+    gameId: number;
+    playerId: number;
+  };
+  game: Game;
+  player: Player;
+}
