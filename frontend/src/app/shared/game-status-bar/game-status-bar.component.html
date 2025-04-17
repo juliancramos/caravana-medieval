@@ -1,24 +1,31 @@
 <div class="status-bar">
-  <div class="status-left">
-    <div class="status-item">
-      <img src="/assets/icons/heart.png" alt="Vida" class="status-icon" />
-      <span>Vida:</span>
-      <span>{{ gameState.playerHealth }}</span>
+  <div class="status-section left">
+    <div class="info-block caravan">
+      <img src="/assets/icons/caravan-icon.png" alt="Caravana" class="info-icon" />
+      <span>{{ caravanName() }}</span>
     </div>
-    <div class="status-item">
-      <img src="/assets/icons/coin.png" alt="Dinero" class="status-icon" />
-      <span>Dinero:</span>
-      <span>{{ gameState.playerGold }}</span>
+    <div class="info-block life">
+      <img src="/assets/icons/heart.png" alt="Vida" class="info-icon" />
+      <span>{{ lifePoints() }}</span>
+    </div>
+    <div class="info-block gold">
+      <img src="/assets/icons/coin.png" alt="Dinero" class="info-icon" />
+      <span>{{ availableMoney() }}/{{ minProfit() }}</span>
+    </div>
+    <div class="info-block time">
+      <img src="/assets/icons/time-icon.png" alt="Tiempo" class="info-icon" />
+      <span>{{ remainingTime() }}</span>
+    </div>
+
+    <div class="info-block city">
+      <img src="/assets/icons/current-city-icon.png" alt="Ciudad" class="info-icon" />
+      <span>Ciudad: {{ cityName() }}</span>
     </div>
   </div>
 
-  <div class="status-center">
-    <span>Ciudad: {{ gameState.currentCity }}</span>
-  </div>
-
-  <div class="status-right">
+  <div class="status-section right">
     <ng-container *ngFor="let service of gameState.activeServices">
-      <button class="service-icon-btn" (click)="showServiceInfo(service)">
+      <button class="service-btn" (click)="showServiceInfo(service)">
         <img [src]="service.icon" [alt]="service.name" class="service-icon" />
       </button>
     </ng-container>
