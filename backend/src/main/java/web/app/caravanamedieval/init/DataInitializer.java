@@ -260,7 +260,8 @@ public class DataInitializer implements CommandLineRunner {
             String name = productNames[new Random().nextInt(productNames.length)] + " " + (i + 1);
             String description = productDescriptions[new Random().nextInt(productDescriptions.length)];
             Float weight = (float) (new Random().nextInt(100) + 1); // Peso entre 1 y 100
-            ProductDTO productDTO = new ProductDTO(name, description, weight);
+            String imgUrl = "a";
+            ProductDTO productDTO =new ProductDTO(name, description, weight, imgUrl);
             Product product = ProductMapper.INSTANCE.toEntity(productDTO);
             productRepository.save(product);
             System.out.println("Producto creado: " + name);

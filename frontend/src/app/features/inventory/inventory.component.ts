@@ -1,73 +1,50 @@
-import { Component } from '@angular/core';
+import { Component, inject, signal, effect } from '@angular/core';
+import { Router } from '@angular/router';
+import { ProductsByCaravan } from '@shared/models/products-by-caravan';
+import { CurrentGameService } from '@core/services/current-game.service';
+import { ProductsByCaravanService } from '@core/services/products-by-caravan.service';
+import { ServicePopupComponent } from '@shared/service-popup/service-popup.component';
 import { CommonModule } from '@angular/common';
-import {Router} from '@angular/router';
-import {GameStatusBarComponent} from '@shared/game-status-bar/game-status-bar.component';
-import {ServicePopupComponent} from '@shared/service-popup/service-popup.component';
+import { GameStatusBarComponent } from '@shared/game-status-bar/game-status-bar.component';
 
 @Component({
   selector: 'app-inventory',
-  standalone: true,
-  imports: [CommonModule, GameStatusBarComponent, ServicePopupComponent],
   templateUrl: './inventory.component.html',
-  styleUrls: ['./inventory.component.scss']
+  styleUrls: ['./inventory.component.scss'],
+  imports: [
+    ServicePopupComponent,
+    CommonModule,
+    GameStatusBarComponent,
+  ]
 })
 export class InventoryComponent {
-  selectedCategory = 'all';
+  private router = inject(Router);
+  private currentGame = inject(CurrentGameService);
+  private productService = inject(ProductsByCaravanService);
+
+  products = signal<ProductsByCaravan[]>([]);
+  selectedCategory = 'all'; 
   selectedService: any = null;
 
-  constructor(private router: Router) {}
-  itemsPerPage = 8;
-  currentPage = 0;
+  constructor() {
+    effect(() => {
+      const caravanId = this.currentGame.selectedGame()?.game.caravan.idCaravan;
+      if (!caravanId) return;
 
-  inventoryItems = [
-    { name: 'Especias', icon: '/assets/icons/bag.png', quantity: 5, category: 'recursos' },
-    { name: 'Armas', icon: '/assets/icons/bag.png', quantity: 1, category: 'armas' },
-    { name: 'Pociones', icon: '/assets/icons/bag.png', quantity: 8, category: 'alquimia' },
-    { name: 'Especias', icon: '/assets/icons/bag.png', quantity: 5, category: 'recursos' },
-    { name: 'Armas', icon: '/assets/icons/bag.png', quantity: 1, category: 'armas' },
-    { name: 'Pociones', icon: '/assets/icons/bag.png', quantity: 8, category: 'alquimia' },
-    { name: 'Especias', icon: '/assets/icons/bag.png', quantity: 5, category: 'recursos' },
-    { name: 'Armas', icon: '/assets/icons/bag.png', quantity: 1, category: 'armas' },
-    { name: 'Pociones', icon: '/assets/icons/bag.png', quantity: 8, category: 'alquimia' },
-    { name: 'Especias', icon: '/assets/icons/bag.png', quantity: 5, category: 'recursos' },
-    { name: 'Armas', icon: '/assets/icons/bag.png', quantity: 1, category: 'armas' },
-    { name: 'Pociones', icon: '/assets/icons/bag.png', quantity: 8, category: 'alquimia' },
-    { name: 'Especias', icon: '/assets/icons/bag.png', quantity: 5, category: 'recursos' },
-    { name: 'Armas', icon: '/assets/icons/bag.png', quantity: 1, category: 'armas' },
-    { name: 'Pociones', icon: '/assets/icons/bag.png', quantity: 8, category: 'alquimia' },
-    { name: 'Especias', icon: '/assets/icons/bag.png', quantity: 5, category: 'recursos' },
-    { name: 'Armas', icon: '/assets/icons/bag.png', quantity: 1, category: 'armas' },
-    { name: 'Pociones', icon: '/assets/icons/bag.png', quantity: 8, category: 'alquimia' },
-  ];
-
-
-
-  prevPage(): void {
-    if (this.currentPage > 0) this.currentPage--;
+      this.productService.getProductsByCaravan(caravanId).subscribe({
+        next: (res: ProductsByCaravan[]) => this.products.set(res),
+        error: (err: any) => console.error('Error loading products', err)
+      });
+    });
   }
+
+  filterCategory(category: string): void {
+    this.selectedCategory = category;
+    //  lógica de filtrado (por ahora no)
+  }
+
   exitInventory(): void {
     this.router.navigate(['/resume']);
-  }
-
-  nextPage(): void {
-    const totalPages = Math.ceil(this.inventoryItems.length / this.itemsPerPage);
-    if (this.currentPage < totalPages - 1) this.currentPage++;
-  }
-
-  filterCategory(category: string) {
-    this.selectedCategory = category;
-  }
-
-  get paginatedItems() {
-    const start = this.currentPage * this.itemsPerPage;
-    return this.filteredItems.slice(start, start + this.itemsPerPage);
-  }
-
-
-  get filteredItems() {
-    return this.selectedCategory === 'all'
-      ? this.inventoryItems
-      : this.inventoryItems.filter(item => item.category === this.selectedCategory);
   }
 
   showServiceInfo(service: any): void {
@@ -77,6 +54,4 @@ export class InventoryComponent {
   closeServiceInfo(): void {
     this.selectedService = null;
   }
-
-
 }

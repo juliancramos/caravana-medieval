@@ -57,6 +57,9 @@ public class ProductServiceImpl implements ProductService {
         if (actualizado.getWeight() != null) {
             product.setWeight(actualizado.getWeight());
         }
+        if(actualizado.getImgUrl() != null){
+            product.setImgUrl(actualizado.getImgUrl());
+        }
 
         return productRepository.save(product);
     }
