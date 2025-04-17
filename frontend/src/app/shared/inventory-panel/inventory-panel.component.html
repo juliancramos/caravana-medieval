@@ -1,0 +1,31 @@
+<div class="inventory-panel">
+  <!-- Título -->
+  <div class="inventory-title">{{ title }}</div>
+
+  <!-- Filtros -->
+  <div class="inventory-filters" *ngIf="showFilters">
+    <button (click)="filterCategory('all')" [class.active]="selectedCategory === 'all'">Todos</button>
+    <button (click)="filterCategory('recursos')" [class.active]="selectedCategory === 'recursos'">🌾 Recursos</button>
+    <button (click)="filterCategory('armas')" [class.active]="selectedCategory === 'armas'">⚔️ Armas</button>
+    <button (click)="filterCategory('alquimia')" [class.active]="selectedCategory === 'alquimia'">🧪 Alquimia</button>
+  </div>
+
+  <!-- Productos -->
+  <div class="items-scroll">
+    @for (item of items(); track item.product.idProduct) {
+      <app-inventory-item
+        [imgUrl]="item.product.imgUrl"
+        [name]="item.product.name"
+        [quantity]="item.quantity"
+        (itemSelected)="onItemClicked(item)">
+      </app-inventory-item>
+    }
+  </div>
+
+  <!-- Popup -->
+  <app-product-popup
+    *ngIf="selectedItem"
+    [product]="selectedItem"
+    (close)="selectedItem = null">
+  </app-product-popup>
+</div>

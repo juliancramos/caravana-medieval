@@ -6,19 +6,18 @@ import { ProductsByCaravanService } from '@core/services/products-by-caravan.ser
 import { ServicePopupComponent } from '@shared/service-popup/service-popup.component';
 import { CommonModule } from '@angular/common';
 import { GameStatusBarComponent } from '@shared/game-status-bar/game-status-bar.component';
-import { InventoryItemComponent } from '@shared/inventory-item/inventory-item.component';
-import { ProductPopupComponent } from '@shared/product-popup/product-popup.component';
+import { InventoryPanelComponent } from "../../shared/inventory-panel/inventory-panel.component";
 
 @Component({
   selector: 'app-inventory',
   templateUrl: './inventory.component.html',
   styleUrls: ['./inventory.component.scss'],
+  standalone: true,
   imports: [
     ServicePopupComponent,
     CommonModule,
     GameStatusBarComponent,
-    InventoryItemComponent,
-    ProductPopupComponent
+    InventoryPanelComponent
   ]
 })
 export class InventoryComponent {
@@ -27,9 +26,6 @@ export class InventoryComponent {
   private productService = inject(ProductsByCaravanService);
 
   products = signal<ProductsByCaravan[]>([]);
-  //Señal para el producto actual. Se va actualizando según el componente de popup
-  selectedProduct: ProductsByCaravan | null = null;
-  selectedCategory = 'all'; 
   selectedService: any = null;
 
   constructor() {
@@ -42,20 +38,6 @@ export class InventoryComponent {
         error: (err: any) => console.error('Error loading products', err)
       });
     });
-  }
-
-
-  
-
-  onItemSelected(item: ProductsByCaravan): void {
-    this.selectedProduct = item;
-  }
-
-  
-
-  filterCategory(category: string): void {
-    this.selectedCategory = category;
-    //  lógica de filtrado (por ahora no)
   }
 
   exitInventory(): void {

@@ -2,40 +2,17 @@
   <div class="screen-fade"></div>
   <img src="/assets/img/bg-inventory.png" class="inventory-background" />
 
+  <!-- Header -->
   <app-game-status-bar (serviceSelected)="showServiceInfo($event)"></app-game-status-bar>
 
-  <div class="inventory-panel">
-    <!-- Título -->
-    <div class="inventory-title">Inventario</div>
+  <!-- Panel para los productos -->
+  <app-inventory-panel
+    [title]="'Inventario'"
+    [items]="products"
+    [showFilters]="true">
+  </app-inventory-panel>  
 
-    <!-- Filtros -->
-    <div class="inventory-filters">
-      <button (click)="filterCategory('all')" [class.active]="selectedCategory === 'all'">Todos</button>
-      <button (click)="filterCategory('recursos')" [class.active]="selectedCategory === 'recursos'">🌾 Recursos</button>
-      <button (click)="filterCategory('armas')" [class.active]="selectedCategory === 'armas'">⚔️ Armas</button>
-      <button (click)="filterCategory('alquimia')" [class.active]="selectedCategory === 'alquimia'">🧪 Alquimia</button>
-    </div>
-
-    <!-- Productos -->
-    <div class="items-scroll">
-      @for (item of products(); track item.product.idProduct) {
-        <app-inventory-item
-          [imgUrl]="item.product.imgUrl"
-          [name]="item.product.name"
-          [quantity]="item.quantity"
-          (itemSelected)="onItemSelected(item)">
-        </app-inventory-item>
-
-      }
-    </div>
-    <!-- Escucha el evento del hijo con (close) -->
-    <app-product-popup
-      *ngIf="selectedProduct"
-      [product]="selectedProduct"
-      (close)="selectedProduct = null">
-    </app-product-popup>
-  </div>
-  <button class="back-button" (click)="exitInventory()">⬅ Volver</button>
+  <button class="back-button" (click)="exitInventory()"> ⬅ Volver</button>
 
   
   <app-service-popup

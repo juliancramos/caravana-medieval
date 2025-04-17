@@ -22,68 +22,6 @@
   z-index: -1;
 }
 
-.inventory-panel {
-  width: 65%;
-  margin: 15vh auto 5vh auto;
-  background: rgba(30, 15, 5, 0.75);
-  border-radius: 20px;
-  padding: 2rem 3rem;
-  box-shadow: 0 0 15px #000;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  overflow: hidden;
-}
-
-.inventory-title {
-  font-size: 3rem;
-  color: #f8e4c3;
-  margin-bottom: 1.5rem;
-  text-shadow: 1px 1px 2px #000;
-}
-
-.inventory-filters {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
-
-  button {
-    font-size: 1rem;
-    padding: 0.5rem 1.2rem;
-    border: none;
-    border-radius: 8px;
-    background-color: #2e1c0d;
-    color: #f8e4c3;
-    cursor: pointer;
-    font-family: 'Cinzel', serif;
-    transition: 0.3s;
-
-    &.active, &:hover {
-      background-color: #f8e4c3;
-      color: #1d1207;
-    }
-  }
-}
-
-.items-scroll {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 1.5rem;
-  max-height: 420px;
-  overflow-y: auto;
-  width: 100%;
-  padding: 1rem;
-
-  &::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: #c8aa7e;
-    border-radius: 10px;
-  }
-}
-
 /* Botón volver */
 .back-button {
   position: absolute;
