@@ -6,6 +6,8 @@ import { ProductsByCaravanService } from '@core/services/products-by-caravan.ser
 import { ServicePopupComponent } from '@shared/service-popup/service-popup.component';
 import { CommonModule } from '@angular/common';
 import { GameStatusBarComponent } from '@shared/game-status-bar/game-status-bar.component';
+import { InventoryItemComponent } from '@shared/inventory-item/inventory-item.component';
+import { ProductPopupComponent } from '@shared/product-popup/product-popup.component';
 
 @Component({
   selector: 'app-inventory',
@@ -15,6 +17,8 @@ import { GameStatusBarComponent } from '@shared/game-status-bar/game-status-bar.
     ServicePopupComponent,
     CommonModule,
     GameStatusBarComponent,
+    InventoryItemComponent,
+    ProductPopupComponent
   ]
 })
 export class InventoryComponent {
@@ -23,6 +27,7 @@ export class InventoryComponent {
   private productService = inject(ProductsByCaravanService);
 
   products = signal<ProductsByCaravan[]>([]);
+  selectedProduct: ProductsByCaravan | null = null;
   selectedCategory = 'all'; 
   selectedService: any = null;
 
@@ -37,6 +42,15 @@ export class InventoryComponent {
       });
     });
   }
+
+
+  
+
+  onItemSelected(item: ProductsByCaravan): void {
+    this.selectedProduct = item;
+  }
+
+  
 
   filterCategory(category: string): void {
     this.selectedCategory = category;

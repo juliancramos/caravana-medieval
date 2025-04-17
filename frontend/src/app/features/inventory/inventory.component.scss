@@ -84,48 +84,6 @@
   }
 }
 
-.item-tile {
-  background: rgba(0, 0, 0, 0.3);
-  border: 2px solid #f8e4c3aa;
-  border-radius: 10px;
-  padding: 1.2rem 0.8rem;
-  text-align: center;
-  color: #f8e4c3;
-  transition: transform 0.2s ease;
-  overflow: hidden;
-  height: 190px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  &:hover {
-    transform: scale(1.04);
-    z-index: 0;
-  }
-
-  .item-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    img {
-      width: 8rem;
-      height: 8rem;
-      object-fit: contain;
-      margin-bottom: 0.7rem;
-    }
-
-    .item-name {
-      font-size: 1.3rem;
-      font-family: 'Cinzel', serif;
-      text-align: center;
-      line-height: 1.2;
-    }
-  }
-}
-
 /* Botón volver */
 .back-button {
   position: absolute;

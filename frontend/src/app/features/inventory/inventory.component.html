@@ -19,17 +19,22 @@
     <!-- Productos -->
     <div class="items-scroll">
       @for (item of products(); track item.product.idProduct) {
-        <div class="item-tile">
-          <div class="item-content">
-            <img [src]="item.product.imgUrl || '/assets/icons/bag.png'" [alt]="item.product.name" />
-            <span class="item-name">{{ item.product.name }}<br>x{{ item.quantity }}</span>
-          </div>
-        </div>
+        <app-inventory-item
+          [imgUrl]="item.product.imgUrl"
+          [name]="item.product.name"
+          [quantity]="item.quantity"
+          (itemSelected)="onItemSelected(item)">
+        </app-inventory-item>
+
       }
     </div>
-    
-  </div>
 
+    <app-product-popup
+      *ngIf="selectedProduct"
+      [product]="selectedProduct"
+      (close)="selectedProduct = null">
+    </app-product-popup>
+  </div>
   <button class="back-button" (click)="exitInventory()">⬅ Volver</button>
 
   <app-service-popup
