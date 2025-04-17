@@ -1,4 +1,4 @@
-import { Component, inject, signal, effect } from '@angular/core';
+import { Component, inject, signal, effect, computed } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductsByCaravan } from '@shared/models/products-by-caravan';
 import { CurrentGameService } from '@core/services/current-game.service';
@@ -6,13 +6,14 @@ import { ProductsByCaravanService } from '@core/services/products-by-caravan.ser
 import { ServicePopupComponent } from '@shared/service-popup/service-popup.component';
 import { CommonModule } from '@angular/common';
 import { GameStatusBarComponent } from '@shared/game-status-bar/game-status-bar.component';
-import { InventoryPanelComponent } from "../../shared/inventory-panel/inventory-panel.component";
+import { InventoryPanelComponent } from '../../shared/inventory-panel/inventory-panel.component';
+import { ProductWithQuantity } from '@shared/models/product-with-quantity';
+import { ProductMapper } from '@shared/models/product.mapper';
 
 @Component({
   selector: 'app-inventory',
   templateUrl: './inventory.component.html',
   styleUrls: ['./inventory.component.scss'],
-  standalone: true,
   imports: [
     ServicePopupComponent,
     CommonModule,
@@ -25,7 +26,12 @@ export class InventoryComponent {
   private currentGame = inject(CurrentGameService);
   private productService = inject(ProductsByCaravanService);
 
-  products = signal<ProductsByCaravan[]>([]);
+  productsByCaravan = signal<ProductsByCaravan[]>([]);
+  //Mapea directamente de ProductsByCaravan a ProductWithQuantity
+  productItems = computed<ProductWithQuantity[]>(() =>
+    ProductMapper.fromCaravanList(this.productsByCaravan())
+  );
+
   selectedService: any = null;
 
   constructor() {
@@ -34,7 +40,7 @@ export class InventoryComponent {
       if (!caravanId) return;
 
       this.productService.getProductsByCaravan(caravanId).subscribe({
-        next: (res: ProductsByCaravan[]) => this.products.set(res),
+        next: (res: ProductsByCaravan[]) => this.productsByCaravan.set(res),
         error: (err: any) => console.error('Error loading products', err)
       });
     });

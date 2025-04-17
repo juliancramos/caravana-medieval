@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductsByCaravan } from '@shared/models/products-by-caravan';
+import { ProductWithQuantity } from '@shared/models/product-with-quantity';
 
 @Component({
   selector: 'app-product-popup',
@@ -9,7 +9,7 @@ import { ProductsByCaravan } from '@shared/models/products-by-caravan';
   styleUrls: ['./product-popup.component.scss']
 })
 export class ProductPopupComponent {
-  @Input() product!: ProductsByCaravan;
+  @Input() product!: ProductWithQuantity;
   //Output para avisar al componente padre
   @Output() close = new EventEmitter<void>();
 

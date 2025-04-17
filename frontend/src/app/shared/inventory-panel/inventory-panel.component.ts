@@ -1,8 +1,8 @@
 import { Component, Input, Output, EventEmitter, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductsByCaravan } from '@shared/models/products-by-caravan';
 import { InventoryItemComponent } from '@shared/inventory-item/inventory-item.component';
 import { ProductPopupComponent } from '@shared/product-popup/product-popup.component';
+import { ProductWithQuantity } from '@shared/models/product-with-quantity';
 
 @Component({
   selector: 'app-inventory-panel',
@@ -12,11 +12,11 @@ import { ProductPopupComponent } from '@shared/product-popup/product-popup.compo
 })
 export class InventoryPanelComponent {
   @Input() title: string = '';
-  @Input() items: () => ProductsByCaravan[] = () => [];
+  @Input() items: () => ProductWithQuantity[] = () => [];
   @Input() showFilters: boolean = true;
 
 
-  selectedItem: ProductsByCaravan | null = null;
+  selectedItem: ProductWithQuantity | null = null;
   selectedCategory = 'all';
 
   filterCategory(category: string): void {
@@ -24,7 +24,7 @@ export class InventoryPanelComponent {
     // lógica de filtrado (por ahora no)
   }
 
-  onItemClicked(item: ProductsByCaravan): void {
+  onItemClicked(item: ProductWithQuantity): void {
     this.selectedItem = item;
   }
 }
