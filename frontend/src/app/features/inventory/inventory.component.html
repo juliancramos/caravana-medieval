@@ -28,7 +28,7 @@
 
       }
     </div>
-
+    <!-- Escucha el evento del hijo con (close) -->
     <app-product-popup
       *ngIf="selectedProduct"
       [product]="selectedProduct"
@@ -37,6 +37,7 @@
   </div>
   <button class="back-button" (click)="exitInventory()">⬅ Volver</button>
 
+  
   <app-service-popup
     *ngIf="selectedService"
     [service]="selectedService"

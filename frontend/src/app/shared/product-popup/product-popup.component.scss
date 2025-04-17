@@ -1,0 +1,80 @@
+.popup-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-card {
+  background: rgba(30, 15, 5, 0.95);
+  border: 2px solid #f8e4c3aa;
+  border-radius: 16px;
+  padding: 2rem;
+  width: 360px;
+  color: #f8e4c3;
+  font-family: 'Cinzel', serif;
+  position: relative;
+  box-shadow: 0 0 12px #000;
+  text-align: center;
+  animation: popupEnter 0.3s ease-out;
+}
+
+// Animación
+@keyframes popupEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.popup-content img {
+  width: 15rem;
+  height: 15rem;
+  object-fit: contain;
+}
+
+.popup-content h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.popup-content .description {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.details {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.5rem;
+  margin-top: 1rem;
+
+  span {
+    flex: 1;
+    text-align: center;
+  }
+}
+
+.close-btn {
+  position: absolute;
+  top: 0.8rem;
+  right: 0.8rem;
+  background: transparent;
+  border: none;
+  color: #f8e4c3;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}

@@ -27,6 +27,7 @@ export class InventoryComponent {
   private productService = inject(ProductsByCaravanService);
 
   products = signal<ProductsByCaravan[]>([]);
+  //Señal para el producto actual. Se va actualizando según el componente de popup
   selectedProduct: ProductsByCaravan | null = null;
   selectedCategory = 'all'; 
   selectedService: any = null;

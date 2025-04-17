@@ -1,0 +1,16 @@
+<div class="popup-backdrop" (click)="closePopup()">
+    <!-- Evita que el click se propague y se salga al hacer click en el popup -->
+    <div class="popup-card" (click)="$event.stopPropagation()">
+      <button class="close-btn" (click)="closePopup()">✖</button>
+      <div class="popup-content">
+        <img [src]="product.product.imgUrl || '/assets/icons/bag.png'" [alt]="product.product.name" />
+        <h2>{{ product.product.name }}</h2>
+        <p class="description">{{ product.product.description }}</p>
+        <div class="details">
+          <span><strong>Cantidad:</strong> x{{ product.quantity }}</span>
+          <span><strong>Peso:</strong> {{ product.product.weight }}</span>
+        </div>
+      </div>
+    </div>
+</div>
+  
