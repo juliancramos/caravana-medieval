@@ -8,7 +8,7 @@ export interface ProductsByCity {
   };
   city: City;
   product: Product;
-  cantidad: number;
+  quantity: number;
   supplyFactor: number;
   demandFactor: number;
 }
