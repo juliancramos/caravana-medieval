@@ -1,21 +1,22 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InventoryItemComponent } from '@shared/inventory-item/inventory-item.component';
-import { ProductWithQuantity } from '@shared/models/product-with-quantity';
+import { ProductDisplayItem } from '@shared/models/product-display-item';
 
 @Component({
   selector: 'app-inventory-panel',
+  standalone: true,
   imports: [CommonModule, InventoryItemComponent],
   templateUrl: './inventory-panel.component.html',
   styleUrls: ['./inventory-panel.component.scss']
 })
 export class InventoryPanelComponent {
   @Input() title: string = '';
-  @Input() items: () => ProductWithQuantity[] = () => [];
+  @Input() items: () => ProductDisplayItem[] = () => [];
   @Input() showFilters: boolean = true;
   @Input() variant: 'inventory' | 'store' | 'services' = 'inventory';
 
-  @Output() itemSelected = new EventEmitter<ProductWithQuantity>();
+  @Output() itemSelected = new EventEmitter<ProductDisplayItem>();
 
   selectedCategory = 'all';
 
@@ -23,7 +24,7 @@ export class InventoryPanelComponent {
     this.selectedCategory = category;
   }
 
-  onItemClicked(item: ProductWithQuantity): void {
-    this.itemSelected.emit(item); //notifica al padre
+  onItemClicked(item: ProductDisplayItem): void {
+    this.itemSelected.emit(item);
   }
 }
