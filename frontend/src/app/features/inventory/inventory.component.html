@@ -8,13 +8,21 @@
   <!-- Panel para los productos -->
   <app-inventory-panel
     [title]="'Inventario'"
-    [items]="productsByCaravan"
-    [showFilters]="true">
+    [items]="productItems"
+    [showFilters]="true"
+    (itemSelected)="onItemSelected($event)">
   </app-inventory-panel>  
 
   <button class="back-button" (click)="exitInventory()"> ⬅ Volver</button>
 
   
+  <!-- popup para producto -->
+  <app-product-popup
+    *ngIf="selectedProduct"
+    [product]="selectedProduct"
+    (close)="selectedProduct = null">
+  </app-product-popup>
+
   <app-service-popup
     *ngIf="selectedService"
     [service]="selectedService"

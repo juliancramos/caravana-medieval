@@ -9,6 +9,7 @@ import { GameStatusBarComponent } from '@shared/game-status-bar/game-status-bar.
 import { InventoryPanelComponent } from '../../shared/inventory-panel/inventory-panel.component';
 import { ProductWithQuantity } from '@shared/models/product-with-quantity';
 import { ProductMapper } from '@shared/models/product.mapper';
+import { ProductPopupComponent } from '@shared/product-popup/product-popup.component';
 
 @Component({
   selector: 'app-inventory',
@@ -18,7 +19,8 @@ import { ProductMapper } from '@shared/models/product.mapper';
     ServicePopupComponent,
     CommonModule,
     GameStatusBarComponent,
-    InventoryPanelComponent
+    InventoryPanelComponent,
+    ProductPopupComponent
   ]
 })
 export class InventoryComponent {
@@ -45,6 +47,13 @@ export class InventoryComponent {
       });
     });
   }
+
+  selectedProduct: ProductWithQuantity | null = null;
+
+  onItemSelected(item: ProductWithQuantity): void {
+    this.selectedProduct = item;
+  }
+
 
   exitInventory(): void {
     this.router.navigate(['/resume']);

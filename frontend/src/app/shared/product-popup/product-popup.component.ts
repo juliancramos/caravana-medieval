@@ -13,6 +13,13 @@ export class ProductPopupComponent {
   //Output para avisar al componente padre
   @Output() close = new EventEmitter<void>();
 
+  @Output() itemSelected = new EventEmitter<ProductWithQuantity>();
+
+  onItemClicked(item: ProductWithQuantity): void {
+    this.itemSelected.emit(item);//Avisa al padre
+  }
+
+
   closePopup(): void {
     this.close.emit();
   }
