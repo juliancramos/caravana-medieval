@@ -14,6 +14,9 @@ export class InventoryPanelComponent {
   @Input() title: string = '';
   @Input() items: () => ProductWithQuantity[] = () => [];
   @Input() showFilters: boolean = true;
+  //Para saber si es para inventario, tienda o servicio
+  @Input() variant: 'inventory' | 'store' | 'services' = 'inventory';
+
 
 
   selectedItem: ProductWithQuantity | null = null;
