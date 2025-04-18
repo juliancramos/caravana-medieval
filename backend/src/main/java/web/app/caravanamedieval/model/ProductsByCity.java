@@ -28,7 +28,7 @@ public class ProductsByCity {
     private Product product;
 
     @Column(name = "cantidad", nullable = false)
-    private Integer cantidad;
+    private Integer quantity;
 
     @Column(name = "factor_oferta", nullable = false)
     private Long supplyFactor;
