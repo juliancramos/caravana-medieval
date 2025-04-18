@@ -1,87 +1,72 @@
-import { Component } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import {GameStatusBarComponent} from "@shared/game-status-bar/game-status-bar.component";
 import {ServicePopupComponent} from '@shared/service-popup/service-popup.component';
+import { ProductsByCityService } from '@core/services/products-by-city.service';
+import { ProductsByCity } from '@shared/models/products-by-city';
+import { CurrentGameService } from '@core/services/current-game.service';
+import { InventoryPanelComponent } from "../../shared/inventory-panel/inventory-panel.component";
+import { ProductMapper } from '@shared/models/product.mapper';
+import { ProductStorePopupComponent } from '@shared/product-store-popup/product-store-popup.component';
+import { ProductForStore } from '@shared/models/product-for-store';
+import { ProductDisplayItem } from '@shared/models/product-display-item';
 
 @Component({
   selector: 'app-store-products',
   standalone: true,
   templateUrl: './store-products.component.html',
   styleUrls: ['./store-products.component.scss'],
-  imports: [CommonModule, GameStatusBarComponent, ServicePopupComponent]
+  imports: [
+    CommonModule, 
+    GameStatusBarComponent, 
+    ServicePopupComponent, 
+    InventoryPanelComponent,
+    ProductStorePopupComponent,
+  ]
 })
 export class StoreProductsComponent {
-  constructor(private router: Router) {}
   selectedService: any = null;
-  itemsPerPage = 9;
-  currentPage = 0;
+
+  private router = inject(Router);
+  private currentGame = inject(CurrentGameService);
+  private cityService = inject(ProductsByCityService);
+
+  productsByCity = signal<ProductsByCity[]>([]);
+
+  productItems = computed<ProductDisplayItem[]>(() =>
+    ProductMapper.fromCityList(this.productsByCity())
+  );
+  
+  selectedProduct: ProductForStore  | null = null;
+  
+  onItemSelected(item: ProductDisplayItem): void {
+    this.selectedProduct = item as ProductForStore;
+  }
+  
+  
 
 
-  selectedProduct: any = null;
-  selectedQuantity = 1;
+  constructor(){
+    effect( () => {
+      const cityId = this.currentGame.selectedGame()?.game.caravan.currentCity.idCity;
+      if(!cityId) return ;
 
-  // Global notification
-  globalNotification = '';
-  showGlobalNotification = false;
-  notificationType: 'success' | 'error' = 'success';
-
-  products = [
-    { name: 'Especias', price: 50, image: '/assets/icons/bag.png' },
-    { name: 'Telas', price: 70, image: '/assets/icons/bag.png' },
-    { name: 'Armas', price: 120, image: '/assets/icons/bag.png' },
-    { name: 'Armas', price: 120, image: '/assets/icons/bag.png' },
-    { name: 'Armas', price: 120, image: '/assets/icons/bag.png' },
-    { name: 'Armas', price: 120, image: '/assets/icons/bag.png' },
-    { name: 'Armas', price: 120, image: '/assets/icons/bag.png' },
-    { name: 'Armas', price: 120, image: '/assets/icons/bag.png' },
-    { name: 'Armas', price: 120, image: '/assets/icons/bag.png' },
-    { name: 'Ganado', price: 90, image: '/assets/icons/bag.png' }
-  ];
-
-  get paginatedProducts() {
-    const start = this.currentPage * this.itemsPerPage;
-    return this.products.slice(start, start + this.itemsPerPage);
+      this.cityService.getProductsByCity(cityId).subscribe({
+        next: (res: ProductsByCity[]) => this.productsByCity.set(res),
+        error: (err: any) => console.error('Error loading products', err)
+      });
+    });
   }
 
-  prevPage(): void {
-    if (this.currentPage > 0) this.currentPage--;
-  }
 
-  nextPage(): void {
-    const totalPages = Math.ceil(this.products.length / this.itemsPerPage);
-    if (this.currentPage < totalPages - 1) this.currentPage++;
+  onBuy(event: { product: ProductForStore; quantity: number }): void {
+    console.log('🛒 Compra realizada:', event);
   }
-
-  openProductPopup(product: any): void {
-    this.selectedProduct = product;
-    this.selectedQuantity = 1;
-  }
-
-  closeProductPopup(): void {
-    this.selectedProduct = null;
-  }
-
-  increaseQuantity(): void {
-    this.selectedQuantity++;
-  }
-
-  decreaseQuantity(): void {
-    if (this.selectedQuantity > 1) this.selectedQuantity--;
-  }
+  
 
   exitStore(): void {
     this.router.navigate(['/resume']);
-  }
-
-
-  showGlobalMessage(message: string, type: 'success' | 'error' = 'success'): void {
-    this.globalNotification = message;
-    this.notificationType = type;
-    this.showGlobalNotification = true;
-    setTimeout(() => {
-      this.showGlobalNotification = false;
-    }, 2000);
   }
 
   showServiceInfo(service: any): void {
@@ -91,4 +76,8 @@ export class StoreProductsComponent {
   closeServiceInfo(): void {
     this.selectedService = null;
   }
+
+
+
+  
 }
