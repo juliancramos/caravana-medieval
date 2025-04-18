@@ -14,22 +14,18 @@ export class GameStatusBarComponent {
 
   currentGame = inject(CurrentGameService);
 
-  caravanName = computed(() => this.currentGame.selectedGame()?.game?.caravan?.name);
-  lifePoints = computed(() => this.currentGame.selectedGame()?.game.caravan.lifePoints);
-  availableMoney = computed(() => this.currentGame.selectedGame()?.game.caravan.availableMoney);
-  minProfit = computed(() => this.currentGame.selectedGame()?.game.minProfit);
-  cityName = computed(() => this.currentGame.selectedGame()?.game.caravan.currentCity.name);
+  availableMoney = this.currentGame.availableMoney;
 
-  remainingTime = computed(() => {
-    const game = this.currentGame.selectedGame()?.game;
-    if (!game) return 0;
-  
-    return game.timeLimit - game.elapsedTime;
-  });
+
+  caravanName = this.currentGame.caravanName;
+  lifePoints = this.currentGame.lifePoints;
   
 
+  minProfit = this.currentGame.minProfit;
+  cityName = this.currentGame.cityName;
 
-
+  remainingTime = this.currentGame.remainingTime;
+  
 
   constructor(public gameState: GameStateService) {}
 

@@ -1,12 +1,39 @@
-import { Injectable, signal } from '@angular/core';
+import { computed, Injectable, signal } from '@angular/core';
 import { GameByPlayer } from '@shared/models/game-by-player.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CurrentGameService {
-
-  constructor() { }
+  // estado general de la partida
   selectedGame = signal<GameByPlayer | null>(null);
+
+  //para el header
+  availableMoney = computed(() => this.selectedGame()?.game.caravan.availableMoney ?? 0);
+  caravanName = computed(() => this.selectedGame()?.game?.caravan?.name);
+  lifePoints = computed(() => this.selectedGame()?.game.caravan.lifePoints);
+  minProfit = computed(() => this.selectedGame()?.game.minProfit);
+  cityName = computed(() => this.selectedGame()?.game.caravan.currentCity.name);
+
+  remainingTime = computed(() => {
+    const game = this.selectedGame()?.game;
+    if (!game) return 0;
+  
+    return game.timeLimit - game.elapsedTime;
+  });
+
+
+  constructor() {}
+
+  updateAvailableGold(delta: number): void {
+    const current = this.selectedGame();
+    if (!current) return;
+  
+    const updated = structuredClone(current); 
+    updated.game.caravan.availableMoney += delta;
+  
+    this.selectedGame.set(updated); 
+  }
+  
 
 }
