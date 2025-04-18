@@ -72,14 +72,4 @@ public class ProductServiceImpl implements ProductService {
         }
         productRepository.deleteById(id);
     }
-
-    //Este se borra después
-    @Override
-    public List<ProductoDTOJ> recuperarProductos() {
-        return productRepository.findAll().stream()
-                .map(ProductoMapperJ::toDTOJ)
-                .toList();
-    }
-
-
 }
