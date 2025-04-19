@@ -1,7 +1,6 @@
+import { BaseProductItem } from "./base-product-item";
 import { Product } from "./product.model";
 
-export interface ProductForStore {
-  product: Product;
-  quantity: number;
+export interface ProductForStore extends BaseProductItem {
   price: number; 
 }
