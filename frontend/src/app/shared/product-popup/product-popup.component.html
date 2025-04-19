@@ -1,16 +1,36 @@
 <div class="popup-backdrop" (click)="closePopup()">
-    <!-- Evita que el click se propague y se salga al hacer click en el popup -->
-    <div class="popup-card" (click)="$event.stopPropagation()">
-      <button class="close-btn" (click)="closePopup()">✖</button>
-      <div class="popup-content">
-        <img [src]="product.product.imgUrl || '/assets/icons/bag.png'" [alt]="product.product.name" />
-        <h2>{{ product.product.name }}</h2>
-        <p class="description">{{ product.product.description }}</p>
-        <div class="details">
-          <span><strong>Cantidad:</strong> x{{ product.quantity }}</span>
-          <span><strong>Peso:</strong> {{ product.product.weight }}</span>
-        </div>
+  <div class="popup-card" (click)="$event.stopPropagation()">
+    <button class="close-btn" (click)="closePopup()">✖</button>
+
+    <div class="popup-content">
+      <img [src]="product.product.imgUrl || '/assets/icons/bag.png'" [alt]="product.product.name" />
+      <h2>{{ product.product.name }}</h2>
+      <p class="description">{{ product.product.description }}</p>
+
+      <div class="details">
+        <span><strong>Disponible:</strong> x{{ product.quantity }}</span>
+        <span><strong>Peso:</strong> {{ product.product.weight }}</span>
       </div>
+
+      <div class="quantity-section">
+        <button 
+          (click)="decrease()" 
+          [class.disabled]="quantity() <= 1"
+          [disabled]="quantity() <= 1">−</button>
+
+        <span class="amount">{{ quantity() }}</span>
+
+        <button 
+          (click)="increase()" 
+          [class.disabled]="quantity() >= product.quantity"
+          [disabled]="quantity() >= product.quantity">+</button>
+      </div>
+
+      <div class="price-summary">
+        Ganancia: <strong>{{ totalPrice() }} monedas</strong>
+      </div>
+
+      <button class="buy-button" (click)="confirmSale()">Vender</button>
     </div>
+  </div>
 </div>
-  

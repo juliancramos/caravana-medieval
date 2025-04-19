@@ -131,5 +131,10 @@ export class StoreProductsComponent {
     setTimeout(() => this.feedbackVisible.set(false), durationMs);
   }
 
+  goToInventory(): void {
+    this.router.navigate(['/inventory']);
+  }
+  
+
 
 }

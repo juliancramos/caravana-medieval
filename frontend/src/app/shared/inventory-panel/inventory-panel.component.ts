@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InventoryItemComponent } from '@shared/inventory-item/inventory-item.component';
-import { ProductDisplayItem } from '@shared/models/product-display-item';
+import { BaseProductItem } from '@shared/models/base-product-item';
 
 @Component({
   selector: 'app-inventory-panel',
@@ -10,13 +10,13 @@ import { ProductDisplayItem } from '@shared/models/product-display-item';
   templateUrl: './inventory-panel.component.html',
   styleUrls: ['./inventory-panel.component.scss']
 })
-export class InventoryPanelComponent {
+export class InventoryPanelComponent<T extends BaseProductItem = BaseProductItem> {
   @Input() title: string = '';
-  @Input() items: () => ProductDisplayItem[] = () => [];
+  @Input() items: () => T[] = () => [];
   @Input() showFilters: boolean = true;
   @Input() variant: 'inventory' | 'store' | 'services' = 'inventory';
 
-  @Output() itemSelected = new EventEmitter<ProductDisplayItem>();
+  @Output() itemSelected = new EventEmitter<T>();
 
   selectedCategory = 'all';
 
@@ -24,7 +24,7 @@ export class InventoryPanelComponent {
     this.selectedCategory = category;
   }
 
-  onItemClicked(item: ProductDisplayItem): void {
+  onItemClicked(item: T): void {
     this.itemSelected.emit(item);
   }
 }
