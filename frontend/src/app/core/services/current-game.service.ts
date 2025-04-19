@@ -25,12 +25,12 @@ export class CurrentGameService {
 
   constructor() {}
 
-  updateAvailableGold(delta: number): void {
+  updateAvailableGold(productPrice: number): void {
     const current = this.selectedGame();
     if (!current) return;
   
-    const updated = structuredClone(current); 
-    updated.game.caravan.availableMoney += delta;
+    const updated = { ...current };
+    updated.game.caravan.availableMoney += productPrice;
   
     this.selectedGame.set(updated); 
   }

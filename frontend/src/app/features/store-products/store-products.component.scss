@@ -173,3 +173,59 @@
   90%  { opacity: 1; }
   100% { opacity: 0; transform: translateY(-10px); }
 }
+
+
+
+//Feedback popup
+
+.feedback-popup {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 3000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeInBackdrop 0.3s ease-in-out;
+}
+
+.popup-card.minimal {
+  background: rgba(30, 15, 5, 0.95);
+  padding: 2rem;
+  border: 2px solid #ffdb70;
+  border-radius: 16px;
+  text-align: center;
+  max-width: 320px;
+  color: #f8e4c3;
+  font-family: 'Cinzel', serif;
+  box-shadow: 0 0 20px #000;
+  animation: popupEnterScale 0.35s ease-out;
+}
+
+
+
+// Animación de entrada
+@keyframes popupEnterScale {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+// Desenfoque de fondo
+@keyframes fadeInBackdrop {
+  from {
+    backdrop-filter: blur(0px);
+    opacity: 0;
+  }
+  to {
+    backdrop-filter: blur(4px);
+    opacity: 1;
+  }
+}
+
