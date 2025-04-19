@@ -10,7 +10,7 @@
     [title]="'Inventario'"
     [items]="productItems"
     [showFilters]="true"
-    (itemSelected)="onItemSelected($event)">
+    (itemSelected)="onItemSelected($event) ">
   </app-inventory-panel>  
 
   <button class="back-button" (click)="exitInventory()"> ⬅ Volver</button>
@@ -18,10 +18,12 @@
   
   <!-- popup para producto -->
   <app-product-popup
-    *ngIf="selectedProduct"
+  *ngIf="selectedProduct"
     [product]="selectedProduct"
-    (close)="selectedProduct = null">
+    (close)="selectedProduct = null"
+    (sell)="onSell($event)">
   </app-product-popup>
+
 
   <app-service-popup
     *ngIf="selectedService"
