@@ -1,132 +1,87 @@
-import {Component, computed} from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { GameStateService } from '@core/services/game-state.service';
-import {GameStatusBarComponent} from '@shared/game-status-bar/game-status-bar.component';
-import {ServicePopupComponent} from '@shared/service-popup/service-popup.component';
+import { GameStatusBarComponent } from '@shared/game-status-bar/game-status-bar.component';
+import { ServicePopupComponent } from '@shared/service-popup/service-popup.component';
+import { RouteService } from '@core/services/route.service';
+import { CurrentGameService } from '@core/services/current-game.service';
+import { Route } from '@shared/models/route.model';
+import { city_coordinates, CityCoordinate } from '@shared/data/city-coordinates';
+import { CityWithRoute } from '@shared/models/city-with-route';
+
 @Component({
   selector: 'app-map',
   standalone: true,
-  imports: [CommonModule, GameStatusBarComponent, ServicePopupComponent],
   templateUrl: './map.component.html',
-  styleUrls: ['./map.component.scss']
+  styleUrls: ['./map.component.scss'],
+  imports: [CommonModule, GameStatusBarComponent, ServicePopupComponent]
 })
 export class MapComponent {
-  constructor(private gameState: GameStateService, private router: Router) {}
+  private router = inject(Router);
+  private routeService = inject(RouteService);
+  private currentGame = inject(CurrentGameService);
 
- currentCity : string = "Eldenport"
-  selectedCity: any = null;
-  selectedService: any = null;
+  selectedCity = signal<CityWithRoute | null>(null);
+  selectedService = signal<any>(null);
 
-  // test cities
-  cities = [
-    { name: 'Eldenport', x: 20, y: 40, available: true },
-    { name: 'Drakenshire', x: 30, y: 40, available: false },
-    { name: 'Valenfort', x: 45, y: 60, available: false },
-    { name: 'Norhollow', x: 25, y: 75, available: false },
-    { name: 'Ironhill', x: 60, y: 20, available: false },
-    { name: 'Stormwick', x: 75, y: 50, available: false },
-    { name: 'Greyrock', x: 80, y: 70, available: false },
-    { name: 'Shadowfen', x: 10, y: 40, available: false },
-    { name: 'Duskreach', x: 55, y: 85, available: true },
-    { name: 'Brightmere', x: 90, y: 35, available: true },
+  availableCities = signal<CityWithRoute[]>([]);
 
-    // Nuevas ciudades
-    { name: 'Frostgarde', x: 15, y: 10, available: false },
-    { name: 'Sunspire', x: 25, y: 15, available: true },
-    { name: 'Thornshade', x: 35, y: 25, available: true },
-    { name: 'Ravenmoor', x: 45, y: 15, available: true },
-    { name: 'Oakendale', x: 50, y: 30, available: true },
-    { name: 'Ironwood', x: 65, y: 25, available: true },
-    { name: 'Windscar', x: 75, y: 15, available: true },
-    { name: 'Blackwater', x: 85, y: 25, available: true },
-    { name: 'Ashenfield', x: 70, y: 35, available: true },
-    { name: 'Briarholm', x: 60, y: 60, available: true },
-   /* { name: 'Wyrmrest', x: 50, y: 70, available: true },
-    { name: 'Highreach', x: 35, y: 85, available: true },
-    { name: 'Mooncliff', x: 20, y: 90, available: true },
-    { name: 'Emberfall', x: 10, y: 85, available: true },
-    { name: 'Stonehaven', x: 5, y: 65, available: true },
-    { name: 'Redpine', x: 15, y: 55, available: true },
-    { name: 'Silverrest', x: 25, y: 50, available: true },
-    { name: 'Stormhold', x: 40, y: 45, available: true },
-    { name: 'Gladefort', x: 65, y: 80, available: true },
-    { name: 'Whiteridge', x: 85, y: 60, available: true }*/
-  ];
+  constructor() {
+    effect(() => this.loadRoutes());
+  }
 
+  loadRoutes() {
+    const currentCityId = this.currentGame.selectedGame()?.game.caravan.currentCity.idCity;
+    if (!currentCityId) return;
 
+    this.routeService.getRoutesFrom(currentCityId).subscribe({
+      next: (routes: Route[]) => {
+        const mapped = routes
+          .map(route => {
+            //Encuentra las coordenadas de la ciudad en especifico para poder ubicar en el mapa
+            const coord: CityCoordinate | undefined = city_coordinates.find(
+              (c: CityCoordinate) => c.id === route.destinationCity.idCity
+            );
+            //si no encuentra coordenadas no pinta la ciudad
+            if (!coord) return null;
 
-  openPopup(city: any): void {
-    // Simular rutas (esto se conectará al backend más adelante)
-    this.selectedCity = {
-      ...city,
-      routes: [
-        {
-          type: 'Ruta segura',
-          time: '4h',
-          damage: 0,
-          cause: null
-        },
-        {
-          type: 'Ruta segura',
-          time: '4h',
-          damage: 0,
-          cause: null
-        },
-        {
-          type: 'Ruta segura',
-          time: '4h',
-          damage: 0,
-          cause: null
-        },
-        {
-          type: 'Ruta segura',
-          time: '4h',
-          damage: 0,
-          cause: null
-        },
-        {
-          type: 'Ruta segura',
-          time: '4h',
-          damage: 0,
-          cause: null
-        },
-        {
-          type: 'Ruta segura',
-          time: '4h',
-          damage: 0,
-          cause: null
-        },
+            return {
+              id: route.destinationCity.idCity,
+              name: route.destinationCity.name,
+              x: coord.x,
+              y: coord.y,
+              route
+            } satisfies CityWithRoute;
+          })
+          //Filtra para eliminar los nulos (los de no coordenadas) !!c para evitar que sea null o undefined
+          .filter((c): c is CityWithRoute => !!c);
 
-        {
-          type: 'Ruta insegura',
-          time: '2h',
-          damage: 20,
-          cause: 'Bandidos'
-        }
-      ]
-    };
+        this.availableCities.set(mapped);
+      }
+    });
+  }
+
+  openPopup(city: CityWithRoute): void {
+    this.selectedCity.set(city);
   }
 
   closePopup(): void {
-    this.selectedCity = null;
+    this.selectedCity.set(null);
   }
-
 
   goBack(): void {
     this.router.navigate(['/resume']);
   }
 
   showServiceInfo(service: any): void {
-    this.selectedService = service;
+    this.selectedService.set(service);
   }
 
   closeServiceInfo(): void {
-    this.selectedService = null;
+    this.selectedService.set(null);
   }
 
-  get availableCities() {
-    return this.cities.filter(c => c.available);
+  get currentCityName() {
+    return this.currentGame.selectedGame()?.game.caravan.currentCity.name;
   }
-
 }
