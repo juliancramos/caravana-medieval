@@ -151,6 +151,6 @@ export class InventoryComponent {
   }
 
   goToStore(): void {
-    this.router.navigate(['/inventory']);
+    this.router.navigate(['/productos']);
   }
 }
