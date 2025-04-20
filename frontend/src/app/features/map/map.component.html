@@ -23,22 +23,19 @@
 
 <!-- Popup de rutas -->
 <ng-container *ngIf="selectedCity() as city">
-  <div class="city-popup-overlay">
-    <div class="city-popup">
+  <div class="city-popup-overlay" (click)="closePopup()" *ngIf="selectedCity()">
+    <div class="city-popup" (click)="$event.stopPropagation()">
       <h2>{{ city.name }}</h2>
 
       <div class="routes-container">
-        <div class="route-card">
-          <p><strong>{{ city.route.type }}</strong></p>
-          <p *ngIf="city.route.cause">
-            Causa: {{ city.route.cause }}
-          </p>
-          <p>Tiempo estimado: {{ city.route.travelTime }}h</p>
-          <p *ngIf="city.route.damage && city.route.damage > 0">
-            Daño estimado: -{{ city.route.damage }} puntos de vida
-          </p>
+        <div *ngFor="let route of selectedCity()?.routes" class="route-card">
+          <p><strong>{{ route.type }}</strong></p>
+          <p *ngIf="route.damage">Causa: {{ route.damageCause }}</p>
+          <p>Tiempo estimado: {{ route.travelTime }}h</p>
+          <p *ngIf="route.damage > 0">Daño estimado: -{{ route.damage }} puntos de vida</p>
           <button class="btn-travel">Viajar</button>
         </div>
+        
       </div>
 
       <button class="btn-close" (click)="closePopup()">✖</button>

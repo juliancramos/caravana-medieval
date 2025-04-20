@@ -6,6 +6,6 @@ export interface Route {
   originCity: City;
   destinationCity: City;
   damage: number;
-  cause: string;
+  damageCause: string;
   travelTime: number;
 }

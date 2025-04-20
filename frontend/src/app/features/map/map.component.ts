@@ -33,33 +33,35 @@ export class MapComponent {
   loadRoutes() {
     const currentCityId = this.currentGame.selectedGame()?.game.caravan.currentCity.idCity;
     if (!currentCityId) return;
-
+  
     this.routeService.getRoutesFrom(currentCityId).subscribe({
       next: (routes: Route[]) => {
-        const mapped = routes
-          .map(route => {
-            //Encuentra las coordenadas de la ciudad en especifico para poder ubicar en el mapa
-            const coord: CityCoordinate | undefined = city_coordinates.find(
-              (c: CityCoordinate) => c.id === route.destinationCity.idCity
-            );
-            //si no encuentra coordenadas no pinta la ciudad
-            if (!coord) return null;
-
-            return {
-              id: route.destinationCity.idCity,
+        const cityMap = new Map<number, CityWithRoute>();
+  
+        routes.forEach(route => {
+          const coord = city_coordinates.find(c => c.id === route.destinationCity.idCity);
+          if (!coord) return;
+  
+          const cityId = route.destinationCity.idCity;
+  
+          if (!cityMap.has(cityId)) {
+            cityMap.set(cityId, {
+              id: cityId,
               name: route.destinationCity.name,
               x: coord.x,
               y: coord.y,
-              route
-            } satisfies CityWithRoute;
-          })
-          //Filtra para eliminar los nulos (los de no coordenadas) !!c para evitar que sea null o undefined
-          .filter((c): c is CityWithRoute => !!c);
-
-        this.availableCities.set(mapped);
+              routes: [route]
+            });
+          } else {
+            cityMap.get(cityId)!.routes.push(route);
+          }
+        });
+  
+        this.availableCities.set(Array.from(cityMap.values()));
       }
     });
   }
+  
 
   openPopup(city: CityWithRoute): void {
     this.selectedCity.set(city);

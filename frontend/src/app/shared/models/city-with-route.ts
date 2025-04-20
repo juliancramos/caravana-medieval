@@ -5,5 +5,5 @@ export interface CityWithRoute {
   name: string;
   x: number;
   y: number;
-  route: Route;
+  routes: Route[];
 }
