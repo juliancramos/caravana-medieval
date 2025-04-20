@@ -13,7 +13,12 @@
     (itemSelected)="onItemSelected($event) ">
   </app-inventory-panel>  
 
-  <button class="back-button" (click)="exitInventory()"> ⬅ Volver</button>
+  <button class="exit-button" (click)="exitInventory()"> ⬅ Volver</button>
+
+  <!-- Botón ir a la tienda -->
+  <button class="exit-button sell-button" (click)="goToStore()" aria-label="Ir a la tienda">
+    Comprar productos
+  </button>
 
   
   <!-- popup para producto -->

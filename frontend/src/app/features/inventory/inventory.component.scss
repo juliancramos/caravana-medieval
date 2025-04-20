@@ -22,28 +22,6 @@
   z-index: -1;
 }
 
-/* Botón volver */
-.back-button {
-  position: absolute;
-  bottom: 2rem;
-  left: 2rem;
-  background: rgba(0, 0, 0, 0.4);
-  border: 2px solid #f8e4c3aa;
-  color: #f8e4c3;
-  font-family: 'Cinzel', serif;
-  font-size: 1rem;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background: #f8e4c3;
-    color: #1a0e05;
-  }
-}
-
-
 //Feedback popup
 
 .feedback-popup {
@@ -100,5 +78,35 @@
 
 .sell-button{
   margin-left: 15%;
+}
+
+/* Botón volver */
+.exit-button {
+  position: fixed;
+  bottom: 5%;
+  left: 1.5%;
+  background: rgba(0, 0, 0, 0.65);
+  color: #f8e4c3;
+  font-family: 'Forum', serif;
+  font-size: 1.1rem;
+  padding: 1.2rem 2.4rem;
+  border: 2px solid #f8e4c3;
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 1000;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: #f8e4c3;
+    color: #111;
+    border-color: #111;
+    box-shadow: 0 0 8px #f8e4c388;
+  }
+}
+
+.sell-button{
+  //para que omita el left de exit-button
+  left: auto;
+  right: 2%;
 }
 

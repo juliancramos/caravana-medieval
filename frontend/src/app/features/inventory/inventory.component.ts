@@ -149,4 +149,8 @@ export class InventoryComponent {
   closeServiceInfo(): void {
     this.selectedService = null;
   }
+
+  goToStore(): void {
+    this.router.navigate(['/inventory']);
+  }
 }
