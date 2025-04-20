@@ -13,4 +13,6 @@ public interface ProductsByCityRepository extends JpaRepository<ProductsByCity, 
     List<ProductsByCity> findByCity_IdCity(Long cityId);
     Optional<ProductsByCity> findById_CityIdAndId_ProductIdOrderById_ProductId(Long cityId, Long productId);
 
+    Optional<ProductsByCity> findById_CityIdAndId_ProductId(Long cityId, Long productId);
+
 }

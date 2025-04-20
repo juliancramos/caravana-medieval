@@ -3,8 +3,14 @@ package web.app.caravanamedieval.service;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import web.app.caravanamedieval.dto.BuyProductDTO;
+import web.app.caravanamedieval.dto.SellProductDTO;
 import web.app.caravanamedieval.model.*;
+import web.app.caravanamedieval.model.keys.ProductsByCityKey;
 import web.app.caravanamedieval.repository.*;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class StoreService {
@@ -38,6 +44,93 @@ public class StoreService {
         deductGold(caravan, totalPrice);
     }
 
+
+    @Transactional
+    public void sellProduct(BuyProductDTO dto) {
+        Caravan caravan = getCaravan(dto.getCaravanId());
+        Product product = getProduct(dto.getProductId());
+
+        // validar existencia del producto en la caravana
+        ProductsByCaravan caravanProduct = caravanProductRepository
+                .findById_CaravanIdAndId_ProductIdOrderById_ProductId(dto.getCaravanId(), dto.getProductId())
+                .orElseThrow(() -> new RuntimeException("Product not found in caravan"));
+
+        //validar si hay suficiente cantidad
+        if (caravanProduct.getQuantity() < dto.getQuantity()) {
+            throw new RuntimeException("Not enough product quantity to sell");
+        }
+
+        // Obtener o crear producto en ciudad
+        ProductsByCity cityProduct = cityProductRepository
+                .findById_CityIdAndId_ProductIdOrderById_ProductId(dto.getCityId(), dto.getProductId())
+                .orElse(null);
+
+        long unitPrice;
+        double stock;
+
+        if (cityProduct != null) {
+            stock = cityProduct.getQuantity();
+            unitPrice = Math.round((double) cityProduct.getDemandFactor() / (1 + stock));
+        } else {
+            stock = 0;
+            unitPrice = Math.round((double) 100L / (1 + stock)); // Defaults
+        }
+
+        long totalPrice = unitPrice * dto.getQuantity();
+
+        // Actualizar inventario caravana
+        int remaining = caravanProduct.getQuantity() - dto.getQuantity();
+        if (remaining <= 0) {
+            //por ahora se borra pero puede que cambie luego
+            caravanProductRepository.delete(caravanProduct);
+        } else {
+            caravanProduct.setQuantity(remaining);
+            caravanProductRepository.save(caravanProduct);
+        }
+
+        // Si no existía la relación con ciudad, crearla
+        if (cityProduct == null) {
+            cityProduct = new ProductsByCity();
+            ProductsByCityKey key = new ProductsByCityKey(dto.getCityId(), dto.getProductId());
+            cityProduct.setId(key);
+            cityProduct.setCity(caravan.getCurrentCity());
+            cityProduct.setProduct(product);
+            cityProduct.setSupplyFactor(100L);
+            cityProduct.setDemandFactor(100L);
+            cityProduct.setQuantity(dto.getQuantity());
+        } else {
+            cityProduct.setQuantity(cityProduct.getQuantity() + dto.getQuantity());
+        }
+
+        cityProductRepository.save(cityProduct);
+
+        // Actualizar oro de la caravana
+        caravan.setAvailableMoney(caravan.getAvailableMoney() + totalPrice);
+        caravanRepository.save(caravan);
+    }
+
+
+
+    public List<SellProductDTO> getProductsForSale(Long caravanId, Long cityId) {
+        List<ProductsByCaravan> caravanProducts = caravanProductRepository
+                .findByCaravan_IdCaravan(caravanId);
+
+        return caravanProducts.stream().map(p -> {
+            Optional<ProductsByCity> cityProductOpt = cityProductRepository
+                    .findById_CityIdAndId_ProductId(cityId, p.getProduct().getIdProduct());
+
+            long price = cityProductOpt
+                    .map(cityProduct -> Math.round((double) cityProduct.getDemandFactor() / (1 + cityProduct.getQuantity())))
+                    .orElse(100L); // default si no hay en ciudad
+
+            return new SellProductDTO(p.getProduct(), p.getQuantity(), price);
+        }).collect(Collectors.toList());
+    }
+
+
+
+
+    //Complementarios
     private Caravan getCaravan(Long id) {
         return caravanRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Caravan not found"));

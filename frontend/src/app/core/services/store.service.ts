@@ -19,4 +19,8 @@ export class StoreService {
   buyProduct(dto: BuyProductDTO): Observable<void> {
     return this.http.post<void>(`${this.baseUrl}/buy`, dto);
   }
+
+  saleProduct(dto: BuyProductDTO): Observable<void> {
+    return this.http.post<void>(`${this.baseUrl}/sell`, dto);
+  }
 }

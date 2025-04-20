@@ -10,11 +10,9 @@ import { InventoryPanelComponent } from '../../shared/inventory-panel/inventory-
 import { ProductMapper } from '@shared/models/product.mapper';
 import { ProductPopupComponent } from '@shared/product-popup/product-popup.component';
 import { StoreService } from '@core/services/store.service';
-import { ProductForStore } from '@shared/models/product-for-store';
 import { SellProductDTO } from '@shared/models/sell-product';
 import { ProductsByCityService } from '@core/services/products-by-city.service';
 import { ProductsByCity } from '@shared/models/products-by-city';
-import { BaseProductItem } from '@shared/models/base-product-item';
 
 @Component({
   selector: 'app-inventory',
@@ -41,7 +39,7 @@ export class InventoryComponent {
   private cityProductService = inject(ProductsByCityService);
   cityProducts = signal<ProductsByCity[]>([])
 
-  selectedService: any = null;
+  
 
   storeService = inject(StoreService);
 
@@ -53,10 +51,15 @@ export class InventoryComponent {
       if (!caravanId || !cityId) return;
   
       this.productService.getProductsByCaravan(caravanId).subscribe({
-        next: res => this.productsByCaravan.set(res),
+        next: res => {
+          //ordena según el id del producto
+          const sorted = [...res].sort((a, b) => a.product.idProduct - b.product.idProduct);
+          this.productsByCaravan.set(sorted);
+        },
         error: err => console.error(err)
       });
-  
+      
+      //Necesario traer los productos por ciudad ya que se necesita el precio
       this.cityProductService.getProductsByCity(cityId).subscribe({
         next: res => this.cityProducts.set(res),
         error: err => console.error(err)
@@ -64,7 +67,7 @@ export class InventoryComponent {
     });
   }
   
-
+  //Para el popup
   selectedProduct: SellProductDTO | null = null;
 
   onItemSelected(item: SellProductDTO): void {
@@ -73,32 +76,51 @@ export class InventoryComponent {
 
 
   //Vender
-  onSell(event: { product: BaseProductItem; quantity: number }) {
+  onSell(event: SellProductDTO) {
     const caravanId = this.currentGame.selectedGame()?.game.caravan.idCaravan;
     const cityId = this.currentGame.selectedGame()?.game.caravan.currentCity.idCity;
   
     if (!caravanId || !cityId) return;
   
     const body = {
-      productId: event.product.product.idProduct,
+      productId: event.product.idProduct,
       quantity: event.quantity,
       caravanId,
       cityId,
     };
+    
+    //Quita popup de producto
+    this.selectedProduct = null;
+    //popup para tiempo de espera
+    this.showFeedback('Procesando...', 'Validando venta...');
   
-    // this.storeService.saleProduct(body).subscribe({
-    //   next: () => {
-    //     this.updateLocalInventory(event.product.product.idProduct, event.quantity);
-    //     this.currentGame.updateAvailableGold(+this.calculateSalePrice(event.product, event.quantity));
-    //     this.selectedProduct = null;
-    //     // Aquí puedes mostrar un feedback visual tipo "Venta exitosa"
-    //   },
-    //   error: () => {
-    //     // Aquí puedes mostrar feedback de error: "No se pudo vender"
-    //   }
-    // });
+    this.storeService.saleProduct(body).subscribe({
+      next: () => {
+        //Actualiza inventario y oro
+        this.updateLocalInventory(event.product.idProduct, event.quantity);
+        this.currentGame.updateAvailableGold(+event.price * event.quantity);
+        this.showFeedback('¡Venta realizada!', 'Has recibido oro por el producto');
+      },
+      error: () => {
+        this.showFeedback('Error en venta', 'No se pudo completar la venta');
+      }
+    });
   }
 
+  //feedback de estado de la venta
+  feedbackVisible = signal(false);
+  feedbackTitle = signal('');
+  feedbackMessage = signal('');
+
+  private showFeedback(title: string, message: string, durationMs: number = 2000): void {
+    this.feedbackTitle.set(title);
+    this.feedbackMessage.set(message);
+    this.feedbackVisible.set(true);
+    setTimeout(() => this.feedbackVisible.set(false), durationMs);
+  }
+
+  
+  //actualiza el inventario
   private updateLocalInventory(productId: number, quantitySold: number) {
     this.productsByCaravan.update((currentList) =>
       currentList
@@ -115,7 +137,7 @@ export class InventoryComponent {
   
   
 
-
+  selectedService: any = null;
   exitInventory(): void {
     this.router.navigate(['/resume']);
   }

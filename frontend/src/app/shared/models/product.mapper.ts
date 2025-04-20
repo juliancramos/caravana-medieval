@@ -19,9 +19,9 @@ export class ProductMapper {
 
   static fromCaravanWithPrices(source: ProductsByCaravan[], cityData: ProductsByCity[]): SellProductDTO[] {
     return source.map(p => {
-      const cityMatch = cityData.find(c => c.product.idProduct === p.product.idProduct);
-      const demandFactor = cityMatch?.demandFactor ?? 100;
-      const stock = cityMatch?.quantity ?? 0;
+      const city = cityData.find(c => c.product.idProduct === p.product.idProduct);
+      const demandFactor = city?.demandFactor ?? 100;
+      const stock = city?.quantity ?? 0;
       const price = Math.round(demandFactor / (1 + stock));
 
       return {

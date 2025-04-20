@@ -12,19 +12,25 @@ import { BaseProductItem } from '@shared/models/base-product-item';
 })
 export class ProductPopupComponent {
   @Input() product!: SellProductDTO;
+  quantity = signal(1);
 
-totalPrice = computed(() => this.product.price * this.quantity());
+  totalPrice = computed(() => this.product.price * this.quantity());
 
-confirmSale(): void {
-  this.sell.emit({ product: this.product, quantity: this.quantity() });
-}
-@Output() sell = new EventEmitter<{ product: SellProductDTO; quantity: number }>();
+  //Confirma venta pasando como atributo un sell product
+  confirmSale(): void {
+    this.sell.emit({
+      ...this.product,
+      quantity: this.quantity()
+    });
+  }
+
+  @Output() sell = new EventEmitter<SellProductDTO>();
 
 
   @Output() close = new EventEmitter<void>();
   @Output() itemSelected = new EventEmitter<BaseProductItem>();
 
-  quantity = signal(1);
+  
 
 
   increase(): void {
