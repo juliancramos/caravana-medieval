@@ -33,7 +33,8 @@
           <p *ngIf="route.damage">Causa: {{ route.damageCause }}</p>
           <p>Tiempo estimado: {{ route.travelTime }}h</p>
           <p *ngIf="route.damage > 0">Daño estimado: -{{ route.damage }} puntos de vida</p>
-          <button class="btn-travel">Viajar</button>
+          <!-- Se activa metodo para viajar -->
+          <button class="btn-travel" (click)="travelTo(route)">Viajar</button>
         </div>
         
       </div>
@@ -42,6 +43,12 @@
     </div>
   </div>
 </ng-container>
+
+<!-- Transición visual de viaje -->
+<div class="travel-overlay" *ngIf="isTraveling()">
+  <div class="travel-text">Viajando...</div>
+</div>
+
 
 <!-- Popup de servicios activos -->
 <app-service-popup

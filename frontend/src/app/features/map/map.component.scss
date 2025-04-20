@@ -246,3 +246,45 @@
     transform: scale(1);
   }
 }
+
+
+
+// Transicion para cuando se viaja
+.travel-overlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at center, #111 0%, #000 100%);
+  z-index: 5000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeTravelIn 0.5s ease forwards;
+
+  .travel-text {
+    font-size: 2.5rem;
+    font-family: 'Cinzel', serif;
+    color: #f8e4c3;
+    animation: pulseText 1.6s ease-in-out infinite;
+    text-shadow: 0 0 10px #f8e4c3aa;
+  }
+}
+
+@keyframes fadeTravelIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulseText {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
