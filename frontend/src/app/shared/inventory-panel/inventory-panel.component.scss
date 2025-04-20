@@ -1,0 +1,133 @@
+.inventory-panel {
+  // Comunes
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 0 15px #000;
+
+  &.inventory {
+    width: 65%;
+    margin: 15vh auto 5vh auto;
+    background: rgba(30, 15, 5, 0.75);
+    padding: 2rem 3rem;
+
+    .inventory-title {
+      font-size: 3rem;
+      color: #f8e4c3;
+      margin-bottom: 1.5rem;
+      text-shadow: 1px 1px 2px #000;
+    }
+
+    .inventory-filters {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+
+      button {
+        font-size: 1rem;
+        padding: 0.5rem 1.2rem;
+        border: none;
+        border-radius: 8px;
+        background-color: #2e1c0d;
+        color: #f8e4c3;
+        cursor: pointer;
+        font-family: 'Cinzel', serif;
+        transition: 0.3s;
+
+        &.active,
+        &:hover {
+          background-color: #f8e4c3;
+          color: #1d1207;
+        }
+      }
+    }
+
+    .items-scroll {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1.5rem;
+      max-height: 420px;
+      overflow-y: auto;
+      width: 100%;
+      padding: 1rem;
+
+      &::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: #c8aa7e;
+        border-radius: 10px;
+      }
+    }
+  }
+
+  //Tienda
+  &.store {
+    width: 30%;
+    background: rgba(30, 15, 5, 0.5);
+    padding: 1.5rem 2rem;
+    margin: 5vh auto;
+    position: absolute;
+    right: 18%;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 1px solid #f8e4c3;
+    border-radius: 50px;
+
+    .inventory-title {
+      font-size: 2.2rem;
+      color: #f8e4c3;
+      margin-bottom: 1rem;
+      text-shadow: 1px 1px 2px #000;
+      text-align: center;
+    }
+
+    .inventory-filters {
+      display: flex;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      button {
+        font-size: 0.9rem;
+        padding: 0.4rem 1rem;
+        border: none;
+        border-radius: 8px;
+        background-color: #2e1c0d;
+        color: #f8e4c3;
+        cursor: pointer;
+        font-family: 'Cinzel', serif;
+        transition: 0.3s;
+
+        &.active,
+        &:hover {
+          background-color: #f8e4c3;
+          color: #1d1207;
+        }
+      }
+    }
+
+    .items-scroll {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 1.2rem;
+      max-height: 420px;
+      overflow-y: auto;
+      width: 100%;
+      padding: 0.5rem;
+
+      &::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: #c8aa7e;
+        border-radius: 10px;
+      }
+    }
+  }
+}

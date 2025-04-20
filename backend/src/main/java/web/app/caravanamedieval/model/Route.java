@@ -29,7 +29,7 @@ public class Route {
     private City destinationCity;
 
     @Column(name = "dano")
-    private Float damage;
+    private int damage;
 
     @Column(name = "causa_dano", length = 100)
     private String damageCause;

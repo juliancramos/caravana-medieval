@@ -2,55 +2,57 @@
   <img src="/assets/img/bg-map.png" class="map-background" />
   <div class="screen-fade"></div>
 
-  <!-- Stats header-->
+  <!-- Stats header -->
   <app-game-status-bar (serviceSelected)="showServiceInfo($event)"></app-game-status-bar>
 
-  <!-- Banner con ciudad actual
-  <div class="map-banner">
-    <span class="map-banner-text">Ciudad actual: {{ currentCity }}</span>
-  </div>-->
-
-  <!-- Ciudades -->
-  <ng-container *ngFor="let city of availableCities">
+  <!-- Botones de ciudades disponibles para viajar -->
+  <ng-container *ngFor="let city of availableCities()">
     <button
       class="map-city"
-      [ngClass]="{
-      available: city.available,
-      'current-city': city.name === currentCity
-    }"
       [ngStyle]="{ top: city.y + '%', left: city.x + '%' }"
-      (click)="city.name !== currentCity && openPopup(city)"
+      (click)="openPopup(city)"
     >
       <img src="/assets/icons/city-icon.png" alt="Ciudad" />
       <span class="city-name">{{ city.name }}</span>
     </button>
   </ng-container>
 
-
   <!-- Botón volver -->
   <button class="back-button" (click)="goBack()">⬅ Volver</button>
 </div>
 
 <!-- Popup de rutas -->
-<div class="city-popup-overlay" *ngIf="selectedCity">
-  <div class="city-popup">
-    <h2>{{ selectedCity.name }}</h2>
+<ng-container *ngIf="selectedCity() as city">
+  <div class="city-popup-overlay" (click)="closePopup()" *ngIf="selectedCity()">
+    <div class="city-popup" (click)="$event.stopPropagation()">
+      <h2>{{ city.name }}</h2>
 
-    <div class="routes-container">
-      <div *ngFor="let route of selectedCity.routes" class="route-card">
-        <p><strong>{{ route.type }}</strong></p>
-        <p *ngIf="route.cause">Causa: {{ route.cause }}</p>
-        <p>Tiempo estimado: {{ route.time }}</p>
-        <p *ngIf="route.damage > 0">Daño estimado: -{{ route.damage }} puntos de vida</p>
-        <button class="btn-travel">Viajar</button>
+      <div class="routes-container">
+        <div *ngFor="let route of selectedCity()?.routes" class="route-card">
+          <p><strong>{{ route.type }}</strong></p>
+          <p *ngIf="route.damage">Causa: {{ route.damageCause }}</p>
+          <p>Tiempo estimado: {{ route.travelTime }}h</p>
+          <p *ngIf="route.damage > 0">Daño estimado: -{{ route.damage }} puntos de vida</p>
+          <!-- Se activa metodo para viajar -->
+          <button class="btn-travel" (click)="travelTo(route)">Viajar</button>
+        </div>
+        
       </div>
+
+      <button class="btn-close" (click)="closePopup()">✖</button>
     </div>
-
-    <button class="btn-close" (click)="closePopup()">✖</button>
   </div>
+</ng-container>
 
-
+<!-- Transición visual de viaje -->
+<div class="travel-overlay" *ngIf="isTraveling()">
+  <div class="travel-text">Viajando...</div>
 </div>
 
-<!-- Service popup -->
-<app-service-popup *ngIf="selectedService" [service]="selectedService" (close)="closeServiceInfo()"></app-service-popup>
+
+<!-- Popup de servicios activos -->
+<app-service-popup
+  *ngIf="selectedService()"
+  [service]="selectedService()"
+  (close)="closeServiceInfo()"
+></app-service-popup>

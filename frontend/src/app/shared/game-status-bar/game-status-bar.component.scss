@@ -3,7 +3,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 70px;
+  height: 80px;
   background: rgba(0, 0, 0, 0.65);
   z-index: 1000;
   display: flex;
@@ -11,67 +11,76 @@
   align-items: center;
   padding: 0 1rem;
   box-sizing: border-box;
-}
-
-.status-left {
-  display: flex;
-  gap: 3rem;
-  align-items: center;
-}
-
-.status-right {
-  display: flex;
-  gap: 1.2rem;
-  align-items: center;
-  justify-content: center;
-
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-radius: 35px;
-  padding: 0.5rem 1rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  max-width: calc(3 * 70px + 2rem);
-  min-width: calc(3 * 70px + 2rem);
-  height: 55px;
-  box-sizing: border-box;
-}
-
-
-.status-center {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  width: fit-content;
-  color: #f8e4c3;
   font-family: 'Forum', serif;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
+  color: #f8e4c3;
   text-shadow: 1px 1px 2px #000;
-  pointer-events: none;
 }
 
-
-
-
-.status-item {
+.status-section {
   display: flex;
   align-items: center;
-  font-family: 'Forum', serif;
-  font-size: 1.5rem;
-  color: #f8e4c3;
+  gap: 1.5rem;
 
-  span {
-    margin-left: 0.4rem;
+  &.left {
+    margin-left: 1rem;
+    gap: 2rem;
+  }
+
+  &.right {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 35px;
+    padding: 0.5rem 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    min-width: calc(3 * 70px + 2rem);
+    height: 55px;
   }
 }
 
-.status-icon {
-  width: 55px;
-  height: 55px;
-  margin-right: 0.1rem;
+.info-block {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+
+  &:hover  {
+    transition: all 0.5s ease;
+  }
+
+  &.gold:hover span {
+    color: gold;
+  }
+
+  &.life:hover span {
+    color: crimson;
+  }
+
+  &.time:hover span {
+    color: lightblue;
+  }
+
+  &.city:hover span {
+    color: #7cd1a0; 
+  }
+
+  &.caravan:hover span {
+    color: #f1c965; 
+  }
 }
 
-.service-icon-btn {
+
+.info-icon {
+  width: 2.3rem;
+  height: 2.3rem;
+  object-fit: contain;
+  transition: all 0.5s ease;
+}
+
+.info-icon:hover{
+  transform: scale(1.2);
+}
+
+.service-btn {
   background: rgba(0, 0, 0, 0.05);
   border: none;
   border-radius: 50%;
@@ -89,12 +98,11 @@
 }
 
 .service-icon {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   object-fit: contain;
-
-  &:hover {
-    transform: scale(1.05);
-  }
 }
 
+#gold:hover{
+  color: gold;
+}

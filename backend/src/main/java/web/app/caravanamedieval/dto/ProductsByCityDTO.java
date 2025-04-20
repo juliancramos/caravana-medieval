@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class ProductsByCityDTO {
     private Long cityId;
     private Long productId;
-    private Integer cantidad;
+    private Integer quantity;
     private Long supplyFactor;
     private Long demandFactor;
 }

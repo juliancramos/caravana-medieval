@@ -57,6 +57,9 @@ public class ProductServiceImpl implements ProductService {
         if (actualizado.getWeight() != null) {
             product.setWeight(actualizado.getWeight());
         }
+        if(actualizado.getImgUrl() != null){
+            product.setImgUrl(actualizado.getImgUrl());
+        }
 
         return productRepository.save(product);
     }
@@ -69,14 +72,4 @@ public class ProductServiceImpl implements ProductService {
         }
         productRepository.deleteById(id);
     }
-
-    //Este se borra después
-    @Override
-    public List<ProductoDTOJ> recuperarProductos() {
-        return productRepository.findAll().stream()
-                .map(ProductoMapperJ::toDTOJ)
-                .toList();
-    }
-
-
 }

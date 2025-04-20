@@ -28,4 +28,12 @@ public class ProductsByCaravan {
 
     @Column(name = "cantidad", nullable = false)
     private int quantity;
+
+    public ProductsByCaravan(Caravan caravan, Product product, int quantity) {
+        this.caravan = caravan;
+        this.product = product;
+        this.quantity = quantity;
+        this.id = new ProductsByCaravanKey(caravan.getIdCaravan(), product.getIdProduct());
+    }
+
 }
