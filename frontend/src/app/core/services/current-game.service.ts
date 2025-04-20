@@ -25,6 +25,7 @@ export class CurrentGameService {
 
   constructor() {}
 
+  //Actualizar señales
   updateAvailableGold(productPrice: number): void {
     const current = this.selectedGame();
     if (!current) return;
@@ -34,6 +35,35 @@ export class CurrentGameService {
   
     this.selectedGame.set(updated); 
   }
+
+  updateLifePoints(delta: number): void {
+    const current = this.selectedGame();
+    if (!current) return;
+  
+    const updated = { ...current };
+    updated.game.caravan.lifePoints += delta;
+    this.selectedGame.set(updated);
+  }
+  
+  updateElapsedTime(delta: number): void {
+    const current = this.selectedGame();
+    if (!current) return;
+  
+    const updated = { ...current };
+    updated.game.elapsedTime += delta;
+    this.selectedGame.set(updated);
+  }
+  
+  updateCurrentCity(cityId: number, cityName: string): void {
+    const current = this.selectedGame();
+    if (!current) return;
+  
+    const updated = { ...current };
+    updated.game.caravan.currentCity.idCity = cityId;
+    updated.game.caravan.currentCity.name = cityName;
+    this.selectedGame.set(updated);
+  }
+  
   
 
 }
