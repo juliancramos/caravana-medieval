@@ -124,36 +124,36 @@ public class DataInitializer implements CommandLineRunner {
     }
 
     private void createGames() {
-        List<Map> maps = mapRepository.findAll();
-        if (maps.isEmpty()) {
-            System.out.println("No hay mapas disponibles para asociar a las partidas.");
-            return;
-        }
-
-        List<Caravan> caravans = caravanRepository.findAll();
-        if (caravans.isEmpty()) {
-            System.out.println("No hay caravanas disponibles para asociar a las partidas.");
-            return;
-        }
-
-        for (int i = 0; i < 3; i++) {
-            Double elapsedTime = new Random().nextDouble() * 100.0;  // Tiempo transcurrido aleatorio
-            Double timeLimit = elapsedTime + 50.0;  // Tiempo límite un poco mayor
-            Long minimumGain = (long) (new Random().nextInt(1000) + 500);  // Ganancia mínima aleatoria
-
-            Caravan caravan = caravans.get(i % caravans.size());
-            Map map = maps.get(i % maps.size());
-
-            Game game = new Game();
-            game.setElapsedTime(elapsedTime);
-            game.setTimeLimit(timeLimit);
-            game.setMinProfit(minimumGain);
-            game.setCaravan(caravan);
-            game.setMap(map);
-
-            gameRepository.save(game);
-            System.out.println("Partida creada con ID: " + game.getIdGame() + " asociada al mapa: " + map.getName());
-        }
+//        List<Map> maps = mapRepository.findAll();
+//        if (maps.isEmpty()) {
+//            System.out.println("No hay mapas disponibles para asociar a las partidas.");
+//            return;
+//        }
+//
+//        List<Caravan> caravans = caravanRepository.findAll();
+//        if (caravans.isEmpty()) {
+//            System.out.println("No hay caravanas disponibles para asociar a las partidas.");
+//            return;
+//        }
+//
+//        for (int i = 0; i < 3; i++) {
+//            int elapsedTime = new Random().nextDouble() * 100.0;  // Tiempo transcurrido aleatorio
+//            int timeLimit = elapsedTime + 50.0;  // Tiempo límite un poco mayor
+//            Long minimumGain = (long) (new Random().nextInt(1000) + 500);  // Ganancia mínima aleatoria
+//
+//            Caravan caravan = caravans.get(i % caravans.size());
+//            Map map = maps.get(i % maps.size());
+//
+//            Game game = new Game();
+//            game.setElapsedTime(elapsedTime);
+//            game.setTimeLimit(timeLimit);
+//            game.setMinProfit(minimumGain);
+//            game.setCaravan(caravan);
+//            game.setMap(map);
+//
+//            gameRepository.save(game);
+//            System.out.println("Partida creada con ID: " + game.getIdGame() + " asociada al mapa: " + map.getName());
+//        }
     }
 
     private void createPlayers() {
@@ -209,44 +209,44 @@ public class DataInitializer implements CommandLineRunner {
     }
 
     private void createRandomRoutes(List<City> cities) {
-        Random random = new Random();
-
-        for (int i = 0; i < 100; i++) {
-            City originCity = cities.get(random.nextInt(cities.size()));
-            City destinationCity = cities.get(random.nextInt(cities.size()));
-
-            while (originCity.equals(destinationCity)) {
-                destinationCity = cities.get(random.nextInt(cities.size()));
-            }
-
-            // Generar un tipo de ruta aleatorio
-            String[] routeTypes = {"segura", "insegura"};
-            String type = routeTypes[random.nextInt(routeTypes.length)];
-
-            // Asignar valores de daño si la ruta es "insegura"
-            Float damage = null;
-            String damageCause = null;
-            if ("insegura".equals(type)) {
-                damage = random.nextFloat() * 100; // Daño entre 0 y 100
-                damageCause = "Desastre natural";
-            }
-
-            // Generar tiempo de trayecto aleatorio
-            int travelTime = random.nextInt(50) + 10; // Entre 10 y 60 minutos
-
-            // Crear la ruta
-            Route route = new Route();
-            route.setType(type);
-            route.setOriginCity(originCity);
-            route.setDestinationCity(destinationCity);
-            route.setDamage(damage);
-            route.setDamageCause(damageCause);
-            route.setTravelTime(travelTime);
-
-            // Guardar la ruta en el repositorio
-            routeRepository.save(route);
-            System.out.println("Ruta creada entre " + originCity.getName() + " y " + destinationCity.getName());
-        }
+//        Random random = new Random();
+//
+//        for (int i = 0; i < 100; i++) {
+//            City originCity = cities.get(random.nextInt(cities.size()));
+//            City destinationCity = cities.get(random.nextInt(cities.size()));
+//
+//            while (originCity.equals(destinationCity)) {
+//                destinationCity = cities.get(random.nextInt(cities.size()));
+//            }
+//
+//            // Generar un tipo de ruta aleatorio
+//            String[] routeTypes = {"segura", "insegura"};
+//            String type = routeTypes[random.nextInt(routeTypes.length)];
+//
+//            // Asignar valores de daño si la ruta es "insegura"
+//            Float damage = null;
+//            String damageCause = null;
+//            if ("insegura".equals(type)) {
+//                damage = random.nextFloat() * 100; // Daño entre 0 y 100
+//                damageCause = "Desastre natural";
+//            }
+//
+//            // Generar tiempo de trayecto aleatorio
+//            int travelTime = random.nextInt(50) + 10; // Entre 10 y 60 minutos
+//
+//            // Crear la ruta
+//            Route route = new Route();
+//            route.setType(type);
+//            route.setOriginCity(originCity);
+//            route.setDestinationCity(destinationCity);
+//            route.setDamage(damage);
+//            route.setDamageCause(damageCause);
+//            route.setTravelTime(travelTime);
+//
+//            // Guardar la ruta en el repositorio
+//            routeRepository.save(route);
+//            System.out.println("Ruta creada entre " + originCity.getName() + " y " + destinationCity.getName());
+//        }
     }
 
 
