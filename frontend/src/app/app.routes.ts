@@ -9,6 +9,7 @@ import { MapComponent } from '@features/map/map.component';
 import {SelectGameComponent} from '@features/select-game/select-game.component';
 import {SelectCaravanComponent} from '@features/select-caravan/select-caravan.component';
 import {InventoryComponent} from '@features/inventory/inventory.component';
+import {RegisterComponent} from '@features/register/register.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -21,5 +22,6 @@ export const routes: Routes = [
   { path: 'select-game', component: SelectGameComponent },
   { path: 'select-caravan', component: SelectCaravanComponent },
   { path: 'inventory', component: InventoryComponent },
+  { path: 'register', component: RegisterComponent },
   { path: 'mapa', component: MapComponent }
 ];
