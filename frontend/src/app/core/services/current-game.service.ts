@@ -110,6 +110,14 @@ export class CurrentGameService {
     });
   }
 
+  hasWon = computed(() => {
+    const game = this.selectedGame()?.game;
+    if (!game) return false;
+
+    return game.caravan.availableMoney >= game.minProfit;
+  });
+
+
 
 
 

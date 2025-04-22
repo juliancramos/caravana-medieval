@@ -1,4 +1,4 @@
-import {Component, computed, EventEmitter, inject, OnInit, Output} from '@angular/core';
+import {Component, computed, effect, EventEmitter, inject, OnInit, Output, signal} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CurrentGameService } from '@core/services/current-game.service';
 import {ActiveServicesBarComponent} from '@shared/active-services-bar/active-services-bar.component';
@@ -39,6 +39,31 @@ export class GameStatusBarComponent {
 
   showServiceInfo(service: any) {
     this.serviceSelected.emit(service);
+  }
+
+  /*VICTORY POPUP
+  isVictoryPopupVisible = signal(false);
+
+  constructor() {
+    effect(() => {
+      if (this.currentGame.hasWon()) {
+        this.isVictoryPopupVisible.set(true);
+      }
+    });
+  }*/
+  isVictoryPopupVisible = signal(false);
+  private hasShownVictory = false;
+
+  constructor() {
+    effect(() => {
+      if (this.currentGame.hasWon() && !this.hasShownVictory) {
+        this.isVictoryPopupVisible.set(true);
+        this.hasShownVictory = true;
+      }
+    });
+  }
+  closeVictoryPopup() {
+    this.isVictoryPopupVisible.set(false);
   }
 
 
