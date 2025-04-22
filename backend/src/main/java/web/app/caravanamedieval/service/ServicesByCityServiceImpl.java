@@ -117,16 +117,26 @@ public class ServicesByCityServiceImpl {
 
         // Obtener el servicio
         Services service = assignment.getService();
+
+        // --- Validación global para servicios NO acumulables ---
+        if (service.getName().equalsIgnoreCase("Guardias")) {
+            boolean alreadyHasGuard = servicesByCaravanRepository
+                    .findByCaravan_IdCaravanAndServices_NameIgnoreCase(caravan.getIdCaravan(), "Guardias")
+                    .isPresent();
+
+            if (alreadyHasGuard) {
+                throw new IllegalArgumentException("El servicio 'Guardias' ya ha sido adquirido. No es posible comprarlo nuevamente.");
+            }
+        }
+
+        // Buscar si ya existe la relación
         ServicesByCaravanKey key = new ServicesByCaravanKey(caravan.getIdCaravan(), serviceId);
+        ServicesByCaravan existing = servicesByCaravanRepository.findById(key).orElse(null);
 
         int currentUpdate = 1;
-
-        // Si ya existe la relación, incrementar currentUpdate y validar límite
-        ServicesByCaravan existing = servicesByCaravanRepository.findById(key).orElse(null);
         if (existing != null) {
             currentUpdate = existing.getCurrentUpdate() + 1;
 
-            // Validar si se supera la mejora máxima
             float totalImprovement = service.getUpgradePerPurchase() * currentUpdate;
             if (totalImprovement > service.getMaxUpgrade()) {
                 throw new IllegalArgumentException("No puedes mejorar más este servicio");
@@ -136,17 +146,6 @@ public class ServicesByCityServiceImpl {
             applyServiceEffect(caravan, service, currentUpdate);
             servicesByCaravanRepository.save(existing);
         } else {
-
-            if (service.getName().equalsIgnoreCase("Guardias")) {
-                boolean alreadyHasGuard = servicesByCaravanRepository
-                        .findByCaravan_IdCaravanAndServices_NameIgnoreCase(caravan.getIdCaravan(), "Guardias")
-                        .isPresent();
-
-                if (alreadyHasGuard) {
-                    throw new IllegalArgumentException("Este servicio ya ha sido adquirido previamente");
-                }
-            }
-
             // Crear la relación por primera vez
             ServicesByCaravan relation = new ServicesByCaravan();
             relation.setId(key);
@@ -165,6 +164,7 @@ public class ServicesByCityServiceImpl {
         caravanRepository.save(caravan);
         servicesByCityRepository.save(assignment);
     }
+
 
     public List<ServiceForStoreDTO> getAvailableServicesByCity(Long cityId) {
         return servicesByCityRepository.findByCity_IdCity(cityId)
@@ -205,7 +205,15 @@ public class ServicesByCityServiceImpl {
 
             case "mejorar velocidad":
                 double currentSpeed = caravan.getSpeed(); // atributo actual de velocidad
-                double newSpeed = Math.min(currentSpeed + improvementPerPurchase, maxImprovement);
+                double totalBonus = improvementPerPurchase * currentUpdate;  // Ej: 0.1 * 3 = 0.3 (30%)
+
+                // Aplica el aumento proporcional al baseSpeed
+                double newSpeed = currentSpeed * (1 + totalBonus);
+
+                // Aplica el tope máximo
+                double maxSpeed = currentSpeed * (1 + maxImprovement);
+                newSpeed = Math.min(newSpeed, maxSpeed);
+
                 caravan.setSpeed(newSpeed);
                 break;
 
