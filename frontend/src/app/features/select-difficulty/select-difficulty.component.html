@@ -1,1 +1,21 @@
-<p>select-difficulty works!</p>
+<div class="difficulty-background">
+  <div class="difficulty-content">
+    <h2>Selecciona la Dificultad</h2>
+
+    <div class="navigation">
+      <button (click)="prevDifficulty()">⬅</button>
+
+      <div class="difficulty-card animate">
+        <h3>{{ currentDifficulty.level }}</h3>
+        <p><strong>Meta de Oro:</strong> {{ currentDifficulty.goalMoney }} MO</p>
+        <p><strong>Tiempo:</strong> {{ currentDifficulty.timeLimit }} turnos</p>
+        <p><strong>Capacidad Máxima:</strong> {{ currentDifficulty.maxCapacity }}</p>
+        <p><strong>Vida Inicial:</strong> {{ currentDifficulty.initialLife }}</p>
+      </div>
+
+      <button (click)="nextDifficulty()">➡</button>
+    </div>
+
+    <button class="confirm-btn" (click)="confirmSelection()">Confirmar</button>
+  </div>
+</div>

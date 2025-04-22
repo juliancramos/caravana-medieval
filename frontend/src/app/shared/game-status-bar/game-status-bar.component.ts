@@ -51,7 +51,7 @@ export class GameStatusBarComponent {
       }
     });
   }*/
-  isVictoryPopupVisible = signal(false);
+  /*isVictoryPopupVisible = signal(false);
   private hasShownVictory = false;
 
   constructor() {
@@ -65,7 +65,7 @@ export class GameStatusBarComponent {
   closeVictoryPopup() {
     this.isVictoryPopupVisible.set(false);
   }
-
+*/
 
 
 }

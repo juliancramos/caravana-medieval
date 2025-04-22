@@ -16,7 +16,7 @@ export class SelectGameComponent implements OnInit {
 
   games = signal<GameByPlayer[]>([]);
   private currentGame = inject(CurrentGameService);
-  
+
   //readonly solo para remarcar que es solo de lectura
   readonly gameSlots = computed< (GameByPlayer | null)[] >(() => {
     const existing = this.games();
@@ -25,7 +25,7 @@ export class SelectGameComponent implements OnInit {
     while (finalGames.length < 3) finalGames.push(null);
     return finalGames;
   });
-  
+
 
   constructor(
     private gameByPlayerService: GameByPlayerService,
@@ -44,7 +44,7 @@ export class SelectGameComponent implements OnInit {
       error: err => console.error('Error loading games', err)
     });
   }
-  
+
 
   loadGame(game: GameByPlayer): void {
     this.currentGame.selectedGame.set(game);
@@ -52,6 +52,6 @@ export class SelectGameComponent implements OnInit {
   }
 
   createNewGame(): void {
-    this.router.navigate(['/select-caravan']);
+    this.router.navigate(['/select-difficulty']);
   }
 }

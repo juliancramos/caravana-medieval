@@ -10,6 +10,7 @@ import {SelectGameComponent} from '@features/select-game/select-game.component';
 import {SelectCaravanComponent} from '@features/select-caravan/select-caravan.component';
 import {InventoryComponent} from '@features/inventory/inventory.component';
 import {RegisterComponent} from '@features/register/register.component';
+import {SelectDifficultyComponent} from '@features/select-difficulty/select-difficulty.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -23,5 +24,7 @@ export const routes: Routes = [
   { path: 'select-caravan', component: SelectCaravanComponent },
   { path: 'inventory', component: InventoryComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'select-difficulty', component: SelectDifficultyComponent },
+
   { path: 'mapa', component: MapComponent }
 ];

@@ -11,4 +11,9 @@ export class GameByPlayerService {
   getGamesByPlayer(playerId: number): Observable<GameByPlayer[]> {
     return this.http.get<GameByPlayer[]>(`/api/games-by-player/games/player/${playerId}`);
   }
+
+  createGame(gameDTO: any) {
+    return this.http.post<GameByPlayer>('/api/game/create', gameDTO);
+  }
+
 }
