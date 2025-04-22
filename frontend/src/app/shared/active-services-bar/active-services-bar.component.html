@@ -1,1 +1,8 @@
-<p>active-services-bar works!</p>
+<div class="status-section right">
+  <ng-container *ngFor="let service of activeServices">
+    <button class="service-btn" (click)="selectService(service)">
+      <img [src]="service.imgUrl" [alt]="service.name" class="service-icon" />
+    </button>
+  </ng-container>
+</div>
+

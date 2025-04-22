@@ -1,0 +1,39 @@
+.status-section {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+
+  &.right {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 35px;
+    padding: 0.5rem 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    min-width: calc(3 * 70px + 2rem);
+    height: 55px;
+  }
+}
+
+.service-btn {
+  background: rgba(0, 0, 0, 0.05);
+  border: none;
+  border-radius: 50%;
+  padding: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.1);
+    transform: scale(1.1);
+  }
+}
+
+.service-icon {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
