@@ -17,17 +17,22 @@
       <span>{{ remainingTime() }}</span>
     </div>
 
+    <div class="info-block bag">
+      <img src="/assets/icons/bag.png" alt="Capacidad" class="info-icon" />
+      <span>{{ currentLoad() | number:'1.0-2' }}/{{ maxCapacity() }}</span>
+    </div>
+
     <div class="info-block city">
       <img src="/assets/icons/current-city-icon.png" alt="Ciudad" class="info-icon" />
       <span>Ciudad: {{ cityName() }}</span>
     </div>
   </div>
 
-  <div class="status-section right">
-    <ng-container *ngFor="let service of gameState.activeServices">
-      <button class="service-btn" (click)="showServiceInfo(service)">
-        <img [src]="service.icon" [alt]="service.name" class="service-icon" />
-      </button>
-    </ng-container>
-  </div>
+  <app-active-services-bar
+    [activeServices]="activeServices()"
+    (serviceSelected)="showServiceInfo($event)">
+  </app-active-services-bar>
+
+
+
 </div>
