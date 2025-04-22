@@ -76,15 +76,15 @@ export class StoreServicesComponent implements OnInit {
       next: () => {
         this.showGlobalMessage('¡Servicio comprado!', 'success');
         this.currentGame.refreshGame(gameId);
-        this.services = this.services.filter(s => s.serviceId !== service.serviceId);
+        this.services = this.services.filter(s => s.serviceId !== serviceId);
         this.closeServicePopup();
       },
       error: err => {
-        console.error('[BUY SERVICE] Error en compra:', err);
         const msg = err.error?.message ?? 'No se pudo comprar el servicio.';
         this.showGlobalMessage(msg, 'error');
       }
     });
+
   }
   showGlobalMessage(message: string, type: 'success' | 'error' = 'success'): void {
     this.globalNotification = message;
