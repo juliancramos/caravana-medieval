@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { GameStateService } from '@core/services/game-state.service';
 import {GameStatusBarComponent} from '@shared/game-status-bar/game-status-bar.component';
 import {ServicePopupComponent} from '@shared/service-popup/service-popup.component';
 
@@ -14,7 +13,7 @@ import {ServicePopupComponent} from '@shared/service-popup/service-popup.compone
 })
 export class ResumeComponent {
 
-  constructor(private gameState: GameStateService, private router: Router) {}
+  constructor( private router: Router) {}
 
   selectedService: any = null;
 

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {GameStateService} from '@core/services/game-state.service';
 import {Router} from '@angular/router';
 
 @Component({
