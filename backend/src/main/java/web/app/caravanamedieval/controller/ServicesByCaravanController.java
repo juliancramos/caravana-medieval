@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import web.app.caravanamedieval.dto.ActiveServiceDTO;
 import web.app.caravanamedieval.dto.ServicesByCaravanDTO;
 import web.app.caravanamedieval.model.ServicesByCaravan;
 import web.app.caravanamedieval.service.ServicesByCaravanServiceImpl;
@@ -61,4 +62,12 @@ public class ServicesByCaravanController {
         ServicesByCaravan updatedAssignment = servicesByCaravanService.updateAssignment(dto);
         return ResponseEntity.ok(updatedAssignment);
     }
+
+    @GetMapping("/active/caravan/{id}")
+    public ResponseEntity<List<ActiveServiceDTO>> getActiveServices(@PathVariable Long id) {
+        return ResponseEntity.ok(servicesByCaravanService.getActiveServicesByCaravanId(id));
+    }
+
+
+
 }
