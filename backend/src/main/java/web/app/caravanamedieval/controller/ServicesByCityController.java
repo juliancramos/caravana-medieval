@@ -4,8 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import web.app.caravanamedieval.dto.ServiceForStoreDTO;
 import web.app.caravanamedieval.dto.ServicesByCityDTO;
+import web.app.caravanamedieval.model.Services;
 import web.app.caravanamedieval.model.ServicesByCity;
+import web.app.caravanamedieval.service.ServicesByCaravanServiceImpl;
 import web.app.caravanamedieval.service.ServicesByCityServiceImpl;
 
 import java.net.URI;
@@ -16,11 +19,26 @@ import java.util.List;
 public class ServicesByCityController {
 
     private final ServicesByCityServiceImpl servicesByCityService;
+    private final ServicesByCaravanServiceImpl servicesByCaravanService;
+
 
     @Autowired
-    public ServicesByCityController(ServicesByCityServiceImpl servicesByCityService) {
+    public ServicesByCityController(ServicesByCityServiceImpl servicesByCityService, ServicesByCaravanServiceImpl servicesByCaravanService) {
         this.servicesByCityService = servicesByCityService;
+        this.servicesByCaravanService = servicesByCaravanService;
     }
+
+    @PostMapping("/buy")
+    public ResponseEntity<Void> buyService(@RequestParam Long gameId, @RequestParam Long serviceId) {
+        servicesByCityService.buyService(gameId, serviceId);
+        return ResponseEntity.ok().build();
+    }
+
+
+
+
+
+
 
     @PostMapping("/assign")
     public ResponseEntity<ServicesByCity> assignServiceToCity(@RequestBody ServicesByCityDTO dto) {
@@ -54,6 +72,12 @@ public class ServicesByCityController {
     public ResponseEntity<List<ServicesByCity>> getServicesByCityId(@PathVariable Long id) {
         return ResponseEntity.ok(servicesByCityService.getServicesByCityId(id));
     }
+
+    @GetMapping("/available/city/{id}")
+    public ResponseEntity<List<ServiceForStoreDTO>> getAvailableServices(@PathVariable Long id) {
+        return ResponseEntity.ok(servicesByCityService.getAvailableServicesByCity(id));
+    }
+
 
     @GetMapping("/list")
     public ResponseEntity<List<ServicesByCity>> listAll() {
