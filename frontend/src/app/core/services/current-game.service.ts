@@ -5,6 +5,7 @@ import { ActiveServiceDTO } from '@shared/models/active-service.dto';
 import {ProductsByCaravan} from '@shared/models/products-by-caravan';
 import { ProductsByCaravanService } from '@core/services/products-by-caravan.service';
 import {Game} from '@shared/models/game.model';
+import { ActiveServiceEffectDTO } from '@shared/models/ActiveServiceEffectDTO';
 
 
 @Injectable({
@@ -33,8 +34,9 @@ export class CurrentGameService {
     return game.timeLimit - game.elapsedTime;
   });
 
+  activeEffects = signal<ActiveServiceEffectDTO[]>([]);
 
-  // Efecto para cargar productos al seleccionar partida
+  // Efecto para cargar productos y servicios  al seleccionar partida
   constructor(private http: HttpClient) {
     effect(() => {
       const caravanId = this.selectedGame()?.game.caravan.idCaravan;
@@ -48,6 +50,9 @@ export class CurrentGameService {
             const filtered = services.filter(s => s.name.toLowerCase() !== 'reparar');
             this.activeServices.set(filtered);
           });
+
+        this.http.get<ActiveServiceEffectDTO[]>(`/api/services-by-caravan/effects/caravan/${caravanId}`)
+          .subscribe(effects => this.activeEffects.set(effects));
       }
     });
   }
@@ -116,6 +121,8 @@ export class CurrentGameService {
 
     return game.caravan.availableMoney >= game.minProfit;
   });
+
+
 
 
 
