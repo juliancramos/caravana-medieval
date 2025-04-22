@@ -1,9 +1,8 @@
 <div class="service-popup-overlay">
   <div class="service-popup">
-    <img [src]="service.icon" [alt]="service.name" class="popup-service-icon" />
+    <img [src]="service.imgUrl" [alt]="service.name" class="popup-service-icon" />
     <h2>{{ service.name }}</h2>
     <p>{{ service.description }}</p>
-    <p><strong>Duración:</strong> {{ service.duration }}</p>
     <button (click)="closePopup()" class="btn-close">Cerrar</button>
   </div>
 </div>
