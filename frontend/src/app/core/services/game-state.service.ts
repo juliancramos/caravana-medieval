@@ -1,10 +1,7 @@
-import { Injectable } from '@angular/core';
+/*import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class GameStateService {
-  playerHealth = 100;
-  playerGold = 250;
-  currentCity = 'Eldenport';
   activeServices = [
     {
       name: 'Guardias',
@@ -27,6 +24,4 @@ export class GameStateService {
   ];
 
 
-
-  // Opcionalmente podrías usar getters/setters o signals si en un futuro lo deseas.
-}
+}*/
