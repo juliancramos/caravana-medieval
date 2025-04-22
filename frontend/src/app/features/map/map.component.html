@@ -31,12 +31,13 @@
         <div *ngFor="let route of selectedCity()?.routes" class="route-card">
           <p><strong>{{ route.type }}</strong></p>
           <p *ngIf="route.damage">Causa: {{ route.damageCause }}</p>
-          <p>Tiempo estimado: {{ route.travelTime }}h</p>
-          <p *ngIf="route.damage > 0">Daño estimado: -{{ route.damage }} puntos de vida</p>
+          <p>Tiempo estimado: {{ applyTravelTime(route.travelTime) }}h</p>          <p *ngIf="route.damage > 0">
+            Daño estimado: -{{ calculateDisplayedDamage(route.damage) }} puntos de vida
+          </p>
           <!-- Se activa metodo para viajar -->
           <button class="btn-travel" (click)="travelTo(route)">Viajar</button>
         </div>
-        
+
       </div>
 
       <button class="btn-close" (click)="closePopup()">✖</button>

@@ -28,6 +28,8 @@ export class MapComponent {
 
   availableCities = signal<CityWithRoute[]>([]);
 
+  activeEffects = this.currentGame.activeEffects;
+
   constructor() {
     effect(() => this.loadRoutes());
   }
@@ -139,4 +141,26 @@ export class MapComponent {
   get currentCityName() {
     return this.currentGame.selectedGame()?.game.caravan.currentCity.name;
   }
+
+  calculateDisplayedDamage(baseDamage: number): number {
+    const hasGuardService = this.currentGame.activeServices().some(s => s.name.toLowerCase() === 'guardias');
+
+    if (hasGuardService) {
+      return Math.floor(baseDamage * 0.75);
+    }
+    return baseDamage;
+  }
+
+
+  applyTravelTime(originalTime: number): number {
+    const speed = this.activeEffects().find(e => e.name.toLowerCase() === 'mejorar velocidad');
+    if (speed) {
+      const reduction = speed.improvementPerPurchase * speed.currentUpgrade;
+      return Math.floor(originalTime * (1 - reduction));
+    }
+    return originalTime;
+  }
+
+
+
 }
