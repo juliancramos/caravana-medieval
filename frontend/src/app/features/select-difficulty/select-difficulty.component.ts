@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DifficultyOption } from '@shared/models/difficulty-option.model';
 import { Router } from '@angular/router';
@@ -14,8 +14,7 @@ import { GameCreationService } from '@core/services/game-creation.service';
 export class SelectDifficultyComponent {
 
   private router = inject(Router);
-
-
+  private gameCreation = inject(GameCreationService);
 
   difficulties: DifficultyOption[] = [
     { level: 'Fácil', goalMoney: 5000, timeLimit: 50, maxCapacity: 120, initialLife: 100 },
@@ -38,8 +37,9 @@ export class SelectDifficultyComponent {
   }
 
   confirmSelection() {
-    console.log('Selected Difficulty:', this.currentDifficulty);
-    // Aquí va la lógica para crear la partida en el backend
+    // Siempre quemamos la dificultad "Medio"
+    const mediumDifficulty = this.difficulties[1];
+    this.gameCreation.setDifficulty(mediumDifficulty);
     this.router.navigate(['/seleccionar-partida']);
   }
 }
