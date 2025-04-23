@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 import web.app.caravanamedieval.dto.CaravanDTO;
 import web.app.caravanamedieval.mapper.CaravanMapper;
 import web.app.caravanamedieval.model.Caravan;
+import web.app.caravanamedieval.model.City;
 import web.app.caravanamedieval.repository.CaravanRepository;
+import web.app.caravanamedieval.repository.CityRepository;
 
 import java.util.List;
 
@@ -14,14 +16,21 @@ import java.util.List;
 public class CaravanServiceImpl implements CaravanService {
 
     private final CaravanRepository caravanRepository;
+    private final CityRepository cityRepository;
+
     @Autowired
-    public CaravanServiceImpl(CaravanRepository caravanRepository) {
+    public CaravanServiceImpl(CaravanRepository caravanRepository, CityRepository cityRepository) {
         this.caravanRepository = caravanRepository;
+        this.cityRepository = cityRepository;
     }
 
     @Override
     public Caravan createCaravan(CaravanDTO caravanDTO) {
+        City currentCity = cityRepository.findById(caravanDTO.getCurrentCityId())
+                .orElseThrow(() -> new EntityNotFoundException("Ciudad con ID " + caravanDTO.getCurrentCityId() + " no encontrada"));
+
         Caravan caravan = CaravanMapper.INSTANCE.toEntity(caravanDTO);
+        caravan.setCurrentCity(currentCity);
         return caravanRepository.save(caravan);
     }
 
@@ -43,7 +52,11 @@ public class CaravanServiceImpl implements CaravanService {
 
         // Mapper actualiza los cambios directamente
        CaravanMapper.INSTANCE.updateEntity(caravan, caravanDTO);
-
+        if (caravanDTO.getCurrentCityId() != null) {
+            City currentCity = cityRepository.findById(caravanDTO.getCurrentCityId())
+                    .orElseThrow(() -> new EntityNotFoundException("Ciudad con ID " + caravanDTO.getCurrentCityId() + " no encontrada"));
+            caravan.setCurrentCity(currentCity);
+        }
         return caravanRepository.save(caravan);
     }
 

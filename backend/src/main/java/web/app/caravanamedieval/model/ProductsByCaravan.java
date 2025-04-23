@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import web.app.caravanamedieval.model.keys.ProductsByCaravanKey;
 
 @Data
 @AllArgsConstructor
@@ -25,6 +26,14 @@ public class ProductsByCaravan {
     @JoinColumn(name = "producto_id")
     private Product product;
 
-    @Column(nullable = false)
+    @Column(name = "cantidad", nullable = false)
     private int quantity;
+
+    public ProductsByCaravan(Caravan caravan, Product product, int quantity) {
+        this.caravan = caravan;
+        this.product = product;
+        this.quantity = quantity;
+        this.id = new ProductsByCaravanKey(caravan.getIdCaravan(), product.getIdProduct());
+    }
+
 }

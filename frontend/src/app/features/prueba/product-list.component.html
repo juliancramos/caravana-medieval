@@ -1,0 +1,7 @@
+<h2>Productos disponibles</h2>
+
+<p *ngIf="productNames.length === 0">No se encontraron productos o hubo un error.</p>
+
+<ul>
+  <li *ngFor="let name of productNames">{{ name }}</li>
+</ul>

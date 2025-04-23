@@ -1,0 +1,54 @@
+<div class="store-services-background">
+  <div class="screen-fade"></div>
+
+  <!-- Stats header-->
+  <app-game-status-bar (serviceSelected)="showServiceInfo($event)"></app-game-status-bar>
+
+  <!-- Estante de servicios -->
+  <div class="services-shelf">
+    <h2 class="shelf-title">Tienda de Servicios</h2>
+
+    <div class="services-grid">
+      <div
+        class="service-tile"
+        *ngFor="let service of services"
+        (click)="openServicePopup(service)"
+      >
+        <img [src]="service.icon" [alt]="service.name" />
+        <span class="service-name">{{ service.name }}</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Service popup-->
+  <div class="product-popup-overlay" *ngIf="selectedServiceToBuy">
+    <div class="product-popup">
+      <button class="close-btn" (click)="closeServicePopup()">✖</button>
+      <img [src]="selectedServiceToBuy.icon" class="popup-image" />
+      <h3>{{ selectedServiceToBuy.name }}</h3>
+      <p>{{ selectedServiceToBuy.description }}</p>
+      <p><strong>Duración:</strong> {{ selectedServiceToBuy.duration }}</p>
+      <p><strong>Precio:</strong> {{ selectedServiceToBuy.price }} MO</p>
+      <button class="buy-button" (click)="buyService()">Comprar</button>
+    </div>
+  </div>
+
+
+
+  <div class="global-notification" [ngClass]="notificationType" *ngIf="showGlobalNotification">
+    {{ globalNotification }}
+  </div>
+
+
+  <!-- Botón salir -->
+  <button class="exit-button" (click)="exitStore()">⬅ Salir de la tienda</button>
+
+  <!-- Service popup in status bar -->
+  <app-service-popup
+    *ngIf="selectedServiceInfo"
+    [service]="selectedServiceInfo"
+    (close)="closeServiceInfo()"
+  ></app-service-popup>
+
+</div>

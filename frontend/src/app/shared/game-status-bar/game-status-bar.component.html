@@ -1,0 +1,33 @@
+<div class="status-bar">
+  <div class="status-section left">
+    <div class="info-block caravan">
+      <img src="/assets/icons/caravan-icon.png" alt="Caravana" class="info-icon" />
+      <span>{{ caravanName() }}</span>
+    </div>
+    <div class="info-block life">
+      <img src="/assets/icons/heart.png" alt="Vida" class="info-icon" />
+      <span>{{ lifePoints() }}</span>
+    </div>
+    <div class="info-block gold">
+      <img src="/assets/icons/coin.png" alt="Dinero" class="info-icon" />
+      <span>{{ availableMoney() }}/{{ minProfit() }}</span>
+    </div>
+    <div class="info-block time">
+      <img src="/assets/icons/time-icon.png" alt="Tiempo" class="info-icon" />
+      <span>{{ remainingTime() }}</span>
+    </div>
+
+    <div class="info-block city">
+      <img src="/assets/icons/current-city-icon.png" alt="Ciudad" class="info-icon" />
+      <span>Ciudad: {{ cityName() }}</span>
+    </div>
+  </div>
+
+  <div class="status-section right">
+    <ng-container *ngFor="let service of gameState.activeServices">
+      <button class="service-btn" (click)="showServiceInfo(service)">
+        <img [src]="service.icon" [alt]="service.name" class="service-icon" />
+      </button>
+    </ng-container>
+  </div>
+</div>

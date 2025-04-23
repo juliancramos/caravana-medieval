@@ -1,0 +1,50 @@
+<div class="store-products-background">
+  <div class="screen-fade"></div>
+
+  <!-- Stats header-->
+  <app-game-status-bar (serviceSelected)="showServiceInfo($event)"></app-game-status-bar>
+
+
+ <!-- Estante de productos -->
+  <app-inventory-panel
+    [title]="'Estante de productos'"
+    [items]="productItems"
+    [showFilters]="true"
+    [variant]="'store'"
+    (itemSelected)="onItemSelected($event)">
+  </app-inventory-panel>
+
+  
+  <!-- Botón salir de la tienda -->
+  <button class="exit-button" (click)="exitStore()" aria-label="Salir de la tienda">
+    ⬅ Salir de la tienda
+  </button>
+  <!-- Botón ir al inventario -->
+  <button class="exit-button sell-button" (click)="goToInventory()" aria-label="Ir al inventario">
+    Vender productos
+  </button>
+
+  <!-- popup de producto -->
+  <app-product-store-popup
+    *ngIf="selectedProduct"
+    [product]="selectedProduct"
+    (close)="selectedProduct = null"
+    (buy)="onBuy($event)">
+  </app-product-store-popup>
+
+
+  <div class="popup-backdrop feedback-popup" *ngIf="feedbackVisible()">
+    <div class="popup-card minimal">
+      <svg width="60" height="60" viewBox="0 0 24 24" fill="#ffdb70" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 1rem;">
+        <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 2a8 8 0 110 16 8 8 0 010-16zm0 2c-.6 0-1 .4-1 1v3H9a1 1 0 000 2h2v3a1 1 0 002 0v-3h2a1 1 0 000-2h-2V7c0-.6-.4-1-1-1z"/>
+      </svg>
+      <h2>{{ feedbackTitle() }}</h2>
+      <p class="description">{{ feedbackMessage() }}</p>
+    </div>
+  </div>
+  
+  <!-- Service popup -->
+  <app-service-popup *ngIf="selectedService" [service]="selectedService" (close)="closeServiceInfo()"></app-service-popup>
+
+
+</div>

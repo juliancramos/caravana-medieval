@@ -26,6 +26,9 @@ public class City {
     @Column(name = "impuesto_entrada", nullable = false)
     private int entryTax;
 
+    @Column(name = "img_url")
+    private String imgUrl;
+
     // Relación con el mapa (ahora directamente en la entidad Ciudad)
     @ManyToOne
     @JoinColumn(name = "mapa_id", nullable = false)

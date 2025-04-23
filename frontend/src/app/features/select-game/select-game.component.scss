@@ -1,0 +1,99 @@
+.select-game-screen {
+  height: 100vh;
+  width: 100%;
+  background: url('/assets/img/bg-select-game.png') no-repeat center center;
+  background-size: cover;
+  display: flex; // flex para centrar contenido
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: 'Forum', serif;
+  color: #f8e4c3;
+}
+
+.game-cards {
+  margin-top: 4%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.game-card {
+  width: 220px;
+  height: 280px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid #f8e4c3;
+  border-radius: 12px;
+  box-shadow: 0 0 10px #000;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  img {
+    width: 100%;
+    height: 85%;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
+  }
+
+  .card-label {
+    height: 15%;
+    font-size: 1.2rem;
+    text-align: center;
+    padding-top: 0.4rem;
+    background: rgb(63, 41, 28);
+    border-radius: 0 0 8px 8px;
+    width: 100%;
+  }
+}
+
+.new-game {
+  background: rgba(0, 0, 0, 0.4);
+  border-style: dashed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .plus-icon {
+    font-size: 5rem;
+    color: #f8e4c3;
+    line-height: 1;
+  }
+
+  .card-label {
+    margin-top: 0.6rem;
+    font-size: 1.2rem;
+    text-align: center;
+    background: none;
+  }
+}
+
+/* animated black screen */
+.screen-fade {
+  position: absolute;
+  inset: 0;
+  background-color: #000;
+  z-index: 100;
+  animation: fadeFromBlack 1.2s ease forwards;
+  pointer-events: none;
+}
+
+@keyframes fadeFromBlack {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

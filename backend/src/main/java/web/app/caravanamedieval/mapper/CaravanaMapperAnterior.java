@@ -10,7 +10,6 @@ public class CaravanaMapperAnterior {
 
         CaravanDTO caravanDTO = new CaravanDTO();
 
-        caravanDTO.setIdCaravan(caravan.getIdCaravan());
         caravanDTO.setName(caravan.getName());
         caravanDTO.setSpeed(caravan.getSpeed());
         caravanDTO.setMaxCapacity(caravan.getMaxCapacity());
@@ -25,7 +24,6 @@ public class CaravanaMapperAnterior {
 
         Caravan caravan = new Caravan();
 
-        caravan.setIdCaravan(dto.getIdCaravan());
         caravan.setName(dto.getName());
         caravan.setSpeed(dto.getSpeed());
         caravan.setMaxCapacity(dto.getMaxCapacity());

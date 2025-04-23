@@ -1,0 +1,22 @@
+<div class="login-background">
+  <!-- //Si fade-out es true, se le agrega la clase -->
+  <div class="login-container" [ngClass]="{ 'fade-fadingOut': fadingOut }">
+    <h1 class="login-title">Caravana Medieval</h1>
+
+    <form class="login-form" [formGroup]="form" (ngSubmit)="login()">
+      <div class="form-group">
+        <input type="text" id="username" placeholder="Usuario" formControlName="username" />
+        <input type="password" id="password" placeholder="Contraseña" formControlName="password" />
+      </div>
+      
+      <div class="form-buttons">
+        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+        <button type="button" class="btn btn-secondary" (click)="createAccount()">Crear cuenta</button>
+      </div>
+    </form>
+
+    <div class="error" *ngIf="error()">{{ error() }}</div>
+  </div>
+
+  <div class="black-screen" *ngIf="showBlackScreen"></div>
+</div>

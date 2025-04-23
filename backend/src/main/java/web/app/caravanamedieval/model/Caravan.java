@@ -33,6 +33,9 @@ public class Caravan {
     @Column(name = "puntos_vida", nullable = false)
     private int lifePoints;
 
+    @Column(name = "img_url")
+    private String imgUrl;
+
     @ManyToMany
     @JoinTable(
             name = "productosxcaravana",  // Tabla intemedia
@@ -46,6 +49,7 @@ public class Caravan {
     @JsonIgnore
     private List<Game> games;
 
-
-
+    @ManyToOne
+    @JoinColumn(name = "ciudad_actual_id", nullable = false)
+    private City currentCity;
 }

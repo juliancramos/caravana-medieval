@@ -1,0 +1,39 @@
+<!-- Stats header-->
+<app-game-status-bar (serviceSelected)="showServiceInfo($event)"></app-game-status-bar>
+
+
+<!-- background game -->
+<div class="resume-background">
+  <div class="screen-fade"></div>
+
+  <!-- Clickeable houses -->
+  <!-- Casa de productos -->
+  <button class="click-zone zone-products"(click)="goToProducts()">
+    <span class="zone-label">Entrar a tienda de productos</span>
+  </button>
+
+  <!-- Casa de servicios -->
+  <button class="click-zone zone-services"(click)="goToServices()">
+    <span class="zone-label">Entrar a tienda de servicios</span>
+  </button>
+
+  <!-- Map button -->
+  <button class="bottom-icon-button map-button" (click)="goToMap()">
+    <img src="/assets/icons/map.png" alt="Mapa" />
+    <span>Mapa</span>
+  </button>
+
+  <!-- Inventory button -->
+  <button class="bottom-icon-button inventory-button" (click)="goToInventory()">
+    <img src="/assets/icons/bag.png" alt="Inventario" />
+    <span>Inventario</span>
+  </button>
+
+
+</div>
+
+<!-- Service popup -->
+<app-service-popup *ngIf="selectedService" [service]="selectedService" (close)="closeServiceInfo()"></app-service-popup>
+
+
+

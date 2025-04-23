@@ -1,0 +1,108 @@
+.status-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  box-sizing: border-box;
+  font-family: 'Forum', serif;
+  font-size: 1.7rem;
+  color: #f8e4c3;
+  text-shadow: 1px 1px 2px #000;
+}
+
+.status-section {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+
+  &.left {
+    margin-left: 1rem;
+    gap: 2rem;
+  }
+
+  &.right {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 35px;
+    padding: 0.5rem 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    min-width: calc(3 * 70px + 2rem);
+    height: 55px;
+  }
+}
+
+.info-block {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+
+  &:hover  {
+    transition: all 0.5s ease;
+  }
+
+  &.gold:hover span {
+    color: gold;
+  }
+
+  &.life:hover span {
+    color: crimson;
+  }
+
+  &.time:hover span {
+    color: lightblue;
+  }
+
+  &.city:hover span {
+    color: #7cd1a0; 
+  }
+
+  &.caravan:hover span {
+    color: #f1c965; 
+  }
+}
+
+
+.info-icon {
+  width: 2.3rem;
+  height: 2.3rem;
+  object-fit: contain;
+  transition: all 0.5s ease;
+}
+
+.info-icon:hover{
+  transform: scale(1.2);
+}
+
+.service-btn {
+  background: rgba(0, 0, 0, 0.05);
+  border: none;
+  border-radius: 50%;
+  padding: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.1);
+    transform: scale(1.1);
+  }
+}
+
+.service-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+#gold:hover{
+  color: gold;
+}

@@ -7,6 +7,6 @@ import web.app.caravanamedieval.model.Player;
 import java.util.Optional;
 
 @Repository
-public interface PlayerRepository extends JpaRepository<Player, Integer> {
+public interface PlayerRepository extends JpaRepository<Player, Long> {
     Optional<Player> findByUsername(String username);
 }

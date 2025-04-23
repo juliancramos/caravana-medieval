@@ -3,16 +3,18 @@ package web.app.caravanamedieval.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity
-@Table(name = "jugador")
-@Data
+
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table(name = "jugador")
 public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_jugador")
-    private Integer idPlayer;
+    private Long idPlayer;
 
     @Column(name = "username", nullable = false, unique = true)
     private String username;
@@ -23,6 +25,6 @@ public class Player {
     @Column(name = "rol", nullable = false)
     private String role;
 
-
-
+    @Column(name = "img_url")
+    private String imgUrl;
 }

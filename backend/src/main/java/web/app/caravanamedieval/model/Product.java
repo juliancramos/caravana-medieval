@@ -23,6 +23,9 @@ public class Product {
     @Column(name = "descripcion", nullable = false, length = 50)
     private String description;
 
+    @Column(name = "img_url")
+    private String imgUrl;
+
     @Column(name = "peso", nullable = false)
     private Float weight;
 

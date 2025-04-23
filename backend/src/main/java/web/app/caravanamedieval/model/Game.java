@@ -17,10 +17,10 @@ public class Game {
     private Long idGame;
 
     @Column(name = "tiempo_transcurrido", nullable = false)
-    private Double elapsedTime;
+    private int elapsedTime;
 
     @Column(name = "tiempo_limite", nullable = false)
-    private Double timeLimit;
+    private int timeLimit;
 
     @Column(name = "ganancia_minima", nullable = false)
     private Long minProfit;

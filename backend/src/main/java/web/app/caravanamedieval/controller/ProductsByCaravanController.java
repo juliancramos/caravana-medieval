@@ -1,86 +1,64 @@
 package web.app.caravanamedieval.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import web.app.caravanamedieval.dto.*;
+import web.app.caravanamedieval.model.ProductsByCaravan;
 import web.app.caravanamedieval.service.*;
-import org.springframework.web.servlet.view.RedirectView;
-
-import java.util.ArrayList;
+import java.net.URI;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+
 
 @Controller
-@RequestMapping("/caravans/products")
+@RequestMapping("/products-by-caravan")
 public class ProductsByCaravanController {
-
+    private final ProductsByCaravanServiceImpl productsByCaravanService;
     @Autowired
-    private CaravanaServiceJ caravanaService;
+    public ProductsByCaravanController(ProductsByCaravanServiceImpl productsByCaravanService) {
+        this.productsByCaravanService = productsByCaravanService;
+    }
 
-    @Autowired
-    private ProductService productService;
+    @PostMapping("/assign")
+    public ResponseEntity<ProductsByCaravan> assignProductsToCaravans(@RequestBody ProductsByCaravanDTO productsByCaravanDTO) {
+        ProductsByCaravan assignment = productsByCaravanService.assignProductToCaravan(productsByCaravanDTO);
 
-    @GetMapping("/update/{idCaravan}")
-    public ModelAndView editCaravanaProductosForm(@PathVariable Long idCaravan) {
-        CaravanProductsDTO caravanProductsDTO = caravanaService.getCaravanaProductos(idCaravan)
-                .orElseThrow();
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{idProduct}/{idCaravan}")
+                .buildAndExpand(productsByCaravanDTO.getIdProduct(), productsByCaravanDTO.getIdCaravan())
+                .toUri();
+        return ResponseEntity.created(location).body(assignment);
+    }
 
-        List<ProductoDTOJ> allProductos = productService.recuperarProductos();
-
-        // Obtener la lista de IDs de productos ya relacionados
-        List<Long> idsProductosRelacionados = caravanProductsDTO.getProducts().stream()
-                .map(ProductsByCaravanDTO::getIdProduct)
-                .collect(Collectors.toList());
-
-        //mapa de cantidades
-        Map<Long, Integer> cantidadesPorProducto = caravanProductsDTO.getProducts().stream()
-                .collect(Collectors.toMap(ProductsByCaravanDTO::getIdProduct, ProductsByCaravanDTO::getQuantity));
-
-        ModelAndView mav = new ModelAndView("caravana-productos-edit");
-        mav.addObject("caravanaProductos", caravanProductsDTO);
-        mav.addObject("allProductos", allProductos);
-        mav.addObject("idsProductosRelacionados", idsProductosRelacionados);
-        mav.addObject("cantidadesPorProducto", cantidadesPorProducto);
-        return mav;
+    @DeleteMapping("/remove/products/{idProduct}/caravans/{idCaravan}")
+    public ResponseEntity<Void> removeAssignment (@PathVariable Long idProduct, @PathVariable Long idCaravan){
+        productsByCaravanService.removeAssignment(idProduct, idCaravan);
+        return ResponseEntity.noContent().build();
     }
 
 
+    @GetMapping("/product/{idProduct}/caravan/{idCaravan}")
+    public ResponseEntity<ProductsByCaravan> getProduct(@PathVariable Long idProduct, @PathVariable Long idCaravan){
+        return ResponseEntity.ok(productsByCaravanService.getProduct(idProduct, idCaravan));
+    }
 
-
-    @PostMapping("/save")
-    public RedirectView saveCaravanaProductos(@RequestParam Long idCaravana,
-                                              @RequestParam(required = false) List<Long> idsProductos,
-                                              @RequestParam(required = false) List<Integer> cantidades) {
-
-
-        // Crea DTO con los datos recibidos
-        CaravanProductsDTO cpd = new CaravanProductsDTO();
-        cpd.setIdCaravan(idCaravana);
-        List<ProductsByCaravanDTO> productosDTO = new ArrayList<>();
-        if (idsProductos != null) {
-            for (int i = 0; i < idsProductos.size(); i++) {
-                ProductsByCaravanDTO productoDTO = new ProductsByCaravanDTO();
-                productoDTO.setIdCaravan(idCaravana);
-                productoDTO.setIdProduct(idsProductos.get(i));
-                productoDTO.setQuantity(cantidades != null && cantidades.size() > i ? cantidades.get(i) : 1);
-
-                productosDTO.add(productoDTO);
-            }
-        }
-        cpd.setProducts(productosDTO);
-        caravanaService.updateCaravanaProductos(cpd);
-        return new RedirectView("/caravana/listar");
+    @GetMapping("/products/caravan/{id}")
+    public ResponseEntity<List<ProductsByCaravan>> getProductsByCaravanId(@PathVariable Long id){
+        return ResponseEntity.ok(productsByCaravanService.getProductsByCaravanId(id));
     }
 
 
+    @GetMapping("/list")
+    public ResponseEntity<List<ProductsByCaravan>> listProductsByCaravan(){
+        return ResponseEntity.ok(productsByCaravanService.listProductsByCaravan());
+    }
 
-
-
-
-
-
-
+    @PutMapping("/update")
+    public ResponseEntity<ProductsByCaravan> updateAssignment(@RequestBody ProductsByCaravanDTO dto) {
+        ProductsByCaravan updatedAssignment = productsByCaravanService.updateAssignment(dto);
+        return ResponseEntity.ok(updatedAssignment);
+    }
 }

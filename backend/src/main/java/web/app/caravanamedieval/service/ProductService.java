@@ -10,8 +10,4 @@ public interface ProductService {
     public Product getProductByName(String nombre);
     public Product updateProduct(Long id, ProductDTO actualizado);
     public void deleteProduct(Long id);
-    //Model and view
-    public List<ProductoDTOJ> recuperarProductos();
-
-
 }

@@ -7,6 +7,10 @@ import java.util.List;
 
 public interface RouteService {
     Route createRoute(RouteDTO routeDTO);
+    Route getRoute(Long id);
+    List<Route> getRoutes();
+    Route updateRoute(Long id, RouteDTO routeDTO);
+    void deleteRoute(Long id);
     List<Route> getRoutesFromCity(long ciudadId);
     List<Route> getRoutesToCity(long ciudadId);
 }
