@@ -52,7 +52,7 @@ export class SelectGameComponent implements OnInit {
   }
 
   createNewGame(): void {
-    this.router.navigate(['/select-difficulty']);
+    this.router.navigate(['/select-caravan']);
   }
 
   trackByIndex(index: number): number {
