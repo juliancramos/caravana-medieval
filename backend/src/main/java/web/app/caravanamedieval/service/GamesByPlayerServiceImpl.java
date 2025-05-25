@@ -10,6 +10,8 @@ import web.app.caravanamedieval.model.Player;
 import web.app.caravanamedieval.repository.GameRepository;
 import web.app.caravanamedieval.repository.GamesByPlayerRepository;
 import web.app.caravanamedieval.repository.PlayerRepository;
+import web.app.caravanamedieval.dto.GameByPlayerDTO;
+
 
 import java.util.List;
 
@@ -56,6 +58,18 @@ public class GamesByPlayerServiceImpl {
 
     public List<GamesByPlayer> getGamesByPlayer(Long playerId) {
         return gamesByPlayerRepository.findByPlayer_IdPlayer(playerId);
+    }
+
+    public List<GameByPlayerDTO> getGameDTOsByPlayer(Long playerId) {
+        List<GamesByPlayer> assignments = gamesByPlayerRepository.findByPlayer_IdPlayer(playerId);
+
+        return assignments.stream()
+                .map(assignment -> {
+                    Game game = gameRepository.findById(assignment.getGame().getIdGame())
+                            .orElse(null);
+                    return new GameByPlayerDTO(game);
+                })
+                .toList();
     }
 
     public void removeAssignment(Long gameId, Long playerId) {
