@@ -54,4 +54,10 @@ export class SelectGameComponent implements OnInit {
   createNewGame(): void {
     this.router.navigate(['/select-difficulty']);
   }
+
+  trackByIndex(index: number): number {
+    return index;
+  }
+
 }
+
