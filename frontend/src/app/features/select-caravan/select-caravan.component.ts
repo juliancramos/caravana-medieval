@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
+import { Caravan } from '@shared/models/caravan.model';
+import { CaravanService } from '@core/services/caravan.service';
 
 @Component({
   selector: 'app-select-caravan',
@@ -9,61 +11,48 @@ import {Router} from '@angular/router';
   templateUrl: './select-caravan.component.html',
   styleUrls: ['./select-caravan.component.scss']
 })
-export class SelectCaravanComponent {
+export class SelectCaravanComponent implements OnInit {
+
+  private caravanService = inject(CaravanService);
+  private router = inject(Router);
+
+  caravans = signal<Caravan[]>([]);
+  currentIndex = 0;
 
   animateStats = false;
   animateImage = false;
 
-  constructor( private router: Router) {}
-  caravans = [
-    {
-      name: 'Caravana Básica',
-      image: '/assets/caravans/basic-caravan.png',
-      capacity: '100 unidades',
-      speed: 'Media',
-      defense: 'Baja',
-      special: 'Ninguna'
-    },
-    {
-      name: 'Caravana Blindada',
-      image: '/assets/caravans/basic-caravan.png',
-      capacity: '80 unidades',
-      speed: 'Lenta',
-      defense: 'Alta',
-      special: 'Reducción de daño en rutas inseguras'
-    },
-    {
-      name: 'Caravana Ligera',
-      image: '/assets/caravans/basic-caravan.png',
-      capacity: '60 unidades',
-      speed: 'Alta',
-      defense: 'Baja',
-      special: 'Menor tiempo de viaje'
-    }
-  ];
+  get selectedCaravan(): Caravan | null {
+    return this.caravans()[this.currentIndex] ?? null;
+  }
 
-  currentIndex = 0;
-
-  get selectedCaravan() {
-    return this.caravans[this.currentIndex];
+  ngOnInit(): void {
+    this.caravanService.getAllCaravans().subscribe({
+      next: (data) => {
+        this.caravans.set(data);
+      },
+      error: err => console.error('Error loading caravans', err)
+    });
   }
 
 
   selectCaravan(): void {
-    const selected = this.caravans[this.currentIndex];
-    console.log('Caravana seleccionada:', selected.name);
-
-
-    this.router.navigate(['/seleccionar-partida']);
+    const selected = this.selectedCaravan;
+    if (selected) {
+      console.log('Caravana seleccionada:', selected.name);
+      this.router.navigate(['/select-map']);
+    }
   }
 
   prevCaravan(): void {
-    this.currentIndex = (this.currentIndex - 1 + this.caravans.length) % this.caravans.length;
+    const list = this.caravans();
+    this.currentIndex = (this.currentIndex - 1 + list.length) % list.length;
     this.triggerAnimation();
   }
 
   nextCaravan(): void {
-    this.currentIndex = (this.currentIndex + 1) % this.caravans.length;
+    const list = this.caravans();
+    this.currentIndex = (this.currentIndex + 1) % list.length;
     this.triggerAnimation();
   }
 
@@ -75,5 +64,4 @@ export class SelectCaravanComponent {
       this.animateImage = true;
     }, 0);
   }
-
 }
