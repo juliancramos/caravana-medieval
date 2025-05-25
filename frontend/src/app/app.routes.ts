@@ -15,7 +15,7 @@ import {SelectDifficultyComponent} from '@features/select-difficulty/select-diff
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'seleccionar-partida', component: SelectMapComponent },
+  { path: 'select-map', component: SelectMapComponent },
   { path: 'productos', component: StoreProductsComponent },
   { path: 'servicios', component: StoreServicesComponent },
   { path: 'resume', component: ResumeComponent },
