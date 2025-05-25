@@ -13,18 +13,20 @@
 
   <!-- Panel central de stats con animación -->
   <div class="caravan-stats" [class.slide]="animateStats">
-    <h2>{{ selectedCaravan.name }}</h2>
+    <h2>{{ selectedCaravan?.name }}</h2>
     <ul>
-      <li><strong>Capacidad:</strong> {{ selectedCaravan.capacity }}</li>
-      <li><strong>Velocidad:</strong> {{ selectedCaravan.speed }}</li>
-      <li><strong>Defensa:</strong> {{ selectedCaravan.defense }}</li>
-      <li><strong>Especial:</strong> {{ selectedCaravan.special }}</li>
+      <li><strong>Vida:</strong> {{ selectedCaravan?.lifePoints }}</li>
+      <li><strong>Capacidad:</strong> {{ selectedCaravan?.maxCapacity }} unidades</li>
+      <li><strong>Velocidad:</strong> {{ selectedCaravan?.speed }}</li>
+      <li><strong>Dinero disponible:</strong> {{ selectedCaravan?.availableMoney }}</li>
+
+
     </ul>
   </div>
 
   <!-- Imagen de la caravana a la derecha -->
   <div class="caravan-image-container" [class.slide]="animateImage">
-    <img [src]="selectedCaravan.image" class="caravan-image" />
+    <img [src]="selectedCaravan?.imgUrl || '/assets/icons/caravan-icon.png'" class="caravan-image" />
   </div>
 
   <button class="arrow-btn right-arrow" (click)="nextCaravan()">→</button>
