@@ -3,6 +3,7 @@ package web.app.caravanamedieval.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import web.app.caravanamedieval.dto.GameByPlayerDTO;
 import web.app.caravanamedieval.model.GamesByPlayer;
 import web.app.caravanamedieval.service.GamesByPlayerServiceImpl;
 
@@ -51,5 +52,11 @@ public class GamesByPlayerController {
     public ResponseEntity<List<GamesByPlayer>> getGamesByPlayerId(@PathVariable Long id){
         return ResponseEntity.ok(gamesByPlayerService.getGamesByPlayer(id));
     }
+
+    @GetMapping("/dtos/player/{id}")
+    public ResponseEntity<List<GameByPlayerDTO>> getGameDTOsByPlayer(@PathVariable Long id) {
+        return ResponseEntity.ok(gamesByPlayerService.getGameDTOsByPlayer(id));
+    }
+
 
 }
