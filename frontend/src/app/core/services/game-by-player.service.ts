@@ -9,7 +9,7 @@ export class GameByPlayerService {
   constructor(private http: HttpClient) {}
 
   getGamesByPlayer(playerId: number): Observable<GameByPlayer[]> {
-    return this.http.get<GameByPlayer[]>(`/api/games-by-player/games/player/${playerId}`);
+    return this.http.get<GameByPlayer[]>(`/api/games-by-player/dtos/player/${playerId}`);
   }
 
   createGame(gameDTO: any) {
