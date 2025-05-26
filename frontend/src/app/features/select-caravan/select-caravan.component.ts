@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Caravan } from '@shared/models/caravan.model';
 import { CaravanService } from '@core/services/caravan.service';
+import { CurrentGameService } from '@core/services/current-game.service';
+
 
 @Component({
   selector: 'app-select-caravan',
@@ -15,6 +17,8 @@ export class SelectCaravanComponent implements OnInit {
 
   private caravanService = inject(CaravanService);
   private router = inject(Router);
+  private currentGame = inject(CurrentGameService);
+
 
   caravans = signal<Caravan[]>([]);
   currentIndex = 0;
@@ -39,10 +43,21 @@ export class SelectCaravanComponent implements OnInit {
   selectCaravan(): void {
     const selected = this.selectedCaravan;
     if (selected) {
-      console.log('Caravana seleccionada:', selected.name);
+      this.currentGame.selectedGame.set({
+        game: {
+          idGame: 0,
+          elapsedTime: 0,
+          timeLimit: 0,
+          minProfit: 0,
+          caravan: selected,
+          map: {} as any
+        }
+      });
+
       this.router.navigate(['/select-map']);
     }
   }
+
 
   prevCaravan(): void {
     const list = this.caravans();
