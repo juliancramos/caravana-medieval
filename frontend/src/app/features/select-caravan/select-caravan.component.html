@@ -31,10 +31,29 @@
 
   <button class="arrow-btn right-arrow" (click)="nextCaravan()">→</button>
 
-  <!-- Botón de confirmar selección -->
+  <!-- Selector de dificultad -->
+  <div class="difficulty-section">
+    <h3>Dificultad</h3>
+
+    <div class="difficulty-panel">
+      <button (click)="prevDifficulty()">⬅</button>
+
+      <div class="difficulty-info">
+        <p><strong>Nivel:</strong> {{ selectedDifficulty.level }}</p>
+        <p><strong>Meta de Oro:</strong> {{ selectedDifficulty.goalMoney }}</p>
+        <p><strong>Tiempo límite:</strong> {{ selectedDifficulty.timeLimit }}</p>
+      </div>
+
+      <button (click)="nextDifficulty()">➡</button>
+    </div>
+  </div>
+
+
+  <!-- Confirmar selección -->
   <div class="confirm-button-wrapper">
-    <button class="confirm-button" (click)="selectCaravan()">
-      Seleccionar Caravana
+    <button class="confirm-button" (click)="confirmSelection()">
+      Seleccionar Caravana y Dificultad
     </button>
   </div>
+
 </div>
