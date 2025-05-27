@@ -16,30 +16,7 @@ export class SelectDifficultyComponent {
   private router = inject(Router);
   private gameCreation = inject(GameCreationService);
 
-  difficulties: DifficultyOption[] = [
-    { level: 'Fácil', goalMoney: 5000, timeLimit: 50, maxCapacity: 120, initialLife: 100 },
-    { level: 'Medio', goalMoney: 8000, timeLimit: 40, maxCapacity: 100, initialLife: 80 },
-    { level: 'Difícil', goalMoney: 12000, timeLimit: 30, maxCapacity: 80, initialLife: 60 }
-  ];
 
   currentIndex = 0;
 
-  get currentDifficulty() {
-    return this.difficulties[this.currentIndex];
-  }
-
-  prevDifficulty() {
-    this.currentIndex = (this.currentIndex - 1 + this.difficulties.length) % this.difficulties.length;
-  }
-
-  nextDifficulty() {
-    this.currentIndex = (this.currentIndex + 1) % this.difficulties.length;
-  }
-
-  confirmSelection() {
-    // Siempre quemamos la dificultad "Medio"
-    const mediumDifficulty = this.difficulties[1];
-    this.gameCreation.setDifficulty(mediumDifficulty);
-    this.router.navigate(['/seleccionar-partida']);
-  }
 }
