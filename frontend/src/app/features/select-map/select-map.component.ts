@@ -6,8 +6,10 @@ import { MapData } from '@shared/models/map.model';
 import { CurrentGameService } from '@core/services/current-game.service';
 import { GameByPlayerService } from '@core/services/game-by-player.service';
 import { AuthService } from '@core/services/auth.service';
+import { GameCreationService } from '@core/services/game-creation.service';
 import { GameByPlayer } from '@shared/models/game-by-player.model';
 import { Game } from '@shared/models/game.model';
+
 @Component({
   selector: 'app-select-map',
   standalone: true,
@@ -21,75 +23,46 @@ export class SelectMapComponent implements OnInit {
   private currentGame = inject(CurrentGameService);
   private gameService = inject(GameByPlayerService);
   private authService = inject(AuthService);
+  private gameCreation = inject(GameCreationService);
   private router = inject(Router);
 
   ngOnInit(): void {
-    console.log('🚀 SelectMapComponent cargado');
     this.mapService.getAllMaps().subscribe({
-      next: (data) => {
-        const firstThreeMaps = data.slice(0, 3);
-        this.maps.set(firstThreeMaps);
-      },
-      error: (err) => console.error('Error loading maps:', err)
+      next: data => this.maps.set(data.slice(0, 3)),
+      error: err => console.error('Error loading maps:', err)
     });
-    console.log('Este es el archivo de select-map.component.ts que se está ejecutando');
-
   }
 
   selectMap(map: MapData): void {
-    const current = this.currentGame.selectedGame();
-    console.log('✅ selectedGame:', current);
-
-    const caravanId = current?.game.caravan.idCaravan;
     const playerId = this.authService.user()?.id;
-    const mapId = map.idMap;
+    const caravan = this.gameCreation.getCaravan();
+    const difficulty = this.gameCreation.getDifficulty();
 
-    console.log('🟡 caravanId:', caravanId);
-    console.log('🟡 playerId:', playerId);
-    console.log('🟡 mapId:', mapId);
-
-    if (!caravanId || !playerId) {
-      console.error('❌ Missing caravanId or playerId');
+    if (!playerId || !caravan || !difficulty) {
+      console.error('❌ Faltan datos para crear la partida');
       return;
     }
 
     const gameDTO = {
       elapsedTime: 0,
-      timeLimit: 60,
-      minProfit: 1000,
-      caravanId,
-      mapId
+      timeLimit: difficulty.timeLimit,
+      minProfit: difficulty.goalMoney,
+      caravanId: caravan.idCaravan,
+      mapId: map.idMap
     };
-
-    console.log('📦 Enviando GameDTO:', gameDTO);
 
     this.gameService.createGame(gameDTO).subscribe({
       next: (game: Game) => {
-        const gameId = game.idGame;
-        const playerId = this.authService.user()?.id;
-
-        if (!playerId) {
-          console.error('❌ No se encontró el ID del jugador');
-          return;
-        }
-
-        this.gameService.assignPlayerToGame(gameId, playerId).subscribe({
+        this.gameService.assignPlayerToGame(game.idGame, playerId).subscribe({
           next: () => {
-            const gameWrapper: GameByPlayer = { game }; // 🟢 OK
-            this.currentGame.selectedGame.set(gameWrapper); // 🟢 OK
+            const wrapper: GameByPlayer = { game };
+            this.currentGame.selectedGame.set(wrapper);
             this.router.navigate(['/resume']);
           },
           error: err => console.error('❌ Error asignando jugador:', err)
         });
-
       },
       error: err => console.error('❌ Error creando partida:', err)
     });
-
-
-
   }
-
-
-
 }
