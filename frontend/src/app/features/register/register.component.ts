@@ -4,10 +4,6 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
-import { AuthService } from '@core/services/auth.service';
-import { LoginRequest } from '@shared/models/login-request.model';
-
-
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -22,10 +18,10 @@ export class RegisterComponent {
   };
 
   error = '';
+  success = '';
 
   constructor(
     private http: HttpClient,
-    private authService: AuthService,
     private router: Router
   ) {}
 
@@ -39,34 +35,19 @@ export class RegisterComponent {
       imgUrl: null
     };
 
-    // 1. Crear jugador
     this.http.post('/api/player/create', newPlayer).subscribe({
       next: () => {
-        // 2. Autologin
-        const loginRequest: LoginRequest = {
-          username: this.formData.username,
-          password: this.formData.password
-        };
+        this.success = '¡Usuario creado correctamente! Redirigiendo al login...';
+        this.error = '';
 
-        this.authService.login(loginRequest).subscribe({
-          next: user => {
-            this.authService.setUser(user);
-            this.playLoginTransition();
-          },
-          error: () => {
-            this.error = 'Usuario creado, pero error al iniciar sesión.';
-          }
-        });
+        setTimeout(() => {
+          this.router.navigate(['/login']);
+        }, 1500);
       },
       error: () => {
+        this.success = '';
         this.error = 'El nombre de usuario ya está en uso.';
       }
     });
   }
-
-  playLoginTransition(): void {
-    document.body.classList.add('fade-out');
-    setTimeout(() => this.router.navigate(['/game-selection']), 800);
-  }
-
 }
