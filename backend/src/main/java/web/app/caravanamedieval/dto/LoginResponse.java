@@ -3,6 +3,7 @@ package web.app.caravanamedieval.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import web.app.caravanamedieval.model.Role;
 
 @Data
 @AllArgsConstructor
@@ -10,5 +11,5 @@ import lombok.NoArgsConstructor;
 public class LoginResponse {
     private Long id;
     private String username;
-    private String role;
+    private Role role;
 }
