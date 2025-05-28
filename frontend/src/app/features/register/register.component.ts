@@ -31,11 +31,11 @@ export class RegisterComponent {
     const newPlayer = {
       username: this.formData.username,
       password: this.formData.password,
-      role: 'USER',
+      role: 'CARAVANERO',
       imgUrl: null
     };
 
-    this.http.post('/api/player/create', newPlayer).subscribe({
+    this.http.post('/api/auth/signup', newPlayer).subscribe({
       next: () => {
         this.success = '¡Usuario creado correctamente! Redirigiendo al login...';
         this.error = '';
@@ -46,8 +46,9 @@ export class RegisterComponent {
       },
       error: () => {
         this.success = '';
-        this.error = 'El nombre de usuario ya está en uso.';
+        this.error = 'El nombre de usuario ya está en uso o hubo un error.';
       }
     });
   }
+
 }
