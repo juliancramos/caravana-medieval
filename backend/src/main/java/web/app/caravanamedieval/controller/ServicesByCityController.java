@@ -2,6 +2,7 @@ package web.app.caravanamedieval.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import web.app.caravanamedieval.dto.ServiceForStoreDTO;
@@ -28,6 +29,8 @@ public class ServicesByCityController {
         this.servicesByCaravanService = servicesByCaravanService;
     }
 
+
+    @PreAuthorize("hasAnyRole('CARAVANERO')")
     @PostMapping("/buy")
     public ResponseEntity<Void> buyService(@RequestParam Long gameId, @RequestParam Long serviceId) {
         servicesByCityService.buyService(gameId, serviceId);
