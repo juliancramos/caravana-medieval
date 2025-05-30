@@ -7,7 +7,7 @@
 
   display: flex;
   flex-direction: column;
-  justify-content: center; // ✅ centrado vertical
+  justify-content: center;
   align-items: center;
   padding: 3rem 1rem;
   font-family: 'Garamond', serif;
@@ -33,7 +33,7 @@ h2 {
     background-color: #d7b98e;
     border: 2px solid #7a573e;
     border-radius: 10px;
-    padding: 2rem 3rem; // ✅ botones más grandes
+    padding: 2rem 3rem;
     font-size: 1.6rem;
     font-weight: bold;
     cursor: pointer;
@@ -54,7 +54,8 @@ h2 {
 }
 
 .role-description {
-  background-color: rgba(250, 235, 215, 0.8);
+  background-color: rgba(63, 41, 28, 0.48);
+  color: #fff;
   border: 2px solid #8b5e3c;
   padding: 1.5rem;
   border-radius: 10px;
@@ -65,8 +66,9 @@ h2 {
   font-size: 1.1rem;
 }
 
+
 .confirm-button {
-  background-color: #8b5e3c; // ✅ color café
+  background-color: #8b5e3c;
   color: white;
   border: none;
   padding: 1.1rem 3rem;
