@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import {GameStatusBarComponent} from '@shared/game-status-bar/game-status-bar.component';
 import {ServicePopupComponent} from '@shared/service-popup/service-popup.component';
+import {AuthService} from '@core/services/auth.service';
 
 @Component({
   selector: 'app-resume',
@@ -13,7 +14,7 @@ import {ServicePopupComponent} from '@shared/service-popup/service-popup.compone
 })
 export class ResumeComponent {
 
-  constructor( private router: Router) {}
+  constructor( private router: Router, public authService: AuthService) {}
 
   selectedService: any = null;
 
