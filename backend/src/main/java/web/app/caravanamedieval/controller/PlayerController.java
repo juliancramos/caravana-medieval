@@ -2,13 +2,18 @@ package web.app.caravanamedieval.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import web.app.caravanamedieval.dto.PlayerDTO;
 import web.app.caravanamedieval.model.Player;
+import web.app.caravanamedieval.model.Role;
+import web.app.caravanamedieval.repository.PlayerRepository;
+import web.app.caravanamedieval.security.auth.JwtAuthenticationResponse;
 import web.app.caravanamedieval.service.PlayerService;
 
 import java.net.URI;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -16,6 +21,7 @@ import java.util.List;
 public class PlayerController {
 
     private final PlayerService playerService;
+
     @Autowired
     public PlayerController(PlayerService playerService) {this.playerService = playerService;}
 
@@ -30,6 +36,14 @@ public class PlayerController {
                 .toUri();
         return ResponseEntity.created(location).body(newPlayer);
     }
+
+    @PutMapping("/update-role")
+    public JwtAuthenticationResponse updateRole(@RequestParam Role role, Principal principal) {
+        return playerService.updateRole(principal.getName(), role);
+    }
+
+
+
 
     @GetMapping("/id/{id}")
     public ResponseEntity<Player> getPlayer(@PathVariable Long id) {
