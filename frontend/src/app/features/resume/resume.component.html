@@ -13,12 +13,20 @@
   </button>
 
   <!-- Casa de servicios -->
-  <button class="click-zone zone-services"(click)="goToServices()">
+  <button
+    class="click-zone zone-services"
+    (click)="goToServices()"
+    *ngIf="authService.user()?.role === 'CARAVANERO'"
+  >
     <span class="zone-label">Entrar a tienda de servicios</span>
   </button>
 
   <!-- Map button -->
-  <button class="bottom-icon-button map-button" (click)="goToMap()">
+  <button
+    class="bottom-icon-button map-button"
+    (click)="goToMap()"
+    *ngIf="authService.user()?.role === 'CARAVANERO'"
+  >
     <img src="/assets/icons/map.png" alt="Mapa" />
     <span>Mapa</span>
   </button>
