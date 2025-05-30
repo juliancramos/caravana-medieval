@@ -43,7 +43,7 @@ public class  AuthService  {
 
 
             playerRepository.save(player);
-            String jwt = jwtService.generateToken(player.getUsername());
+            String jwt = jwtService.generateToken(player);
             return new JwtAuthenticationResponse(jwt);
 
         } catch (Exception e) {
@@ -62,7 +62,8 @@ public class  AuthService  {
 
         Player player = playerRepository.findByUsername(request.getUsername())
                 .orElseThrow();
-        String jwt = jwtService.generateToken(player.getUsername());
+        String jwt = jwtService.generateToken(player);
+
         System.out.println("JWT generado: " + jwt);
 
         return new JwtAuthenticationResponse(jwt);
