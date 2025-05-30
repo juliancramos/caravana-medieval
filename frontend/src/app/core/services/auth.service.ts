@@ -10,7 +10,7 @@ export class AuthService {
 
   private userSignal = signal<JwtAuthenticationResponse | null>(null);
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, ) {
     const raw = sessionStorage.getItem('user');
     if (raw) this.userSignal.set(JSON.parse(raw));
   }
