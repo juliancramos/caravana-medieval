@@ -74,7 +74,7 @@ export class SelectCaravanComponent implements OnInit {
     this.gameCreation.setCaravan(caravan);
     this.gameCreation.setDifficulty(this.selectedDifficulty);
 
-    this.router.navigate(['/select-map']);
+    this.router.navigate(['/select-role']);
   }
 
   triggerAnimation(): void {
