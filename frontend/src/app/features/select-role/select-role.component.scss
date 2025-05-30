@@ -1,0 +1,102 @@
+.container {
+  min-height: 100vh;
+  background-image: url('/assets/img/bg-select-role.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center; // ✅ centrado vertical
+  align-items: center;
+  padding: 3rem 1rem;
+  font-family: 'Garamond', serif;
+  color: #3b2f2f;
+  text-shadow: 1px 1px #e0d4b7;
+}
+
+h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  background-color: rgba(255, 248, 220, 0.8);
+  padding: 0.5rem 2rem;
+  border: 2px solid #8b5e3c;
+  border-radius: 10px;
+}
+
+.button-group {
+  display: flex;
+  gap: 3rem;
+  margin-bottom: 2rem;
+
+  button {
+    background-color: #d7b98e;
+    border: 2px solid #7a573e;
+    border-radius: 10px;
+    padding: 2rem 3rem; // ✅ botones más grandes
+    font-size: 1.6rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: #c49b6c;
+      transform: scale(1.05);
+      box-shadow: 0 0 10px #b78b58;
+    }
+
+    &.active {
+      background-color: #b78b58;
+      color: white;
+      box-shadow: 0 0 10px #5a3b1c;
+    }
+  }
+}
+
+.role-description {
+  background-color: rgba(250, 235, 215, 0.8);
+  border: 2px solid #8b5e3c;
+  padding: 1.5rem;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 600px;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.confirm-button {
+  background-color: #8b5e3c; // ✅ color café
+  color: white;
+  border: none;
+  padding: 1.1rem 3rem;
+  font-size: 1.3rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #6f4427;
+    box-shadow: 0 0 8px #5a3b1c;
+  }
+
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+}
+
+.screen-fade {
+  position: absolute;
+  inset: 0;
+  background-color: #000;
+  z-index: 100;
+  animation: fadeFromBlack 1.2s ease forwards;
+  pointer-events: none;
+}
+
+@keyframes fadeFromBlack {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
