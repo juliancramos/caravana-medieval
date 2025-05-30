@@ -12,6 +12,7 @@ import { SelectCaravanComponent } from '@features/select-caravan/select-caravan.
 import { InventoryComponent } from '@features/inventory/inventory.component';
 import { SelectDifficultyComponent } from '@features/select-difficulty/select-difficulty.component';
 import { AuthGuard } from './core/guards/auth.guard';
+import {SelectRoleComponent} from '@features/select-role/select-role.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -30,5 +31,6 @@ export const routes: Routes = [
   { path: 'select-caravan', component: SelectCaravanComponent, canActivate: [AuthGuard] },
   { path: 'inventory', component: InventoryComponent, canActivate: [AuthGuard] },
   { path: 'select-difficulty', component: SelectDifficultyComponent, canActivate: [AuthGuard] },
-  { path: 'mapa', component: MapComponent, canActivate: [AuthGuard] }
+  { path: 'mapa', component: MapComponent, canActivate: [AuthGuard] },
+  { path: 'select-role', component: SelectRoleComponent, canActivate: [AuthGuard] }
 ];
