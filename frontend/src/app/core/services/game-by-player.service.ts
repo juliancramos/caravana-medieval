@@ -13,6 +13,12 @@ export class GameByPlayerService {
     return this.http.get<GameByPlayer[]>(`/api/games-by-player/dtos/player/${playerId}`);
   }
 
+  getMyGames(): Observable<GameByPlayer[]> {
+    return this.http.get<GameByPlayer[]>('/api/games-by-player/my-games');
+  }
+
+
+
   createGame(gameDTO: any): Observable<Game> {
     return this.http.post<Game>('/api/game/create', gameDTO);
   }
@@ -20,6 +26,9 @@ export class GameByPlayerService {
     return this.http.post(`/api/games-by-player/assign/games/${gameId}/players/${playerId}`, null);
   }
 
+  assignMeToGame(gameId: number): Observable<void> {
+    return this.http.post<void>(`/api/games-by-player/my-game/${gameId}`, {});
+  }
 
 
 }
