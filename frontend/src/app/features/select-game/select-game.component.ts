@@ -38,8 +38,9 @@ export class SelectGameComponent implements OnInit {
 
   loadGame(game: GameByPlayer): void {
     this.currentGame.selectedGame.set(game);
-    this.router.navigate(['/resume']);
+    this.router.navigate(['/select-role'], { queryParams: { returnTo: 'resume' } });
   }
+
 
   createNewGame(): void {
     this.router.navigate(['/select-caravan']);
