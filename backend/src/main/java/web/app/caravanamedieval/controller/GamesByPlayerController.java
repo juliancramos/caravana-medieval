@@ -1,6 +1,8 @@
 package web.app.caravanamedieval.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import web.app.caravanamedieval.dto.GameByPlayerDTO;
@@ -8,6 +10,7 @@ import web.app.caravanamedieval.model.GamesByPlayer;
 import web.app.caravanamedieval.service.GamesByPlayerServiceImpl;
 
 import java.net.URI;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -30,6 +33,7 @@ public class GamesByPlayerController {
 
         return ResponseEntity.created(location).body(assignment);
     }
+
 
 
     @DeleteMapping("/remove/games/{gameId}/players/{playerId}")
@@ -57,6 +61,24 @@ public class GamesByPlayerController {
     public ResponseEntity<List<GameByPlayerDTO>> getGameDTOsByPlayer(@PathVariable Long id) {
         return ResponseEntity.ok(gamesByPlayerService.getGameDTOsByPlayer(id));
     }
+
+    @GetMapping("/my-games")
+    public ResponseEntity<List<GameByPlayerDTO>> getMyGames(Principal principal) {
+        String username = principal.getName();
+        Long idPlayer = gamesByPlayerService.findPlayerIdByUsername(username);
+        return ResponseEntity.ok(gamesByPlayerService.getGameDTOsByPlayer(idPlayer));
+    }
+
+    @PostMapping("/my-game/{gameId}")
+    public ResponseEntity<Void> assignMeToGame(@PathVariable Long gameId, Principal principal) {
+        String username = principal.getName();
+        Long idPlayer = gamesByPlayerService.findPlayerIdByUsername(username);
+        gamesByPlayerService.assignPlayerToGame(gameId, idPlayer);
+        return ResponseEntity.ok().build();
+    }
+
+
+
 
 
 }
