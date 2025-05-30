@@ -34,11 +34,10 @@ export class SelectMapComponent implements OnInit {
   }
 
   selectMap(map: MapData): void {
-    const playerId = this.authService.user()?.id;
     const caravan = this.gameCreation.getCaravan();
     const difficulty = this.gameCreation.getDifficulty();
 
-    if (!playerId || !caravan || !difficulty) {
+    if (!caravan || !difficulty) {
       console.error('❌ Faltan datos para crear la partida');
       return;
     }
@@ -53,7 +52,8 @@ export class SelectMapComponent implements OnInit {
 
     this.gameService.createGame(gameDTO).subscribe({
       next: (game: Game) => {
-        this.gameService.assignPlayerToGame(game.idGame, playerId).subscribe({
+        // Ya no usamos playerId. El backend lo deduce desde el token JWT
+        this.gameService.assignMeToGame(game.idGame).subscribe({
           next: () => {
             const wrapper: GameByPlayer = { game };
             this.currentGame.selectedGame.set(wrapper);
