@@ -6,7 +6,10 @@ import org.springframework.stereotype.Service;
 import web.app.caravanamedieval.dto.PlayerDTO;
 import web.app.caravanamedieval.mapper.PlayerMapper;
 import web.app.caravanamedieval.model.Player;
+import web.app.caravanamedieval.model.Role;
 import web.app.caravanamedieval.repository.PlayerRepository;
+import web.app.caravanamedieval.security.auth.JwtAuthenticationResponse;
+import web.app.caravanamedieval.security.jwt.JwtService;
 
 import java.util.List;
 
@@ -14,6 +17,9 @@ import java.util.List;
 public class PlayerServiceImpl implements PlayerService {
 
     private final PlayerRepository playerRepository;
+    @Autowired
+    private JwtService jwtService;
+
 
     @Autowired
     public PlayerServiceImpl(PlayerRepository playerRepository) {this.playerRepository = playerRepository;}
@@ -52,4 +58,17 @@ public class PlayerServiceImpl implements PlayerService {
     public void deletePlayer(Long id) {
         playerRepository.deleteById(id);
     }
+
+    public JwtAuthenticationResponse updateRole(String username, Role role) {
+        Player player = playerRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        player.setRole(role);
+        playerRepository.save(player);
+
+        String token = jwtService.generateToken(player);
+        return new JwtAuthenticationResponse(token);
+    }
+
+
 }
