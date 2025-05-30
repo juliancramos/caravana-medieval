@@ -2,6 +2,7 @@ package web.app.caravanamedieval.service;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import web.app.caravanamedieval.model.Game;
 import web.app.caravanamedieval.model.GamesByPlayer;
@@ -84,4 +85,11 @@ public class GamesByPlayerServiceImpl {
     public List<GamesByPlayer> listAssignments() {
         return gamesByPlayerRepository.findAll();
     }
+
+    public Long findPlayerIdByUsername(String username) {
+        Player player = playerRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Player not found"));
+        return player.getIdPlayer();
+    }
+
 }
