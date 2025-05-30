@@ -16,6 +16,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import web.app.caravanamedieval.model.Player;
 
 
 @Service
@@ -30,14 +31,19 @@ public class JwtService {
         return extractClaim(token, Claims::getSubject);
     }
 
-    public String generateToken(String username) {
+    public String generateToken(Player player) {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("role", player.getRole().name());
+        claims.put("idPlayer", player.getIdPlayer());
         return Jwts.builder()
-                .setSubject(username)
+                .setClaims(claims)
+                .setSubject(player.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + tokeDuration.toMillis()))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
+
 
 
     public boolean isTokenValid(String token, String username) {
