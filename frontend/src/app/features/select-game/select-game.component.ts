@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { GameByPlayerService } from '@core/services/game-by-player.service';
 import { GameByPlayer } from '@shared/models/game-by-player.model';
 import { CurrentGameService } from '@core/services/current-game.service';
+import { JoinGamePopupComponent } from './join-game-popup/join-game-popup.component';
 
 @Component({
   selector: 'select-game',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, JoinGamePopupComponent],
   templateUrl: './select-game.component.html',
   styleUrls: ['./select-game.component.scss']
 })
@@ -23,6 +24,10 @@ export class SelectGameComponent implements OnInit {
     while (finalGames.length < 3) finalGames.push(null);
     return finalGames;
   });
+
+  //signal para popup de unirse a un juego existente
+  showJoinPopup = signal(false);
+
 
   constructor(
     private gameByPlayerService: GameByPlayerService,
@@ -49,4 +54,10 @@ export class SelectGameComponent implements OnInit {
   trackByIndex(index: number): number {
     return index;
   }
+  // evita que el clic llegue al div padre
+  onJoinClick(event: MouseEvent): void {
+    event.stopPropagation(); 
+    this.showJoinPopup.set(true);
+  }
+
 }

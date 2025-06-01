@@ -20,6 +20,15 @@
     <div class="game-card new-game" (click)="createNewGame()">
       <span class="plus-icon">+</span>
       <span class="card-label">Nueva partida</span>
+
+      <div class="join-option" (click)="onJoinClick($event)">
+        Unirse a partida existente
+      </div>
     </div>
   </ng-template>
+
+  <app-join-game-popup *ngIf="showJoinPopup()" (close)="showJoinPopup.set(false)" />
+
+
+
 </div>
