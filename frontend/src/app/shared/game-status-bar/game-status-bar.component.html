@@ -33,6 +33,15 @@
     (serviceSelected)="showServiceInfo($event)">
   </app-active-services-bar>
 
+  <div class="info-block invite" (click)="openInvitePopup()" style="cursor: pointer;">
+    <img src="/assets/icons/share.png" alt="Invitar" class="info-icon" />
+    <span>Invitar</span>
+  </div>
+
+  <app-invite-popup *ngIf="showInvitePopup()" (close)="closeInvitePopup()" />
+
+
+
   <!-- Victory popup
   <div class="victory-popup" *ngIf="isVictoryPopupVisible()">
     <div class="popup-content">

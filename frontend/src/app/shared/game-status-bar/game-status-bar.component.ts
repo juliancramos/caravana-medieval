@@ -2,11 +2,12 @@ import {Component, computed, effect, EventEmitter, inject, OnInit, Output, signa
 import { CommonModule } from '@angular/common';
 import { CurrentGameService } from '@core/services/current-game.service';
 import {ActiveServicesBarComponent} from '@shared/active-services-bar/active-services-bar.component';
+import { InvitePopupComponent } from './bar-menu/invite-popup/invite-popup.component';
 
 @Component({
   selector: 'app-game-status-bar',
   standalone: true,
-  imports: [CommonModule, ActiveServicesBarComponent],
+  imports: [CommonModule, ActiveServicesBarComponent, InvitePopupComponent,  ],
   templateUrl: './game-status-bar.component.html',
   styleUrls: ['./game-status-bar.component.scss']
 })
@@ -40,6 +41,18 @@ export class GameStatusBarComponent {
   showServiceInfo(service: any) {
     this.serviceSelected.emit(service);
   }
+
+  showInvitePopup = signal(false);
+
+  openInvitePopup(): void {
+    this.showInvitePopup.set(true);
+  }
+
+  closeInvitePopup(): void {
+    this.showInvitePopup.set(false);
+  }
+
+
 
   /*VICTORY POPUP
   isVictoryPopupVisible = signal(false);
