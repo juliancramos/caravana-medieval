@@ -9,11 +9,17 @@
       <h2>Invita a un jugador</h2>
       <p class="description">Copia este código y compártelo con otro jugador para que se una a la partida.</p>
 
-      <div class="invite-code">
-        {{ inviteCode() }}
+      <!-- muestra mensaje de carga en lo que llega el código de invitación -->
+      <div *ngIf="inviteCode(); else loading">
+        <div class="invite-code">{{ inviteCode()?.code }}</div>
+        <button class="copy-button" (click)="copyToClipboard()">Copiar código</button>
       </div>
 
-      <button class="copy-button" (click)="copyToClipboard()">Copiar código</button>
+      <ng-template #loading>
+        <p class="description">Generando código de invitación...</p>
+      </ng-template>
+
+
     </div>
   </div>
 </div>
