@@ -6,16 +6,27 @@
     <button
       [class.active]="selectedRole === 'CARAVANERO'"
       (click)="select('CARAVANERO')"
+      [disabled]="takenRoles.includes('CARAVANERO')"
     >
       Caravanero
     </button>
     <button
       [class.active]="selectedRole === 'COMERCIANTE'"
       (click)="select('COMERCIANTE')"
+      [disabled]="takenRoles.includes('COMERCIANTE')"
     >
       Comerciante
     </button>
   </div>
+
+  Mensajes si alguno de los roles ya fue tomado:
+  <p class="role-unavailable" *ngIf="takenRoles.includes('CARAVANERO')">
+    Rol Caravanero ya ha sido tomado.
+  </p>
+  <p class="role-unavailable" *ngIf="takenRoles.includes('COMERCIANTE')">
+    Rol Comerciante ya ha sido tomado.
+  </p>
+
 
   <div class="role-description" *ngIf="selectedRole">
     <h3>Descripción del Rol:</h3>

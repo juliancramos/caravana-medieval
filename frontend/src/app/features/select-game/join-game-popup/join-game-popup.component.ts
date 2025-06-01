@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, inject, Output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { InviteCodeService } from '@core/services/invitation-code.service';
 
 @Component({
@@ -14,6 +15,8 @@ export class JoinGamePopupComponent {
   @Output() close = new EventEmitter<void>();
 
   private inviteService = inject(InviteCodeService);
+
+  constructor(private router: Router) {}
 
   code: string = '';
   validated = signal(false);
@@ -43,9 +46,19 @@ export class JoinGamePopupComponent {
     });
   }
 
+  // lleva a la pantalla de selección de rol
   joinGame(): void {
     if (this.validatedGameId != null) {
-      // Aquí se hará la carga de la partida
+      this.router.navigate(['/select-role'], {
+        queryParams: {
+          //avisa que viene desde el popup de unirse a una partida en vez de "crear partida"
+          fromPopup: true,
+          //partida a unirse
+          gameId: this.validatedGameId, 
+          //a donde redirigir al usuario después de seleccionar el rol
+          returnTo: 'resume' 
+        }
+      });
     }
   }
 

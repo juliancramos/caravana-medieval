@@ -102,3 +102,17 @@ h2 {
   from { opacity: 1; }
   to { opacity: 0; }
 }
+
+
+//mensaje de rol tomado
+.role-unavailable {
+  font-size: 1.2rem;
+  color: #f8e4c3;
+  background-color: rgba(255, 50, 50, 0.15);
+  border: 1px solid #ff9d9d;
+  padding: 0.6rem 4rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  font-family: 'Cinzel', serif;
+  text-align: center;
+}
