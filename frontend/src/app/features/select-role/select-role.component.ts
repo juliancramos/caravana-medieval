@@ -5,6 +5,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {JwtAuthenticationResponse} from '@shared/models/jwt-authentication-response.model';
 import { AuthService } from '@core/services/auth.service';
 import { GameStateService } from '@core/services/game-state.service';
+import { CurrentGameService } from '@core/services/current-game.service';
+import { Game } from '@shared/models/game.model';
+import { GameByPlayerService } from '@core/services/game-by-player.service';
 
 @Component({
   selector: 'app-select-role',
@@ -30,7 +33,10 @@ export class SelectRoleComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private authService: AuthService,
-    private GameStateService: GameStateService 
+    private GameStateService: GameStateService,
+    private currentGame: CurrentGameService,
+    private gameService: GameByPlayerService
+
   ) {}
 
   ngOnInit(): void {
@@ -67,7 +73,30 @@ export class SelectRoleComponent implements OnInit {
     this.http.put<JwtAuthenticationResponse>(`/api/player/update-role?role=${this.selectedRole}`, {}).subscribe({
       next: (response) => {
         this.authService.setUser(response);
-        this.router.navigate([`/${this.returnTo}`]);
+
+        // si viene desde el popup es porque se va a unir a una partida existente
+        if (this.fromPopup && this.gameId !== null) {
+          // primero se asigna el jugador a la partida
+          this.gameService.assignMeToGame(this.gameId).subscribe({
+            next: () => {
+              // establecer estado inicial del juego
+              this.currentGame.selectedGame.set({ game: { idGame: this.gameId } as Game });
+
+              // refrescar los datos del juego
+              this.currentGame.refreshGame(this.gameId!!);
+
+              // redigir al usuario a pantalla principal de la partida
+              this.router.navigate([`/${this.returnTo}`]);
+            },
+            error: err => {
+              console.error('Error asignando jugador a la partida', err);
+              this.loading = false;
+            }
+          });
+        } else {
+          // Si no viene del popup, sigue flujo normal (crear partida)
+          this.router.navigate([`/${this.returnTo}`]);
+        }
       },
       error: () => {
         alert('Error updating role');
