@@ -10,9 +10,10 @@
 
       <div class="button-row">
         <button (click)="validate()">Validar</button>
-        <button *ngIf="validated()"  class="join-button">Unirse</button>
+        <button *ngIf="validated()" (click)="joinGame()" class="join-button">Unirse</button>
       </div>
 
+      <p class="error" *ngIf="error()">{{ error() }}</p>
       <p class="success" *ngIf="validated()">¡Código válido!</p>
 
     </div>

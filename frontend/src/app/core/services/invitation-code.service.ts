@@ -28,4 +28,10 @@ export class InviteCodeService {
         return this.http.post<InviteCodeDTO>(`/api/invite-code/generate/${gameId}`, {});
     }
 
+    //validar codigo de invitacion
+    validateCode(code: string): Observable<number> {
+        return this.http.get<number>(`/api/invite-code/validate/${code}`);
+    }
+
+
 }

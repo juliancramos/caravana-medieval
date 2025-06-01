@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, Output, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, inject, Output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { InviteCodeService } from '@core/services/invitation-code.service';
 
 @Component({
   selector: 'app-join-game-popup',
@@ -12,18 +13,39 @@ import { FormsModule } from '@angular/forms';
 export class JoinGamePopupComponent {
   @Output() close = new EventEmitter<void>();
 
+  private inviteService = inject(InviteCodeService);
+
   code: string = '';
   validated = signal(false);
   error = signal<string | null>(null);
+  validatedGameId: number | null = null;
 
   validate(): void {
+    this.error.set(null);
+    this.validated.set(false);
+
+    //para evitar consultas innecesarias en la base de datos
     if (this.code.length < 10) {
       this.error.set('Código muy corto.');
-      this.validated.set(false);
-    } else {
-      // temporal, solo front
-      this.error.set(null);
-      this.validated.set(true);
+      return;
+    }
+
+    this.inviteService.validateCode(this.code).subscribe({
+      next: (gameId) => {
+        this.validatedGameId = gameId;
+        //para que se muestre botón y mensaje de éxito
+        this.validated.set(true);
+      },
+      error: () => {
+        this.error.set('Código inválido o expirado.');
+        this.validated.set(false);
+      }
+    });
+  }
+
+  joinGame(): void {
+    if (this.validatedGameId != null) {
+      // Aquí se hará la carga de la partida
     }
   }
 
