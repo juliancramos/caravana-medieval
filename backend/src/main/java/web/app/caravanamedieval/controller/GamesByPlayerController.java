@@ -77,6 +77,14 @@ public class GamesByPlayerController {
         return ResponseEntity.ok().build();
     }
 
+    //obtiene los roles ya usados según una partida en específico
+    @GetMapping("/game/{gameId}/taken-roles")
+    public ResponseEntity<List<String>> getTakenRoles(@PathVariable Long gameId) {
+        List<String> roles = gamesByPlayerService.getRolesInGame(gameId);
+        return ResponseEntity.ok(roles);
+    }
+
+
 
 
 

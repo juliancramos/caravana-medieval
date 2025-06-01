@@ -92,4 +92,11 @@ public class GamesByPlayerServiceImpl {
         return player.getIdPlayer();
     }
 
+    //busca todos los roles usados en una partida según su id
+    public List<String> getRolesInGame(Long gameId) {
+        List<Long> playerIds = gamesByPlayerRepository.findPlayerIdsByGameId(gameId);
+        return playerRepository.findRolesByPlayerIds(playerIds);
+    }
+
+
 }
