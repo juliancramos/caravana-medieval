@@ -123,6 +123,38 @@ export class CurrentGameService {
   });
 
 
+  private pollingIntervalId: any = null;
+  //para actualizar el estado del juego cada 3 segundos
+  startGameSyncPolling(): void {
+    if (this.pollingIntervalId !== null) return; // ya está corriendo
+
+    this.pollingIntervalId = setInterval(() => {
+      const gameId = this.selectedGame()?.game.idGame;
+      const caravanId = this.selectedGame()?.game.caravan.idCaravan;
+
+      if (!gameId || !caravanId) return;
+
+      // Actualiza el objeto Game
+      this.http.get<Game>(`/api/game/${gameId}`).subscribe({
+        next: (updatedGame) => {
+          const current = this.selectedGame();
+          if (current) {
+            this.selectedGame.set({ ...current, game: updatedGame });
+          }
+        },
+        error: err => console.error('Error actualizando Game:', err)
+      });
+
+      // Actualiza los productos de la caravana (para peso, etc.)
+      this.productsService.getProductsByCaravan(caravanId).subscribe({
+        next: (res) => this.productsByCaravan.set(res),
+        error: (err) => console.error('Error actualizando productos de caravana:', err)
+      });
+    }, 3000);
+  }
+
+
+
 
 
 

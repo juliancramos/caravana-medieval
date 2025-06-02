@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import {GameStatusBarComponent} from '@shared/game-status-bar/game-status-bar.component';
 import {ServicePopupComponent} from '@shared/service-popup/service-popup.component';
 import {AuthService} from '@core/services/auth.service';
+import { CurrentGameService } from '@core/services/current-game.service';
 
 @Component({
   selector: 'app-resume',
@@ -14,12 +15,23 @@ import {AuthService} from '@core/services/auth.service';
 })
 export class ResumeComponent {
 
-  constructor( private router: Router, public authService: AuthService) {}
+  constructor( private router: Router, 
+    public authService: AuthService,
+    public currentGame: CurrentGameService
+  ) {
+    effect(() => {
+      const gold = this.currentGame.availableMoney();
+      console.log('Gold actualizado:', gold);
+    });
+  }
 
   selectedService: any = null;
 
 
-
+  // Efecto para iniciar el seguimiento de la partida actual
+  ngOnInit(): void {
+    this.currentGame.startGameSyncPolling();
+  }
 
 
 
