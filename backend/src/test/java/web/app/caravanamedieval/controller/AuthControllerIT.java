@@ -1,4 +1,4 @@
-package caravanamedieval.controller;
+package web.app.caravanamedieval.controller;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,18 +6,19 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import web.app.caravanamedieval.CaravanaMedievalApplication; // ✅ Importa tu clase principal
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@SpringBootTest
+@SpringBootTest(classes = CaravanaMedievalApplication.class) // ✅ Define la clase de configuración
 @AutoConfigureMockMvc
 public class AuthControllerIT {
 
     @Autowired
     private MockMvc mockMvc;
 
-    //  POST: prueba de login o registro
+    // POST: prueba de login o registro
     @Test
     public void testPost() throws Exception {
         mockMvc.perform(post("/auth")
