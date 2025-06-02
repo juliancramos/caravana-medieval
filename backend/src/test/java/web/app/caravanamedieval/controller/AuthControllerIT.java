@@ -5,48 +5,47 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
-import web.app.caravanamedieval.CaravanaMedievalApplication; // ✅ Importa tu clase principal
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest(classes = CaravanaMedievalApplication.class) // ✅ Define la clase de configuración
+@ActiveProfiles("test")
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 public class AuthControllerIT {
 
     @Autowired
     private MockMvc mockMvc;
 
-    // POST: prueba de login o registro
     @Test
-    public void testPost() throws Exception {
-        mockMvc.perform(post("/auth")
+    void loginConCredencialesValidas() throws Exception {
+        String jsonRequest = """
+            {
+                "username": "admin",
+                "password": "admin123"
+            }
+        """;
+
+        mockMvc.perform(post("/api/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{}"))
-                .andExpect(status().isOk()); // ajusta según lógica real
+                        .content(jsonRequest))
+                .andExpect(status().isOk()); // Ajusta si tu endpoint devuelve otro status como 201 o 202
     }
 
-    // GET: por si Auth tiene algo que consultar
     @Test
-    public void testGet() throws Exception {
-        mockMvc.perform(get("/auth"))
-                .andExpect(status().isOk());
-    }
+    void loginConCredencialesInvalidas() throws Exception {
+        String jsonRequest = """
+            {
+                "username": "usuarioInvalido",
+                "password": "contrasenaMala"
+            }
+        """;
 
-    // PUT: actualizar algo del auth
-    @Test
-    public void testPut() throws Exception {
-        mockMvc.perform(put("/auth")
+        mockMvc.perform(post("/api/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{}"))
-                .andExpect(status().isOk());
-    }
-
-    // DELETE: cerrar sesión o eliminar token
-    @Test
-    public void testDelete() throws Exception {
-        mockMvc.perform(delete("/auth/1"))
-                .andExpect(status().isNoContent());
+                        .content(jsonRequest))
+                .andExpect(status().isUnauthorized()); // Si da 403 cambia a .isForbidden()
     }
 }
