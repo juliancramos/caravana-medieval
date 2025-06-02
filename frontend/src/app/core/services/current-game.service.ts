@@ -124,9 +124,14 @@ export class CurrentGameService {
 
 
   private pollingIntervalId: any = null;
+
+  private previousGold = this.availableMoney();
+  public lastManualPurchaseTime = 0;
+  public lastManualSaleTime = 0;
+
   //para actualizar el estado del juego cada 3 segundos
   startGameSyncPolling(): void {
-    if (this.pollingIntervalId !== null) return; // ya está corriendo
+    if (this.pollingIntervalId !== null) return; 
 
     this.pollingIntervalId = setInterval(() => {
       const gameId = this.selectedGame()?.game.idGame;
@@ -138,9 +143,37 @@ export class CurrentGameService {
       this.http.get<Game>(`/api/game/${gameId}`).subscribe({
         next: (updatedGame) => {
           const current = this.selectedGame();
-          if (current) {
-            this.selectedGame.set({ ...current, game: updatedGame });
+          if (!current) return;
+
+          const now = Date.now();
+          const newGold = updatedGame.caravan.availableMoney;
+
+          // Detectar compra hecha por otro jugador
+          if (
+            newGold < this.previousGold &&
+            now - this.lastManualPurchaseTime > 2000
+          ) {
+            this.triggerGlobalFeedback(
+              '¡Compra detectada!',
+              'Otro jugador ha comprado un producto.'
+            );
           }
+
+          // Detectar venta hecha por otro jugador
+          if (
+            newGold > this.previousGold &&
+            now - this.lastManualSaleTime > 2000
+          ) {
+            this.triggerGlobalFeedback(
+              '¡Venta detectada!',
+              'Otro jugador ha vendido un producto.'
+            );
+          }
+
+          this.previousGold = newGold;
+
+          // Actualiza la señal reactiva
+          this.selectedGame.set({ ...current, game: updatedGame });
         },
         error: err => console.error('Error actualizando Game:', err)
       });
@@ -155,9 +188,19 @@ export class CurrentGameService {
 
 
 
+  // Señales para mostrar popup global
+  globalFeedbackVisible = signal(false);
+  globalFeedbackTitle = signal('');
+  globalFeedbackMessage = signal('');
 
-
-
+  // Lanza un popup global desde cualquier evento 
+  triggerGlobalFeedback(title: string, message: string, durationMs: number = 2000): void {
+    console.log('  popup global:', title, message);
+    this.globalFeedbackTitle.set(title);
+    this.globalFeedbackMessage.set(message);
+    this.globalFeedbackVisible.set(true);
+    setTimeout(() => this.globalFeedbackVisible.set(false), durationMs);
+  }
 
 
 
