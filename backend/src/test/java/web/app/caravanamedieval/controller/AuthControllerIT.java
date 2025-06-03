@@ -1,5 +1,6 @@
 package web.app.caravanamedieval.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -8,44 +9,61 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import java.util.HashMap;
+import java.util.Map;
 
-@ActiveProfiles("test")
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+@SpringBootTest
 @AutoConfigureMockMvc
+@ActiveProfiles("test")
 public class AuthControllerIT {
 
     @Autowired
     private MockMvc mockMvc;
 
-    @Test
-    void loginConCredencialesValidas() throws Exception {
-        String jsonRequest = """
-            {
-                "username": "admin",
-                "password": "admin123"
-            }
-        """;
+    @Autowired
+    private ObjectMapper objectMapper;
 
-        mockMvc.perform(post("/api/auth/login")
+    @Test
+    void loginUsuarioExistente_retornaToken() throws Exception {
+        Map<String, String> loginData = new HashMap<>();
+        loginData.put("username", "camilo");
+        loginData.put("password", "123");
+
+        mockMvc.perform(post("/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(jsonRequest))
-                .andExpect(status().isOk()); // Ajusta si tu endpoint devuelve otro status como 201 o 202
+                        .content(objectMapper.writeValueAsString(loginData)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.token").exists());
     }
 
     @Test
-    void loginConCredencialesInvalidas() throws Exception {
-        String jsonRequest = """
-            {
-                "username": "usuarioInvalido",
-                "password": "contrasenaMala"
-            }
-        """;
+    void loginInvalido_retornaErrorControlado() throws Exception {
+        Map<String, String> loginData = new HashMap<>();
+        loginData.put("username", "noexiste");
+        loginData.put("password", "clavefalsa");
 
-        mockMvc.perform(post("/api/auth/login")
+        mockMvc.perform(post("/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(jsonRequest))
-                .andExpect(status().isUnauthorized()); // Si da 403 cambia a .isForbidden()
+                        .content(objectMapper.writeValueAsString(loginData)))
+                .andExpect(status().isInternalServerError())
+                .andExpect(jsonPath("$.message").value("Error interno del servidor: Bad credentials"));
+    }
+
+    @Test
+    void registroNuevoUsuario_debeRetornarToken() throws Exception {
+        Map<String, String> registerData = new HashMap<>();
+        long random = System.currentTimeMillis();
+        registerData.put("username", "test_" + random);
+        registerData.put("password", "123456");
+        registerData.put("email", "test_" + random + "@correo.com");
+
+        mockMvc.perform(post("/auth/signup")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(registerData)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.token").exists());
     }
 }

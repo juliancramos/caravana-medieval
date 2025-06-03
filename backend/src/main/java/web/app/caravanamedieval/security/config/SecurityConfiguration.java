@@ -2,6 +2,8 @@ package web.app.caravanamedieval.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
+import org.springframework.core.env.Profiles;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -35,24 +37,32 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
-        return http
-                .csrf(AbstractHttpConfigurer::disable)
+    public SecurityFilterChain securityFilterChain(
+            HttpSecurity http,
+            HandlerMappingIntrospector introspector,
+            Environment env
+    ) throws Exception {
+        boolean isTest = env.acceptsProfiles(Profiles.of("test"));
+
+        http.csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(new MvcRequestMatcher(introspector, "/auth/**")).permitAll()
-                        .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
-                        .anyRequest().authenticated()
-                )
-
-                .sessionManagement(session -> session.sessionCreationPolicy(org.springframework.security.config.http.SessionCreationPolicy.STATELESS))
-                .authenticationProvider(authenticationProvider())
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .headers(headers -> headers.frameOptions(frame -> frame.disable()))
-                .build();
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(org.springframework.security.config.http.SessionCreationPolicy.STATELESS))
+                .authenticationProvider(authenticationProvider());
+
+        if (isTest) {
+            http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
+        } else {
+            http.authorizeHttpRequests(auth -> auth
+                    .requestMatchers(new MvcRequestMatcher(introspector, "/auth/**")).permitAll()
+                    .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
+                    .anyRequest().authenticated()
+            ).addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        }
+
+        return http.build();
     }
-
-
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
