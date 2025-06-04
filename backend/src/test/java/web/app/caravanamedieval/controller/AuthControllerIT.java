@@ -60,8 +60,8 @@ public class AuthControllerIT {
     @Test
     void loginInvalido_retornaErrorControlado() throws Exception {
         Map<String, String> loginData = new HashMap<>();
-        loginData.put("username", "noexiste");
-        loginData.put("password", "clavefalsa");
+        loginData.put("username", "camilo");
+        loginData.put("password", "123");
 
         mockMvc.perform(post("/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
