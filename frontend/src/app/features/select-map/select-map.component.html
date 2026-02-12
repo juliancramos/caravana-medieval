@@ -5,22 +5,18 @@
     <h1 class="title">Seleccionar Mapa</h1>
 
     <div class="map-cards">
-      <div class="map-card" (click)="startGame()">
-        <img src="/assets/img/map1-thumb.png" alt="Mapa 1" />
-        <div class="map-title">Mapa 1</div>
-      </div>
-
-      <div class="map-card" (click)="startGame()">
-        <img src="/assets/img/map2-thumb.png" alt="Mapa 2" />
-        <div class="map-title">Mapa 2</div>
-      </div>
-
-      <div class="map-card" (click)="startGame()">
-        <img src="/assets/img/map3-thumb.png" alt="Mapa 3" />
-        <div class="map-title">Mapa 3</div>
+      <div
+        class="map-card"
+        *ngFor="let map of maps()"
+        (click)="selectMap(map)"
+      >
+        <img [src]="map.imgUrl || '/assets/img/default-map.png'" [alt]="map.name" />
+        <div class="map-title">{{ map.name }}</div>
       </div>
     </div>
-
-
   </div>
+
+
 </div>
+
+

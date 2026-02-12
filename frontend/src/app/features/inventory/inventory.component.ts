@@ -96,6 +96,7 @@ export class InventoryComponent {
   
     this.storeService.saleProduct(body).subscribe({
       next: () => {
+        this.currentGame.lastManualSaleTime = Date.now();
         //Actualiza inventario y oro
         this.updateLocalInventory(event.product.idProduct, event.quantity);
         this.currentGame.updateAvailableGold(+event.price * event.quantity);

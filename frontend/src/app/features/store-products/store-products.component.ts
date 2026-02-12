@@ -46,20 +46,12 @@ export class StoreProductsComponent {
     this.selectedProduct = item as ProductForStore;
   }
 
-  constructor() {
-    //Traer los productos ordenados por id del producto
-    effect(() => {
-      const cityId = this.currentGame.selectedGame()?.game.caravan.currentCity.idCity;
-      if (!cityId) return;
+  //Carga inicial del inventario al entrar a la tienda
+  ngOnInit(): void {
+    const cityId = this.currentGame.selectedGame()?.game.caravan.currentCity.idCity;
+    if (!cityId) return;
 
-      this.cityService.getProductsByCity(cityId).subscribe({
-        next: (res: ProductsByCity[]) => {
-          const sorted = [...res].sort((a, b) => a.product.idProduct - b.product.idProduct);
-          this.productsByCity.set(sorted);
-        },
-        error: (err: any) => console.error('Error loading products', err)
-      });
-    });
+    this.refreshProducts(cityId);
   }
 
   onBuy(event: { product: ProductForStore; quantity: number }) {
@@ -84,6 +76,9 @@ export class StoreProductsComponent {
         this.currentGame.updateAvailableGold(-event.product.price * event.quantity);
         this.updateLocalCityInventory(event.product.product.idProduct, event.quantity);
         this.showFeedback('¡Compra realizada!', 'El producto fue agregado al inventario');
+
+        //Refrescar productos desde el backend después de un retraso
+        setTimeout(() => this.refreshProducts(cityId), 1500);
       },
       error: () => {
         this.showFeedback('Compra fallida', 'No tienes suficiente oro');
@@ -105,6 +100,17 @@ export class StoreProductsComponent {
         })
         .filter((item): item is ProductsByCity => item !== null)
     );
+  }
+
+  //Actualiza los productos de la ciudad desde el backend
+  private refreshProducts(cityId: number): void {
+    this.cityService.getProductsByCity(cityId).subscribe({
+      next: (res: ProductsByCity[]) => {
+        const sorted = [...res].sort((a, b) => a.product.idProduct - b.product.idProduct);
+        this.productsByCity.set(sorted);
+      },
+      error: (err: any) => console.error('Error actualizando productos', err)
+    });
   }
 
   exitStore(): void {
@@ -134,7 +140,4 @@ export class StoreProductsComponent {
   goToInventory(): void {
     this.router.navigate(['/inventory']);
   }
-  
-
-
 }

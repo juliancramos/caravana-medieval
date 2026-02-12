@@ -30,7 +30,7 @@ constructor(private fb: FormBuilder, private authService: AuthService, private r
 }
 
 
- 
+
   login() {
     if (this.form.invalid) return;
 
@@ -43,7 +43,7 @@ constructor(private fb: FormBuilder, private authService: AuthService, private r
         this.error.set('Invalid username or password');
       }
     });
-    
+
   }
 
   playLoginTransition() {
@@ -53,6 +53,6 @@ constructor(private fb: FormBuilder, private authService: AuthService, private r
   }
 
   createAccount() {
-    //Por ahora sin implementar
+    this.router.navigate(['/register'])
   }
 }

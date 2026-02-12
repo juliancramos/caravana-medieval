@@ -4,22 +4,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import web.app.caravanamedieval.dto.ActiveServiceDTO;
+import web.app.caravanamedieval.dto.ActiveServiceEffectDTO;
 import web.app.caravanamedieval.dto.ServicesByCaravanDTO;
 import web.app.caravanamedieval.model.ServicesByCaravan;
+import web.app.caravanamedieval.repository.ServicesByCaravanRepository;
 import web.app.caravanamedieval.service.ServicesByCaravanServiceImpl;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/services-by-caravan")
 public class ServicesByCaravanController {
 
     private final ServicesByCaravanServiceImpl servicesByCaravanService;
+    private final ServicesByCaravanRepository servicesByCaravanRepository;
 
     @Autowired
-    public ServicesByCaravanController(ServicesByCaravanServiceImpl servicesByCaravanService) {
+    public ServicesByCaravanController(ServicesByCaravanServiceImpl servicesByCaravanService, ServicesByCaravanRepository servicesByCaravanRepository) {
         this.servicesByCaravanService = servicesByCaravanService;
+        this.servicesByCaravanRepository = servicesByCaravanRepository;
     }
 
     @PostMapping("/assign")
@@ -61,4 +67,30 @@ public class ServicesByCaravanController {
         ServicesByCaravan updatedAssignment = servicesByCaravanService.updateAssignment(dto);
         return ResponseEntity.ok(updatedAssignment);
     }
+
+    @GetMapping("/active/caravan/{id}")
+    public ResponseEntity<List<ActiveServiceDTO>> getActiveServices(@PathVariable Long id) {
+        return ResponseEntity.ok(servicesByCaravanService.getActiveServicesByCaravanId(id));
+    }
+
+    @GetMapping("/effects/caravan/{caravanId}")
+    public ResponseEntity<List<ActiveServiceEffectDTO>> getActiveServiceEffects(@PathVariable Long caravanId) {
+        List<ServicesByCaravan> activeServices = servicesByCaravanRepository.findByCaravan_IdCaravan(caravanId);
+
+        List<ActiveServiceEffectDTO> effects = activeServices.stream()
+                .filter(s -> s.getServices().getName().equalsIgnoreCase("guardias")
+                        || s.getServices().getName().equalsIgnoreCase("mejorar velocidad"))
+                .map(s -> new ActiveServiceEffectDTO(
+                        s.getServices().getName(),
+                        s.getServices().getUpgradePerPurchase(),
+                        s.getCurrentUpdate()
+                ))
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(effects);
+    }
+
+
+
+
 }

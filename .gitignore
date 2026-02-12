@@ -51,3 +51,5 @@ gradle-app.setting
 *.mv.db
 *.trace.db
 *.h2.db
+
+*.log

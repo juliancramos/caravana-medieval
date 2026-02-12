@@ -1,0 +1,21 @@
+<div class="popup-backdrop" (click)="closePopup()">
+  <div class="popup-card" (click)="$event.stopPropagation()">
+    <button class="close-btn" (click)="closePopup()">✖</button>
+
+    <div class="popup-content">
+      <h2>Unirse a partida</h2>
+      <p class="description">Ingresa el código de invitación</p>
+
+      <input [(ngModel)]="code" class="code-input" placeholder="Ej: 9A2F7D" />
+
+      <div class="button-row">
+        <button (click)="validate()">Validar</button>
+        <button *ngIf="validated()" (click)="joinGame()" class="join-button">Unirse</button>
+      </div>
+
+      <p class="error" *ngIf="error()">{{ error() }}</p>
+      <p class="success" *ngIf="validated()">¡Código válido!</p>
+
+    </div>
+  </div>
+</div>

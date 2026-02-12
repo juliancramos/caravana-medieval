@@ -4,17 +4,21 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import web.app.caravanamedieval.dto.ActiveServiceDTO;
 import web.app.caravanamedieval.dto.ServicesByCaravanDTO;
 import web.app.caravanamedieval.mapper.ServicesByCaravanMapper;
 import web.app.caravanamedieval.model.Caravan;
 import web.app.caravanamedieval.model.Services;
 import web.app.caravanamedieval.model.ServicesByCaravan;
+import web.app.caravanamedieval.model.ServicesByCity;
 import web.app.caravanamedieval.model.keys.ServicesByCaravanKey;
 import web.app.caravanamedieval.repository.CaravanRepository;
+import web.app.caravanamedieval.repository.ServicesByCityRepository;
 import web.app.caravanamedieval.repository.ServicesRepository;
 import web.app.caravanamedieval.repository.ServicesByCaravanRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ServicesByCaravanServiceImpl {
@@ -23,13 +27,18 @@ public class ServicesByCaravanServiceImpl {
     private final CaravanRepository caravanRepository;
     private final ServicesRepository servicesRepository;
 
+    private final ServicesByCityRepository servicesByCityRepository;
+
     @Autowired
     public ServicesByCaravanServiceImpl(ServicesByCaravanRepository servicesByCaravanRepository,
-                                        CaravanRepository caravanRepository, ServicesRepository servicesRepository) {
+                                        CaravanRepository caravanRepository, ServicesRepository servicesRepository, ServicesByCityRepository servicesByCityRepository) {
         this.servicesByCaravanRepository = servicesByCaravanRepository;
         this.caravanRepository = caravanRepository;
         this.servicesRepository = servicesRepository;
+        this.servicesByCityRepository = servicesByCityRepository;
     }
+
+
 
     public ServicesByCaravan assignServiceToCaravan(ServicesByCaravanDTO dto) {
         Services service = servicesRepository.findById(dto.getServiceId())
@@ -85,4 +94,18 @@ public class ServicesByCaravanServiceImpl {
 
         return servicesByCaravanRepository.save(assignment);
     }
+
+    public List<ActiveServiceDTO> getActiveServicesByCaravanId(Long caravanId) {
+        List<ServicesByCaravan> assignments = servicesByCaravanRepository.findByCaravan_IdCaravan(caravanId);
+        return assignments.stream()
+                .map(assignment -> {
+                    Services s = assignment.getServices();
+                    return new ActiveServiceDTO(s.getName(), s.getDescription(), s.getImgUrl());
+                })
+                .collect(Collectors.toList());
+    }
+
+
+
+
 }

@@ -27,15 +27,6 @@
     gap: 2rem;
   }
 
-  &.right {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    border-radius: 35px;
-    padding: 0.5rem 1rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    min-width: calc(3 * 70px + 2rem);
-    height: 55px;
-  }
 }
 
 .info-block {
@@ -60,11 +51,11 @@
   }
 
   &.city:hover span {
-    color: #7cd1a0; 
+    color: #7cd1a0;
   }
 
   &.caravan:hover span {
-    color: #f1c965; 
+    color: #f1c965;
   }
 }
 
@@ -80,29 +71,45 @@
   transform: scale(1.2);
 }
 
-.service-btn {
-  background: rgba(0, 0, 0, 0.05);
-  border: none;
-  border-radius: 50%;
-  padding: 6px;
-  cursor: pointer;
+.victory-popup {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
-  align-items: center;
   justify-content: center;
-  transition: background 0.2s ease, transform 0.2s ease;
+  align-items: center;
+  z-index: 999;
 
-  &:hover {
-    background: rgba(0, 0, 0, 0.1);
-    transform: scale(1.1);
+  .popup-content {
+    background: #fff;
+    border-radius: 8px;
+    padding: 24px;
+    text-align: center;
+    box-shadow: 0 0 10px #000;
+  }
+
+  h2 {
+    margin-bottom: 10px;
+    color: #2e7d32;
+  }
+
+  button {
+    margin-top: 12px;
+    padding: 8px 16px;
+    background: #4f3f23;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
   }
 }
 
-.service-icon {
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
+.victory-message {
+  color: saddlebrown;
 }
 
-#gold:hover{
-  color: gold;
+.info-block.invite:hover {
+  opacity: 0.8;
+  text-decoration: underline;
 }

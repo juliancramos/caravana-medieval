@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {GameStateService} from '@core/services/game-state.service';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
+import { CaravanService } from '@core/services/caravan.service';
+import { Caravan } from '@shared/models/caravan.model';
+import { GameCreationService } from '@core/services/game-creation.service';
+import { DifficultyOption } from '@shared/models/difficulty-option.model';
 
 @Component({
   selector: 'app-select-caravan',
@@ -10,62 +13,68 @@ import {Router} from '@angular/router';
   templateUrl: './select-caravan.component.html',
   styleUrls: ['./select-caravan.component.scss']
 })
-export class SelectCaravanComponent {
+export class SelectCaravanComponent implements OnInit {
+  private caravanService = inject(CaravanService);
+  private gameCreation = inject(GameCreationService);
+  private router = inject(Router);
+
+  caravans = signal<Caravan[]>([]);
+  currentIndex = 0;
+
+  // Dificultades disponibles
+  difficulties: DifficultyOption[] = [
+    { level: 'Fácil', goalMoney: 5000, timeLimit: 50 },
+    { level: 'Medio', goalMoney: 8000, timeLimit: 40 },
+    { level: 'Difícil', goalMoney: 12000, timeLimit: 30 }
+  ];
+  difficultyIndex = 0;
 
   animateStats = false;
   animateImage = false;
 
-  constructor( private router: Router) {}
-  caravans = [
-    {
-      name: 'Caravana Básica',
-      image: '/assets/caravans/basic-caravan.png',
-      capacity: '100 unidades',
-      speed: 'Media',
-      defense: 'Baja',
-      special: 'Ninguna'
-    },
-    {
-      name: 'Caravana Blindada',
-      image: '/assets/caravans/basic-caravan.png',
-      capacity: '80 unidades',
-      speed: 'Lenta',
-      defense: 'Alta',
-      special: 'Reducción de daño en rutas inseguras'
-    },
-    {
-      name: 'Caravana Ligera',
-      image: '/assets/caravans/basic-caravan.png',
-      capacity: '60 unidades',
-      speed: 'Alta',
-      defense: 'Baja',
-      special: 'Menor tiempo de viaje'
-    }
-  ];
-
-  currentIndex = 0;
-
-  get selectedCaravan() {
-    return this.caravans[this.currentIndex];
+  ngOnInit(): void {
+    this.caravanService.getAllCaravans().subscribe({
+      next: data => this.caravans.set(data),
+      error: err => console.error('Error loading caravans', err)
+    });
   }
 
+  get selectedCaravan(): Caravan | null {
+    return this.caravans()[this.currentIndex] ?? null;
+  }
 
-  selectCaravan(): void {
-    const selected = this.caravans[this.currentIndex];
-    console.log('Caravana seleccionada:', selected.name);
-
-
-    this.router.navigate(['/seleccionar-partida']);
+  get selectedDifficulty(): DifficultyOption {
+    return this.difficulties[this.difficultyIndex];
   }
 
   prevCaravan(): void {
-    this.currentIndex = (this.currentIndex - 1 + this.caravans.length) % this.caravans.length;
+    const list = this.caravans();
+    this.currentIndex = (this.currentIndex - 1 + list.length) % list.length;
     this.triggerAnimation();
   }
 
   nextCaravan(): void {
-    this.currentIndex = (this.currentIndex + 1) % this.caravans.length;
+    const list = this.caravans();
+    this.currentIndex = (this.currentIndex + 1) % list.length;
     this.triggerAnimation();
+  }
+
+  prevDifficulty(): void {
+    this.difficultyIndex = (this.difficultyIndex - 1 + this.difficulties.length) % this.difficulties.length;
+  }
+
+  nextDifficulty(): void {
+    this.difficultyIndex = (this.difficultyIndex + 1) % this.difficulties.length;
+  }
+
+  confirmSelection(): void {
+    const caravan = this.selectedCaravan;
+    if (!caravan) return;
+
+    this.gameCreation.setCaravan(caravan);
+    this.gameCreation.setDifficulty(this.selectedDifficulty);
+
+    this.router.navigate(['/select-role']);
   }
 
   triggerAnimation(): void {
@@ -76,5 +85,4 @@ export class SelectCaravanComponent {
       this.animateImage = true;
     }, 0);
   }
-
 }

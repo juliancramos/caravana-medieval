@@ -59,6 +59,8 @@ public class TravelService {
         int finalTravelTime = calculateTravelTime(caravan.getIdCaravan(), route.getTravelTime());
         game.setElapsedTime(game.getElapsedTime() + finalTravelTime);
 
+
+
         //mover caravana
         caravan.setCurrentCity(route.getDestinationCity());
 
@@ -92,17 +94,21 @@ public class TravelService {
     }
 
     private int calculateTravelTime(Long caravanId, int baseTravelTime) {
-        //busca servicio según nombre
-        Optional<ServicesByCaravan> servicesByCaravan = servicesByCaravanRepository
+        Optional<ServicesByCaravan> serviceOpt = servicesByCaravanRepository
                 .findByCaravan_IdCaravanAndServices_NameIgnoreCase(caravanId, "Mejorar velocidad");
 
-        if (servicesByCaravan.isPresent()) {
-            int bonusPercentage = servicesByCaravan.get().getCurrentUpdate();
-            int reduction = Math.round(baseTravelTime * (bonusPercentage / 100f));
-            baseTravelTime -= reduction;
+        if (serviceOpt.isPresent()) {
+            ServicesByCaravan service = serviceOpt.get();
+            float improvementPerPurchase = service.getServices().getUpgradePerPurchase();
+            int currentUpgrade = service.getCurrentUpdate();
+
+            float totalReduction = improvementPerPurchase * currentUpgrade;
+            int reducedTime = Math.round(baseTravelTime * (1 - totalReduction));
+            return Math.max(reducedTime, 1);
         }
 
-        return Math.max(baseTravelTime, 1); // siempre al menos 1 hora
+        return baseTravelTime;
     }
+
 
 }

@@ -17,17 +17,40 @@
       <span>{{ remainingTime() }}</span>
     </div>
 
+    <div class="info-block bag">
+      <img src="/assets/icons/bag.png" alt="Capacidad" class="info-icon" />
+      <span>{{ currentLoad() | number:'1.0-2' }}/{{ maxCapacity() }}</span>
+    </div>
+
     <div class="info-block city">
       <img src="/assets/icons/current-city-icon.png" alt="Ciudad" class="info-icon" />
       <span>Ciudad: {{ cityName() }}</span>
     </div>
   </div>
 
-  <div class="status-section right">
-    <ng-container *ngFor="let service of gameState.activeServices">
-      <button class="service-btn" (click)="showServiceInfo(service)">
-        <img [src]="service.icon" [alt]="service.name" class="service-icon" />
-      </button>
-    </ng-container>
+  <app-active-services-bar
+    [activeServices]="activeServices()"
+    (serviceSelected)="showServiceInfo($event)">
+  </app-active-services-bar>
+
+  <div class="info-block invite" (click)="openInvitePopup()" style="cursor: pointer;">
+    <img src="/assets/icons/share.png" alt="Invitar" class="info-icon" />
+    <span>Invitar</span>
   </div>
+
+  <app-invite-popup *ngIf="showInvitePopup()" (close)="closeInvitePopup()" />
+
+
+
+  <!-- Victory popup
+  <div class="victory-popup" *ngIf="isVictoryPopupVisible()">
+    <div class="popup-content">
+      <h2>🎉 ¡Victoria! 🎉</h2>
+      <p class="victory-message">Has alcanzado la meta de oro.</p>
+      <button (click)="closeVictoryPopup()">Cerrar</button>
+    </div>
+  </div>-->
+
+
+
 </div>

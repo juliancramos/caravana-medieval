@@ -28,6 +28,8 @@ export class MapComponent {
 
   availableCities = signal<CityWithRoute[]>([]);
 
+  activeEffects = this.currentGame.activeEffects;
+
   constructor() {
     effect(() => this.loadRoutes());
   }
@@ -35,17 +37,17 @@ export class MapComponent {
   loadRoutes() {
     const currentCityId = this.currentGame.selectedGame()?.game.caravan.currentCity.idCity;
     if (!currentCityId) return;
-  
+
     this.routeService.getRoutesFrom(currentCityId).subscribe({
       next: (routes: Route[]) => {
         const cityMap = new Map<number, CityWithRoute>();
-  
+
         routes.forEach(route => {
           const coord = city_coordinates.find(c => c.id === route.destinationCity.idCity);
           if (!coord) return;
-  
+
           const cityId = route.destinationCity.idCity;
-  
+
           if (!cityMap.has(cityId)) {
             cityMap.set(cityId, {
               id: cityId,
@@ -58,7 +60,7 @@ export class MapComponent {
             cityMap.get(cityId)!.routes.push(route);
           }
         });
-  
+
         this.availableCities.set(Array.from(cityMap.values()));
       }
     });
@@ -84,11 +86,20 @@ export class MapComponent {
 
     this.travelService.travel(dto).subscribe({
       next: () => {
-        // actualizar señales
+        // efecto de "Guardias"
+        let damage = route.damage;
+        const hasGuardService = this.currentGame.activeServices().some(s => s.name.toLowerCase() === 'guardias');
+        if (hasGuardService) {
+          damage = Math.floor(damage * 0.75);
+        }
+
+        this.currentGame.refreshGame(game.game.idGame);
+
+        /* actualizar señales
         this.currentGame.updateLifePoints(-route.damage);
         this.currentGame.updateElapsedTime(route.travelTime);
         this.currentGame.updateCurrentCity(route.destinationCity.idCity, route.destinationCity.name);
-
+*/
         // esperar un momento para mostrar animación y luego navegar
         setTimeout(() => {
           this.isTraveling.set(false);
@@ -105,7 +116,7 @@ export class MapComponent {
     });
   }
 
-  
+
 
   openPopup(city: CityWithRoute): void {
     this.selectedCity.set(city);
@@ -130,4 +141,26 @@ export class MapComponent {
   get currentCityName() {
     return this.currentGame.selectedGame()?.game.caravan.currentCity.name;
   }
+
+  calculateDisplayedDamage(baseDamage: number): number {
+    const hasGuardService = this.currentGame.activeServices().some(s => s.name.toLowerCase() === 'guardias');
+
+    if (hasGuardService) {
+      return Math.floor(baseDamage * 0.75);
+    }
+    return baseDamage;
+  }
+
+
+  applyTravelTime(originalTime: number): number {
+    const speed = this.activeEffects().find(e => e.name.toLowerCase() === 'mejorar velocidad');
+    if (speed) {
+      const reduction = speed.improvementPerPurchase * speed.currentUpgrade;
+      return Math.floor(originalTime * (1 - reduction));
+    }
+    return originalTime;
+  }
+
+
+
 }

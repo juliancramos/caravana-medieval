@@ -2,23 +2,33 @@
   <div class="screen-fade"></div>
 
   <div class="game-cards">
-    @for (slot of gameSlots(); let i = $index; track i) {
-      <!-- Verifica si es un slot o si es nulo -->
+    <ng-container *ngFor="let slot of gameSlots(); let i = index; trackBy: trackByIndex">
       <ng-container *ngIf="slot; else newGameCard">
         <div class="game-card" (click)="loadGame(slot)">
-          <img 
-            [src]="'/assets/img/map' + (i + 1) + '-thumb.png'" 
+          <img
+            [src]="'/assets/img/map' + (i + 1) + '-thumb.png'"
             [alt]="slot.game.map.name" />
           <span class="card-label">{{ slot.game.map.name }}</span>
         </div>
       </ng-container>
-    }
+    </ng-container>
+
+
   </div>
 
   <ng-template #newGameCard>
     <div class="game-card new-game" (click)="createNewGame()">
       <span class="plus-icon">+</span>
       <span class="card-label">Nueva partida</span>
+
+      <div class="join-option" (click)="onJoinClick($event)">
+        Unirse a partida existente
+      </div>
     </div>
   </ng-template>
+
+  <app-join-game-popup *ngIf="showJoinPopup()" (close)="showJoinPopup.set(false)" />
+
+
+
 </div>

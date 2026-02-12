@@ -1,38 +1,43 @@
 import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { LoginRequest } from '../../shared/models/login-request.model';
-import { LoginResponse } from '../../shared/models/login-response.model';
 import { Router } from '@angular/router';
+import { LoginRequest } from '@shared/models/login-request.model';
+import { JwtAuthenticationResponse } from '@shared/models/jwt-authentication-response.model';
+import {jwtDecode} from 'jwt-decode';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
-  //Señal reactiva, inicialmente en null ya que no hay sesión actica
-  private userSignal = signal<LoginResponse | null>(null);
+  private userSignal = signal<JwtAuthenticationResponse | null>(null);
 
-  //Http para solicitudes y router para redirigir a rutas
-  constructor(private http: HttpClient, private router: Router) {
-    //Verifica si hay una instancia, si la hay actualiza la señal
-    const raw = localStorage.getItem('user');
+  constructor(private http: HttpClient, private router: Router, ) {
+    const raw = sessionStorage.getItem('user');
     if (raw) this.userSignal.set(JSON.parse(raw));
   }
 
   login(request: LoginRequest) {
-    return this.http.post<LoginResponse>('/api/auth/login', request);
+    return this.http.post<JwtAuthenticationResponse>('/api/auth/login', request);
   }
 
-  setUser(user: LoginResponse) {
+  setUser(user: JwtAuthenticationResponse) {
+    const decoded: any = jwtDecode(user.token);
+    user.role = decoded.role;
+    user.idPlayer = decoded.idPlayer;
     this.userSignal.set(user);
-    localStorage.setItem('user', JSON.stringify(user));
+    sessionStorage.setItem('user', JSON.stringify(user));
   }
 
   get user() {
     return this.userSignal.asReadonly();
   }
 
+  getToken(): string | null {
+    return this.userSignal()?.token || null;
+  }
+
   logout() {
     this.userSignal.set(null);
-    localStorage.removeItem('user');
+    sessionStorage.removeItem('user');
     this.router.navigate(['/login']);
   }
 }

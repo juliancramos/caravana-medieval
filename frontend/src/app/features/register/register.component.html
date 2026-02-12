@@ -1,0 +1,26 @@
+<div class="register-container">
+  <div class="register-box">
+    <h2>Crear nuevo jugador</h2>
+
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+      <input
+        type="text"
+        name="username"
+        [(ngModel)]="formData.username"
+        required
+        placeholder="Nombre de usuario"
+      />
+      <input
+        type="password"
+        name="password"
+        [(ngModel)]="formData.password"
+        required
+        placeholder="Contraseña"
+      />
+      <button type="submit" [disabled]="form.invalid">Registrar</button>
+    </form>
+
+    <div *ngIf="success" class="success-msg">{{ success }}</div>
+    <div *ngIf="error" class="error-msg">{{ error }}</div>
+  </div>
+</div>

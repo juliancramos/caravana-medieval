@@ -188,3 +188,110 @@
     border: 1px solid #2d1c0e;
   }
 }
+
+/* Sección de dificultad dentro del fondo ya existente */
+/* Encabezado de dificultad con estilo similar a .caravan-title */
+/* Encabezado de dificultad */
+.difficulty-section h3 {
+  position: absolute;
+  top: 10px;
+  right: 110px;
+  padding: 0.6rem 2rem;
+  background: rgba(45, 28, 14, 0.85);
+  border: 2px solid #f8e4c3;
+  border-radius: 15px;
+  text-align: center;
+  font-family: 'Forum', serif;
+  font-size: 2.8rem;
+  color: #f8e4c3;
+  text-shadow: 1px 1px 3px #000;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  z-index: 10;
+  animation: fadeInUp 0.6s ease-in-out;
+}
+
+/* Contenedor de info + flechas */
+.difficulty-panel {
+  position: absolute;
+  top: 130px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  animation: fadeInUp 0.5s ease-in-out;
+}
+
+/* Tarjeta de info */
+.difficulty-info {
+  background: rgba(45, 28, 14, 0.85);
+  padding: 1rem 2rem;
+  border: 2px solid #f8e4c3;
+  border-radius: 15px;
+  font-family: 'Forum', serif;
+  font-size: 1.6rem;
+  color: #f8e4c3;
+  text-shadow: 1px 1px 2px #000;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+  z-index: 9;
+  min-width: 230px;
+
+  p {
+    margin: 0.6rem 0;
+  }
+}
+
+/* Flechas */
+.difficulty-panel button {
+  background: #d2b48c;
+  border: 2px solid #f8e4c3;
+  color: #3b2410;
+  font-size: 1.8rem;
+  padding: 10px 14px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+  transition: background 0.3s, transform 0.2s;
+
+  &:hover {
+    background: #bfa07a;
+    transform: scale(1.1);
+  }
+}
+
+/* Animación */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

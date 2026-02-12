@@ -2,6 +2,8 @@ package web.app.caravanamedieval.service;
 
 import web.app.caravanamedieval.dto.PlayerDTO;
 import web.app.caravanamedieval.model.Player;
+import web.app.caravanamedieval.model.Role;
+import web.app.caravanamedieval.security.auth.JwtAuthenticationResponse;
 
 import java.util.List;
 
@@ -12,5 +14,8 @@ public interface PlayerService {
     List<Player> getPlayers();
     Player updatePlayer(Long id, PlayerDTO playerDTO);
     void deletePlayer(Long id);
-}
+
+    public JwtAuthenticationResponse updateRole(String username, Role role) ;
+
+    }
 
