@@ -277,7 +277,69 @@ Access to API endpoints is enforced using `@PreAuthorize` annotations at the con
 
 ## Proof of Concept
 
-acá las imagenes
+Visual demonstration of the complete user journey.
+
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="./docs/images/1-login.png" width="100%" alt="Login Screen">
+      <br>
+      <sub><b>1. Authentication</b><br>Login screen with username/password fields.</sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="./docs/images/2-select-game.png" width="100%" alt="Game Selection">
+      <br>
+      <sub><b>2. Game Selection</b><br>Lobby view showing existing games and options to create or join a session.</sub>
+    </td>
+  </tr>
+
+  <tr>
+    <td align="center" width="50%">
+      <img src="./docs/images/3-main-page.png" width="100%" alt="Main Page">
+      <br>
+      <sub><b>3. City Hub</b><br>Main game view with caravan stats bar, Products and Services stores, Inventory and Map access.</sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="./docs/images/4-products-store.png" width="100%" alt="Products Store">
+      <br>
+      <sub><b>4. Products Store</b><br>City marketplace displaying available goods with stock quantities and category filters.</sub>
+    </td>
+  </tr>
+
+  <tr>
+    <td align="center" width="50%">
+      <img src="./docs/images/5-product-view.png" width="100%" alt="Product Detail">
+      <br>
+      <sub><b>5. Dynamic Pricing</b><br>Product detail popup showing computed price based on supply/demand formula, quantity selector, and weight.</sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="./docs/images/6-services-store.png" width="100%" alt="Services Store">
+      <br>
+      <sub><b>6. Services Store</b><br>Four available services: Repair, Upgrade Capacity, Upgrade Speed, and Guards.</sub>
+    </td>
+  </tr>
+
+  <tr>
+    <td align="center" width="50%">
+      <img src="./docs/images/7-map.png" width="100%" alt="Map View">
+      <br>
+      <sub><b>7. Map Navigation</b><br>Interactive map showing connected cities with names.</sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="./docs/images/8-travel.png" width="100%" alt="Travel Routes">
+      <br>
+      <sub><b>8. Route Selection</b><br>Travel dialog displaying safe vs. unsafe routes with estimated time, damage, and cause.</sub>
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="2" align="center">
+      <img src="./docs/images/9-share.png" width="60%" alt="Invite Code">
+      <br>
+      <sub><b>9. Multiplayer Invite</b><br>Generated 15-character alphanumeric code with 30-minute expiration for other players to join the session.</sub>
+    </td>
+  </tr>
+</table>
 
 
 
